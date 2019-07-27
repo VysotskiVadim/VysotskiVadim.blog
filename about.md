@@ -4,15 +4,10 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hi, I'm Vadzim Vysotski, software engineer from Minsk, Belarus.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+I've started my career as a software engineer in 2014 and since then I've been working in different areas: backend, mobile, gamedev. Now my main focus is Android development. 
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+I often found it's a lot of things which doesn't get enough attentions in popular blogs and I don't know why. So I'll do it.
 
-
-[jekyll-organization]: https://github.com/jekyll
+All I write in blog is for you, so your feedback is very appreciated, please do not hesitate contact me via any suitable channel for you: twitter, telegram, github, emails.
