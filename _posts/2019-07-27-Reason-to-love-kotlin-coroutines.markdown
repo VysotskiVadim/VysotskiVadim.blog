@@ -63,9 +63,48 @@ Object name: 'ConsoleView'.
 
 The worst thing about cancellation related crashes - it's hard to miss it and let it go to prod: local servers are fast, navigation could be not trivial and so on.
 
+Let's handle cancellation!
 
+```c#
+class RightScreen { 
 
+    private CancellationTokenSource cts;
+    private ConsoleView view;
 
+    public async void initialize() {
+        try {
+            view = new ConsoleView();
+            view.ShowLoading();
+            cts = new CancellationTokenSource();
+            var data = await FakeTaskManager.fetchDataAsync(cts.Token);
+            view.HideLoading();
+            view.ShowData(data);
+        } catch (OperationCanceledException) {
+            Console.WriteLine("Operation was cancelled");
+        }
+    }
+
+    public void destroy() {
+        cts.Cancel();
+        //cleanup the resources
+        view.Dispose();
+    }
+}
+```
+
+With *async/await* approach cancellation handling works via exceptions: as soon as operation cancelled exceptions should be thrown. Exceptions just interrupts regular code flow.
+
+Let's check:
+```c#
+var screen = new RightScreen();
+screen.initialize();
+screen.destroy();
+```
+It works, great!
+```console
+Loading...
+Operation was cancelled
+```
 
 TODO: remove it don't need it any more
 
