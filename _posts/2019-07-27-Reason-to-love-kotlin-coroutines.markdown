@@ -6,10 +6,10 @@ date:   2019-07-27 13:30:26 +0300
 
 I love [Structured Concurrency](https://medium.com/@elizarov/structured-concurrency-722d765aa952) in Kotlin Coroutines because it's solved the biggest problem we always had with the "old shool" technic like *async/await* - **cancellations**.
 
-Cancellations is dangerous - most developers aren't aware of its importance. Tutorials doesn't tell you about cancellations, try to google "C# or Ecma Script *async/await* tutorials". Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
+Cancellations is dangerous - most developers aren't aware of its importance. Tutorials doesn't tell you about cancellations, try to google C# or Ecma Script *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
 
 What is wrong with cancellations and *async/await*? Let's consider typical C# async/await example
-{% highlight C# %}
+```c#
 class WrongScreen { 
 
     private ConsoleView view;
@@ -27,39 +27,42 @@ class WrongScreen {
         view.Dispose();
     }
 }
-{% endhighlight %}
+```
 
-Wrong screen is a imitation of presenter(you can find similar in any platform: Fragment or Activity from Android or ViewController from iOS). Code in **WrongScreen.initialize** looks great: easy to read and understand, asynchronous but looks just like usual iterative.
+Wrong screen is a imitation of presenter(you can find similar in any platform: Fragment or Activity from Android or ViewController from iOS). Code in `WrongScreen.initialize` method looks great: easy to read and understand, asynchronous but looks just like usual iterative.
 
 When page opens everything works as expected:
-{% highlight csharp %}
+```c#
 var screen = new WrongScreen();
 screen.initialize();
-{% endhighlight %}
+```
 
 
-{% highlight Console output %}
+```console
 Loading...
 Loading completed
 Data is 5
-{% endhighlight %}
+```
 
-But what will happen if user leave page before loading completed:
+I wouldn't name it `WrongScreen` if everything were good. What will happen if user leave page before loading completed?
 
-{% highlight csharp %}
+```c#
 var screen = new WrongScreen();
 screen.initialize();
+//leave page immediately
 screen.destroy();
-{% endhighlight %}
+```
 
-{% highlight Console output %}
+```console
 Loading...
 
 Unhandled Exception: System.ObjectDisposedException: Cannot access a disposed object.
 Object name: 'ConsoleView'.
-{% endhighlight %}
+```
+**Crash!** View was destroyed while data was loading, and when loading completed and presenter tried to call `view.HideLoading()` it got `ObjectDisposedException`.
 
 The worst thing about cancellation related crashes - it's hard to miss it and let it go to prod: local servers are fast, navigation could be not trivial and so on.
+
 
 
 
