@@ -4,11 +4,11 @@ title:  "The biggest reason to love kotlin coroutines"
 date:   2019-07-27 13:30:26 +0300
 ---
 
-Kotlin coroutines like a breadth of fresh air for me. Before I started develop for Android platform I used C# for my daily job. In C# since 2011 (TODO: clarify) for developers available async/await mechanism. When I saw coroutines for a first time I thought "Just like I used to writing in C#, great!", but I was wrong - it's much better!
+I love [Structured Concurrency](https://medium.com/@elizarov/structured-concurrency-722d765aa952) in Kotlin Coroutines because it's solved the biggest problem we always had with the "old shool" technic like *async/await* - **cancellations**.
 
-Kotlin coroutines solved the biggest problem we always have with C# async/await mechanism: cancellation. Cancellation is an issue for C# projects not because it's something hard to implement(you'll see it's easy), because developers aren't aware that cancellation is important. We had realized importance of correct cancellation implementation right after we started getting a lot of crash reports from production.
+Cancellations is dangerous - most developers aren't aware of its importance. Tutorials doesn't tell you about cancellations, try to google "C# or Ecma Script *async/await* tutorials". Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
 
-Let's consider typical C# async/await example (don't worry you will understand everything)
+What is wrong with cancellations and *async/await*? Let's consider typical C# async/await example
 {% highlight C# %}
 class WrongScreen { 
 
@@ -29,13 +29,14 @@ class WrongScreen {
 }
 {% endhighlight %}
 
-It's a kind of imitation of presenter from any platform: (Fragment or Activity from Android or ViewController from iOS). Code looks great - easy to read and understand asynchronous code looks just like usual.
+Wrong screen is a imitation of presenter(you can find similar in any platform: Fragment or Activity from Android or ViewController from iOS). Code in **WrongScreen.initialize** looks great: easy to read and understand, asynchronous but looks just like usual iterative.
 
-Let's imitate page opening:
-{% highlight C# %}
+When page opens everything works as expected:
+{% highlight csharp %}
 var screen = new WrongScreen();
 screen.initialize();
 {% endhighlight %}
+
 
 {% highlight Console output %}
 Loading...
@@ -43,9 +44,9 @@ Loading completed
 Data is 5
 {% endhighlight %}
 
-It works, great! But what happens if user leave page before loading completed:
+But what will happen if user leave page before loading completed:
 
-{% highlight C# %}
+{% highlight csharp %}
 var screen = new WrongScreen();
 screen.initialize();
 screen.destroy();
@@ -58,5 +59,13 @@ Unhandled Exception: System.ObjectDisposedException: Cannot access a disposed ob
 Object name: 'ConsoleView'.
 {% endhighlight %}
 
-The worst think about cancellation related crashes - it's hard to miss it and let it go to prod: local servers are fast, navigation could be not trivial and so on.
+The worst thing about cancellation related crashes - it's hard to miss it and let it go to prod: local servers are fast, navigation could be not trivial and so on.
 
+
+
+
+TODO: remove it don't need it any more
+
+Kotlin coroutines like a breadth of fresh air for me. Before I started develop for Android platform I used C# for my daily job. In C# since 2011 (TODO: clarify) for developers available async/await mechanism. When I saw coroutines for a first time I thought "Just like I used to writing in C#, great!", but I was wrong - it's much better!
+
+Kotlin coroutines solved the biggest problem we always have with C# async/await mechanism: cancellation. Cancellation is an issue for C# projects not because it's something hard to implement(you'll see it's easy), because developers aren't aware that cancellation is important. We had realized importance of correct cancellation implementation right after we started getting a lot of crash reports from production.
