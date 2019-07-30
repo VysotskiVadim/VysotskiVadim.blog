@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The biggest reason to love kotlin coroutines"
+title:  "Kotlin Coroutines - async/await done right"
 date:   2019-07-27 13:30:26 +0300
 ---
 
