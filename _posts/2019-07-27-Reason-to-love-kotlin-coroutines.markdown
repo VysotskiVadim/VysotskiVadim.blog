@@ -4,9 +4,7 @@ title:  "The biggest reason to love kotlin coroutines"
 date:   2019-07-27 13:30:26 +0300
 ---
 
-I love [Structured Concurrency](https://medium.com/@elizarov/structured-concurrency-722d765aa952) in Kotlin Coroutines because it's solved the biggest problem we always had with the "old shool" technic like *async/await* - **cancellations**.
-
-Cancellations is dangerous - most developers aren't aware of its importance. Tutorials doesn't tell you about cancellations, try to google C# or Ecma Script *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
+Before I switched to Android I was .Net developer and used C# intensively. I've wrote a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest problem I always had in asynchronous *async/await* code - **cancellations**.
 
 What is wrong with cancellations and *async/await*? Let's consider typical C# async/await example
 ```c#
@@ -17,7 +15,7 @@ class WrongScreen {
     public async void initialize() {
         view = new ConsoleView();
         view.ShowLoading();
-        var data = await FakeTaskManager.fetchDataAsync();
+        var data = await FakeTaskManager.fetchDataAsync(); //always returns 5
         view.HideLoading();
         view.ShowData(data);
     }
@@ -61,9 +59,7 @@ Object name: 'ConsoleView'.
 ```
 **Crash!** View was destroyed while data was loading, and when loading completed and presenter tried to call `view.HideLoading()` it got `ObjectDisposedException`.
 
-The worst thing about cancellation related crashes - it's hard to miss it and let it go to prod: local servers are fast, navigation could be not trivial and so on.
-
-Let's handle cancellation!
+Is it hard to handle cancellation? NO!
 
 ```c#
 class RightScreen { 
@@ -92,7 +88,7 @@ class RightScreen {
 }
 ```
 
-With *async/await* approach cancellation handling works via exceptions: as soon as operation cancelled exceptions should be thrown. Exceptions just interrupts regular code flow.
+In languages with *async/await* cancellation handling works via exceptions: as soon as operation cancelled - exception should be thrown. In case of cancellation exception mechanism used just to interrupt code execution.
 
 Let's check:
 ```c#
@@ -105,6 +101,14 @@ It works, great!
 Loading...
 Operation was cancelled
 ```
+
+Cancellations is dangerous - most developers aren't aware of its importance. Tutorials doesn't tell you about cancellations, try to google C# or Ecma Script *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
+
+The worst thing about cancellation related crashes - it's easy not to notice it when you test: local servers are fast, navigation could be not trivial and so on. But believe me you will find all wrong handled cancellations in crash reports from prod.
+
+The main point I've learned about *async/await* asynchronous code - you should always handle cases with cancellation. The only exceptions is backend development: http doesn't support cancellations.
+
+In this article I expect that you're familiar with idea of [Structured Concurrency](https://medium.com/@elizarov/structured-concurrency-722d765aa952) in Kotlin Coroutines.
 
 TODO: remove it don't need it any more
 
