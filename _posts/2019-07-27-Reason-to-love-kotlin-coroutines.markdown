@@ -6,6 +6,8 @@ date:   2019-07-27 13:30:26 +0300
 
 Before I switched to Android I was .Net developer and used C# intensively. I've wrote a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest problem I always had in asynchronous *async/await* code - **cancellations**.
 
+## The problem
+
 What is wrong with cancellations and *async/await*? Let's consider typical C# async/await example
 ```c#
 class WrongScreen { 
@@ -108,10 +110,15 @@ The worst thing about cancellation related crashes - it's easy not to notice it 
 
 The main point I've learned about *async/await* asynchronous code - you should always handle cases with cancellation. The only exceptions is backend development: http doesn't support cancellations.
 
-In this article I expect that you're familiar with idea of [Structured Concurrency](https://medium.com/@elizarov/structured-concurrency-722d765aa952) in Kotlin Coroutines.
+Let's summarize *async/await* cancellations issue:
 
-TODO: remove it don't need it any more
+* easy to handle, but easy to make a mistake
+* should be handled everywhere, every time
+* many developers aren't aware
 
-Kotlin coroutines like a breadth of fresh air for me. Before I started develop for Android platform I used C# for my daily job. In C# since 2011 (TODO: clarify) for developers available async/await mechanism. When I saw coroutines for a first time I thought "Just like I used to writing in C#, great!", but I was wrong - it's much better!
+Can compiler handle it for us? **Yes!**
 
-Kotlin coroutines solved the biggest problem we always have with C# async/await mechanism: cancellation. Cancellation is an issue for C# projects not because it's something hard to implement(you'll see it's easy), because developers aren't aware that cancellation is important. We had realized importance of correct cancellation implementation right after we started getting a lot of crash reports from production.
+## The solution
+
+Kotlin Coroutines comes with idea of [Structured Concurrency](https://medium.com/@elizarov/structured-concurrency-722d765aa952) - compiler doesn't leave up to you to decide what to do with cancellation. Cancellation is always handled!
+
