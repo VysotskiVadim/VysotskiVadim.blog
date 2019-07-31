@@ -144,5 +144,17 @@ class RightScreen: CoroutineScope by CoroutineScope(Dispatchers.Unconfined) {
 
 }
 ```
+Let's check:
+```kotlin
+val screen = RightScreen()
+screen.initialize()
+screen.destroy()
+println("user successfully leaved the screen")
+```
+Output:
+```console
+loading...
+user successfully leaved the screen
+```
 
-It works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function, except for **compiler and library do for you and even if you do a mistake code won't compile**.  
+It works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function. But in Kotlin **compiler and library do for you and even if you make a mistake code won't compile**.  
