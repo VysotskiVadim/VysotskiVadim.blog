@@ -108,7 +108,7 @@ Cancellations is dangerous - most developers aren't aware of its importance. Tut
 
 The worst thing about cancellation related crashes - it's easy not to notice it when you test: local servers are fast, navigation could be not trivial and so on. But believe me you will find all wrong handled cancellations in crash reports from prod.
 
-The main point I've learned about *async/await* asynchronous code - you should always handle cases with cancellation. The only exceptions is backend development: http doesn't support cancellations.
+The main point I've learned about *async/await* asynchronous code - you should always handle cases with cancellation. The only exception is backend development: http doesn't support cancellations.
 
 Let's summarize *async/await* cancellations issue:
 
