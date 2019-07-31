@@ -120,5 +120,29 @@ Can compiler handle it for us? **Yes!**
 
 ## The solution
 
-Kotlin Coroutines comes with idea of [Structured Concurrency](https://medium.com/@elizarov/structured-concurrency-722d765aa952) - compiler doesn't leave up to you to decide what to do with cancellation. Cancellation is always handled!
+Kotlin Coroutines comes with idea of [Structured Concurrency](https://kotlinlang.org/docs/reference/coroutines/basics.html#structured-concurrency): all Kotlin Coroutines must run in Coroutine Scope - just cancel scope and all coroutines in it will be cancelled.
 
+```kotlin
+class RightScreen: CoroutineScope by CoroutineScope(Dispatchers.Unconfined) {
+
+    lateinit var view: ConsoleView
+
+    fun initialize() {
+        view = ConsoleView()
+        launch {
+            view.showLoading()
+            val data = fetchData()
+            view.hideLoading()
+            view.showData(data)
+        }
+    }
+
+    fun destroy() {
+        cancel()
+        view.dispose()
+    }
+
+}
+```
+
+It works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function, except for **compiler and library do for you and even if you do a mistake code won't compile**.  
