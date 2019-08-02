@@ -22,6 +22,9 @@ url: "https://vadzimv.dev" # the base hostname & protocol for your site, e.g. ht
 twitter_username: VysotskiVadim
 github_username:  VysotskiVadim
 
+disqus:
+    shortname: vadzimv-dev
+
 # Build settings
 markdown: kramdown
 theme: minima
