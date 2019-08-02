@@ -157,4 +157,4 @@ loading...
 user successfully leaved the screen
 ```
 
-It works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function. But in Kotlin **compiler and library do for you and even if you make a mistake code won't compile**.  
+Under the hood cancellation mechanism in Kotlin Coroutines works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function. But in Kotlin **compiler and library do for you and even if you make a mistake code won't compile**.
