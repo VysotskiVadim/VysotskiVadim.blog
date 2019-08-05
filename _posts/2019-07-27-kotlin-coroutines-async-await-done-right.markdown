@@ -6,7 +6,7 @@ date:   2019-07-27 13:30:26 +0300
 
 Before I switched to Android I was .Net developer and used C# intensively. I've written a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest problem I always had in asynchronous *async/await* code - **cancellations**.
 
-## The problem
+## The issue
 
 What is wrong with cancellations and *async/await*? Let's consider typical C# async/await example
 ```c#
