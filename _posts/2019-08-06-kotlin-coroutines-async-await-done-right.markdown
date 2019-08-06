@@ -122,7 +122,7 @@ Can compiler handle it for us? **Yes!**
 
 ## The solution
 
-Kotlin Coroutines comes with idea of [Structured Concurrency](https://kotlinlang.org/docs/reference/coroutines/basics.html#structured-concurrency): all Kotlin Coroutines must run in Coroutine Scope - just cancel scope and all coroutines in it will be cancelled.
+Kotlin Coroutines come with idea of [Structured Concurrency](https://kotlinlang.org/docs/reference/coroutines/basics.html#structured-concurrency): all Kotlin Coroutines must run in Coroutine Scope - just cancel scope and all coroutines in it will be cancelled.
 
 ```kotlin
 class RightScreen: CoroutineScope by CoroutineScope(Dispatchers.Unconfined) {
