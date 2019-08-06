@@ -6,7 +6,7 @@ date:   2019-08-06 12:00:00 +0300
 
 ![Async dogs](/assets/3-dogs-1-stick.jpg){: style="width:100%"}
 
-Before I switched to Android I was .Net developer and used C# intensively. I've written a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest problem I always had in asynchronous *async/await* code - **cancellations**.
+Before I switched to Android I was .Net developer and used C# intensively. I've written a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest issue I always had in asynchronous *async/await* code - **cancellations**.
 
 ## The issue
 
