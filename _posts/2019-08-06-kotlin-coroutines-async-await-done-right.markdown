@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Kotlin Coroutines - async/await done right"
+title:  "Kotlin Coroutines - async/await which is done right"
 date:   2019-08-06 12:00:00 +0300
 ---
 
@@ -33,7 +33,7 @@ class WrongScreen {
 
 Wrong screen is imitation of presenter(you can find similar classes in any platform: Fragment or Activity from Android or ViewController from iOS). Code in `WrongScreen.initialize` method looks great: easy to read and understand, asynchronous but looks just like usual iterative.
 
-When page opens everything works as expected:
+When the page opens everything works as expected:
 ```c#
 var screen = new WrongScreen();
 screen.initialize();
@@ -92,7 +92,7 @@ class RightScreen {
 }
 ```
 
-In languages with *async/await* cancellation handling works via exceptions: as soon as operation cancelled - exception should be thrown. In case of cancellation exception mechanism used just to interrupt code execution.
+In languages with *async/await* cancellation handling works via exceptions: as soon as an operation cancelled - exception should be thrown. In case of the cancellation handling exception mechanism used just to interrupt code execution.
 
 Let's check:
 ```c#
@@ -159,7 +159,7 @@ loading...
 user successfully leaved the screen
 ```
 
-Under the hood cancellation mechanism in Kotlin Coroutines works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function. But in Kotlin **compiler and library handle cancellation for you**. Of course you still can make a mistake but the only issue you'll get - compilation error. Much better then production crash, isn't it?
+Under the hood cancellation mechanism in Kotlin Coroutines works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function. But in Kotlin **compiler and library handle cancellation for you**. Of course, you still can make a mistake but the only issue you'll get - compilation error. Much better than production crash, isn't it?
 
 ## Instead of conclusion
 
