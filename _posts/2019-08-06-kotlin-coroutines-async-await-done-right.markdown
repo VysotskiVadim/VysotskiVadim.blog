@@ -169,3 +169,8 @@ Again and again I see how Kotlin reduces amount of boilerplate code which I shou
 #### P.S.
 
 Some Kotlin features come with price. Will talk about it next time...
+
+### Links:
+
+* [Cancellation examples at github](https://github.com/VysotskiVadim/cancelations-examples)
+* [Image source](https://www.reddit.com/r/photoshopbattles/comments/6yoxr4/psbattle_these_dogs_sharing_a_stick/)
