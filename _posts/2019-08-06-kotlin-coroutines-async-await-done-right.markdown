@@ -106,7 +106,7 @@ Loading...
 Operation was cancelled
 ```
 
-Cancellation is dangerous - most developers aren't aware of its importance. Tutorials don't tell you about cancellations, try to google C# or Java Script *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
+Cancellation is dangerous - most developers aren't aware of its importance. Tutorials don't tell you about cancellations, try to google C# or JavaScript *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
 
 The worst thing about cancellation related crashes - it's might be challenging to spot them: local servers are fast, navigation could be not trivial and so on. But believe me you will find all wrong handled cancellations in crash reports from prod.
 
@@ -163,7 +163,7 @@ Under the hood cancellation mechanism in Kotlin Coroutines works similar to C# w
 
 ## Instead of conclusion
 
-Again and again I see how Kotlin reduce amount of boilerplate code which I should write and I like it! You can't make a mistake if you don't write code. Write more clean and robust code then ever before with Kotlin!
+Again and again I see how Kotlin reduces amount of boilerplate code which I should write and I like it! You can't make a mistake if you don't write code. Write more clean and robust code then ever before with Kotlin!
 
 
 #### P.S.
