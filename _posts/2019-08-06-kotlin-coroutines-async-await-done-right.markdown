@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Kotlin Coroutines - async/await done right"
-date:   2019-08-06 15:00:00 +0300
+date:   2019-08-06 12:00:00 +0300
 ---
 
 ![Async dogs](/assets/3-dogs-1-stick.jpg){: style="width:100%"}
