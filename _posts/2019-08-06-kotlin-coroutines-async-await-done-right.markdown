@@ -108,7 +108,7 @@ Operation was cancelled
 
 Cancellation is dangerous - most developers aren't aware of its importance. Tutorials don't tell you about cancellations, try to google C# or Ecma Script *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
 
-The worst thing about cancellation related crashes - it's easy not to notice it when you test: local servers are fast, navigation could be not trivial and so on. But believe me you will find all wrong handled cancellations in crash reports from prod.
+The worst thing about cancellation related crashes - it's might be challenging to spot them: local servers are fast, navigation could be not trivial and so on. But believe me you will find all wrong handled cancellations in crash reports from prod.
 
 The main point I've learned about *async/await* asynchronous code - you should always handle cases with cancellation. The only exception is backend development: http doesn't support cancellations.
 
