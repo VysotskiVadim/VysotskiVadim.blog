@@ -46,7 +46,7 @@ Loading completed
 Data is 5
 ```
 
-I wouldn't name it `WrongScreen` if everything were good. What will happen if user leaves page before loading completed?
+I wouldn't name it `WrongScreen` if everything was good. What will happen if user leaves page before loading completed?
 
 ```c#
 var screen = new WrongScreen();
