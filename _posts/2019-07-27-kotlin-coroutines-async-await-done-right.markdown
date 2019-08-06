@@ -158,3 +158,12 @@ user successfully leaved the screen
 ```
 
 Under the hood cancellation mechanism in Kotlin Coroutines works similar to C# where you should catch `OperationCanceledException`, pass and manage `CancellationToken` every time you call async function. But in Kotlin **compiler and library handle cancellation for you**. Of course you still can make a mistake but the only issue you'll get - compilation error. Much better then production crash, isn't it?
+
+## Instead of conclusion
+
+Again and again I see how Kotlin reduce amount of boilerplate code which I should write and I like it! You can't make a mistake if you don't write code. Write more clean and robust code then ever before with Kotlin!
+
+
+#### P.S.
+
+Some Kotlin features comes with price. Will talk about it next time...
