@@ -106,7 +106,7 @@ Loading...
 Operation was cancelled
 ```
 
-Cancellation is dangerous - most developers aren't aware of its importance. Tutorials don't tell you about cancellations, try to google C# or Ecma Script *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
+Cancellation is dangerous - most developers aren't aware of its importance. Tutorials don't tell you about cancellations, try to google C# or Java Script *async/await* tutorials. Even if you're experienced developer - it probably won't help because issue isn't actual for pre *async/await* approach like callbacks.
 
 The worst thing about cancellation related crashes - it's might be challenging to spot them: local servers are fast, navigation could be not trivial and so on. But believe me you will find all wrong handled cancellations in crash reports from prod.
 
