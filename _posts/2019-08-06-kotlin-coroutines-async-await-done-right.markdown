@@ -31,7 +31,7 @@ class WrongScreen {
 }
 ```
 
-Wrong screen is imitation of presenter(you can find similar in any platform: Fragment or Activity from Android or ViewController from iOS). Code in `WrongScreen.initialize` method looks great: easy to read and understand, asynchronous but looks just like usual iterative.
+Wrong screen is imitation of presenter(you can find similar classes in any platform: Fragment or Activity from Android or ViewController from iOS). Code in `WrongScreen.initialize` method looks great: easy to read and understand, asynchronous but looks just like usual iterative.
 
 When page opens everything works as expected:
 ```c#
