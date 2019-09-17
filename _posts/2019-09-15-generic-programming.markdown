@@ -68,4 +68,6 @@ https://stackoverflow.com/questions/3912089/why-no-generics-in-go
 
 ## Kotlin
 
+https://kotlinlang.org/docs/reference/inline-functions.html#reified-type-parameters
+
 ## Swift
