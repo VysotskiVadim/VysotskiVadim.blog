@@ -8,32 +8,53 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Generic_programming):
 
 > Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. 
 
-i.e. you're adding one more layer of indirection: abstraction over concrete types in algorithms or data structures.
+What does it mean? Let's consider example: function which takes 2 arguments and returns max of them. Code was written using strong typed language (java)
 
-For example you'd like to create function which returns max element:
+```java
+public static int max(int first, int second) {
+    if (second > first) {
+        return second;
+    }
+    return first;
+}
+```
+Ok, but what about floating point numbers?
+
+```java
+public static double max(double first, double second) {
+    if (second > first) {
+        return second;
+    }
+    return first;
+}
+```
+
+Oh, so should I implement it for every type I use?! For me as developer code looks almost the same. It would be so nice to write code with one more layer of indirection: abstraction of concrete types. That what is Generic programming about -- writing algorithms and data structure which can work with different types.
+
+In week typed languages you use generic programming out of the box, for example implementation of `max` function in JavaScript looks like
 
 ```js
 function max(first, second) {
-    if (first > second) {
-        return first
+    if (second > first) {
+        return second
     }
-    return second
+    return first
 }
 ```
-As you can see in JavaScript, as well as in any other week typed language, Generic Programming works out of the box: now we can use `max` function for any type
+You can use `max` function for any type
 
 ```js
 max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you are using strong typed language? Well, it depends on chosen language. Now we consider popular now day strong typed languages.
+But what to do if you use strong typed language? Well, it depends on chosen language. We consider popular now day strong typed languages.
 
 For every considered language we will answer following questions:
-* How does it work under the hood?
+* How does generics work under the hood?
 * How did migration to generic happen(if actual)?
-* How Variance works?
-* What about known issues?
+* Variance(*don't be afraid of term, explanation will follow*)
+* Pros and Cons
 
 ## Go
 
