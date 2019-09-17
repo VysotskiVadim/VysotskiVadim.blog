@@ -29,7 +29,25 @@ public static double max(double first, double second) {
 }
 ```
 
-Oh, so should I implement it for every type I use?! For me as developer code looks almost the same. It would be so nice to write code with one more layer of indirection: abstraction of concrete types. That what is Generic programming about -- writing algorithms and data structure which can work with different types.
+Create function per type? That's sucks! This is **not generic programming**: every implementation of `max` function can be called with only one concrete type. And implementation for every type looks just the same!
+
+Here generic programming comes. Let's recap definition -- *algorithms are written in terms of types to-be-specified-later*, i.e. we implement algorithms and don't specify concrete types during implementation: 
+
+```java
+public static <T extends Comparable> T max(T first, T second) {
+    if (second.compareTo(first) > 0) {
+        return second;
+    }
+    return first;
+}
+```
+Types are specified during usage:
+```java
+max(12.4, 11.5); // returns 12.4
+max("ab", "abc"); // returns "abc"
+```
+
+One implementation that works with all types(which extends `Comparable` of course). That what is Generic programming about -- writing algorithms and data structure which can work with different types.
 
 In week typed languages you use generic programming out of the box, for example implementation of `max` function in JavaScript looks like
 
