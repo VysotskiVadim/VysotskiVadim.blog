@@ -10,9 +10,24 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Generic_programming):
 
 i.e. you're adding one more layer of indirection: abstraction over concrete types in algorithms or data structures.
 
-Add example!
+For example you'd like to create function which returns max element:
 
-I found fascinating how different programming languages implements Generic Programming, in post we consider popular now day strong typed languages. TODO: Why only strong typed?, is only strong typed?
+```js
+function max(first, second) {
+    if (first > second) {
+        return first
+    }
+    return second
+}
+```
+As you can see in JavaScript, as well as in any other week typed language, Generic Programming works out of the box: now we can use `max` function for any type
+
+```js
+max(5, 2) // returns 5
+max("a", "d") // returns "d"
+```
+
+But what to do if you are using strong typed language? Well, different programming languages faced generic programming using different techniques. In post we consider popular now day strong typed languages. In week typed languages generic programming works without any effort, so we won't review them.
 
 For every considered language we will answer following questions:
 * How does it work under the hood?
@@ -20,3 +35,14 @@ For every considered language we will answer following questions:
 * How Variance works?
 * What about known issues?
 
+## Go
+
+## C++
+
+## Java
+
+## C#
+
+## Kotlin
+
+## Swift
