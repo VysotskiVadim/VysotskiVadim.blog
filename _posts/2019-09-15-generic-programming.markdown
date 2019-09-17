@@ -27,7 +27,7 @@ max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you are using strong typed language? Well, different programming languages faced generic programming using different techniques. In post we consider popular now day strong typed languages. In week typed languages generic programming works without any effort, so we won't review them.
+But what to do if you are using strong typed language? Well, it depends on chosen language. Now we consider popular now day strong typed languages.
 
 For every considered language we will answer following questions:
 * How does it work under the hood?
