@@ -48,7 +48,7 @@ max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you use strong typed language? Well, it depends on chosen language. We consider popular now day strong typed languages.
+But what to do if you use strong typed language? Well, it depends on chosen language. We'll consider popular now day strong typed languages: Go, C++, Java, C#, Kotlin, Swift. **//TODO: links?!**
 
 For every considered language we will answer following questions:
 * How does generics work under the hood?
@@ -57,6 +57,8 @@ For every considered language we will answer following questions:
 * Pros and Cons
 
 ## Go
+
+https://stackoverflow.com/questions/3912089/why-no-generics-in-go
 
 ## C++
 
