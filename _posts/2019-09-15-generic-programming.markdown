@@ -66,13 +66,55 @@ max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you use strong typed language? Well, it depends on chosen language. We'll consider popular now day strong typed languages: Go, C++, Java, C#, Kotlin, Swift. **//TODO: links?!**
+But what to do if you use strong typed language? Well, it depends on chosen language. We'll consider popular now day strong typed languages: C++, Java, C#, Kotlin, Swift, TypeScript, Go. **//TODO: links?!**
 
 For every considered language we will answer following questions:
 * How does generics work under the hood?
 * How did migration to generic happen(if actual)?
 * Variance(*don't be afraid of term, explanation will follow*)
 * Pros and Cons
+
+## Variance
+
+But before we start discovering different languages it worth to understand what variance is, because it's very important in context of generic programming and strong typed languages.
+
+```java
+class Animal {  }
+class Cat extends Animal { }
+class Dog extends Animal { }
+
+interface AnimalDoctor<T extends Animal> { 
+    void cure(T animal);
+}
+
+class DoctorDolittle implements AnimalDoctor<Animal> {
+    @Override
+    public void cure(Animal animal) { }
+}
+```
+
+There are 2 entities `Cat` and `Dog` which are `Animal`, there are also components `AnimalDoctor` and `DoctorDolittle` which uses entities as generic parameter.
+
+Term **Variance** refers to how components which uses different entities as generic parameters relates to each other. 
+
+For example can I use list of `Dog` as a list of `Animal`?
+```java
+List<Animals> animals = new ArrayList<Dog>();
+```
+Or can I use doctor Dolittle as a cat doctor?
+```java
+AnimalDoctor<Cat> catDoctor = new DoctorDolittle();
+```
+
+Developers use strong typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will causes runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fails at runtime)*.
+
+Should strong typed language compiler allows usage of list of `Dog` as list of `Animals`:
+
+```
+List<Animals> animals = new ArrayList<Dog>();
+
+
+```
 
 ## Go
 
