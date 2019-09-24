@@ -108,13 +108,35 @@ AnimalDoctor<Cat> catDoctor = new DoctorDolittle();
 
 Developers use strong typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will causes runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fails at runtime)*.
 
-Should strong typed language compiler allows usage of list of `Dog` as list of `Animals`:
+### Covariance
 
+Should strong typed language compiler allows usage of list of sub class `Dog` as list of super class `Animal`? Does it seem wrong? Would it fail in runtime?
+
+```java
+// warning! it's pseudocode, not java!
+List<Dog> dogs = new ArrayList<>();
+dogs.add(new Dog());
+dogs.add(new Dog());
+List<Animals> animals = dogs;
+Animal first = animals.get(0);
+Animal second = animals.get(1);
 ```
-List<Animals> animals = new ArrayList<Dog>();
 
+Example seems good, everything is safe and looks useful. It's okay for compiler to allow such variance. But we use only functions which **returns** `Animal`. What would happen if we **pass** animal to any method?
 
+```java
+// warning! it's pseudocode, not java!
+List<Dog> dogs = new ArrayList<>();
+dogs.add(new Dog());
+dogs.add(new Dog());
+List<Animals> animals = dogs;
+animals.add(new Cat());
+Dog dog = dogs.get(2); // OOOOOPS, we've got Cat here!
 ```
+
+Next example would crash in runtime, because we've got `Cat` instead of `Dog`. It's not okay for compiler to allow such variance.
+
+We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, only if you use generic functions that returns values, passing generic values if forbidden.
 
 ## Go
 
