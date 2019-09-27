@@ -78,6 +78,8 @@ For every considered language we will answer following questions:
 
 But before we start discovering different languages it worth to understand what variance is, because it's very important in context of generic programming and strong typed languages.
 
+Many developers use strong typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will causes runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fails at runtime)*. You've got the point -- ***compiler shouldn't allow you shoot in your own leg***.
+
 ```java
 class Animal {  }
 class Cat extends Animal { }
@@ -93,11 +95,11 @@ class DoctorDolittle implements AnimalDoctor<Animal> {
 }
 ```
 
-There are 2 entities `Cat` and `Dog` which are `Animal`, there are also components `AnimalDoctor` and `DoctorDolittle` which uses entities as generic parameter.
+There are 2 regular classes: `Cat` and `Dog` which are `Animal`, and there are also generic classes `AnimalDoctor` and `DoctorDolittle` which uses animals as generic parameter.
 
-Term **Variance** refers to how components which uses different entities as generic parameters relates to each other. 
+Term **Variance** refers to how generic classes which use different generic parameters relates to each other. 
 
-For example can I use list of `Dog` as a list of `Animal`?
+So **Varience** answers question like: Can I use list of `Dog` as a list of `Animal`?
 ```java
 List<Animals> animals = new ArrayList<Dog>();
 ```
@@ -106,11 +108,12 @@ Or can I use doctor Dolittle as a cat doctor?
 AnimalDoctor<Cat> catDoctor = new DoctorDolittle();
 ```
 
-Developers use strong typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will causes runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fails at runtime)*.
+To answer we need to remember one of compilers purpose --  ***don't let you shoot in your own leg***. So let's consider how can we cast generic object without getting troubles.
+
 
 ### Covariance
 
-Should strong typed language compiler allows usage of list of sub class `Dog` as list of super class `Animal`? Does it seem wrong? Would it fail in runtime?
+Should allows usage of list of sub class `Dog` as list of super class `Animal`? Can it cause any troubles?
 
 ```java
 // warning! it's pseudocode, not java!
@@ -122,7 +125,7 @@ Animal first = animals.get(0);
 Animal second = animals.get(1);
 ```
 
-Example seems good, everything is safe and looks useful. It's okay for compiler to allow such variance. But we use only functions which **returns** `Animal`. What would happen if we **pass** animal to any method?
+Doesn't seem dangerous, no crashes. And it can be useful: if somebody need list of animals why can't him list of dogs. But in example we use only functions **returns** `Animal`. What would happen if we **pass** animal to any method?
 
 ```java
 // warning! it's pseudocode, not java!
@@ -131,12 +134,14 @@ dogs.add(new Dog());
 dogs.add(new Dog());
 List<Animals> animals = dogs;
 animals.add(new Cat());
-Dog dog = dogs.get(2); // OOOOOPS, we've got Cat here!
+Dog dog = dogs.get(2); // OOOOOPS, ClassCastException
 ```
 
-Next example would crash in runtime, because we've got `Cat` instead of `Dog`. It's not okay for compiler to allow such variance.
+Next example would crash in runtime, because we've got `Cat` instead of `Dog`. 
 
-We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, only if you use generic functions that returns values, passing generic values if forbidden.
+Have you got the point: it's save to produce subclass but not to consume. It also sounds logically when we talk about it in real life. For example you have a 
+
+We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, only if you **produce** generic values *(returns as a result from the function)*, passing generic values will get you in troubles.
 
 ## Go
 
