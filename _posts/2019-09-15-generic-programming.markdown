@@ -99,7 +99,7 @@ There are 2 regular classes: `Cat` and `Dog` which are `Animal`, and there are a
 
 Term **Variance** refers to how generic classes which use different generic parameters relates to each other. 
 
-So **Varience** answers question like: Can I use list of `Dog` as a list of `Animal`?
+So **Variance** answers question like: Can I use list of `Dog` as a list of `Animal`?
 ```java
 List<Animals> animals = new ArrayList<Dog>();
 ```
@@ -113,7 +113,7 @@ To answer we need to remember one of compilers purpose --  ***don't let you shoo
 
 ### Covariance
 
-Should allows usage of list of sub class `Dog` as list of super class `Animal`? Can it cause any troubles?
+Should allows usage of list of sub class `Dog` as list of super class `Animal`? Can it cause any trouble?
 
 ```java
 // warning! it's pseudocode, not java!
@@ -139,7 +139,12 @@ Dog dog = dogs.get(2); // OOOOOPS, ClassCastException
 
 Next example would crash in runtime, because we've got `Cat` instead of `Dog`. 
 
-Have you got the point: it's save to produce subclass but not to consume. It also sounds logically when we talk about it in real life. For example you have a 
+Have you got the point? In given examples it's save to produce subclass but not to consume.
+
+It also sounds logically when we talk about it in real life.
+When you need a flower you can take from rouse shop or daisy shop. Flowers shop produces flowers, so it's save to cast `Shop<Flower>` to `Shop<Rouse>`.
+
+But when your girlfriend likes roses, you can't consider her as somebody who loves flower -- she likes only rouses! Pretty girl consumes flowers, so you can't cast `PrettyGirl<Rouse>` to `PrettyGirl<Flower>`.
 
 We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, only if you **produce** generic values *(returns as a result from the function)*, passing generic values will get you in troubles.
 
