@@ -147,7 +147,43 @@ We have just considered example of **Covariance** - you are allowed to cast `A<C
 
 ### Contravariance 
 
+Okay, now step 2 - present flower to a pretty girl:
+
+```java
+interface PrettyGirl<TFavouriteFlower extends Flower> {
+    void gift(TFavouriteFlower flower);
+}
+```
+Depending on her personal taste she could love different flowers:
+
+```java
+class AnyFlowerLover implements PrettyGirl<Flower> {
+    @Override
+    public void takeGift(Flower flower) {
+        System.out.println("I like all flowers!");
+    }
+}
+
+class DaisyLover implements PrettyGirl<Daisy> {
+    @Override
+    public void takeGift(Daisy flower) {
+        System.out.println("wow, daisy, it's my favourite!");
+    }
+}
+```
+
+If your girlfriend likes all kinds of flowers and you gift her a rose, would it be okay?
+
+```java
+// Warning: it's pseudocode, won't compile 
+PrettyGirl<Flower> girlfriend = AnyFlowerLover();
+girlfrient.takeGift(new Rose());
+```
+Yes, if she likes all flowers she will like rose.
+
 But when your girlfriend likes roses, you can't consider her as somebody who loves flower -- she likes only rouses! Pretty girl consumes flowers, so you can't cast `PrettyGirl<Rouse>` to `PrettyGirl<Flower>`.
+
+We have just considered example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` subclass of `B`, if `A` consumes generic value.
 
 ## Go
 
