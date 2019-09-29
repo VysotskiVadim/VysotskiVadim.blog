@@ -81,34 +81,21 @@ But before we start discovering different languages it worth to understand what 
 Many developers use strong typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will causes runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fails at runtime)*. You've got the point -- ***compiler shouldn't allow you shoot in your own leg***.
 
 ```java
-class Animal {  }
-class Cat extends Animal { }
-class Dog extends Animal { }
-
-interface AnimalDoctor<T extends Animal> { 
-    void cure(T animal);
-}
-
-class DoctorDolittle implements AnimalDoctor<Animal> {
-    @Override
-    public void cure(Animal animal) { }
-}
+class Flower {  }
+class Rose extends Flower { }
+class Daisy extends Flower { }
 ```
 
-There are 2 regular classes: `Cat` and `Dog` which are `Animal`, and there are also generic classes `AnimalDoctor` and `DoctorDolittle` which uses animals as generic parameter.
+There is simple class hierarchy: `Rose` and `Daisy`, each of them is `Flower`.
 
-Term **Variance** refers to how generic classes which use different generic parameters relates to each other. 
+Term **variance** refers to how generic classes which use different generic parameters relates to each other. And we need to understand their relationships in order to do cast.
 
-So **Variance** answers question like: Can I use list of `Dog` as a list of `Animal`?
+For example **Variance** refers questions like: Can I use list of `Rose` as a list of `Flower`?
 ```java
-List<Animals> animals = new ArrayList<Dog>();
-```
-Or can I use doctor Dolittle as a cat doctor?
-```java
-AnimalDoctor<Cat> catDoctor = new DoctorDolittle();
+List<Flower> bouquet = new ArrayList<Rose>();
 ```
 
-To answer we need to remember one of compilers purpose --  ***don't let you shoot in your own leg***. So let's consider how can we cast generic object without getting troubles.
+To answer we need to remember one of compilers purpose --  ***don't let you shoot in your own leg***. So let's consider how can we cast generic object safely.
 
 
 ### Covariance
