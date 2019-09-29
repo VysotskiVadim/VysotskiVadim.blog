@@ -181,7 +181,12 @@ girlfrient.takeGift(new Rose());
 ```
 Yes, if she likes all flowers she will like rose.
 
-But when your girlfriend likes roses, you can't consider her as somebody who loves flower -- she likes only rouses! Pretty girl consumes flowers, so you can't cast `PrettyGirl<Rouse>` to `PrettyGirl<Flower>`.
+But when your girlfriend likes daisies, you can't consider her as somebody who loves flower -- she likes only daisies!
+```java
+// Warning: it's pseudocode, won't compile 
+PrettyGirl<Flower> girlfriend = DaisyLover();
+girlfrient.takeGift(new Rose()); // she won't like it!
+```
 
 We have just considered example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` subclass of `B`, if `A` consumes generic value.
 
