@@ -97,43 +97,57 @@ List<Flower> bouquet = new ArrayList<Rose>();
 
 To answer we need to remember one of compilers purpose --  ***don't let you shoot in your own leg***. So let's consider how can we cast generic object safely.
 
+We'll learn it by journey: you need to get a flower to give it to pretty girl.
 
 ### Covariance
 
-Should allows usage of list of sub class `Dog` as list of super class `Animal`? Can it cause any trouble?
+Our task starts from getting flower. Let's go to a shop.
 
 ```java
-// warning! it's pseudocode, not java!
-List<Dog> dogs = new ArrayList<>();
-dogs.add(new Dog());
-dogs.add(new Dog());
-List<Animals> animals = dogs;
-Animal first = animals.get(0);
-Animal second = animals.get(1);
+interface FlowerShop<T extends Flower> {
+    T getFlower();
+}
 ```
-
-Doesn't seem dangerous, no crashes. And it can be useful: if somebody need list of animals why can't him list of dogs. But in example we use only functions **returns** `Animal`. What would happen if we **pass** animal to any method?
+And you have 2 flowers shop in your city:
 
 ```java
-// warning! it's pseudocode, not java!
-List<Dog> dogs = new ArrayList<>();
-dogs.add(new Dog());
-dogs.add(new Dog());
-List<Animals> animals = dogs;
-animals.add(new Cat());
-Dog dog = dogs.get(2); // OOOOOPS, ClassCastException
+class RoseShop implements FlowerShop<Rose> {
+    @Override
+    public Rose getFlower() {
+        return new Rose();
+    }
+}
+
+class DaisyShop implements FlowerShop<Daisy> {
+    @Override
+    public Daisy getFlower() {
+        return new Daisy();
+    }
+}
 ```
 
-Next example would crash in runtime, because we've got `Cat` instead of `Dog`. 
+If you ask me where is the flower shop and tell you address of `RoseShop` would it be fine?
 
-Have you got the point? In given examples it's save to produce subclass but not to consume.
+```java
+// Warning: it's pseudocode, won't compile 
+static FlowerShop<Flower> giveMeTheShop() {
+    return new RoseShop();
+}
+```
 
-It also sounds logically when we talk about it in real life.
-When you need a flower you can take from rouse shop or daisy shop. Flowers shop produces flowers, so it's save to cast `Shop<Flower>` to `Shop<Rouse>`.
+Yep, `Rouse` is `Flower`, if you need a flower you can go to `RouseShop` and buy flower there.
+
+```java
+// Warning: it's pseudocode, won't compile 
+FlowerShop<Flower> shop = giveMeTheShop();
+Flower flower = shop.getFlower();
+```
+
+We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, if `A` **produces** generic values *(returns as a result from the function)*.
+
+### Contravariance 
 
 But when your girlfriend likes roses, you can't consider her as somebody who loves flower -- she likes only rouses! Pretty girl consumes flowers, so you can't cast `PrettyGirl<Rouse>` to `PrettyGirl<Flower>`.
-
-We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, only if you **produce** generic values *(returns as a result from the function)*, passing generic values will get you in troubles.
 
 ## Go
 
