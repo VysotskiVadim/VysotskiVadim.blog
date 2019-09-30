@@ -143,7 +143,7 @@ FlowerShop<Flower> shop = giveMeTheShop();
 Flower flower = shop.getFlower();
 ```
 
-We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, if `A` **produces** generic values *(returns as a result from the function)*.
+We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is subclass of `B`, if `A` **produces** generic values *(returns as a result from the function)*. **Covariance** about producers.
 
 ### Contravariance 
 
