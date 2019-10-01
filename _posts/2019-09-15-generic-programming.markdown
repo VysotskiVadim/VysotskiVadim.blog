@@ -90,14 +90,18 @@ There is simple class hierarchy: `Rose` and `Daisy`, each of them is `Flower`.
 
 Term **variance** refers to how generic classes which use different generic parameters relates to each other. And we need to understand their relationships in order to do cast.
 
-For example **Variance** refers questions like: Can I use list of `Rose` as a list of `Flower`?
+For example if `Rose` is subclass of `Flower` then I should be able to substitute `Flower` by `Rose`. Is it applicable to generic code?
+Variance releates to questions like "Can I use list of `Rose` as a list of `Flower`?".
 ```java
 List<Flower> bouquet = new ArrayList<Rose>();
 ```
+When somebody ask "What about variance in language X?", he would like to know how can he cast generics classes with different generic parameters to each other. Usually there is some kinds of limitations in casting. Compiler won't let you let you shoot in your own leg, remember? With different limitations we have 4 types of variance:
+* Covariance
+* Contravariance
+* Bivariance
+* Invariance
 
-To answer we need to remember one of compilers purpose --  ***don't let you shoot in your own leg***. So let's consider how can we cast generic object safely.
-
-We'll learn it by journey: you need to get a flower to give it to pretty girl.
+We will consider 2 of them: co and contra variance. To make it fun let's do it by journey: you need to get a flower to gift it to pretty girl.
 
 ### Covariance
 
@@ -151,7 +155,7 @@ Okay, now step 2 - present flower to a pretty girl:
 
 ```java
 interface PrettyGirl<TFavouriteFlower extends Flower> {
-    void gift(TFavouriteFlower flower);
+    void takeGift(TFavouriteFlower flower);
 }
 ```
 Depending on her personal taste she could love different flowers:
