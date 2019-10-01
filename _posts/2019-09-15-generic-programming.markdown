@@ -4,7 +4,7 @@ title:  "Generic Programming"
 date:   2019-09-15 12:00:00 +0300
 ---
 
-![Types of Asteraceae](https://github.com/VysotskiVadim/VysotskiVadim.github.io/blob/2d1d1a2108158080c4128ee8a64694d6fddb5869/assets/Asteracea_poster_3.jpg?raw=true){: style="width:100%;clip:rect(0px,60px,200px,0px)"}
+![Types of Asteraceae](https://github.com/VysotskiVadim/VysotskiVadim.github.io/blob/2d1d1a2108158080c4128ee8a64694d6fddb5869/assets/Asteracea_poster_3.jpg?raw=true){: style="width:100%"}
 
 There is a lot of different strongly typed languages that supports generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth to recap everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
 
@@ -72,7 +72,7 @@ max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you use strongly typed language? Well, it depends on chosen language. In next post we'll consider popular now day strongly typed languages: C++, Java, C#, Kotlin, Swift, TypeScript.
+But what to do if you use strongly typed language? Well, it depends on chosen language. In the next post we'll consider popular now day strongly typed languages: C++, Java, C#, Kotlin, Swift, TypeScript.
 
 For every considered language we will answer following questions:
 * How does generics work under the hood?
@@ -107,7 +107,7 @@ When somebody ask "What about variance in language X?", he would like to know ho
 * Bivariance
 * Invariance
 
-We will consider 2 of them: co and contra variance. To make it fun let's do it by journey: you need to get a flower to gift it to pretty girl.
+We will consider 2 of them: co and contra variance. To make it fun let's do it by journey: you need to get a flower to gift it to a pretty girl.
 
 ### Covariance
 
