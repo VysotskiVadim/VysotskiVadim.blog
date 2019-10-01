@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Generic Programming"
-date:   2019-09-15 12:00:00 +0300
+title:  "Generic Programming - Introduction"
+date:   2019-10-01 12:00:00 +0300
 ---
 
 ![Types of Asteraceae](https://github.com/VysotskiVadim/VysotskiVadim.github.io/blob/2d1d1a2108158080c4128ee8a64694d6fddb5869/assets/Asteracea_poster_3.jpg?raw=true){: style="width:100%"}
