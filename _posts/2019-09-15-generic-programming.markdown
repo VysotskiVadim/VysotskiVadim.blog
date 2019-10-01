@@ -6,7 +6,7 @@ date:   2019-09-15 12:00:00 +0300
 
 ![Types of Asteraceae](https://github.com/VysotskiVadim/VysotskiVadim.github.io/blob/2d1d1a2108158080c4128ee8a64694d6fddb5869/assets/Asteracea_poster_3.jpg?raw=true){: style="width:100%"}
 
-There is a lot of different strongly typed languages that supports generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth recapping everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
+There are a lot of different strongly typed languages that support generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth recapping everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
 
 ## Introduction
 
@@ -35,7 +35,7 @@ public static double max(double first, double second) {
 }
 ```
 
-Create function per type? That's sucks! This is **not generic programming**: every implementation of `max` function can be called with only one concrete type. And implementation for every type looks just the same!
+Create function per type? That's sucks! This is **not generic programming**: every implementation of `max` function can be called with only one specific type. And implementation for every type looks just the same!
 
 Here generic programming comes. Let's recap definition -- *algorithms are written in terms of types to-be-specified-later*, i.e. we implement algorithms and don't specify specific types during implementation: 
 
@@ -72,7 +72,7 @@ max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you use strongly typed language? Well, it depends on chosen language. In the next post we'll consider popular now day strongly typed languages: C++, Java, C#, Kotlin, Swift, TypeScript.
+But what to do if you use strongly typed language? Well, it depends on chosen language. In the next post we'll consider popular nowadays strongly typed languages: C++, Java, C#, Kotlin, Swift, TypeScript.
 
 For every considered language we will answer following questions:
 * How does generics work under the hood?
@@ -84,7 +84,7 @@ For every considered language we will answer following questions:
 
 But before we start discovering different languages it worth understanding what variance is, because it's very important in context of generic programming and strongly typed languages.
 
-Many developers use strongly typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will causes runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fails at runtime)*. You've got the point -- ***compiler shouldn't allow you shoot in your own leg***.
+Many developers use strongly typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will cause runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fail at runtime)*. You've got the point -- ***compiler shouldn't allow you shoot in your own leg***.
 
 ```java
 class Flower {  }
@@ -96,12 +96,12 @@ There is simple class hierarchy: `Rose` and `Daisy`, each of them is `Flower`.
 
 Term **variance** refers to how generic classes which use different generic parameters relates to each other. And we need to understand their relationships in order to do cast.
 
-For instance if `Rose` is subclass of `Flower` then I should be able to substitute `Flower` by `Rose`. Is it applicable to generic code?
+For instance if `Rose` is a subclass of `Flower` then I should be able to substitute `Flower` by `Rose`. Is it applicable to generic code?
 Variance refers to questions like "Can I use list of `Rose` as a list of `Flower`?".
 ```java
 List<Flower> bouquet = new ArrayList<Rose>();
 ```
-When somebody ask "What about variance in language X?", he would like to know how can he cast generics classes with different generic parameters to each other. Usually there is some kinds of limitations in casting. Compiler won't let you let you shoot in your own leg, remember? With different limitations we have 4 types of variance:
+When somebody ask *"What about variance in language X?"*, he would like to know how can he cast generic classes with different generic parameters to each other. Usually there are some kinds of limitations in casting. Compiler won't let you shoot in your own leg, remember? With different limitations we have 4 types of variance:
 * Covariance
 * Contravariance
 * Bivariance
@@ -145,7 +145,7 @@ static FlowerShop<Flower> giveMeTheShop() {
 }
 ```
 
-Yep, `Rouse` is `Flower`, if you need a flower you can go to `RouseShop` and buy flower there.
+Yep, `Rose` is `Flower`, if you need a flower you can go to `RoseShop` and buy flower there.
 
 ```java
 // Warning: it's pseudocode, won't compile 
@@ -153,7 +153,7 @@ FlowerShop<Flower> shop = giveMeTheShop();
 Flower flower = shop.getFlower();
 ```
 
-We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is a subclass of `B`, if `A` **produces** generic values *(return as a result from the function)*. Covariance is about **producers**.
+We have just considered example of **Covariance** - you are allowed to cast `A<C>` to `A<B>`, where `C` is a subclass of `B`, if `A` **produces** generic values *(returns as a result from the function)*. Covariance is about **producers**.
 
 ### Contravariance 
 
@@ -198,9 +198,9 @@ PrettyGirl<Flower> girlfriend = DaisyLover();
 girlfriend.takeGift(new Rose()); // she won't like it!
 ```
 
-We have just considered example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` subclass of `B`, if `A` consumes generic value.
+We have just considered example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` is subclass of `B`, if `A` consumes generic value.
 Contravariance is about **consumers**.
 
 ## To be continued
 
-In next post I will blog about generic programming implementation in different languages. Follow me on twitter and you won't miss next part!
+In next post I will blog about generic programming implementation in different languages. Follow me on twitter if you won't miss it!
