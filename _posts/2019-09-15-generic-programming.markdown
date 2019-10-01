@@ -181,7 +181,7 @@ If your girlfriend likes all kinds of flowers and you gift her a rose, would it 
 ```java
 // Warning: it's pseudocode, won't compile 
 PrettyGirl<Flower> girlfriend = AnyFlowerLover();
-girlfrient.takeGift(new Rose());
+girlfriend.takeGift(new Rose());
 ```
 Yes, if she likes all flowers she will like rose.
 
@@ -189,7 +189,7 @@ But when your girlfriend likes daisies, you can't consider her as somebody who l
 ```java
 // Warning: it's pseudocode, won't compile 
 PrettyGirl<Flower> girlfriend = DaisyLover();
-girlfrient.takeGift(new Rose()); // she won't like it!
+girlfriend.takeGift(new Rose()); // she won't like it!
 ```
 
 We have just considered example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` subclass of `B`, if `A` consumes generic value.
