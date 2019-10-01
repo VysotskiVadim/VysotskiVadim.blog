@@ -6,7 +6,7 @@ date:   2019-09-15 12:00:00 +0300
 
 ![Types of Asteraceae](https://github.com/VysotskiVadim/VysotskiVadim.github.io/blob/2d1d1a2108158080c4128ee8a64694d6fddb5869/assets/Asteracea_poster_3.jpg?raw=true){: style="width:100%"}
 
-There is a lot of different strongly typed languages that supports generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth to recap everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
+There is a lot of different strongly typed languages that supports generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth recapping everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
 
 ## Introduction
 
@@ -82,7 +82,7 @@ For every considered language we will answer following questions:
 
 ## Variance
 
-But before we start discovering different languages it worth to understand what variance is, because it's very important in context of generic programming and strongly typed languages.
+But before we start discovering different languages it worth understanding what variance is, because it's very important in context of generic programming and strongly typed languages.
 
 Many developers use strongly typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will causes runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fails at runtime)*. You've got the point -- ***compiler shouldn't allow you shoot in your own leg***.
 
