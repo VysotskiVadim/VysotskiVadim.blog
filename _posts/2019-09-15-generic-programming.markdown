@@ -4,6 +4,10 @@ title:  "Generic Programming"
 date:   2019-09-15 12:00:00 +0300
 ---
 
+There is a lot of different strongly typed languages that supports generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth to recap everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
+
+## Introduction
+
 According to [Wikipedia](https://en.wikipedia.org/wiki/Generic_programming):
 
 > Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. 
@@ -66,7 +70,7 @@ max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you use strong typed language? Well, it depends on chosen language. We'll consider popular now day strong typed languages: C++, Java, C#, Kotlin, Swift, TypeScript, Go. **//TODO: links?!**
+But what to do if you use strong typed language? Well, it depends on chosen language. In next post we'll consider popular now day strong typed languages: C++, Java, C#, Kotlin, Swift, TypeScript.
 
 For every considered language we will answer following questions:
 * How does generics work under the hood?
@@ -194,3 +198,7 @@ girlfriend.takeGift(new Rose()); // she won't like it!
 
 We have just considered example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` subclass of `B`, if `A` consumes generic value.
 Contravariance is about **consumers**.
+
+## To be continued
+
+In next post I will blog about generic programming implementation in different languages. Follow me on twitter and you won't miss next part!
