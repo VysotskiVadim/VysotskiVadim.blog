@@ -97,11 +97,11 @@ There is simple class hierarchy: `Rose` and `Daisy`, each of them is `Flower`.
 Term **variance** refers to how generic classes which use different generic parameters relates to each other. And we need to understand their relationships in order to do cast.
 
 For instance if `Rose` is a subclass of `Flower` then I should be able to substitute `Flower` by `Rose`. Is it applicable to generic code?
-Variance refers to questions like "Can I use list of `Rose` as a list of `Flower`?".
+Variance refers to questions like "Can I use a list of `Rose` as a list of `Flower`?".
 ```java
 List<Flower> bouquet = new ArrayList<Rose>();
 ```
-When somebody ask *"What about variance in language X?"*, he would like to know how can he cast generic classes with different generic parameters to each other. Usually there are some kinds of limitations in casting. Compiler won't let you shoot in your own leg, remember? With different limitations we have 4 types of variance:
+When somebody asks *"What about variance in language X?"*, he would like to know how can he cast generic classes with different generic parameters to each other. Usually there are some kinds of limitations in casting. Compiler won't let you shoot in your own leg, remember? With different limitations we have 4 types of variance:
 * Covariance
 * Contravariance
 * Bivariance
