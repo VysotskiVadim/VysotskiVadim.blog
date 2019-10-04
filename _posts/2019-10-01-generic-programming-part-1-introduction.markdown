@@ -139,8 +139,7 @@ class DaisyShop implements FlowerShop<Daisy> {
 If you ask me where is the flower shop and tell you address of `RoseShop` would it be fine?
 
 ```java
-// Warning: it's pseudocode, won't compile 
-static FlowerShop<Flower> giveMeTheShop() {
+FlowerShop<? extends Flower> tellMeShopAddress() {
     return new RoseShop();
 }
 ```
@@ -149,7 +148,7 @@ Yep, `Rose` is `Flower`, if you need a flower you can go to `RoseShop` and buy f
 
 ```java
 // Warning: it's pseudocode, won't compile 
-FlowerShop<Flower> shop = giveMeTheShop();
+FlowerShop<Flower> shop = tellMeShopAddress();
 Flower flower = shop.getFlower();
 ```
 
@@ -185,15 +184,14 @@ class DaisyLover implements PrettyGirl<Daisy> {
 If your girlfriend likes all kinds of flowers and you gift her a rose, would it be okay?
 
 ```java
-// Warning: it's pseudocode, won't compile 
-PrettyGirl<Flower> girlfriend = AnyFlowerLover();
+PrettyGirl<? super Rose> girlfriend = new AnyFlowerLover();
 girlfriend.takeGift(new Rose());
 ```
 Yes, if she likes all flowers she will like rose.
 
 But when your girlfriend likes daisies, you can't consider her as somebody who loves flower -- she likes only daisies!
 ```java
-// Warning: it's pseudocode, won't compile 
+// Warning: won't compile 
 PrettyGirl<Flower> girlfriend = DaisyLover();
 girlfriend.takeGift(new Rose()); // she won't like it!
 ```
