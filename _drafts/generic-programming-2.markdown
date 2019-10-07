@@ -24,7 +24,7 @@ So If you use `max` function like this:
 ```cpp
 cout << "int " << generic::max(1, 2) << ", char " << generic::max('a', 'b');
 ```
-Compiler will generate 2 functions:
+under the hood compiler generates 2 functions:
 
 ```cpp
 int max(int first, int second) {
@@ -41,7 +41,16 @@ char max(char first, char second) {
     return first;
 }
 ```
-Approach from C++ the most understandable for developers: 
+Approach from C++ the most understandable for developers, it's easy to imagine how code would work if you replace generic parameter with the specific type.
+It's really easy work with generic types - you can do what ever you want with them, all type checks take place after code generation phase, just write code so that it compile with specific type you use it with.
+
+But generics aren't really popular in C++ world. It's too many disadvantages:
+* Generics slows down compilation.;
+* Absolutely not helpful compiler error messages;
+* You can't reuse generic binary, only source code; 
+* Hard to validate: to make sure it works with type you need to test it with that type.
+
+What about variance? 
 
 ## Java
 
