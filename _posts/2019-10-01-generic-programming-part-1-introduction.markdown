@@ -40,7 +40,7 @@ Create function per type? That's sucks! This is **not generic programming**: eve
 Here generic programming comes. Let's recap definition -- *algorithms are written in terms of types to-be-specified-later*, i.e. we implement algorithms and don't specify specific types during implementation: 
 
 ```java
-public static <T extends Comparable> T max(T first, T second) {
+static <T extends Comparable<T>> T max(@NotNull T first, @NotNull T second) {
     if (second.compareTo(first) > 0) {
         return second;
     }
