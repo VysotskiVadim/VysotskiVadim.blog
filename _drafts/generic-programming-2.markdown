@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Generic Programming - Implementation Overview"
+date:   2019-10-07 12:00:00 +0300
+---
+
+
 ## Go
 
 https://stackoverflow.com/questions/3912089/why-no-generics-in-go
@@ -54,9 +61,15 @@ What about variance? **TODO: add examples**
 
 ## Java
 
+Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
+Java had been existing for more then 8 years.
+It was a lot*(I mean really a lot!)* of code written since java became popular.
+One of big challenge for Oracle's engineers was backward compatibility.
+
 Java type system is based on reference and value types. 
-Objects are reference type, they are allocated in heap, and you work with them via reference. 
-Value types are data primitives which allocated on stack(local variable) or heap(class field).
+Objects are reference type, they are allocated in the heap, and you work with them via reference. 
+Value types are data primitives which allocated on the stack(local variable) or heap(class field).
+
 Before generics were introduced all generic code was written via cast to any base type.
 For example class `Object` is the parent of all types, i.e. you can cast anything to it.
 Or if you want to call some method in generic code you can cast them to base interface.
@@ -76,12 +89,16 @@ Integer second = 7;
 Integer dangerResult = (Integer) unsafeMax(first, second);
 ```
 
-The main issue in given example is **unsafe** type cast. 
+The main issue when generics isn't presented in language is **unsafe** type cast. 
 Every time you call `max` function you have to cast result back,
 i.e. it's a chance to make a mistake which you'll find in run time.
 It's not why people select strongly typed language.
+Another issue it that when you cast `integer` to `Comparable` boxing happens.
+So you can work only with reference types.
 
-When you work with reference types JVM doesn't really cares about object type.
+Oracle's engineers decided to implement generics like complier feature, Java runtime knows nothing about generics. All type checks are made at compile time, and at Bytecode level all generics types became `Object`.
+
+*If you feel terrified when you see Java Bytecode, learn it in 47 minutes on [youtube](https://www.youtube.com/watch?v=e2zmmkc5xI0).*
 ```javabytecode
 L0
  ICONST_5
