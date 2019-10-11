@@ -64,11 +64,86 @@ What about variance? **TODO: add examples**
 Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
 Java had been existing for more then 8 years.
 It was a lot*(I mean really a lot!)* of code written since java became popular.
-One of big challenge for Oracle's engineers was backward compatibility.
 
 Java type system is based on reference and value types. 
 Objects are reference type, they are allocated in the heap, and you work with them via reference. 
 Value types are data primitives which allocated on the stack(local variable) or heap(class field).
+
+Generics in Java implemented like compile time feature: generics aren't present in Bytecode.
+On Bytecode level you're just working with `Object`. 
+
+```java
+static Comparable unsafeMax(@NotNull Comparable first, @NotNull Comparable second) {
+    if (second.compareTo(first) > 0) {
+        return second;
+    }
+    return first;
+}
+
+static <T extends Comparable<T>> T max(@NotNull T first, @NotNull T second) {
+    if (second.compareTo(first) > 0) {
+        return second;
+    }
+    return first;
+}
+
+static void main(String[] args) {
+    Integer first = 5;
+    Integer second = 7;
+    Integer dangerResult = (Integer) unsafeMax(first, second);
+    Integer result = max(first, second);
+}
+```
+
+In example we have 2 implementations of `max` function: generic(`max`) and not generic(`unsafeMax`).
+As you can see at Java Bytecode level they are the same.
+
+*If you feel terrified when you see Java Bytecode, learn it in 47 minutes on [youtube](https://www.youtube.com/watch?v=e2zmmkc5xI0).*
+
+Here how `max` function calls `Comparable<T>.compareTo`:
+```bytecode
+static max(Ljava/lang/Comparable;Ljava/lang/Comparable;)Ljava/lang/Comparable;
+    ALOAD 1
+    ALOAD 0
+    INVOKEINTERFACE java/lang/Comparable.compareTo (Ljava/lang/Object;)I (itf)
+```
+
+And here how `unsafeMax` calls `Comparable.compareTo`:
+```bytecode
+static unsafeMax(Ljava/lang/Comparable;Ljava/lang/Comparable;)Ljava/lang/Comparable;
+    ALOAD 1
+    ALOAD 0
+    INVOKEINTERFACE java/lang/Comparable.compareTo (Ljava/lang/Object;)I (itf)
+```
+
+And here how they are called in `main` function:
+```bytecode
+L0
+    ICONST_5
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    ASTORE 1
+L1
+    BIPUSH 7
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    ASTORE 2
+L2
+    ALOAD 1
+    ALOAD 2
+    INVOKESTATIC Main.unsafeMax (Ljava/lang/Comparable;Ljava/lang/Comparable;)Ljava/lang/Comparable;
+    CHECKCAST java/lang/Integer
+    ASTORE 3
+L3
+    ALOAD 1
+    ALOAD 2
+    INVOKESTATIC Main.max (Ljava/lang/Comparable;Ljava/lang/Comparable;)Ljava/lang/Comparable;
+    CHECKCAST java/lang/Integer
+    ASTORE 4
+L4
+```
+
+No difference at Bytecode level.
+
+
 
 Before generics were introduced all generic code was written via cast to any base type.
 For example class `Object` is the parent of all types, i.e. you can cast anything to it.
@@ -95,6 +170,10 @@ i.e. it's a chance to make a mistake which you'll find in run time.
 It's not why people select strongly typed language.
 Another issue it that when you cast `integer` to `Comparable` boxing happens.
 So you can work only with reference types.
+
+Okay, let's recap preconditions:
+* Type system where majority of work done via reference type;
+* Backward compatibility required ()
 
 Oracle's engineers decided to implement generics like complier feature, Java runtime knows nothing about generics. All type checks are made at compile time, and at Bytecode level all generics types became `Object`.
 
