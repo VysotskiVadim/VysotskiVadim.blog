@@ -151,6 +151,22 @@ L4
 
 No difference at Bytecode level.
 
+//TODO: anchor link to c++ templates disadvantages.
+As you can see all C++ templates disadvantages which we mentioned above have been solved.
+Compiler produce only one function or class for all possible generics parameter,
+where all generics types are `Object`, so:
+* no noticeable compilation slowdown;
+* you are able to use generic code from binary(Bytecode);
+* compilation error messages don't come from generated code, so they're understandable;
+* easy validation: if code works for one type, then it would work for others.
+
+But there is still some disadvantages.
+
+* Generics code works only for reference types.
+It means that you can't use `Map<integer>`, only `Map<Integer>`.
+I.e. in order to pass `integer` to generic code you have to box in object `Integer`;
+* Because of type erasure you can't get via reflection which typed used as generic parameter.
+
 
 ## C#
 
