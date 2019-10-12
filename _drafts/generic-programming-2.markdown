@@ -159,7 +159,6 @@ L4
 
 No difference at Bytecode level.
 
-//TODO: anchor link to c++ templates disadvantages.
 As you can see all C++ templates disadvantages which we mentioned above have been solved.
 Compiler produce only one function or class for all possible generics parameter,
 where all generics types are `Object`, so:
