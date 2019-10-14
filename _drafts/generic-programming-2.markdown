@@ -151,6 +151,13 @@ L4
 
 No difference at Bytecode level.
 
+Java Runtime Environment is shipped with a lot of useful packages.
+As you remember generics were released in Java 5, more then 8 years passed since Java release.
+So many built-in classes was rewritten using generics feature, for example `ArrayList` became `ArrayList<T>`.
+To achieve compatibility with already written not generic code Oracle's engineers added feature **raw types**.
+When you use generic type as not generic, for example `ArrayList` instead of `ArrayList<T>`
+compiler treats it like `ArrayList<Object>`.
+
 As you can see all C++ templates disadvantages which we mentioned above have been solved.
 Compiler produce only one function or class for all possible generics parameter,
 where all generics types are `Object`, so:
