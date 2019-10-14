@@ -134,14 +134,6 @@ static unsafeMax(Ljava/lang/Comparable;Ljava/lang/Comparable;)Ljava/lang/Compara
 
 And here how they are called in `main` function:
 ```bytecode
-L0
-    ICONST_5
-    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-    ASTORE 1
-L1
-    BIPUSH 7
-    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-    ASTORE 2
 L2
     ALOAD 1
     ALOAD 2
