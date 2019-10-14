@@ -171,8 +171,20 @@ But there is still some disadvantages.
 * Generics code works only for reference types.
 It means that you can't use `Map<integer>`, only `Map<Integer>`.
 I.e. in order to pass `integer` to generic code you have to box in object `Integer`;
-* Because of type erasure you can't get via reflection which typed used as generic parameter.
+* Because of type erasure you can't get at runtime any info about generics parameters;
+* It's kind of consequence of previous point, but it's worth to mention as disadvantage:
+ Arrays don't work well with generics, for example you can't create generic array like `new E[]`;
 
+Just a few words about Array and generics.
+Arrays in Java are covariant and all type checks happens in runtime:
+```java
+Object[] objectArray = new Long[1];
+objectArray[0] = "secretly I'm a String"; // Throws ArrayStoreException
+```
+You can't create arrays like `new E[]` because of runtime check in array and type erasure in generics.
+Oracle couldn't change arrays in Java 5, so arrays and generics in Java is a bad mix.
+If you interested you can find more info in "Effective Java" by Joshua Bloch.
+In third edition chapter is called *Item 28: prefer lists to arrays*.
 
 ## C#
 
