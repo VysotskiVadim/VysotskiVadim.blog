@@ -188,6 +188,30 @@ In third edition chapter is called *Item 28: prefer lists to arrays*.
 
 ## C#
 
+C# supports generics since version 2.0 - September 2005.
+```cs
+public static T max<T>(T first, T second) where T: IComparable<T> {
+    if (second.CompareTo(first) > 0) {
+        return second;
+    }
+    return first;
+}
+
+public static void Main() {
+    var maxValue = max(3, 4);
+}
+```
+
+As you can see Microsoft decided to support generics at runtime level, so all generics data are present in intermediate language
+*(visit [.Net fiddle](https://dotnetfiddle.net/A9PW6r) to see full version of IL code)*:
+```il
+.method public hidebysig static !!T  max<(class [mscorlib]System.IComparable`1<!!T>) T>(!!T first,
+                                                                                          !!T second) cil managed
+  {
+    IL_000a:  callvirt   instance int32 class [mscorlib]System.IComparable`1<!!T>::CompareTo(!0)
+```
+
+
 ## Kotlin
 
 https://kotlinlang.org/docs/reference/inline-functions.html#reified-type-parameters
