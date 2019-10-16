@@ -161,6 +161,11 @@ To achieve compatibility with already written not generic code Oracle's engineer
 When you use generic type as not generic, for example `ArrayList` instead of `ArrayList<T>`
 compiler treats it like `ArrayList<Object>`.
 
+So basically migration strategy following:
+if you write a new code - use generics,
+if you have existing code which works well - don't touch,
+it would work well with raw types from new packages.
+
 #### Variance {#java_generics_variance}
 Java supports variance via language feature called wildcards.
 
