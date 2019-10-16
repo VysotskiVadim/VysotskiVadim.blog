@@ -24,7 +24,7 @@ namespace generic {
     }
 }
 ```
-
+#### Under the hood
 Word **Template** reveals how does language feature work under the hood. Implemented function is just a template for compiler, which generates new functions for every type template is used with.
 
 So If you use `max` function like this:
@@ -51,13 +51,14 @@ char max(char first, char second) {
 Approach from C++ the most understandable for developers, it's easy to imagine how code would work if you replace generic parameter with the specific type.
 It's really easy work with generic types - you can do what ever you want with them, all type checks take place after code generation phase, just write code so that it compile with specific type you use it with.
 
+#### Disadvantages
 But generics aren't really popular in C++ world. It's too many disadvantages:
 * Generics slows down compilation;
 * Absolutely not helpful compiler error messages;
 * You can't reuse generic binary, only source code; 
 * Hard to validate: to make sure it works with type you need to test it with that type.
 
-What about variance?
+#### Variance
 As I sad before C++ templates very intuitive:
 there is just code generation behind it.
 What kind of variance will it be if you write the same class or function using different types.
@@ -89,7 +90,7 @@ static Comparable unsafeMax(@NotNull Comparable first, @NotNull Comparable secon
     return first;
 }
 ```
-
+#### Under the hood
 Generics in Java implemented like compile time feature: generics aren't present in Bytecode.
 On Bytecode level you're just working with `Object`.
 But when you use generics compiler checks types and you don't have to use explicit cast.
@@ -151,6 +152,8 @@ L4
 
 No difference at Bytecode level.
 
+
+#### Migration to generics
 Java Runtime Environment is shipped with a lot of useful packages.
 As you remember generics were released in Java 5, more then 8 years passed since Java release.
 So many built-in classes was rewritten using generics feature, for example `ArrayList` became `ArrayList<T>`.
@@ -158,6 +161,7 @@ To achieve compatibility with already written not generic code Oracle's engineer
 When you use generic type as not generic, for example `ArrayList` instead of `ArrayList<T>`
 compiler treats it like `ArrayList<Object>`.
 
+#### Variance
 Java supports variance via language feature called wildcards.
 
 To use **invariance** specify unbounded wildcard like `T<?>`.
@@ -207,6 +211,7 @@ B b = listOfB.get(0); // won't compile
 ```
 In Java developers specify wildcards at the place of usage, it called *use-site variance*. 
 
+#### Pros
 As you can see all C++ templates disadvantages which we mentioned above have been solved.
 Compiler produce only one function or class for all possible generics parameter,
 where all generics types are `Object`, so:
@@ -215,6 +220,7 @@ where all generics types are `Object`, so:
 * compilation error messages don't come from generated code, so they're understandable;
 * easy validation: if code works for one type, then it would work for others.
 
+#### Cons
 But there is still some disadvantages.
 
 * Generics code works only for reference types.
