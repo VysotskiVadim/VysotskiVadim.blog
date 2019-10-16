@@ -158,9 +158,20 @@ To achieve compatibility with already written not generic code Oracle's engineer
 When you use generic type as not generic, for example `ArrayList` instead of `ArrayList<T>`
 compiler treats it like `ArrayList<Object>`.
 
-Java supports both co and contravariance via language feature called bounded wildcards.
+Java supports variance via language feature called wildcards.
 
-TODO: what is unbounded wildcard?
+To use **invariance** specify unbounded wildcard like `T<?>`.
+It means that you don't care about type and use generic object just like regular `Object`:
+```java
+static void printItems(List<?> list) {
+    for (Object item : list) {
+        System.out.println(item);
+    }
+}
+```
+
+If you specify lower or upper bound it's called bounded wildcards.
+Let's consider it via simple examples:
 
 ```java
 class A {}
@@ -169,7 +180,7 @@ class C extends B {}
 class D extends B {}
 ```
 
-If you want to use covariance you should specify *upper bound* like `extends T`:
+If you want to use **covariance** you should specify *upper bound* like `extends T`:
 ```java
 List<? extends B> listOfB;
 listOfB = new ArrayList<C>(); // fine
@@ -183,7 +194,7 @@ B b = listOfB.get(0); // fine
 listOfB.add(new B()); // compilation error
 ```
 
-If you want to use contravariance you should specify *lower bound* like `super T`:
+If you want to use **contravariance** you should specify *lower bound* like `super T`:
 ```java
 List<? super B> listOfB;
 listOfB = new ArrayList<A>(); // fine
