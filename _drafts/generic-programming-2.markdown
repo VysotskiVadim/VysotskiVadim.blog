@@ -158,6 +158,44 @@ To achieve compatibility with already written not generic code Oracle's engineer
 When you use generic type as not generic, for example `ArrayList` instead of `ArrayList<T>`
 compiler treats it like `ArrayList<Object>`.
 
+Java supports both co and contravariance via language feature called bounded wildcards.
+
+TODO: what is unbounded wildcard?
+
+```java
+class A {}
+class B extends A {}
+class C extends B {}
+class D extends B {}
+```
+
+If you want to use covariance you should specify *upper bound* like `extends T`:
+```java
+List<? extends B> listOfB;
+listOfB = new ArrayList<C>(); // fine
+listOfB = new ArrayList<D>(); // fine
+listOfB = new ArrayList<A>(); // compilation error
+```
+`List` has many methods, some of them produces and some of them consumes generic values.
+When you specify `extends T` you can use only methods producers:
+```java
+B b = listOfB.get(0); // fine
+listOfB.add(new B()); // compilation error
+```
+
+If you want to use contravariance you should specify *lower bound* like `super T`:
+```java
+List<? super B> listOfB;
+listOfB = new ArrayList<A>(); // fine
+listOfB = new ArrayList<C>(); // won't compile
+```
+When you specify `super T` you can use only methods consumers:
+```java
+listOfB.add(new D()); // fine
+B b = listOfB.get(0); // won't compile
+```
+In Java developers specify wildcards at the place of usage, it called *use-site variance*. 
+
 As you can see all C++ templates disadvantages which we mentioned above have been solved.
 Compiler produce only one function or class for all possible generics parameter,
 where all generics types are `Object`, so:
