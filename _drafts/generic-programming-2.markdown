@@ -34,14 +34,13 @@ cout << "int " << generic::max(1, 2) << ", char " << generic::max('a', 'b');
 under the hood compiler generates 2 functions:
 
 ```cpp
-int max(int first, int second) {
+template<> int max<int>(int first, int second) {
     if (second > first) {
         return second;
     }
     return first;
 }
-
-char max(char first, char second) {
+template<> char max<char>(char first, char second) {
     if (second > first) {
         return second;
     }
