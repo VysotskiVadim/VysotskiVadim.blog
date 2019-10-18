@@ -290,7 +290,20 @@ Oracle couldn't change arrays in Java 5, so arrays and generics in Java is a bad
 If you interested you can find more info in "Effective Java" by Joshua Bloch.
 In third edition chapter is called *Item 28: prefer lists to arrays*.
 
-## C# {#cs}
+## C# (.Net) {#cs}
+
+C# is similar to Java.
+In university at first lecture about .Net platform I've been told a story:
+Microsoft liked a Java a lot, but they wanted to implement better integration with Windows OS.
+So they started to change JVM, and Oracle didn't like it so they baned Microsoft's changes.
+Then Microsoft decided create it's own platform.
+And they could see all existing disadvantages of Java and they tried to fix it from the very beginning.
+
+C# type system lets developers create both custom value and reference types.
+Value type allocated on heap or stack, reference only in heap.
+.Net runtime, called CLR, is in charge of memory allocation and cleaning.
+C# compiler produce Intermediate Language(IL),
+which is then compiled to machine code on running device.
 
 C# supports generics since version 2.0 - September 2005.
 ```cs
