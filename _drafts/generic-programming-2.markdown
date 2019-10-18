@@ -16,6 +16,7 @@ you can allocate objects on stack or heap,
 you're in charge of freeing memory,
 you can even develop your onw heap allocator.
 Mmmmm freedom!
+Code compiled directly to machine code, which target CPU can execute.
 
 Decisions of how memory would be allocated are made in the place of usage:
 
@@ -110,7 +111,13 @@ Functions produces are covariant, functions consumers are contravariant.
 Java type system is based on reference and value types.
 Any objects are reference type, they are allocated in the heap, and you work with them via reference.
 Value types are data primitives which allocated on the stack(local variable) or heap(class field).
-If you use Java most of the time you work with reference types.
+There are only 8 value types in java: byte, short, int, long, float, double, char, and boolean.
+So if you use Java most of the time you work with reference types.
+Developers can only allocate objects.
+How objects allocated and how they will be freed depends on Java runtime.
+Java code is compiled to Java Byte code,
+which is interpreted by Java Virtual Machine on running device.
+
 
 Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
 Java had been existing for more then 8 years.
