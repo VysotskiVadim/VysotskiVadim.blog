@@ -47,15 +47,23 @@ template<> char max<char>(char first, char second) {
     return first;
 }
 ```
-Approach from C++ the most understandable for developers, it's easy to imagine how code would work if you replace generic parameter with the specific type.
-It's really easy work with generic types - you can do what ever you want with them, all type checks take place after code generation phase, just write code so that it compile with specific type you use it with.
+Approach from C++ the most understandable for developers,
+it's easy to imagine how code would work if you replace generic parameter with the specific type.
+It's really easy work with generic types - you can do what ever you want with them,
+all type checks take place after code generation phase,
+just write code so that it compile with specific type you use it with.
 
 #### Disadvantages {#cpp_templates_disadvantages}
 But generics aren't really popular in C++ world. It's too many disadvantages:
 * Generics slows down compilation;
 * Absolutely not helpful compiler error messages;
 * You can't reuse generic binary, only source code; 
-* Hard to validate: to make sure it works with type you need to test it with that type.
+* Hard to validate: to make sure it works with type you need to test it with that type;
+* Code bloat.
+
+**Code bloat** it's when you get much bigger program after compilation then you expected.
+Every time you use a new generic parameter you get a new generated class or function,
+its code is stored on disk and have to be loaded in the RAM during execution.
 
 #### Variance {#cpp_templates_variance}
 As I sad before C++ templates very intuitive:
