@@ -305,7 +305,7 @@ Value type allocated on heap or stack, reference only in heap.
 C# compiler produce Intermediate Language(IL),
 which is then compiled to machine code on running device.
 
-C# supports generics since version 2.0 - September 2005.
+C# supports generics since version 2.0 - September 2005, 3 years after C# 1.0 release.
 ```cs
 public static T max<T>(T first, T second) where T: IComparable<T> {
     if (second.CompareTo(first) > 0) {
@@ -319,7 +319,13 @@ public static void Main() {
 }
 ```
 
-As you can see Microsoft decided to support generics at runtime level, so all generics data are present in intermediate language
+#### Under the hood {#java_generics_under_the_hood}
+
+Microsoft didn't have much choice,
+give support of custom value type and [revelled disadvantages of type erasure in Java](#java_generics_cons),
+they had to support generics in runtime.
+And they did it.
+
 *(visit [.Net fiddle](https://dotnetfiddle.net/A9PW6r) to see full version of IL code)*:
 ```il
 .method public hidebysig static !!T  max<(class [mscorlib]System.IComparable`1<!!T>) T>(!!T first,
@@ -328,6 +334,25 @@ As you can see Microsoft decided to support generics at runtime level, so all ge
     IL_000a:  callvirt   instance int32 class [mscorlib]System.IComparable`1<!!T>::CompareTo(!0)
 ```
 
+After compilation we get the same IL code with respect to generics as in C#.
+Wait a minute!
+How does work ***under the hood***?
+Everybody knowns that CPU don't know anything about generics, it just executes simple instructions.
+
+All optimizations works at machine code generation level.
+Most of the time you work with reference type.
+Under the hood all reference are the same data type: address in the memory, i.e. just a number.
+So CLR generate one generic implementation for all reference type.
+Like in Java, but on 1 level deeper, at machine code.
+
+Unfortunately it's not possible to apply the same optimization for value types,
+because all value types have a different size and different structure.
+So for custom value types generic code works like in C++,
+but on the machine code level:
+CLR generated different implementation of generic code for every value type which is used as generic parameter.
+So we need to be careful with value types.
+
+*If you want to know more about generics in .Net I recommend you [this article](https://alexandrnikitin.github.io/blog/dotnet-generics-under-the-hood/) as entry point.*
 
 ## Kotlin
 
