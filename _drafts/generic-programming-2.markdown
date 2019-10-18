@@ -11,6 +11,36 @@ https://stackoverflow.com/questions/3912089/why-no-generics-in-go
 
 ## C++ {#cpp}
 
+In C++ developers control all aspects of memory usage:
+you can allocate objects on stack or heap,
+you're in charge of freeing memory,
+you can even develop your onw heap allocator.
+Mmmmm freedom!
+
+Decisions of how memory would be allocated are made in the place of usage:
+
+```cpp
+class Product {
+    private:
+        double price;
+    public:
+        Product(double price): price(price) { }
+        void printPrice() {
+            std::cout << "my price is " << price << "\n";
+        }
+    };
+ 
+   int main()
+   {
+        Product stackAllocatedProduct(1.5);
+        stackAllocatedProduct.printPrice();
+        Product* heapAllocatedProduct = new Product(2.5);
+        heapAllocatedProduct->printPrice();
+        return 0;
+    }
+```
+
+Given that freedom it's hard to implement generic programming and don't lose freedom.
 C++ supports generic programming via feature called [Template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)):
 
 ```cpp
