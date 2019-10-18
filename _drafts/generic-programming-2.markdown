@@ -42,7 +42,8 @@ class Product {
 ```
 
 Given that freedom it's hard to implement generic programming and don't lose freedom.
-C++ supports generic programming via feature called [Template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)):
+C++ supports generic programming via feature called [Template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)),
+which was added to language long long time ago 1986.
 
 ```cpp
 namespace generic {
@@ -83,6 +84,16 @@ it's easy to imagine how code would work if you replace generic parameter with t
 It's really easy work with generic types - you can do what ever you want with them,
 all type checks take place after code generation phase,
 just write code so that it compile with specific type you use it with.
+
+
+#### Migration to generics {#cpp_migration_to_generics}
+
+I don't believe that migration have ever been an issue in C++.
+Templates doesn't break existing code.
+And in C++ even now*(year 2019)* many projects are written without usage of any library.
+For some reason C++ developers like to implement everything by themselves.
+Any way first release of STL(Standard Template Library) where generic code really necessary was at 1992,
+and library code based on templates.
 
 #### Disadvantages {#cpp_templates_disadvantages}
 But generics aren't really popular in C++ world. It's too many disadvantages:
