@@ -4,10 +4,17 @@ title:  "Generic Programming - Implementation Overview"
 date:   2019-10-07 12:00:00 +0300
 ---
 
+![Types of Asteraceae](https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/a9ae80c482ebd479ccbc702e9a8ac3d67b369ecb/assets/Asteracea_poster_3_part_2.jpg){: style="width:100%"}
 
-## Go
+During my career I've been working with different strongly typed languages that support generic programming.
+They faced the same set of challenges but solved it in different time using different methods with different pros and cons.
+I find it fascinating, that's why I blogged about it.
 
-https://stackoverflow.com/questions/3912089/why-no-generics-in-go
+I won't compare languages in order to understand which one is better,
+they all are nice!
+My point is to show how different preconditions like language and runtime design,
+ecosystem, or even market competition affected the way how generics were implemented.
+
 
 ## C++ {#cpp}
 
@@ -363,10 +370,4 @@ but on the machine code level:
 CLR generated different implementation of generic code for every value type which is used as generic parameter.
 So we need to be careful with value types.
 
-*If you want to know more about generics in .Net I recommend you [this article](https://alexandrnikitin.github.io/blog/dotnet-generics-under-the-hood/) as entry point.*
-
-## Kotlin
-
-https://kotlinlang.org/docs/reference/inline-functions.html#reified-type-parameters
-
-## Swift
+*If you want to know more about generics implementation in .Net I recommend you [this article](https://alexandrnikitin.github.io/blog/dotnet-generics-under-the-hood/) as entry point.*
