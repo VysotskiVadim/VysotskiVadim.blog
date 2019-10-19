@@ -311,15 +311,18 @@ In third edition chapter is called *Item 28: prefer lists to arrays*.
 ## C# (.Net) {#cs}
 
 C# is similar to Java.
-In university at first lecture about .Net platform I've been told a story:
-Microsoft liked a Java a lot, but they wanted to implement better integration with Windows OS.
-So they started to change JVM, and Oracle didn't like it so they baned Microsoft's changes.
+In university at the first lecture about .Net platform I've been told a story:
+At the early 2000 one of the main Microsoft's products was Windows OS.
+It was easy to imaging how language + runtime like Java's one
+could increase productivity of developers as well as improve quality of software for Windows.
+And Microsoft wanted to implement better integration with Windows OS, and only Windows OS.
+So they started to change JVM, and Sun*(which then was acquired by Oracle)* didn't like it so they baned Microsoft's changes.
 Then Microsoft decided create it's own platform.
-And they could see all existing disadvantages of Java and they tried to fix it from the very beginning.
+At that time all Java disadvantages and design errors was obvious, so Microsoft tried to fix it from the very beginning.
 
 C# type system lets developers create both custom value and reference types.
 Value type allocated on heap or stack, reference only in heap.
-.Net runtime, called CLR, is in charge of memory allocation and cleaning.
+.Net runtime, which is called CLR, is in charge of memory allocation and cleaning.
 C# compiler produce Intermediate Language(IL),
 which is then compiled to machine code on running device.
 
