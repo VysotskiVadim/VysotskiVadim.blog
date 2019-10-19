@@ -340,7 +340,7 @@ public static void Main() {
 }
 ```
 
-#### Under the hood {#java_generics_under_the_hood}
+#### Under the hood {#cs_generics_under_the_hood}
 
 Microsoft didn't have much choice,
 give support of custom value type and [revelled disadvantages of type erasure in Java](#java_generics_cons),
@@ -374,3 +374,16 @@ CLR generated different implementation of generic code for every value type whic
 So we need to be careful with value types.
 
 *If you want to know more about generics implementation in .Net I recommend you [this article](https://alexandrnikitin.github.io/blog/dotnet-generics-under-the-hood/) as entry point.*
+
+#### Migration to generics {#cs_migration_to_generics}
+
+Language feature generics don't suppose to break something,
+so main challenge is base class library(BCL).
+It's easy to guess how migration happened when you see namespaces.
+```cs
+var notGenericList = new System.Collections.ArrayList();
+var genericList = new System.Collections.Generic.List<object>();
+```
+See it? Just added namespace with new collection implementation.
+Genius and easy!
+
