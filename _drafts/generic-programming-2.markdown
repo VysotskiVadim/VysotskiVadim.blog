@@ -387,3 +387,33 @@ var genericList = new System.Collections.Generic.List<object>();
 See it? Just added namespace with new collection implementation.
 Genius and easy!
 
+#### Variance {#cs_variance}
+
+C# supports both co and contra variance using declaration side variance:
+C# language supports 2 keywords `in` and `out` which marks generic parameters as contra and covariant.
+```c#
+public interface IEnumerable<out T> : IEnumerable {
+    ...
+}
+```
+Generic parameter in `IEnumerable<T>` marked as `out`.
+It means that `IEnumerable<T>` can only produce values of type `T`
+i.e. it's safe to use covariance:
+
+```c#
+var listOfB = new List<B>() { new B(), new B() };
+IEnumerable<A> emumerableOfA = listOfB;
+```
+The same applies for `in` and contravariance.
+
+Variance is also supported on CLR level:
+The [CLI](https://stackoverflow.com/questions/480752/clr-and-cli-what-is-the-difference)
+supports covariance and contravariance of generic parameters,
+but only in the signatures of interfaces and delegate classes.
+
+Some of the guys who [introduced wildcards to Java](https://dl.acm.org/citation.cfm?id=968162),
+Neal Gafter for example,
+who currently works on C# language design,
+[think that declaration-site variance is the best approach](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037).
+
+![Declaration site is better](https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/gafter-about-declaration-site-variance.jpg){: style="width:100%"}
