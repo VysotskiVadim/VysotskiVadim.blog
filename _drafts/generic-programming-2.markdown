@@ -10,11 +10,16 @@ During my career I've been working with different strongly typed languages that 
 They faced the same set of challenges but solved it in different time using different methods with different pros and cons.
 I find it fascinating, that's why I blogged about it.
 
+For every considered language we will answer following questions:
+* How does generics work under the hood?
+* How did migration to generic happen(if actual)?
+* Variance(*don't be afraid of term, explanation will follow*)
+* Pros and Cons
+
 I won't compare languages in order to understand which one is better,
 they all are nice!
 My point is to show how different preconditions like language and runtime design,
 ecosystem, or even market competition affected the way how generics were implemented.
-
 
 ## C++ {#cpp}
 
@@ -410,6 +415,10 @@ Variance is also supported on CLR level:
 The [CLI](https://stackoverflow.com/questions/480752/clr-and-cli-what-is-the-difference)
 supports covariance and contravariance of generic parameters,
 but only in the signatures of interfaces and delegate classes.
+
+
+
+## Holly war {#variance_holly_war}
 
 Some of the guys who [introduced wildcards to Java](https://dl.acm.org/citation.cfm?id=968162),
 Neal Gafter for example,
