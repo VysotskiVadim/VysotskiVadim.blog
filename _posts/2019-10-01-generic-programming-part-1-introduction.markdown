@@ -94,7 +94,8 @@ class Daisy extends Flower { }
 
 There is simple class hierarchy: `Rose` and `Daisy`, each of them is `Flower`.
 
-Term **variance** refers to how generic classes which use different generic parameters relates to each other. And we need to understand their relationships in order to do cast.
+Term **variance** refers to how generic classes which use different generic parameters relates to each other,
+in other words **variance** answers to the question of when an instantiation of a generic class can be a subtype of another class.
 
 For instance if `Rose` is a subclass of `Flower` then I should be able to substitute `Flower` by `Rose`. Is it applicable to generic code?
 Variance refers to questions like "Can I use a list of `Rose` as a list of `Flower`?".
