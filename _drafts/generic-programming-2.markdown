@@ -290,6 +290,7 @@ where all generics types are `Object`, so:
 * no noticeable compilation slowdown;
 * you are able to use generic code from binary(Bytecode);
 * compilation error messages don't come from generated code, so they're understandable;
+* support of co and contravariance;
 * easy validation: if code works for one type, then it would work for others.
 
 #### Cons  {#java_generics_cons}
@@ -416,13 +417,19 @@ The [CLI](https://stackoverflow.com/questions/480752/clr-and-cli-what-is-the-dif
 supports covariance and contravariance of generic parameters,
 but only in the signatures of interfaces and delegate classes.
 
+#### Proc {#cs_generic_proc}
 
+Again, C# as many language before it tried to solve issues of its predecessors.
+The main C# competitor is Java,
+so C# language designers put a lot of effort to solve [Java generics design issues](#java_generics_cons):
+* Generic code available for value types;
+* [Some people thinks that declaration site variance is superior to use site](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037);
+* Generic type info available in runtime.
 
-## Holly war {#variance_holly_war}
+#### Cons {#cs_generic_cons}
 
-Some of the guys who [introduced wildcards to Java](https://dl.acm.org/citation.cfm?id=968162),
-Neal Gafter for example,
-who currently works on C# language design,
-[think that declaration-site variance is the best approach](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037).
+But even there some disadvantages:
 
-![Declaration site is better](https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/gafter-about-declaration-site-variance.jpg){: style="width:100%"}
+* Possible code bloat with value types;
+* Some people thinks that use site variance more convenient;
+* [Arrays are still covariant with runtime check](https://dotnetfiddle.net/uKTPl7).
