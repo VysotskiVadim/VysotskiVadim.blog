@@ -433,3 +433,16 @@ But even there some disadvantages:
 * Possible code bloat with value types;
 * Some people thinks that use site variance more convenient;
 * [Arrays are still covariant with runtime check](https://dotnetfiddle.net/uKTPl7).
+
+## Conclusion
+
+It's fascinating, isn't it?
+I didn't try to find out the best generic implementation,
+my point is that
+3 considered languages had different preconditions
+and different goals.
+I see some reasons behind all implementations and
+I think that all of them are good.
+
+Hope you enjoyed the reading and found something useful for you.
+I will consider generics implementation in Kotlin as well, so subscribe to my twitter and stay tuned!
