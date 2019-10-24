@@ -10,6 +10,8 @@ During my career I've been working with different strongly typed languages that 
 They faced the same set of challenges but solved it in different time using different methods with different pros and cons.
 I find it fascinating, that's why I blogged about it.
 
+If you don't have match experience with generic programming - read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
+
 For every considered language we will answer following questions:
 * How does generics work under the hood?
 * How did migration to generic happen?
