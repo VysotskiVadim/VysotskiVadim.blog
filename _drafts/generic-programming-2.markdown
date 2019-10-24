@@ -12,8 +12,8 @@ I find it fascinating, that's why I blogged about it.
 
 For every considered language we will answer following questions:
 * How does generics work under the hood?
-* How did migration to generic happen(if actual)?
-* Variance(*don't be afraid of term, explanation will follow*)
+* How did migration to generic happen?
+* [Variance]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#variance)
 * Pros and Cons
 
 I won't compare languages in order to understand which one is better,
