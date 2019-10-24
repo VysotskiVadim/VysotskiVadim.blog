@@ -53,9 +53,9 @@ class Product {
     }
 ```
 
-Given that freedom it's hard to implement generic programming and don't lose freedom.
+Given that freedom it's hard to implement generic programming and don't lose that freedom.
 C++ supports generic programming via feature called [Template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)),
-which was added to language long long time ago 1986.
+which was added to language long long time ago - in 1986.
 
 ```cpp
 namespace generic {
@@ -316,8 +316,8 @@ In third edition chapter is called *Item 28: prefer lists to arrays*.
 
 ## C# (.Net) {#cs}
 
-C# is similar to Java.
-In university at the first lecture about .Net platform I've been told a story:
+C# is similar to Java, and there is a story behind their similarity.
+I've been told a this story in the university at the first lecture about .Net platform:
 At the early 2000 one of the main Microsoft's products was Windows OS.
 It was easy to imaging how language + runtime like Java's one
 could increase productivity of developers as well as improve quality of software for Windows.
