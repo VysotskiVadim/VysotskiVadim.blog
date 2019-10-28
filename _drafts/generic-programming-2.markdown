@@ -10,7 +10,8 @@ During my career I've been working with different strongly typed languages that 
 They faced the same set of challenges but solved it in different time using different methods with different pros and cons.
 I find it fascinating, that's why I blogged about it.
 
-If you don't have match experience with generic programming - read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
+If you don't have much experience with generic programming -
+read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
 
 For every considered language we will answer following questions:
 * How does generics work under the hood?
@@ -30,7 +31,7 @@ you can allocate objects on stack or heap,
 you're in charge of freeing memory,
 you can even develop your onw heap allocator.
 Mmmmm freedom!
-Code compiled directly to machine code, which target CPU can execute.
+C++ code is compiled directly to machine code, which target CPU can execute.
 
 Decisions of how memory would be allocated are made in the place of usage:
 
@@ -93,7 +94,7 @@ template<> char max<char>(char first, char second) {
     return first;
 }
 ```
-Approach from C++ the most understandable for developers,
+Approach from C++ is the most understandable for developers,
 it's easy to imagine how code would work if you replace generic parameter with the specific type.
 It's really easy work with generic types - you can do what ever you want with them,
 all type checks take place after code generation phase,
@@ -117,12 +118,12 @@ But generics aren't really popular in C++ world. It's too many disadvantages:
 * Hard to validate: to make sure it works with type you need to test it with that type;
 * Code bloat.
 
-**Code bloat** it's when you get much bigger program after compilation then you expected.
+**Code bloat** it's when you get much bigger executable file after compilation then you expected.
 Every time you use a new generic parameter you get a new generated class or function,
 its code is stored on disk and have to be loaded in the RAM during execution.
 
 #### Variance {#cpp_templates_variance}
-As I sad before C++ templates very intuitive:
+As I sad before C++ templates are very intuitive:
 there is just code generation behind it.
 What kind of variance will it be if you write the same class or function using different types.
 **Invariance**.
@@ -134,9 +135,9 @@ Functions produces are covariant, functions consumers are contravariant.
 ## Java {#java}
 
 Java type system is based on reference and value types.
-Any objects are reference type, they are allocated in the heap, and you work with them via reference.
+Any object is reference type, it's allocated in the heap, and you work with it via reference.
 Value types are data primitives which allocated on the stack(local variable) or heap(class field).
-There are only 8 value types in java: byte, short, int, long, float, double, char, and boolean.
+There are only 8 value types in Java: byte, short, int, long, float, double, char, and boolean.
 So if you use Java most of the time you work with reference types.
 Developers can only allocate objects.
 How objects allocated and how they will be freed depends on Java runtime.
@@ -163,7 +164,7 @@ static Comparable unsafeMax(@NotNull Comparable first, @NotNull Comparable secon
 Generics in Java implemented like compile time feature: generics aren't present in Bytecode.
 On Bytecode level you're just working with `Object`.
 But when you use generics compiler checks types and you don't have to use explicit cast.
-The process when compiler doesn't leave any meta information about generics also called **type erasure**.
+The process when compiler doesn't leave for runtime any information about generics is called **type erasure**.
 
 ```java
 static <T extends Comparable<T>> T max(@NotNull T first, @NotNull T second) {
@@ -232,7 +233,7 @@ compiler treats it like `ArrayList<Object>`.
 
 So basically migration strategy following:
 if you write a new code - use generics,
-if you have existing code which works well - don't touch,
+if you have existing code which works well - don't touch it,
 it would work well with raw types from new packages.
 
 #### Variance {#java_generics_variance}
@@ -283,7 +284,7 @@ When you specify `super T` you can use only methods consumers:
 listOfB.add(new D()); // fine
 B b = listOfB.get(0); // won't compile
 ```
-In Java developers specify wildcards at the place of usage, it called *use-site variance*. 
+In Java, developers specify wildcards at the place of usage, that approach is called *use-site variance*. 
 
 #### Pros {#java_generics_pros}
 As you can see all C++ templates disadvantages which we mentioned above have been solved.
