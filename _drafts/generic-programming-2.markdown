@@ -437,9 +437,26 @@ But even there some disadvantages:
 * Some people thinks that use site variance more convenient;
 * [Arrays are still covariant with runtime check](https://dotnetfiddle.net/uKTPl7).
 
+
+## Use site variance VS declaration site variance {#use_vs_declaration_site_variance}
+
+People have been using generics for many years.
+Maybe now we have some experience and we could agree that some kind of variance is better then other?
+I'm afraid no.
+There is still debates across the Internet.
+
+As a person who used both I can say that
+use site variance is more powerful, i.e. it gives developers more freedom.
+So even if designers didn't created their class for variant usage you still can,
+and compiler helps you not to shoot in your own leg.
+As a disadvantage it's annoying to write it every time.
+
+From the other side
+declaration site variance is less powerful
+but it also requires less effort from developers.
+
 ## Conclusion
 
-It's fascinating, isn't it?
 I didn't try to find out the best generic implementation,
 my point is that
 3 considered languages had different preconditions
