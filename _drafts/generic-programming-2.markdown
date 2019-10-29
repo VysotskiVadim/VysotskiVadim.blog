@@ -224,14 +224,25 @@ No difference at Bytecode level.
 
 
 #### Migration to generics {#java_migration_to_generics}
-Java Runtime Environment is shipped with a lot of useful packages.
+
 As you remember generics were released in Java 5, more then 8 years passed since Java release.
+Java was very popular*(and it's still the same at 2019)* so there were a lot of code written since first Java release.
+
+Sun decided that one of the main goal is to support migration capability:
+developers should be able to start using generics without breaking source or binary capability of existing classes.
+
+Java Runtime Environment(JRE) is shipped with a lot of useful packages.
 So many built-in classes was rewritten using generics feature, for example `ArrayList` became `ArrayList<T>`.
-To achieve compatibility with already written not generic code Oracle's engineers added feature **raw types**.
+To achieve compatibility with already written not generic code Sun's engineers added feature **raw types**.
 When you use generic type as not generic, for example `ArrayList` instead of `ArrayList<T>`
 compiler treats it like `ArrayList<Object>`.
 
-So basically migration strategy following:
+There is also a cases when some companies develop libraries and sell it,
+then some other companies develop libraries on to of those libraries and sell it too.
+It wasn't a rare case at those days, so this scenario is supported.
+[Here is the article to know more about migrations](http://gafter.blogspot.com/2004/09/puzzling-through-erasure-answer.html).
+
+Basically migration strategy following:
 if you write a new code - use generics,
 if you have existing code which works well - don't touch it,
 it would work well with raw types from new packages.
@@ -299,10 +310,10 @@ where all generics types are `Object`, so:
 #### Cons  {#java_generics_cons}
 But there is still some disadvantages.
 
-* Generics code works only for reference types.
+* Generic code works only for reference types.
 It means that you can't use `Map<integer>`, only `Map<Integer>`.
 I.e. in order to pass `integer` to generic code you have to box in object `Integer`;
-* Because of type erasure you can't get at runtime any info about generics parameters;
+* Generics type parameter aren't reified (not available at runtime because of type erasure);
 * It's kind of consequence of previous point, but it's worth to mention as disadvantage:
  Arrays don't work well with generics, for example you can't create generic array like `new E[]`;
 
