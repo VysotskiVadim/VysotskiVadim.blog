@@ -451,20 +451,33 @@ But even there some disadvantages:
 
 ## Use site variance VS declaration site variance {#use_vs_declaration_site_variance}
 
+In other words we can say that we're comparing Java wildcards and C `in` `out`.
+
 People have been using generics for many years.
 Maybe now we have some experience and we could agree that some kind of variance is better then other?
 I'm afraid no.
 There is still debates across the Internet.
 
-As a person who used both I can say that
-use site variance is more powerful, i.e. it gives developers more freedom.
+Most people agreed on that use site variance more powerful, i.e. it gives developers more freedom and flexibility.
 So even if designers didn't created their class for variant usage you still can,
 and compiler helps you not to shoot in your own leg.
-As a disadvantage it's annoying to write it every time.
+As a disadvantage of wildcard it's annoying to write it every time, you need a variance.
 
-From the other side
-declaration site variance is less powerful
-but it also requires less effort from developers.
+Declaration site variance is less powerful
+but it also requires less effort from developers,
+so it more confidant.
+If you have good types system, 
+where all functions grouped in different interfaces and marked as `in` or `out`,
+the declaration site variance works amazing.
+By the way guys from Microsoft(especially those who implemented wildcards in Java) are so 
+[confident about declaration site variance](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037),
+that variance have been embedded into CLR,
+so now it's not something that can be easily changed.
+
+As for me I like languages where use site variance and declaration site variance coexists,
+for example Kotlin.
+Because most of the time*(I can't say that I use variance often)* it's you can use already defined variance.
+But when class isn't designed with the variance in mind, so you still able to apply variance at use site.
 
 ## Conclusion
 
