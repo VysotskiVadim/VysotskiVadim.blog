@@ -72,7 +72,8 @@ namespace generic {
 }
 ```
 #### Under the hood {#cpp_templates_under_the_hood}
-Word **Template** reveals how does language feature work under the hood. Implemented function is just a template for compiler, which generates new functions for every type template is used with.
+Word **Template** reveals how does language feature work under the hood.
+Implemented function is just a template for compiler, which generates new functions for every type template is used with.
 
 So If you use `max` function like this:
 ```cpp
@@ -94,12 +95,6 @@ template<> char max<char>(char first, char second) {
     return first;
 }
 ```
-Approach from C++ is the most understandable for developers,
-it's easy to imagine how code would work if you replace generic parameter with the specific type.
-It's really easy work with generic types - you can do what ever you want with them,
-all type checks take place after code generation phase,
-just write code so that it compile with specific type you use it with.
-
 
 #### Migration to generics {#cpp_migration_to_generics}
 
@@ -109,6 +104,18 @@ And in C++ even now*(year 2019)* many projects are written without usage of any 
 For some reason C++ developers like to implement everything by themselves.
 Any way first release of STL(Standard Template Library) where generic code really necessary was at 1992,
 and library code based on templates.
+
+#### Advantages {#cpp_templates_advantages}
+
+Approach from C++ is the most understandable for developers,
+it's easy to imagine how code would work if you replace generic parameter with the specific type.
+It's really easy work with generic types - you can do what ever you want with them,
+all type checks take place after code generation phase,
+just write code so that it compile with specific type you use it with.
+
+Templates are also very flexible,
+you can use just anything inside template:
+it would work if it works with template parameter.
 
 #### Disadvantages {#cpp_templates_disadvantages}
 But generics aren't really popular in C++ world. It's too many disadvantages:
@@ -314,6 +321,15 @@ I.e. in order to pass `integer` to generic code you have to box in object `Integ
 * It's kind of consequence of previous point, but it's worth to mention as disadvantage:
  Arrays don't work well with generics, for example you can't create generic array like `new E[]`;
 
+As for using value types and reified generics
+I can say that majority of industry
+*(I mean backend development, where Java's very popular)*
+doesn't really suffer because of their absence.
+But some people do.
+There it project called [valhalla](https://wiki.openjdk.java.net/display/valhalla/Main)
+which is experiment to bring value types and reified generics in Java,
+read [this article](https://wiki.openjdk.java.net/display/valhalla/Main) to know more about it.
+
 Just a few words about Array and generics.
 Arrays in Java are covariant and all type checks happens in runtime:
 ```java
@@ -483,8 +499,20 @@ my point is that
 3 considered languages had different preconditions
 and different goals.
 
-I see some reasons behind all implementations and
-I think that all of them are good.
+C++ gives developers a lot of freedom in terms of memory usages,
+code generation approach was already common in sphere of C and C++ development,
+so I believe that templates is really great approach for C++,
+it's fast*(but only in runtime)*, easy to understanding and very flexible.
+
+Generics in Java was created with all C++ disadvantages in mind,
+and it was fixed.
+
+Generics in C# (.Net) was created taking into account Java's implementation.
+
+As you can see all implementations are reasonable,
+they provide to developer ability to write generic and do it good.
+But because of different preconditions, history, ideology,
+*good* means different for every language and problems set that language targets.
 
 Hope you enjoyed the reading and found something useful for you.
-I will consider generics implementation in Kotlin as well, so subscribe to my twitter and stay tuned!
+Next I'm going to explore generics in Kotlin, so subscribe to my twitter and stay tuned!
