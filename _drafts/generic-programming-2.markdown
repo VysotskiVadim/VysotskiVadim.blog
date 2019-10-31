@@ -353,7 +353,7 @@ So they started to change JVM, and Sun*(which then was acquired by Oracle)* didn
 Then Microsoft decided create it's own platform.
 At that time all Java disadvantages and design errors was obvious, so Microsoft tried to fix it from the very beginning.
 
-C# type system lets developers create both custom value and reference types.
+C# type system lets developers create both custom value(`struct`) and reference(`class`) types.
 Value type allocated on heap or stack, reference only in heap.
 .Net runtime, which is called CLR, is in charge of memory allocation and cleaning.
 C# compiler produce Intermediate Language(IL),
@@ -422,22 +422,68 @@ Genius and easy!
 
 #### Variance {#cs_variance}
 
-C# supports both co and contra variance using declaration side variance:
+C# supports both co and contra variance using declaration site variance:
 There are 2 keywords: `in` and `out` which marks generic parameters as contra and covariant.
+Let's try them rewriting examples from 
+[co]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#covariance)
+and
+[contravariance]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#contravariance)
+explanation.
+
 ```c#
-public interface IEnumerable<out T> : IEnumerable { ... }
+class Flower {  }
+class Rose: Flower { }
+class Daisy: Flower { }
+
+interface FlowerShop<out T> where T: Flower {
+    T getFlower();
+}
+
+class RoseShop: FlowerShop<Rose> {
+    public Rose getFlower() {
+        return new Rose();
+    }
+}
+
+class DaisyShop: FlowerShop<Daisy> {
+    public Daisy getFlower() {
+        return new Daisy();
+    }
+}
 ```
-Generic parameter in `IEnumerable<T>` marked as `out`.
-It means that `IEnumerable<T>` can only produce values of type `T`
+Generic parameter in `FlowerShop<T>` marked as `out`.
+It means that `FlowerShop<T>` can only produce values of type `T`
 i.e. it's safe to use covariance:
 
 ```c#
-var listOfB = new List<B>() { new B(), new B() };
-IEnumerable<A> emumerableOfA = listOfB;
+static FlowerShop<Flower> tellMeShopAddress() {
+    return new RoseShop();
+}
 ```
-The same applies for `in` and contravariance.
 
-Variance is also supported on CLR level:
+And when you mark generic parameter as `out`,
+it means that interface implementation can only consume values of type `T`.
+
+```c#
+interface PrettyGirl<in TFavoriteFlower> where TFavoriteFlower: Flower {
+    void takeGift(TFavoriteFlower flower);
+}
+
+class AnyFlowerLover: PrettyGirl<Flower> {
+    public void takeGift(Flower flower) {
+        Console.WriteLine("I like all flowers!");
+    }
+}
+```
+
+So it's save to use contravariance:
+
+```c#
+PrettyGirl<Rose> girlfriend = new AnyFlowerLover();
+girlfriend.takeGift(new Rose());
+```
+
+Variance is supported on CLR level:
 The [CLI](https://stackoverflow.com/questions/480752/clr-and-cli-what-is-the-difference)
 supports covariance and contravariance of generic parameters,
 but only in the signatures of interfaces and delegate classes.
@@ -445,11 +491,14 @@ but only in the signatures of interfaces and delegate classes.
 #### Proc {#cs_generic_proc}
 
 Again, C# as many language before it tried to solve issues of its predecessors.
-The main C# competitor is Java,
+C# predecessor as well as the main competitor is Java,
 so C# language designers put a lot of effort to solve [Java generics design issues](#java_generics_cons):
 * Generic code available for value types;
 * [Some people thinks that declaration site variance is superior to use site](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037);
-* Generic type info available in runtime.
+* Generic types is reified, i.e. available in runtime.
+
+Other reason for .Net to support value type in generic code is structs.
+It would be very strange to let developer create custom value type, but don't allow them to use strucs in generic code.
 
 #### Cons {#cs_generic_cons}
 
