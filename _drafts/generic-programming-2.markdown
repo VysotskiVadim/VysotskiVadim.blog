@@ -423,11 +423,9 @@ Genius and easy!
 #### Variance {#cs_variance}
 
 C# supports both co and contra variance using declaration side variance:
-C# language supports 2 keywords `in` and `out` which marks generic parameters as contra and covariant.
+There are 2 keywords: `in` and `out` which marks generic parameters as contra and covariant.
 ```c#
-public interface IEnumerable<out T> : IEnumerable {
-    ...
-}
+public interface IEnumerable<out T> : IEnumerable { ... }
 ```
 Generic parameter in `IEnumerable<T>` marked as `out`.
 It means that `IEnumerable<T>` can only produce values of type `T`
