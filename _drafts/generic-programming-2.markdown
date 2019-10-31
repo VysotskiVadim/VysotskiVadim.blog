@@ -144,11 +144,7 @@ How objects allocated and how they will be freed depends on Java runtime.
 Java code is compiled to Java Byte code,
 which is interpreted by Java Virtual Machine on running device.
 
-
-Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
-Java had been existing for more then 8 years.
-It was a lot*(I mean really a lot!)* of code written since java became popular.
-
+Java didn't supported generics at first release.
 How did people live without generics?
 You can cast objects to the same base class or interface and then pass them to function.
 
@@ -225,8 +221,9 @@ No difference at Bytecode level.
 
 #### Migration to generics {#java_migration_to_generics}
 
-As you remember generics were released in Java 5, more then 8 years passed since Java release.
-Java was very popular*(and it's still the same at 2019)* so there were a lot of code written since first Java release.
+Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
+Java had been existing for more then 8 years.
+It was a lot*(I mean really a lot!)* of code written since java became popular.
 
 Sun decided that one of the main goal is to support migration capability:
 developers should be able to start using generics without breaking source or binary capability of existing classes.
@@ -469,7 +466,7 @@ so it more confidant.
 If you have good types system, 
 where all functions grouped in different interfaces and marked as `in` or `out`,
 the declaration site variance works amazing.
-By the way guys from Microsoft(especially those who implemented wildcards in Java) are so 
+By the way guys from Microsoft*(especially those who implemented wildcards in Java)* are so 
 [confident about declaration site variance](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037),
 that variance have been embedded into CLR,
 so now it's not something that can be easily changed.
@@ -485,6 +482,7 @@ I didn't try to find out the best generic implementation,
 my point is that
 3 considered languages had different preconditions
 and different goals.
+
 I see some reasons behind all implementations and
 I think that all of them are good.
 
