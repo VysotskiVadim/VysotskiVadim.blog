@@ -511,7 +511,7 @@ But even there some disadvantages:
 
 ## Use site variance VS declaration site variance {#use_vs_declaration_site_variance}
 
-In other words we can say that we're comparing Java wildcards and C `in` `out`.
+In other words we can say that we're comparing Java wildcards and C# `in` `out`.
 
 People have been using generics for many years.
 Maybe now we have some experience and we could agree that some kind of variance is better then other?
