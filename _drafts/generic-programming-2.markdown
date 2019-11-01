@@ -30,7 +30,6 @@ In C++ developers control all aspects of memory usage:
 you can allocate objects on stack or heap,
 you're in charge of freeing memory,
 you can even develop your onw heap allocator.
-Mmmmm freedom!
 C++ code is compiled directly to machine code, which target CPU can execute.
 
 Decisions of how memory would be allocated are made in the place of usage:
@@ -71,9 +70,14 @@ namespace generic {
     }
 }
 ```
+
+
 #### Under the hood {#cpp_templates_under_the_hood}
+
+
 Word **Template** reveals how does language feature work under the hood.
-Implemented function is just a template for compiler, which generates new functions for every type template is used with.
+Implemented function is just a template for compiler,
+which generates new functions for every type template is used with.
 
 So If you use `max` function like this:
 ```cpp
@@ -102,7 +106,7 @@ I don't believe that migration have ever been an issue in C++.
 Templates doesn't break existing code.
 And in C++ even now*(year 2019)* many projects are written without usage of any library.
 For some reason C++ developers like to implement everything by themselves.
-Any way first release of STL(Standard Template Library) where generic code really necessary was at 1992,
+Anyway first release of STL(Standard Template Library) where generic code really necessary was at 1992,
 and library code based on templates.
 
 #### Advantages {#cpp_templates_advantages}
@@ -118,8 +122,12 @@ you can use just anything inside template:
 it would work if it works with template parameter.
 
 #### Disadvantages {#cpp_templates_disadvantages}
-But generics aren't really popular in C++ world. It's too many disadvantages:
-* Generics slows down compilation;
+
+But templates aren't very popular in C++ world.
+Many developers don't use that feature.
+There is too many disadvantages:
+
+* Templates slows down compilation;
 * Absolutely not helpful compiler error messages;
 * You can't reuse generic binary, only source code; 
 * Hard to validate: to make sure it works with type you need to test it with that type;
@@ -132,7 +140,7 @@ its code is stored on disk and have to be loaded in the RAM during execution.
 #### Variance {#cpp_templates_variance}
 As I sad before C++ templates are very intuitive:
 there is just code generation behind it.
-What kind of variance will it be if you write the same class or function using different types.
+What kind of variance will it be if you write the same class or function using different types?
 **Invariance**.
 There is no relationships between generated classes and functions.
 
@@ -149,9 +157,9 @@ So if you use Java most of the time you work with reference types.
 Developers can only allocate objects.
 How objects allocated and how they will be freed depends on Java runtime.
 Java code is compiled to Java Byte code,
-which is interpreted by Java Virtual Machine on running device.
+which is interpreted by Java Virtual Machine(JVM) on running device.
 
-Java didn't supported generics at first release.
+Java didn't support generics at first release.
 How did people live without generics?
 You can cast objects to the same base class or interface and then pass them to function.
 
@@ -163,7 +171,12 @@ static Comparable unsafeMax(@NotNull Comparable first, @NotNull Comparable secon
     return first;
 }
 ```
+Doesn't seems hard,
+but difficulties in life without generics is that
+you should cast result of the function explicitly at the place of usage. 
+
 #### Under the hood {#java_generics_under_the_hood}
+
 Generics in Java implemented like compile time feature: generics aren't present in Bytecode.
 On Bytecode level you're just working with `Object`.
 But when you use generics compiler checks types and you don't have to use explicit cast.
