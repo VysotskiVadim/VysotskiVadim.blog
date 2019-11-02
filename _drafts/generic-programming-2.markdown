@@ -20,7 +20,7 @@ For every considered language we will answer following questions:
 * Pros and Cons
 
 I won't compare languages in order to understand which one is better,
-they all are nice!
+because they all are nice!
 My point is to show how different preconditions like language and runtime design,
 ecosystem, or even market competition affected the way how generics were implemented.
 
@@ -159,7 +159,7 @@ Functions produces are covariant, functions consumers are contravariant.
 Java type system is based on reference and value types.
 Any object is reference type, it's allocated in the heap, and you work with it via reference.
 Value types are data primitives which allocated on the stack(local variable) or heap(class field).
-There are only 8 value types in Java: byte, short, int, long, float, double, char, and boolean.
+There are only 8 value types in Java: `byte`, `short`, `int`, `long`, `float`, `double`, `char`, and `boolean`.
 So if you use Java most of the time you work with reference types.
 Developers can only allocate objects.
 How objects allocated and how they will be freed depends on Java runtime.
@@ -180,7 +180,10 @@ static Comparable unsafeMax(@NotNull Comparable first, @NotNull Comparable secon
 ```
 Doesn't seems hard,
 but difficulties in life without generics is that
-you should cast result of the function explicitly at the place of usage. 
+you should cast result of the function explicitly at the place of usage.
+And of course whenever programming language gives to developers a chance to make a mistake,
+we alway do
+*(because all developers are humans, and humans always makes mistakes)*.
 
 #### Under the hood {#java_generics_under_the_hood}
 
@@ -250,9 +253,9 @@ No difference at Bytecode level.
 
 Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
 Java had been existing for more then 8 years.
-It was a lot*(I mean really a lot!)* of code written since java became popular.
+It was a lot*(I mean really a lot!)* of code written since Java became popular.
 
-Sun decided that one of the main goal is to support migration capability:
+Sun decided that one of the main goal  is to support migration capability:
 developers should be able to start using generics without breaking source or binary capability of existing classes.
 
 Java Runtime Environment(JRE) is shipped with a lot of useful packages.
@@ -263,7 +266,7 @@ compiler treats it like `ArrayList<Object>`.
 
 There is also a cases when some companies develop libraries and sell it,
 then some other companies develop libraries on to of those libraries and sell it too.
-It wasn't a rare case at those days, so this scenario is supported.
+It wasn't a rare case at those days, so this scenario is supported as well.
 [Here is the article to know more about migrations](http://gafter.blogspot.com/2004/09/puzzling-through-erasure-answer.html).
 
 Basically migration strategy following:
@@ -342,15 +345,15 @@ I.e. in order to pass `integer` to generic code you have to box in object `Integ
  Arrays don't work well with generics, for example you can't create generic array like `new E[]`;
 
 As for using value types and reified generics
-I can say that majority of industry
-*(I mean backend development, where Java's very popular)*
+I must say that majority of industry
+*(I mean backend development, where Java's extremely popular)*
 doesn't really suffer because of their absence.
 But some people do.
 There it project called [valhalla](https://wiki.openjdk.java.net/display/valhalla/Main)
 which is experiment to bring value types and reified generics in Java,
 read [this article](https://wiki.openjdk.java.net/display/valhalla/Main) to know more about it.
 
-Just a few words about Array and generics.
+And just a few words about Array and generics.
 Arrays in Java are covariant and all type checks happens in runtime:
 ```java
 Object[] objectArray = new Long[1];
@@ -363,15 +366,18 @@ In third edition chapter is called *Item 28: prefer lists to arrays*.
 
 ## C# (.Net) {#cs}
 
-C# is similar to Java, and there is a story behind their similarity.
-I've been told a this story in the university at the first lecture about .Net platform:
+C# is similar to Java,
+but it's not a coincident,
+there is a story behind their similarity.
 At the early 2000 one of the main Microsoft's products was Windows OS.
 It was easy to imaging how language + runtime like Java's one
 could increase productivity of developers as well as improve quality of software for Windows.
-And Microsoft wanted to implement better integration with Windows OS, and only Windows OS.
+And Microsoft wanted to implement better integration with Windows OS.
 So they started to change JVM, and Sun*(which then was acquired by Oracle)* didn't like it so they baned Microsoft's changes.
 Then Microsoft decided create it's own platform.
-At that time all Java disadvantages and design errors was obvious, so Microsoft tried to fix it from the very beginning.
+At that time all Java disadvantages and design errors was obvious,
+so Microsoft tried to fix it from the very beginning.
+*[More about why Microsoft created C#](https://www.forbes.com/sites/quora/2018/03/02/why-did-microsoft-create-c/#7c51ffda70f3)*
 
 C# type system lets developers create both custom value(`struct`) and reference(`class`) types.
 Value type allocated on heap or stack, reference only in heap.
@@ -396,7 +402,7 @@ public static void Main() {
 #### Under the hood {#cs_generics_under_the_hood}
 
 Microsoft didn't have much choice,
-give support of custom value type and [revelled disadvantages of type erasure in Java](#java_generics_cons),
+given support of custom value type and [revelled disadvantages of type erasure in Java](#java_generics_cons),
 they had to support generics in runtime.
 And they did it.
 
@@ -409,9 +415,9 @@ And they did it.
 ```
 
 After compilation we get the same IL code with respect to generics as in C#.
-Wait a minute!
-How does work ***under the hood***?
-Everybody knowns that CPU don't know anything about generics, it just executes simple instructions.
+
+So to answer the question how C# generics work under the hood
+we have to go one level deeper.
 
 All optimizations works at machine code generation level.
 Most of the time you work with reference type.
@@ -420,11 +426,9 @@ So CLR generate one generic implementation for all reference type.
 Like in Java, but on 1 level deeper, at machine code.
 
 Unfortunately it's not possible to apply the same optimization for value types,
-because all value types have a different size and different structure.
-So for custom value types generic code works like in C++,
-but on the machine code level:
-CLR generated different implementation of generic code for every value type which is used as generic parameter.
-So we need to be careful with value types.
+because all value types have a different size and structure.
+So for custom value types generic code works like in C++:
+CLR generates implementation per every value type which is used as generic parameter.
 
 *If you want to know more about generics implementation in .Net I recommend you [this article](https://alexandrnikitin.github.io/blog/dotnet-generics-under-the-hood/) as entry point.*
 
@@ -440,11 +444,14 @@ var genericList = new System.Collections.Generic.List<object>();
 See it? Just added namespace with new collection implementation.
 Genius and easy!
 
+Microsoft provided majority of infrastructure and "ready to go" solutions for developers,
+so migration of third party library wasn't so important case for C#.
+
 #### Variance {#cs_variance}
 
 C# supports both co and contra variance using declaration site variance:
 There are 2 keywords: `in` and `out` which marks generic parameters as contra and covariant.
-Let's try them rewriting examples from 
+Let's try them by rewriting examples from 
 [co]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#covariance)
 and
 [contravariance]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#contravariance)
@@ -510,54 +517,54 @@ but only in the signatures of interfaces and delegate classes.
 
 #### Proc {#cs_generic_proc}
 
-Again, C# as many language before it tried to solve issues of its predecessors.
+C# as many language before it tried to solve issues of its predecessors.
 C# predecessor as well as the main competitor is Java,
 so C# language designers put a lot of effort to solve [Java generics design issues](#java_generics_cons):
 * Generic code available for value types;
 * [Some people thinks that declaration site variance is superior to use site](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037);
-* Generic types is reified, i.e. available in runtime.
+* Generic types is reified, i.e. type of generic parameter is available at runtime.
 
-Other reason for .Net to support value type in generic code is structs.
-It would be very strange to let developer create custom value type, but don't allow them to use strucs in generic code.
+Other major reason for .Net to support value type in generic code is custom value types - `struct`.
+It would be very strange to let developer create custom value type,
+but don't allow them to use `struct` in generic code.
 
 #### Cons {#cs_generic_cons}
 
-But even there some disadvantages:
-
 * Possible code bloat with value types;
-* Some people thinks that use site variance more convenient;
-* [Arrays are still covariant with runtime check](https://dotnetfiddle.net/uKTPl7).
+* Some people thinks that use site variance is more convenient;
+* [Arrays are still covariant with runtime assentation](https://dotnetfiddle.net/uKTPl7).
 
 
 ## Use site variance VS declaration site variance {#use_vs_declaration_site_variance}
 
-In other words we can say that we're comparing Java wildcards and C# `in` `out`.
+In other words we can say that we're comparing Java wildcards and C# declaration site `in` `out`.
 
 People have been using generics for many years.
 Maybe now we have some experience and we could agree that some kind of variance is better then other?
 I'm afraid no.
-There is still debates across the Internet.
+There is still debates across the Internet, so developers divided into two camps.
 
-Most people agreed on that use site variance more powerful, i.e. it gives developers more freedom and flexibility.
-So even if designers didn't created their class for variant usage you still can,
-and compiler helps you not to shoot in your own leg.
-As a disadvantage of wildcard it's annoying to write it every time, you need a variance.
+Most people agreed on that use site variance is more powerful,
+i.e. it gives developers more freedom and flexibility.
+So even if designers didn't create their class for variant usage you still can,
+and compiler helps you don't shoot in your own leg.
+As a disadvantage of wildcard it's annoying to write it every time when you need a variance.
 
 Declaration site variance is less powerful
 but it also requires less effort from developers,
-so it more confidant.
+so it more convenient.
 If you have good types system, 
 where all functions grouped in different interfaces and marked as `in` or `out`,
 the declaration site variance works amazing.
 By the way guys from Microsoft*(especially those who implemented wildcards in Java)* are so 
-[confident about declaration site variance](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037),
-that variance have been embedded into CLR,
+[confident about declaration site variance superiority](https://github.com/dotnet/csharplang/issues/1992#issuecomment-438082037),
+that variance had been embedded into CLR,
 so now it's not something that can be easily changed.
 
 As for me I like languages where use site variance and declaration site variance coexists,
 for example Kotlin.
-Because most of the time*(I can't say that I use variance often)* it's you can use already defined variance.
-But when class isn't designed with the variance in mind, so you still able to apply variance at use site.
+Because most of the time*(I can't say that I use variance often)* you can use already defined variance.
+But when class isn't designed with the variance in mind,  you still able to apply variance at use site.
 
 ## Conclusion
 
@@ -569,17 +576,20 @@ and different goals.
 C++ gives developers a lot of freedom in terms of memory usages,
 code generation approach was already common in sphere of C and C++ development,
 so I believe that templates is really great approach for C++,
-it's fast*(but only in runtime)*, easy to understanding and very flexible.
+it's fast*(only in runtime)*, easy to understand and very flexible.
 
-Generics in Java was created with all C++ disadvantages in mind,
-and it was fixed.
+Generics in Java was created
+to improve existing, popular, and wildly used technology,
+and the task was well done.
 
-Generics in C# (.Net) was created taking into account Java's implementation.
+Generics in C# (.Net) as well as language itself is the youngest,
+so engineers did their best to do better then their competitors(Java, C++).
 
 As you can see all implementations are reasonable,
 they provide to developer ability to write generic and do it good.
 But because of different preconditions, history, ideology,
-*good* means different for every language and problems set that language targets.
+*good* means different for every language.
 
 Hope you enjoyed the reading and found something useful for you.
-Next I'm going to explore generics in Kotlin, so subscribe to my twitter and stay tuned!
+Don't hesitate to ask questions in comments, or reach me in twitter.
+I will appreciate your feedback, it means much for me.
