@@ -30,8 +30,6 @@ In C++ developers control all aspects of memory usage:
 you can allocate objects on stack or heap,
 you're in charge of freeing memory,
 you can even develop your onw heap allocator.
-C++ code is compiled directly to machine code, which target CPU can execute.
-
 Decisions of how memory would be allocated are made in the place of usage:
 
 ```cpp
@@ -55,7 +53,16 @@ class Product {
     }
 ```
 
-Given that freedom it's hard to implement generic programming and don't lose that freedom.
+In C++ methods are invoked by 2 different ways.
+If method declared using `virtual` keyword it's invoked via [virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table).
+Other methods are invoked directly: i.e. compiler puts in machine code call function by its address in memory.
+
+In the light of all discussed aspects of C++
+implementing generic programming looks like a quite challenging task:
+all types are very different,
+so it's impossible to get one code that handle all possible types with respect to all given freedom.
+But the task was solved using usual for C++ world technique - code generation.
+
 C++ supports generic programming via feature called [Template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)),
 which was added to language long long time ago - in 1986.
 
