@@ -114,7 +114,7 @@ Templates don't break existing code.
 And in C++ even now*(year 2019)* many projects are written without usage of any library.
 For some reason C++ developers like to implement everything by themselves.
 Anyway first release of STL(Standard Template Library) where generic code was required happend in 1992,
-and library code based on templates.
+and library code is based on templates.
 
 #### Advantages {#cpp_templates_advantages}
 
