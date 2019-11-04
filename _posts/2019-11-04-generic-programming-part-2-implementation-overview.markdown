@@ -14,7 +14,7 @@ If you don't have much experience with generic programming -
 read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
 
 For every considered language we will answer following questions:
-* How does generics work under the hood?
+* How do generics work under the hood?
 * How did migration to generic happen?
 * [Variance]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#variance)
 * Pros and Cons
