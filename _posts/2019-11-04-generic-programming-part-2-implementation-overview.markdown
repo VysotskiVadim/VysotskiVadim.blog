@@ -29,7 +29,7 @@ ecosystem, or even market competition affected the way how generics were impleme
 In C++ developers control all aspects of memory usage:
 you can allocate objects on stack or heap,
 you're in charge of freeing memory,
-you can even develop your onw heap allocator.
+you can even develop your own heap allocator.
 Decisions of how memory would be allocated are made in the place of usage:
 
 ```cpp
