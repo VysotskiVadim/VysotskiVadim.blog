@@ -82,7 +82,7 @@ namespace generic {
 #### Under the hood {#cpp_templates_under_the_hood}
 
 
-Word **Template** reveals how does language feature work under the hood.
+Word **Template** reveals how does language feature works under the hood.
 Implemented function is just a template for compiler,
 which generates new functions for every type template is used with.
 
