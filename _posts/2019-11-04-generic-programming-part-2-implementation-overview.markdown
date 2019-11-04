@@ -110,7 +110,7 @@ template<> char max<char>(char first, char second) {
 #### Migration to generics {#cpp_migration_to_generics}
 
 I don't believe that migration have ever been an issue in C++.
-Templates doesn't break existing code.
+Templates don't break existing code.
 And in C++ even now*(year 2019)* many projects are written without usage of any library.
 For some reason C++ developers like to implement everything by themselves.
 Anyway first release of STL(Standard Template Library) where generic code really necessary was at 1992,
