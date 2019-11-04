@@ -55,7 +55,7 @@ class Product {
 
 In C++ methods are invoked by 2 different ways.
 If method declared using `virtual` keyword it's invoked via [virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table).
-Other methods are invoked directly: i.e. compiler puts in machine code call function by its address in memory.
+Other methods are invoked directly, i.e. compiler puts in machine code function call by its address.
 
 In the light of all discussed aspects of C++
 implementing generic programming looks like a quite challenging task:
