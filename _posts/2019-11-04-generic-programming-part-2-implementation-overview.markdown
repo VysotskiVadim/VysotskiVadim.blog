@@ -573,17 +573,25 @@ my point is that
 3 considered languages had different preconditions
 and different goals.
 
-C++ gives developers a lot of freedom in terms of memory usages,
+C++ gives developers a complete freedom in terms of memory management,
 code generation approach was already common in sphere of C and C++ development,
-so I believe that templates is really great approach for C++,
-it's fast*(only in runtime)*, easy to understand and very flexible.
+so I believe that templates are really great approach for C++,
+it's fast*(only in runtime)*,
+easy to understand,
+and the most flexible among considered languages.
 
 Generics in Java was created
-to improve existing, popular, and wildly used technology,
-and the task was well done.
+to improve existing, popular, and wildly used technology.
+Given Java memory model, ecosystem, and use cases,
+I must say that Sun's engineers did a good job! 
 
-Generics in C# (.Net) as well as language itself is the youngest,
-so engineers did their best to do better then their competitors(Java, C++).
+Generics in C# (.Net) as well as language itself is the youngest.
+To be successful in a sphere where problem is already solved,
+your need so solve it much better then your competitors.
+Direct competitor for C# is Java.
+C# creators did their best to make their language amazing.
+There is also a different reasons which affected generics design:
+different from Java memory model and libraries ecosystem.
 
 As you can see all implementations are reasonable,
 they provide to developer ability to write generic and do it good.
