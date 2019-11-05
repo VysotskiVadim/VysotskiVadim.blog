@@ -109,12 +109,18 @@ template<> char max<char>(char first, char second) {
 
 #### Migration to generics {#cpp_migration_to_generics}
 
-I don't believe that migration have ever been an issue in C++.
-Templates don't break existing code.
-And in C++ even now*(year 2019)* many projects are written without usage of any library.
-For some reason C++ developers like to implement everything by themselves.
-Anyway first release of STL(Standard Template Library) where generic code was required happend in 1992,
-and library code is based on templates.
+*I haven't found any info regarding migration to templates,
+so it's just my assumptions which is based on logic.*
+
+Templates as a language feature doesn't break existing code,
+if you recompile your code using compiler which supports templates
+it should work.
+The main issue for migration is how to migrate libraries so that
+it would work with new and old compilers.
+Happily in old good times developers weren't so good at reusing code.
+First release of STL(Standard Template Library) where generic code was necessary happened in 1992,
+and library code based on templates.
+So I think that migration wasn't ever considered as a problem.
 
 #### Advantages {#cpp_templates_advantages}
 
