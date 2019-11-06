@@ -261,24 +261,33 @@ Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java
 Java had been existing for more then 8 years.
 It was a lot*(I mean really a lot!)* of code written since Java became popular.
 
-Sun decided that one of the main goal  is to support migration capability:
-developers should be able to start using generics without breaking source or binary capability of existing classes.
+Sun didn't control whole or even majority of libraries ecosystem,
+so it was clear that migration will take some time
+and it won't happen simultaneously.
+For example you're developing library,
+some of library's users updated to new Java and want you to provide generic API,
+and other users develop very big application so it would take years to update to new Java,
+but they want to get fixes and improvements from you.
+In order to support all mentioned cases by one library
+[migration capability became the first constraint in the requirements](https://www.jcp.org/en/jsr/detail?id=14):
+> C1) Upward compatibility with existing code. Pre-existing code must work on the new system. This implies not only upward compatibility of the class file format, but also interoperability of old applications with parameterized versions of pre-existing libraries, in particular those used in the platform library and in standard extensions.
 
-Java Runtime Environment(JRE) is shipped with a lot of useful packages.
-So many built-in classes was rewritten using generics feature, for example `ArrayList` became `ArrayList<T>`.
-To achieve compatibility with already written not generic code Sun's engineers added feature **raw types**.
-When you use generic type as not generic, for example `ArrayList` instead of `ArrayList<T>`
+To achieve compatibility with already written not generic code
+Sun's engineers implemented generics throught type erassure and added feature **raw types**.
+
+Raw type lets developers use generic code as it was not generic.
+For example `ArrayList` instead of `ArrayList<T>`
 compiler treats it like `ArrayList<Object>`.
 
-There is also a cases when some companies develop libraries and sell it,
-then some other companies develop libraries on to of those libraries and sell it too.
-It wasn't a rare case at those days, so this scenario is supported as well.
-[Here is the article to know more about migrations](http://gafter.blogspot.com/2004/09/puzzling-through-erasure-answer.html).
+Java Runtime Environment(JRE) is shipped with a lot of useful packages.
+Many built-in classes was rewritten to provide generic API, for example `ArrayList` became `ArrayList<T>`.
 
 Basically migration strategy following:
 if you write a new code - use generics,
 if you have existing code which works well - don't touch it,
 it would work well with raw types from new packages.
+
+*To know more about why Sun chose type erasure reed [Neal Gafter blog](http://gafter.blogspot.com/2004/09/puzzling-through-erasure-answer.html).*
 
 #### Variance {#java_generics_variance}
 Java supports variance via language feature called wildcards.
@@ -440,18 +449,21 @@ CLR generates implementation per every value type which is used as generic param
 
 #### Migration to generics {#cs_migration_to_generics}
 
-Language feature generics don't suppose to break something,
-so main challenge is base class library(BCL).
-It's easy to guess how migration happened when you see namespaces.
+As well as in Java and C++
+generics as a language feature don't break existing code,
+so main challenge is not simultaneous migration of libraries and applications
+to language version that support generics.
+
+Microsoft provided majority of infrastructure and "ready to go" solutions for developers,
+so migration of third party library wasn't important case for C#.
+This fact let Microsoft to make a breaking change in runtime.
+Libraries was migrated without breaking changes,
+new API with generic support was added.
+
 ```cs
 var notGenericList = new System.Collections.ArrayList();
 var genericList = new System.Collections.Generic.List<object>();
 ```
-See it? Just added namespace with new collection implementation.
-Genius and easy!
-
-Microsoft provided majority of infrastructure and "ready to go" solutions for developers,
-so migration of third party library wasn't so important case for C#.
 
 #### Variance {#cs_variance}
 
