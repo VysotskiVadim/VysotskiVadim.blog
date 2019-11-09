@@ -259,31 +259,31 @@ No difference at Bytecode level.
 
 Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
 Java had been existing for more then 8 years.
-It was a lot*(I mean really a lot!)* of code written since Java became popular.
+A lot*(I mean really a lot!)* of code had been written since Java became popular.
 
-Sun didn't control whole or even majority of libraries ecosystem,
+Sun didn't control whole or even majority of libraries in Java ecosystem,
 so it was clear that migration will take some time
 and it won't happen simultaneously.
-For example you're developing library,
-some of library's users updated to new Java and want you to provide generic API,
-and other users develop very big application so it would take years to update to new Java,
+For example you are a library developer,
+some of library users updated to new Java and want you to provide generic API,
+and other users develop enormous application so it would take years to update to new Java,
 but they want to get fixes and improvements from you.
 In order to support all mentioned cases by one library
 [migration capability became the first constraint in the requirements](https://www.jcp.org/en/jsr/detail?id=14):
 > C1) Upward compatibility with existing code. Pre-existing code must work on the new system. This implies not only upward compatibility of the class file format, but also interoperability of old applications with parameterized versions of pre-existing libraries, in particular those used in the platform library and in standard extensions.
 
 To achieve compatibility with already written not generic code
-Sun's engineers implemented generics throught type erassure and added feature **raw types**.
+Sun's engineers implemented generics through type erasure and added **raw types** feature.
 
 Raw type lets developers use generic code as it was not generic.
-For example `ArrayList` instead of `ArrayList<T>`
-compiler treats it like `ArrayList<Object>`.
+For example `ArrayList` instead of `ArrayList<T>` would be treated by
+compiler like `ArrayList<Object>`.
 
 Java Runtime Environment(JRE) is shipped with a lot of useful packages.
 Many built-in classes was rewritten to provide generic API, for example `ArrayList` became `ArrayList<T>`.
 
-Basically migration strategy following:
-if you write a new code - use generics,
+Basically migration strategy is following:
+if you write new code - use generics,
 if you have existing code which works well - don't touch it,
 it would work well with raw types from new packages.
 
@@ -319,7 +319,7 @@ listOfB = new ArrayList<C>(); // fine
 listOfB = new ArrayList<D>(); // fine
 listOfB = new ArrayList<A>(); // compilation error
 ```
-`List` has many methods, some of them produces and some of them consumes generic values.
+`List` has many methods, some of them produce and some of them consume generic values.
 When you specify `extends T` you can use only methods producers:
 ```java
 B b = listOfB.get(0); // fine
@@ -341,22 +341,22 @@ In Java, developers specify wildcards at the place of usage, that approach is ca
 
 #### Pros {#java_generics_pros}
 As you can see all C++ templates disadvantages which we mentioned above have been solved.
-Compiler produce only one function or class for all possible generics parameter,
-where all generics types are `Object`, so:
+Compiler produces only one function or class for all possible generic parameters,
+where all generic types are `Object`, so:
 * no noticeable compilation slowdown;
 * you are able to use generic code from binary(Bytecode);
 * compilation error messages don't come from generated code, so they're understandable;
-* support of co and contravariance;
-* easy validation: if code works for one type, then it would work for others.
+* support of co- and contravariance;
+* easy validation: if code works for one type, then it will work for others.
 
 #### Cons  {#java_generics_cons}
-But there is still some disadvantages.
+But there are still some disadvantages.
 
 * Generic code works only for reference types.
 It means that you can't use `Map<integer>`, only `Map<Integer>`.
 I.e. in order to pass `integer` to generic code you have to box in object `Integer`;
-* Generics type parameter aren't reified (not available at runtime because of type erasure);
-* It's kind of consequence of previous point, but it's worth to mention as disadvantage:
+* Generic parameters aren't reified (not available at runtime because of type erasure);
+* It's a kind of consequence of previous point, but it's worth to mention as disadvantage:
  Arrays don't work well with generics, for example you can't create generic array like `new E[]`;
 
 As for using value types and reified generics
@@ -364,20 +364,20 @@ I must say that majority of industry
 *(I mean backend development, where Java's extremely popular)*
 doesn't really suffer because of their absence.
 But some people do.
-There it project called [valhalla](https://wiki.openjdk.java.net/display/valhalla/Main)
+There is the project called [valhalla](https://wiki.openjdk.java.net/display/valhalla/Main)
 which is experiment to bring value types and reified generics in Java,
 read [this article](https://wiki.openjdk.java.net/display/valhalla/Main) to know more about it.
 
 And just a few words about Array and generics.
-Arrays in Java are covariant and all type checks happens in runtime:
+Arrays in Java are covariant and all type checks happen in runtime:
 ```java
 Object[] objectArray = new Long[1];
 objectArray[0] = "secretly I'm a String"; // Throws ArrayStoreException
 ```
 You can't create arrays like `new E[]` because of runtime check in array and type erasure in generics.
 Oracle couldn't change arrays in Java 5, so arrays and generics in Java is a bad mix.
-If you interested you can find more info in "Effective Java" by Joshua Bloch.
-In third edition chapter is called *Item 28: prefer lists to arrays*.
+If you interested you can find more info in "Effective Java" by Joshua Bloch,
+in third edition chapter is called *Item 28: prefer lists to arrays*.
 
 ## C# (.Net) {#cs}
 
@@ -385,19 +385,19 @@ C# is similar to Java,
 but it's not a coincident,
 there is a story behind their similarity.
 At the early 2000 one of the main Microsoft's products was Windows OS.
-It was easy to imaging how language + runtime like Java's one
+It was easy to imagine how language + runtime like Java's one
 could increase productivity of developers as well as improve quality of software for Windows.
 And Microsoft wanted to implement better integration with Windows OS.
 So they started to change JVM, and Sun*(which then was acquired by Oracle)* didn't like it so they baned Microsoft's changes.
 Then Microsoft decided create it's own platform.
-At that time all Java disadvantages and design errors was obvious,
+At that time all Java disadvantages and design errors were obvious,
 so Microsoft tried to fix it from the very beginning.
 *[More about why Microsoft created C#](https://www.forbes.com/sites/quora/2018/03/02/why-did-microsoft-create-c/#7c51ffda70f3)*
 
 C# type system lets developers create both custom value(`struct`) and reference(`class`) types.
-Value type allocated on heap or stack, reference only in heap.
+Value types are allocated on heap or stack, reference - only in heap.
 .Net runtime, which is called CLR, is in charge of memory allocation and cleaning.
-C# compiler produce Intermediate Language(IL),
+C# compiler produces Intermediate Language(IL),
 which is then compiled to machine code on running device.
 
 C# supports generics since version 2.0 - September 2005, 3 years after C# 1.0 release.
@@ -434,11 +434,11 @@ After compilation we get the same IL code with respect to generics as in C#.
 So to answer the question how C# generics work under the hood
 we have to go one level deeper.
 
-All optimizations works at machine code generation level.
+All optimizations work at machine code generation level.
 Most of the time you work with reference type.
-Under the hood all reference are the same data type: address in the memory, i.e. just a number.
-So CLR generate one generic implementation for all reference type.
-Like in Java, but on 1 level deeper, at machine code.
+Under the hood all references are the same data type: address in the memory, i.e. just a number.
+So CLR generates one generic implementation for all reference types.
+Works like in Java, but on 1 level deeper, at machine code.
 
 Unfortunately it's not possible to apply the same optimization for value types,
 because all value types have a different size and structure.
