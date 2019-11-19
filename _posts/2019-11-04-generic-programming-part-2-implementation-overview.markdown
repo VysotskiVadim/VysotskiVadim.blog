@@ -157,7 +157,7 @@ What kind of variance will it be if you write the same class or function using d
 **Invariance**.
 There are no relationships between generated classes and functions.
 
-But since C++ 17 std library supports co and contravariance via `std::function`.
+But since C++ 17 std library supports co- and contravariance via `std::function`.
 Functions produces are covariant, functions consumers are contravariant.
 
 ## Java {#java}
