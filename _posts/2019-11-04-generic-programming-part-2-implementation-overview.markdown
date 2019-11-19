@@ -155,7 +155,7 @@ As I sad before C++ templates are very intuitive:
 there is just code generation behind it.
 What kind of variance will it be if you write the same class or function using different types?
 **Invariance**.
-There is no relationships between generated classes and functions.
+There are no relationships between generated classes and functions.
 
 But since C++ 17 std library supports co and contravariance via `std::function`.
 Functions produces are covariant, functions consumers are contravariant.
