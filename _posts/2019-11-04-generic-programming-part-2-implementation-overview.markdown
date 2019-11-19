@@ -141,7 +141,7 @@ Many developers don't use that feature.
 There are too many disadvantages:
 
 * Templates slow down compilation;
-* Absolutely not helpful compiler error messages;
+* Absolutely useless compiler error messages;
 * You can't reuse generic binary, only source code; 
 * Hard to validate: to make sure it works with type you need to test it with that type;
 * Code bloat.
