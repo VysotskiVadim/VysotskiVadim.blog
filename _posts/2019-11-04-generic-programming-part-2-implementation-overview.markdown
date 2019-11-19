@@ -138,7 +138,7 @@ it would work if it works with template parameter.
 
 But templates aren't very popular in C++ world.
 Many developers don't use that feature.
-There is too many disadvantages:
+There are too many disadvantages:
 
 * Templates slows down compilation;
 * Absolutely not helpful compiler error messages;
