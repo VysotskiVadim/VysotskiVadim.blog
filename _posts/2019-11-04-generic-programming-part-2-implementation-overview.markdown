@@ -126,7 +126,7 @@ So I think that migration wasn't ever considered as a problem.
 
 Approach from C++ is the most understandable for developers,
 it's easy to imagine how code would work if you replace generic parameter with the specific type.
-It's really easy work with generic types - you can do what ever you want with them,
+So it's very easy to work with generic types - you can do what ever you want with them,
 all type checks take place after code generation phase,
 just write code so that it compile with specific type you use it with.
 
