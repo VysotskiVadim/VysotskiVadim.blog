@@ -140,7 +140,7 @@ But templates aren't very popular in C++ world.
 Many developers don't use that feature.
 There are too many disadvantages:
 
-* Templates slows down compilation;
+* Templates slow down compilation;
 * Absolutely not helpful compiler error messages;
 * You can't reuse generic binary, only source code; 
 * Hard to validate: to make sure it works with type you need to test it with that type;
