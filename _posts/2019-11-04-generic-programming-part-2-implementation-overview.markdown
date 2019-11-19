@@ -143,7 +143,7 @@ There are too many disadvantages:
 * Templates slow down compilation;
 * Absolutely useless compiler error messages;
 * You can't reuse generic binary, only source code; 
-* Hard to validate: to make sure it works with type you need to test it with that type;
+* You don't know does generic code work until you try;
 * Code bloat.
 
 **Code bloat** it's when you get much bigger executable file after compilation then you expected.
