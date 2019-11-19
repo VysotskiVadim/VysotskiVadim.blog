@@ -146,7 +146,7 @@ There are too many disadvantages:
 * You don't know does generic code work until you try;
 * Code bloat.
 
-**Code bloat** it's when you get much bigger executable file after compilation then you expected.
+**Code bloat** it's when you get much bigger executable file after compilation than you expected.
 Every time you use a new generic parameter you get a new generated class or function,
 its code is stored on disk and have to be loaded in the RAM during execution.
 
