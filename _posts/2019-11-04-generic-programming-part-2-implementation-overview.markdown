@@ -199,7 +199,7 @@ But when you use generics compiler checks types and you don't have to use explic
 The process when compiler doesn't leave for runtime any information about generics is called **type erasure**.
 
 ```java
-static <T extends Comparable<T>> T max(@NotNull T first, @NotNull T second) {
+static <T extends Comparable<T>> T max(T first, T second) {
     if (second.compareTo(first) > 0) {
         return second;
     }
