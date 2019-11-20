@@ -193,7 +193,7 @@ we alway do
 
 #### Under the hood {#java_generics_under_the_hood}
 
-Generics in Java implemented like compile time feature: generics aren't present in Bytecode.
+Generics in Java have been implemented like compile time feature: generics aren't present in Bytecode.
 On Bytecode level you're just working with `Object`.
 But when you use generics compiler checks types and you don't have to use explicit cast.
 The process when compiler doesn't leave for runtime any information about generics is called **type erasure**.
