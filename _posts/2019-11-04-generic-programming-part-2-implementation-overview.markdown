@@ -185,7 +185,7 @@ static Comparable unsafeMax(@NotNull Comparable first, @NotNull Comparable secon
 }
 ```
 Doesn't seem hard,
-but difficulties in life without generics is that
+but difficulty in life without generics is that
 you should cast result of the function explicitly at the place of usage.
 And of course whenever programming language gives to developers a chance to make a mistake,
 we alway do
