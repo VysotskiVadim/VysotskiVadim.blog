@@ -168,7 +168,7 @@ Value types are data primitives which allocated on the stack(local variable) or 
 There are only 8 value types in Java: `byte`, `short`, `int`, `long`, `float`, `double`, `char`, and `boolean`.
 So if you use Java most of the time you work with reference types.
 Developers can only allocate objects.
-How objects allocated and how they will be freed depends on Java runtime.
+How objects are allocated and how they will be freed depends on Java runtime.
 Java code is compiled to Java Byte code,
 which is interpreted by Java Virtual Machine(JVM) on running device.
 
