@@ -598,7 +598,7 @@ it's fast*(only in runtime)*,
 easy to understand,
 and the most flexible among considered languages.
 
-Generics in Java was created
+Generics as a language feature in Java was created
 to improve existing, popular, and wildly used technology.
 Given Java memory model, ecosystem, and use cases,
 I must say that Sun's engineers did a good job! 
