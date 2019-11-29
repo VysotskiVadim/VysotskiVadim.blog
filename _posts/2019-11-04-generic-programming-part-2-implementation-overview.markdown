@@ -90,7 +90,7 @@ So If you use `max` function like this:
 ```cpp
 cout << "int " << generic::max(1, 2) << ", char " << generic::max('a', 'b');
 ```
-under the hood compiler generates 2 functions:
+compiler will generate 2 functions: for `int` and for `char` type
 
 ```cpp
 template<> int max<int>(int first, int second) {
