@@ -608,7 +608,7 @@ To be successful in a sphere where problem is already solved,
 your need so solve it much better then your competitors.
 Direct competitor for C# is Java.
 C# creators did their best to make their language amazing.
-There is also a different reasons which affected generics design:
+There are also a different reasons which affected generics design:
 different from Java memory model and libraries ecosystem.
 
 As you can see all implementations are reasonable,
