@@ -165,11 +165,6 @@ Under the hood cancellation mechanism in Kotlin Coroutines works similar to C# w
 
 Again and again I see how Kotlin reduces amount of boilerplate code which I should write and I like it! You can't make a mistake if you don't write code. Write more clean and robust code then ever before with Kotlin!
 
-
-#### P.S.
-
-Some Kotlin features come with price. Will talk about it next time...
-
 ### Links:
 
 * [Cancellation examples at github](https://github.com/VysotskiVadim/cancelations-examples)
