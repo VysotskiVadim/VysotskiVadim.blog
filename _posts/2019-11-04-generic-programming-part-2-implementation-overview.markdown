@@ -189,7 +189,7 @@ but difficulty in life without generics is that
 you should cast result of the function explicitly at the place of usage.
 And of course whenever programming language gives to developers a chance to make a mistake,
 we alway do
-*(because all developers are humans, and humans always makes mistakes)*.
+*(because all developers are humans, and humans always make mistakes)*.
 
 #### Under the hood {#java_generics_under_the_hood}
 
