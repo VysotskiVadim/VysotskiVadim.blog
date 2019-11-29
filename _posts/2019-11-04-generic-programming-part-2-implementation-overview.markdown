@@ -6,21 +6,21 @@ date:   2019-11-04 12:00:00 +0300
 
 ![Types of Asteraceae](https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/a9ae80c482ebd479ccbc702e9a8ac3d67b369ecb/assets/Asteracea_poster_3_part_2.jpg){: style="width:100%"}
 
-During my career I've been working with different strongly typed languages that support generic programming.
-They faced the same set of challenges but solved it in different time using different methods with different pros and cons.
-I find it fascinating, that's why I'm blogging about it.
+During my career, I've been working with different strongly typed languages that support generic programming.
+They faced the same set of challenges but solved it at different time using different methods with different pros and cons.
+I find it fascinating that's why I'm blogging about it.
 
 If you don't have much experience with generic programming -
 read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
 
 For every considered language we will answer the following questions:
 * How do generics work under the hood?
-* How did migration to generic happen?
+* How did the migration to generic happen?
 * [Variance]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#variance)
 * Pros and Cons
 
-I won't compare languages in order to understand which one is better,
-because they all are nice!
+I won't compare languages to understand which one is better,
+because they all are excellent!
 My point is to show how different preconditions like language and runtime design,
 ecosystem, or even market competition affected the way how generics were implemented.
 
@@ -54,14 +54,14 @@ class Product {
 ```
 
 In C++ methods are invoked by 2 different ways.
-If method declared using `virtual` keyword it's invoked via [virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table).
+If the method declared using `virtual` keyword it's invoked via [virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table).
 Other methods are invoked directly, i.e. compiler puts in machine code function call by its address.
 
 In the light of all discussed aspects of C++
 implementing generic programming looks like a quite challenging task:
 all types are very different,
-so it's impossible to get one code that handle all possible types with respect to all given freedom.
-But the task was solved using usual for C++ world technique - code generation.
+so it's impossible to get one code that handles all possible types with respect to all given freedom.
+But the task was solved using common for C++ world technique - code generation.
 
 C++ supports generic programming via feature called [Template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)),
 which was added to language long long time ago - in 1986.
@@ -110,7 +110,7 @@ template<> char max<char>(char first, char second) {
 #### Migration to generics {#cpp_migration_to_generics}
 
 *I haven't found any info regarding migration to templates,
-so it's just my assumptions which is based on logic.*
+so it's just my assumptions which are based on logic.*
 
 Templates as a language feature doesn't break existing code,
 if you recompile your code using compiler which supports templates
@@ -125,8 +125,8 @@ So I think that migration wasn't ever considered as a problem.
 #### Advantages {#cpp_templates_advantages}
 
 Approach from C++ is the most understandable for developers,
-it's easy to imagine how code would work if you replace generic parameter with the specific type.
-So it's very easy to work with generic types - you can do what ever you want with them,
+it's easy to imagine how code would work if you replace generic parameters with the specific type.
+So it's very easy to work with generic types - you can do whatever you want with them,
 all type checks take place after code generation phase,
 just write code so that it compiles with specific type you use it with.
 
@@ -258,10 +258,10 @@ No difference at Bytecode level.
 #### Migration to generics {#java_migration_to_generics}
 
 Feature **generics** [was released in Java 5](https://en.wikipedia.org/wiki/Java_version_history#J2SE_5.0) in September 2004.
-Java had been existing for more then 8 years.
+Java had been existing for more than 8 years.
 A lot*(I mean really a lot!)* of code had been written since Java became popular.
 
-Sun didn't control whole or even majority of libraries in Java ecosystem,
+Sun didn't control whole or even a majority of libraries in Java ecosystem,
 so it was clear that migration will take some time
 and it won't happen simultaneously.
 For example you are a library developer,
@@ -591,8 +591,8 @@ my point is that
 3 considered languages had different preconditions
 and different goals.
 
-C++ gives developers a complete freedom in terms of memory management,
-code generation approach was already common in sphere of C and C++ development,
+C++ gives developers complete freedom in terms of memory management,
+code generation approach was already common in the sphere of C and C++ development,
 so I believe that templates are really great approach for C++,
 it's fast*(only in runtime)*,
 easy to understand,
@@ -603,19 +603,19 @@ to improve existing, popular, and wildly used technology.
 Given Java memory model, ecosystem, and use cases,
 I must say that Sun's engineers did a good job! 
 
-Generics in C# (.Net) as well as language itself is the youngest.
-To be successful in a sphere where problem is already solved,
-your need so solve it much better then your competitors.
-Direct competitor for C# is Java.
+Generics in C# (.Net), as well as language itself, is the youngest.
+To be successful in a sphere where the problem is already solved,
+your need to solve it much better than your competitors.
+A direct competitor for C# is Java.
 C# creators did their best to make their language amazing.
-There are also a different reasons which affected generics design:
+There are also different reasons which affected generics design:
 different from Java memory model and libraries ecosystem.
 
 As you can see all implementations are reasonable,
-they provide to developer ability to write generic and do it well.
+they provide to a developer the ability to write generic and do it well.
 But because of different preconditions, history, ideology,
 *good* means different for every language.
 
-Hope you enjoyed the reading and found something useful for you.
-Don't hesitate to ask questions in comments, or reach me in twitter.
-I will appreciate your feedback, it means much for me.
+I hope you enjoyed the reading and found something useful for you.
+Don't hesitate to ask questions in comments or reach me on twitter.
+I will appreciate your feedback it means much for me.
