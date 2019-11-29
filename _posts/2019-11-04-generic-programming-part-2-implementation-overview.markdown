@@ -8,7 +8,7 @@ date:   2019-11-04 12:00:00 +0300
 
 During my career I've been working with different strongly typed languages that support generic programming.
 They faced the same set of challenges but solved it in different time using different methods with different pros and cons.
-I find it fascinating, that's why I blogged about it.
+I find it fascinating, that's why I'm blogging about it.
 
 If you don't have much experience with generic programming -
 read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
