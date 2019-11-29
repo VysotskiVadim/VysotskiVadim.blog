@@ -612,7 +612,7 @@ There are also a different reasons which affected generics design:
 different from Java memory model and libraries ecosystem.
 
 As you can see all implementations are reasonable,
-they provide to developer ability to write generic and do it good.
+they provide to developer ability to write generic and do it well.
 But because of different preconditions, history, ideology,
 *good* means different for every language.
 
