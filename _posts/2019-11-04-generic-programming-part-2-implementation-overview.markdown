@@ -177,7 +177,7 @@ How did people live without generics?
 You can cast objects to the same base class or interface and then pass them to function.
 
 ```java
-static Comparable unsafeMax(@NotNull Comparable first, @NotNull Comparable second) {
+static Comparable unsafeMax(Comparable first, Comparable second) {
     if (second.compareTo(first) > 0) {
         return second;
     }
