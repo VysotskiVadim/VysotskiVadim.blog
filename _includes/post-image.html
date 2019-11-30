@@ -1,6 +1,6 @@
 {%- if page.postImage.src -%}
 <img
-  style="width:100%"
+  style="width:100%; margin-bottom: 30px;"
   src="{{site.images.baseUrl}}/{{ page.postImage.src }}.jpg"
   sizes="`{{ site.images.sizes }}"
   srcset="{% for width in site.images.srcset %}{{ site.images.baseUrl }}/resized/{{ page.postImage.src }}_{{ width }}.jpg {{ width }}w{% if forloop.last == false %}, {% endif %}{% endfor %}"
