@@ -199,9 +199,12 @@ PrettyGirl<Flower> girlfriend = DaisyLover();
 girlfriend.takeGift(new Rose()); // she won't like it!
 ```
 
-We have just considered example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` is subclass of `B`, if `A` consumes generic value.
+We have just considered an example of **Contravariance** - you're allowed to cast `A<B>` to `A<C>`, where `C` is subclass of `B`, if `A` consumes generic value.
 Contravariance is about **consumers**.
 
-## To be continued
+## What is next?
 
-In next post I will blog about generic programming implementation in different languages. Follow me on twitter if you won't miss it!
+Nice! We've done with the idea of generic programming.
+I hope it was understandable and enjoyable for you.
+If wasn't please leave feedback or question in the comments.
+Now you're ready to see [different implementations of generic programming in the Part 2]({% post_url 2019-11-29-generic-programming-part-2-implementation-overview %}). 
