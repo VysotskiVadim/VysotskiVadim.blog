@@ -1,8 +1,12 @@
 {%- if page.postImage.src -%}
-<img
-  style="width:100%; margin-bottom: 30px;"
-  src="{{site.images.baseUrl}}/{{ page.postImage.src }}.jpg"
-  sizes="`{{ site.images.sizes }}"
-  srcset="{% for width in site.images.srcset %}{{ site.images.baseUrl }}/resized/{{ page.postImage.src }}_{{ width }}.jpg {{ width }}w{% if forloop.last == false %}, {% endif %}{% endfor %}"
-  alt="{{ page.postImage.alt }}">
+<div style="position:relative;width:100%;margin-bottom:30px;">
+  <img
+    style="z-index:0;width:100%;"
+    src="data:image/jpg;base64,{{page.postImage.preloader}}">
+  <img
+    style="position:absolute;z-index:1;left:0;width:100%;"
+    src="{{site.images.baseUrl}}/{{ page.postImage.src }}.jpg"
+    srcset="{% for width in site.images.srcset %}{{ site.images.baseUrl }}/resized/{{ page.postImage.src }}_{{ width }}.jpg {{ width }}w{% if forloop.last == false %}, {% endif %}{% endfor %}"
+    alt="{{ page.postImage.alt }}">
+</div>
 {%- endif -%}
