@@ -1,10 +1,11 @@
 ---
 layout: post
 title:  "Generic Programming - Implementation Overview"
-date:   2019-11-04 12:00:00 +0300
+date:   2019-11-29 12:00:00 +0300
+postImage:
+  src: Asteracea_poster_3_part_2
+  alt: Types of Asteraceaes
 ---
-
-![Types of Asteraceae](https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/a9ae80c482ebd479ccbc702e9a8ac3d67b369ecb/assets/Asteracea_poster_3_part_2.jpg){: style="width:100%"}
 
 During my career, I've been working with different strongly typed languages that support generic programming.
 They faced the same set of challenges but solved it at different time using different methods with different pros and cons.

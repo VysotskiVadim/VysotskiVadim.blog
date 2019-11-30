@@ -2,9 +2,10 @@
 layout: post
 title:  "Generic Programming - Introduction"
 date:   2019-10-01 12:00:00 +0300
+postImage:
+  src: Asteracea_poster_3
+  alt: Types of Asteraceaes
 ---
-
-![Types of Asteraceae](https://github.com/VysotskiVadim/VysotskiVadim.github.io/blob/2d1d1a2108158080c4128ee8a64694d6fddb5869/assets/Asteracea_poster_3.jpg?raw=true){: style="width:100%"}
 
 There are a lot of different strongly typed languages that support generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth recapping everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
 

@@ -2,9 +2,10 @@
 layout: post
 title:  "Kotlin Coroutines - async/await which is done right"
 date:   2019-08-06 12:00:00 +0300
+postImage:
+  src: 3-dogs-1-stick
+  alt: 'Async dogs'
 ---
-
-![Async dogs](https://github.com/VysotskiVadim/VysotskiVadim.github.io/blob/f9ca7a5855a0f2325a2c0b0f444352f1eb389f02/assets/3-dogs-1-stick.jpg?raw=true){: style="width:100%"}
 
 Before I switched to Android I was .Net developer and used C# intensively. I've written a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest issue I always had in asynchronous *async/await* code - **cancellations**.
 

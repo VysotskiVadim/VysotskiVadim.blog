@@ -14,7 +14,9 @@ layout: default
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span></span>
       {%- endif -%}</p>
   </header>
-
+  
+  {% include post-image.html %}
+  
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>

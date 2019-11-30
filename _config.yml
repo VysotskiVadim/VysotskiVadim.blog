@@ -34,6 +34,16 @@ markdown: kramdown
 plugins:
   - jekyll-feed
 
+images:
+  baseUrl: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets
+  srcset:
+    - 1920
+    - 1600
+    - 1366
+    - 1024
+    - 768
+    - 640
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
