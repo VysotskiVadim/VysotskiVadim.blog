@@ -2,7 +2,7 @@
 <div style="position:relative;width:100%;margin-bottom:30px;">
   <img
     style="z-index:0;width:100%;"
-    src="data:image/jpg;base64,{{page.postImage.preloader}}">
+    src="data:image/jpg;base64,{{site.data.preloadedImages[page.postImage.src]}}">
   <img
     style="position:absolute;z-index:1;left:0;width:100%;"
     src="{{site.images.baseUrl}}/{{ page.postImage.src }}.jpg"

@@ -5,7 +5,6 @@ date:   2019-08-06 12:00:00 +0300
 postImage:
   src: 3-dogs-1-stick
   alt: 'Async dogs'
-  preloader: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAARABYDASIAAhEBAxEB/8QAGgABAAMAAwAAAAAAAAAAAAAAAAMEBQEGB//EACgQAAIBAwQABAcAAAAAAAAAAAECAwAEEQUSITETMkGBBiIzUXFysf/EABcBAAMBAAAAAAAAAAAAAAAAAAECBAD/xAAcEQACAgIDAAAAAAAAAAAAAAAAAQIDISIUMWH/2gAMAwEAAhEDEQA/AMnSnt98e5YfDBJeO4YwhgB0GPXpzXE9vbvDNOiNcCNmTFsCSAAQTzjJ3LjC5wMH14ngs3ubR5b26toVhXdIIl3EgkKASQM844qX4fhvkfTbBNTsGit5Rc3ESRABWfd4aAgDPmAb7e1RVUJQ2WR497I6nqVqkAWRI3eJycOoPfZBHYIpXo1kmn6fZItpGkfifNJtBOW6Pm5A46pW4/oZQi3gybnyR/tVuy+h7H+0pVTCixc9D80pSgMf/9k=
 ---
 
 Before I switched to Android I was .Net developer and used C# intensively. I've written a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest issue I always had in asynchronous *async/await* code - **cancellations**.
