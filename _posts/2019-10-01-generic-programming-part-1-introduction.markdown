@@ -7,7 +7,22 @@ postImage:
   alt: Types of Asteraceaes
 ---
 
-There are a lot of different strongly typed languages that support generic programming. They faced the same set of challenges but solved it in different time using different methods with different pros and cons. I find it fascinating, so I have to blog about it. But before we start it's worth recapping everything we know about generic programming in general. You're reading **Part 1 - Introduction**.
+Generic programming makes developers' life easier by allowing us to
+write code once and reuse across different types in typesafe manner.
+The majority of strongly typed languages support generic programming.
+You're probably already familiar with the *generic programming* term,
+and know that there are some tricky parts, like variance, which is quite hard to understand.
+But you need that understanding to write complex systems like an expert.
+
+It's time to take one step back and start from the very begging to build a proper understanding.
+Don't worry, it won't take long but will be rewarding in your development career. 
+
+You're reading **Part 1 - Introduction**.
+In this post, we'll figure out what is generic programming and
+find out via simple examples what is covariance and contravariance.
+
+If you're confident about your theory understanding, you can go directly to
+[overview of different implementations of generic programming in Part 2]({% post_url 2019-11-29-generic-programming-part-2-implementation-overview %}). 
 
 ## Introduction
 
