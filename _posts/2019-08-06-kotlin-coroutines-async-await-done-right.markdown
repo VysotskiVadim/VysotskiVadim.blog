@@ -1,13 +1,17 @@
 ---
 layout: post
-title:  "Kotlin Coroutines - async/await which is done right"
+title:  "Kotlin Coroutines - C# async/await which is done right"
 date:   2019-08-06 12:00:00 +0300
 postImage:
   src: 3-dogs-1-stick
   alt: 'Async dogs'
 ---
 
-Before I switched to Android I was .Net developer and used C# intensively. I've written a lot of asynchronous code using C# *async/await* language feature. In this post I'm going to explain how Kotlin Coroutines solved the biggest issue I always had in asynchronous *async/await* code - **cancellations**.
+Kotlin`s suspend functions let developers write asynchronous code which is looks like the synchronous one.
+But Kotlin isn't the first programming language that provided such capability.
+C# has *async/await* feature since version 5.0, which was released at August 2012.
+Kotlin Coroutines took into account and solved the biggest issue I always had in the asynchronous C# *async/await* code - **cancellations**.
+This post is my contribution to the question Kotlin Coroutines vs C# async/await.
 
 ## The issue
 
