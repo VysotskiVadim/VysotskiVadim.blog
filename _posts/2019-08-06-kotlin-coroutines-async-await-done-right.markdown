@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Kotlin Coroutines - C# async/await which is done right"
+title:  Kotlin Coroutines - C# async/await which is done right
+description: "Kotlin Coroutines vs C# async/await: how coroutines solved the biggest issue I always had in asynchronous C# code - cancellations."
 date:   2019-08-06 12:00:00 +0300
 postImage:
   src: 3-dogs-1-stick
