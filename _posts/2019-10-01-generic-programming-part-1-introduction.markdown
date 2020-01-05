@@ -3,19 +3,22 @@ layout: post
 title:  "Generic Programming - Introduction"
 date:   2019-10-01 12:00:00 +0300
 image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/Asteracea_poster_3.jpg
+description: "It's easy to understand generic programming, variance, covariance, contravariance by simple examples."
 postImage:
   src: Asteracea_poster_3
   alt: Types of Asteraceaes
 ---
 
-Generic programming makes developers' life easier by allowing us to
-write code once and reuse across different types in typesafe manner.
+Generic programming makes developers' life easier by giving us the ability to
+write code once and reuse it across different types in a typesafe manner.
 The majority of strongly typed languages support generic programming.
 You're probably already familiar with the *generic programming* term,
-and know that there are some tricky parts, like variance, which is quite hard to understand.
-But you need that understanding to write complex systems like an expert.
+and know that there are some tricky parts like covariance and contravariance, which is quite complex.
+Sounds scary, but these concepts are logical,
+and it's easy to understand it by simple examples.
+Deep understanding is crucial for complex systems development and gives you an advantage at job interviews. 
 
-It's time to take one step back and start from the very begging to build a proper understanding.
+It's time to take one step back and start from the very begging, to build a proper understanding.
 Don't worry, it won't take long but will be rewarding in your development career. 
 
 You're reading **Part 1 - Introduction**.
@@ -45,7 +48,7 @@ Ok, but what about floating point numbers?
 
 ```java
 public static double max(double first, double second) {
-    if (second > first) {
+    if (second > first) {imple explanation of
         return second;
     }
     return first;
