@@ -92,17 +92,14 @@ max(5, 2) // returns 5
 max("a", "d") // returns "d"
 ```
 
-But what to do if you use strongly typed language? Well, it depends on chosen language. In the next post we'll consider popular nowadays strongly typed languages: C++, Java, C#, Kotlin, Swift, TypeScript.
-
-For every considered language we will answer following questions:
-* How does generics work under the hood?
-* How did migration to generic happen(if actual)?
-* Variance(*don't be afraid of term, explanation will follow*)
-* Pros and Cons
+But what to do if you use strongly typed language? Well, it depends on chosen language.
+In the
+[next post]({% post_url 2019-11-29-generic-programming-part-2-implementation-overview %})
+we'll consider implementation details of generic programming in different languages: C++, Java, C#.
+But now it's time to get to know the basic ideas of generic programming,
+which is applicable to any language.
 
 ## Variance
-
-But before we start discovering different languages it worth understanding what variance is, because it's very important in context of generic programming and strongly typed languages.
 
 Many developers use strongly typed languages in order to set some constrains on code, which leads to decreasing amount of runtime errors. I.e. compiler should not compile code which will cause runtime errors *(of course compiler can't prevent all errors, but for some cases it's obvious at compile time that it will fail at runtime)*. You've got the point -- ***compiler shouldn't allow you shoot in your own leg***.
 
