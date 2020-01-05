@@ -3,23 +3,25 @@ layout: post
 title: "Generic Programming - Implementation Overview"
 date: 2019-11-29 12:00:00 +0300
 image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/Asteracea_poster_3_part_2.jpg
+description: "Comparison of generic programming in C++, Java, C#(.Net): history, under the hood, variance, pros anc cons of each approach"
 postImage:
   src: Asteracea_poster_3_part_2
   alt: Types of Asteraceaes
 ---
 
-During my career, I've been working with different strongly typed languages that support generic programming.
-They faced the same set of challenges but solved it at different time using different methods with different pros and cons.
-I find it fascinating that's why I'm blogging about it.
-
-If you don't have much experience with generic programming -
-read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
-
+The majority of strongly typed programming languages support generic programming.
+They faced the same set of challenges but solved it at a different time using different methods with different pros and cons.
+The history of generic programming implementation will give you a taste of real engineering:
+you'll see that there is no "the best" approach, it's always a tradeoff between different advantages.
+We'll consider popular programming languages who brought new approaches to industry: C++, Java, C#(.Net).
 For every considered language we will answer the following questions:
 * How do generics work under the hood?
 * How did the migration to generic happen?
 * [Variance]({% post_url 2019-10-01-generic-programming-part-1-introduction %}#variance)
 * Pros and Cons
+
+If you don't have much experience with generic programming in general -
+read [the introduction to generic programming]({% post_url 2019-10-01-generic-programming-part-1-introduction %}).
 
 I won't compare languages to understand which one is better,
 because they all are excellent!
