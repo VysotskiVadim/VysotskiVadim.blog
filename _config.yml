@@ -26,8 +26,8 @@ minima:
     twitter: VysotskiVadim
     github: VysotskiVadim
 
-disqus:
-    shortname: vadzimv-dev
+# disqus:
+#     shortname: vadzimv-dev
 
 # Build settings
 markdown: kramdown
