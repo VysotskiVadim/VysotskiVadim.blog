@@ -4,3 +4,4 @@
 
 layout: home
 ---
+Hi, you're reading personal blog of Vadzim Vysotski, a software engineer from Minsk(Belarus).
