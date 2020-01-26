@@ -35,3 +35,18 @@ Developers who use strongly typed languages want compiler to check their code ra
 Good exception error handling system should **force developers handle all scenarios, event negatives one,
 by compile time checks**(1).
 
+Exceptions based error handling mechanism has another advantage: developer can focus on positive scenario.
+Consider the simple case:
+```kotlin
+try {
+    val data = getData()
+    val viewObject = processData()
+    showResultOnUI(viewObject)
+} catch (t: Throwable) {
+    showErrorOnUI()
+}
+```
+In this case when developer implements logic, he thinks only about positive scenario.
+To avoid crash he wrap all logic with error handling so that it doesn't matter when exactly error happened.
+Despite "one `tru-catch` to rule them all" approach works only for simple cases,
+it's still very useful **to be able to concentrate on positive flow when you reading or wring code**.
