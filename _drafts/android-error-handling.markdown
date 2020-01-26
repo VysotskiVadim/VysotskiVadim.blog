@@ -8,34 +8,30 @@ There is something important, something that matters, something that I always mi
 Strategy is a global plan applicable for all application code, it's a part of architecture.
 I always use the straightforward one: when app crashes it's time for one more `try-catch`.
 
-### The issue
+### The motivation
 
-Default error handling strategy given out of the box by Java far from perfect.
-When something goes wrong
-, for instance method was called on a pointer which is null,
-code execution is interrupted by exceptions.
-For developer it looks 
+Default error handling strategy given out of the box by Java is far from perfect.
+When something goes wrong code execution is interrupted by exception.
+Exception contains some information regarding failure and can be handled by `try-catch` block.
 
-Basically exceptions itself is an object which contains info abo
+Java's creators made a good attempt to divide exception into two categories: *checked* and *unchecked*.
+Unchecked is something unexpected like bug in logic which is causes `NullPointerException`.
+Checked is expected possible failure which is part of a method signature,
+so that function called have to handle negative scenario,
+like `IOException` when you open a file.
+This perfect from the first glance approach,
+failed when developers stated using it: reed
+[Java's checked exceptions were a mistake](http://radio-weblogs.com/0122027/stories/2003/04/01/JavasCheckedExceptionsWereAMistake.html)
+and
+[The Trouble with Checked Exceptions](https://www.artima.com/intv/handcuffs.html).
+Next generation of languages which is inspired by Java, like C#, Scala, Kotlin, missing checked exceptions feature.
+The issue with unchecked exception is that developer should expect that every function call has two possible results:
+successful one which is specified in function signature,
+and in case of failure exception is your result.
 
-Every time you miss the exception is a signal for runtime that we got into a stage which wasn't expected
+Depside of checked exception failure
+the idea of specifying successful and failed result in function signature is great.
+Developers who use strongly typed languages want compiler to check their code rather then see errors in runtime.
+Good exception error handling system should **force developers handle all scenarios, event negatives one,
+by compile time checks**(1).
 
-
-
-What kind of problems do you have developing applications without 
-
-Basic error handling strategy for software is straightforward:
-when some process can't continue execution OS just shut it down.
-That's fair.
-Runtimes (Java or .Net for example) usually adhere to the same strategy.
-To avoid crashes as a client developer I have only one option: setup an exception handling strategy in the app.
-*Option to write code without bugs which cause exceptions isn't considered - it's impossible.*
-
-
-
-Client application has default exceptions handing strategies as well,
-it's called **crash**.
-
-
-Android runtime is based on Java runtime.
-In Java all the exceptions divided into two categories.
