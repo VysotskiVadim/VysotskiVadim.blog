@@ -7,8 +7,9 @@ description: "How to organize error error handling in Android application."
 There is something important, something that matters, something that I always miss - error handling strategy.
 Strategy is a global plan applicable for all application code, it's a part of architecture.
 I always use the straightforward one: when app crashes it's time for one more `try-catch`.
+If strategy haven't been setup yet, it means that next the best time to do is now.
 
-### The motivation
+### The wish
 
 Default error handling strategy given out of the box by Java is far from perfect.
 When something goes wrong code execution is interrupted by exception.
@@ -32,8 +33,8 @@ and in case of failure exception is your result.
 Depside of checked exception failure
 the idea of specifying successful and failed result in function signature is great.
 Developers who use strongly typed languages want compiler to check their code rather then see errors in runtime.
-Good exception error handling system should **force developers handle all scenarios, event negatives one,
-by compile time checks**(1).
+Good exception error handling system should
+**force developers handle all scenarios, event negatives one, by compile time checks**(1).
 
 Exceptions based error handling mechanism has another advantage: developer can focus on positive scenario.
 Consider the simple case:
@@ -49,4 +50,4 @@ try {
 In this case when developer implements logic, he thinks only about positive scenario.
 To avoid crash he wrap all logic with error handling so that it doesn't matter when exactly error happened.
 Despite "one `tru-catch` to rule them all" approach works only for simple cases,
-it's still very useful **to be able to concentrate on positive flow when you reading or wring code**.
+it's still very useful **to be able to concentrate on positive flow when you reading or wring code**(2).
