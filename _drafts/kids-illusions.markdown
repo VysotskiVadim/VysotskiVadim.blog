@@ -61,4 +61,21 @@ But reality beat their believe -- they loose.
 It's hard to overcome Child believe
 *(take a look at young polish boy who doesn't understand why german soldiers put a gun against him, he did as his mummy said, he shouldn't be hurt: [photo](https://commons.wikimedia.org/wiki/File:Stroop_Report_-_Warsaw_Ghetto_Uprising_06.jpg))*.
 
-## Magic code
+## Magic and code
+
+In the software development industry we have many people who really good at selling ideas(Uncle Bob for example).
+Let's call people like them industry giants.
+When giants sells ideas they usually skip important part: the area of applicability.
+It would be boring and probably impossible to mention all the preconditions during the talk.
+Our Child gets new illusion: *If I do as industry giants say, I will be a successful developer.*
+We're looking for magic which will protect us in the complicated world of software development.
+Even in case of failure we tend to think that *I didn't managed to do as giants said*
+or *I did as giant said, it's not my failure*.
+
+## Let's the Adult rule
+
+Everything is your hands.
+You're the responsible for your project, for your code.
+Gyu from the book won't protect you.
+Analyze, ask your self the question **Why am I doing it?**.
+Ask giants **Why**, they're smart and know the answer, just don't want to bother you with enormous amount of ifs and whens.
