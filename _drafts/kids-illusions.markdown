@@ -19,17 +19,17 @@ They are just different, with different pros and cons.
 People who are aware of the majority of ways to success in their field,
 and know which one suits given situation better are called an experts.
 
-I often meet smart people, who don't want to go further than following.
+I often meet smart people, who don't want to go further than following without asking why.
 They stick to idea that in the world something which is *"right"*,
 so that if you act in different way they call it *"wrong"*.
 They see only one approach and don't even want to consider others.
 I found a theory in Transactional Analysis, which explains this phenomenon.
 
-## Transactional Analysis
+## Transactional Analysis (TODO: rewrite)
 
+Transactional analysis (TA) is a psychoanalytic theory and method of therapy wherein social transactions are analyzed to determine the ego state of the patient (whether parent-like, childlike, or adult-like) as a basis for understanding behavior. In transactional analysis, the patient is taught to alter the ego state as a way to solve emotional problems. The method deviates from Freudian psychoanalysis which focuses on increasing awareness of the contents of unconsciously held ideas. Eric Berne developed the concept and paradigm of transactional analysis in the late 1950s.
 
-
-## The ego states
+## The ego state (TODO: rewrite)
 You as a person consist of at least 3 different personalities --
 [Child, Adult, and Parent](https://en.wikipedia.org/wiki/Transactional_analysis#The_ego-state_(or_Parent%E2%80%93Adult%E2%80%93Child_(PAC))_models), also known as an ego states:
 * Parent: a state in which people behave, feel, and think in response to an unconscious mimicking of how their parents (or other parental figures) acted, or how they interpreted their parent's actions. For example, a person may shout at someone out of frustration because they learned from an influential figure in childhood the lesson that this seemed to be a way of relating that worked.
@@ -48,25 +48,30 @@ Child inside us believes in illusions despite your age.
 
 Illusions can be different: *if I wan the lottery I will be make my dream come true and will be happy*.
 People are waisting all live waiting for the miracle.
-Every game miracle happens for one person.
+Every game miracle happens for at least one person.
 But usually he finds out that things he can buy doesn't make them happy,
 because this things are real, not magic like in their illusions.
 The majority of winners waist all money and return back to regular live.
 This happens because all the system of illusions is built on top of magic.
-Price shouldn't just appeared by magic, it should be magical.
+Prize should appear by magic, and it should be magical.
 Child always became disappointed when he see the real things when magic was expected.
 
-One of the most illustrative example is nazis.
+One of the most illustrative example of illusion is nazis.
 Hitler promised them the Greater German Reich if they kill all other nations.
 This promise and strong believe made them immortal and all-powerful during genocide of civilians of different nations.
 Despite the fact that they committed a horrible crime they consider it as an act of love,
 their Child believed
 *"If you do as I say, I will love and protect you, you're nothing without me."*
-But reality beat their believe -- they loose.
-It's hard to overcome Child believe
-*(take a look at young polish boy who doesn't understand why german soldiers put a gun against him, he did as his mummy said, he shouldn't be hurt: [photo](https://commons.wikimedia.org/wiki/File:Stroop_Report_-_Warsaw_Ghetto_Uprising_06.jpg))*.
+But reality beat their believe -- they were defeated during the WW2.
 
-## Magic and code
+It's hard to overcome Child believe,
+in most cases it's impossible.
+Take a look at young polish boy,
+who doesn't understand why german soldiers put a gun against him,
+he did as his mummy said, he shouldn't be hurt:
+[photo](https://commons.wikimedia.org/wiki/File:Stroop_Report_-_Warsaw_Ghetto_Uprising_06.jpg)).
+
+## Magical code
 
 In the software development industry we have many people who really good at selling ideas(Uncle Bob for example).
 Let's call people like them industry giants.
@@ -76,6 +81,13 @@ Our Child gets new illusion: *If I do as industry giants say, I will be a succes
 We're looking for magic which will protect us in the complicated world of software development.
 Even in case of failure we tend to think that *I didn't managed to do as giants said*
 or *I did as giant said, it's not my failure*.
+
+## Reality
+
+In real world where we live magic doesn't exist.
+So if your idea is based on magic it will probably fail.
+As I said before there is a many ways which leads you to success.
+
 
 ## Let's the Adult rule
 
