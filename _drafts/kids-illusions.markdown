@@ -9,7 +9,7 @@ postImage:
   alt: An Old Man and his Grandson
 ---
 
-The first step of learning new things is to start doing it following rules given by teachers.
+The first step of learning new things is to start doing it by following rules given by teachers.
 You don't ask why, it's too much materials to knew at the beginning.
 After a while when you got some knowledge you start looking deep at the area.
 Your main question now is **why**.
@@ -19,10 +19,15 @@ They are just different, with different pros and cons.
 People who are aware of the majority of ways to success in their field,
 and know which one suits given situation better are called an experts.
 
-I feel that it's natural for all the Science.
-But I often meet smart people, who are so blind.
+I often meet smart people, who don't want to go further than following.
+They stick to idea that in the world something which is *"right"*,
+so that if you act in different way they call it *"wrong"*.
 They see only one approach and don't even want to consider others.
-I found a theory in transactional analysis by Eric Berne, which explains this phenomenon.
+I found a theory in Transactional Analysis, which explains this phenomenon.
+
+## Transactional Analysis
+
+
 
 ## The ego states
 You as a person consist of at least 3 different personalities --
