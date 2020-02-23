@@ -110,7 +110,7 @@ It makes decisions based on analysis.
 But it's not easy to make it the ruler of your life.
 All transactional analysis is about giving the Adult more power.
 
-For me working stategy was just start acting as a professional.
+For me working strategy was just start acting as a professional.
 I don't do anything until I answer myself **Why am I doing it?**.
 Everything is in my hands.
 I'm responsible for my project, my code, and my life.
