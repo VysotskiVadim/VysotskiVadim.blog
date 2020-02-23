@@ -11,10 +11,10 @@ postImage:
 
 The first step of learning new things is to start doing it by following rules given by teachers.
 You don't ask why, it's too much materials to knew at the beginning.
-After a while when you got some knowledge you start looking deep at the area.
+After a while when you get some knowledge you start looking deep at the area.
 Your main question now is **why**.
 Usually after many **why**s you find out that there is no approach which is just *right*.
-There are many approaches, and all of them lead you to success.
+There are many approaches which can lead you to success.
 They are just different, with different pros and cons.
 People who are aware of the majority of ways to success in their field,
 and know which one suits given situation better are called an experts.
@@ -37,7 +37,7 @@ You as a person consist of at least 3 different personalities --
 * Child: a state in which people behave, feel, and think similarly to how they did in childhood. For example, a person who receives a poor evaluation at work may respond by looking at the floor and crying or pouting, as when scolded as a child. Conversely, a person who receives a good evaluation may respond with a broad smile and a joyful gesture of thanks. The Child is the source of emotions, creation, recreation, spontaneity, and intimacy.
 
 Child is one of the most valuable state in us -- it makes us creative, makes us alive.
-Eric Bern(founder of Transactional Analysis) use Child, where first letter is upper case, to talk about ego state, so do I.
+Eric Bern use Child, where first letter is upper case, to talk about ego state, so do I.
 
 ## Illusions
 
@@ -73,9 +73,9 @@ he did as his mummy said, he shouldn't be hurt:
 
 ## Magical code
 
-In the software development industry we have many people who really good at selling ideas(Uncle Bob for example).
+In the software development industry we have many people who are really good at selling ideas(Uncle Bob for example).
 Let's call people like them industry giants.
-When giants sells ideas they usually skip important part: the area of applicability.
+When giants sell ideas they usually skip important part: the area of applicability.
 It would be boring and probably impossible to mention all the preconditions during the talk.
 Our Child gets new illusion: *If I do as industry giants say, I will be a successful developer.*
 We're looking for magic which will protect us in the complicated world of software development.
@@ -85,14 +85,25 @@ or *I did as giant said, it's not my failure*.
 ## Reality
 
 In real world where we live magic doesn't exist.
-So if your idea is based on magic it will probably fail.
+So if your idea is based on magic it will probably fail...
+Or maybe not.
+It can so happen that you'll luckily reach your destination following the white rabbit.
 As I said before there is a many ways which leads you to success.
 
+{% include image.html src="paths_to_success" alt="many path to success" %}
+
+None of them is "right" and none of them is "wrong".
+They are different.
+Direct will lead you to success fast.
+But not direct can be more funny and give you more experience.
+
+The trick is to guarantee you success you need to see the path and understand how does it work.
+Even if you was successful once it can stop working for different preconditions.
 
 ## Let's the Adult rule
 
 Everything is your hands.
-You're the responsible for your project, for your code.
-Gyu from the book won't protect you.
+You're the responsible for your project, for your code, for your life.
+Guys from the book won't protect you.
 Analyze, ask your self the question **Why am I doing it?**.
 Ask giants **Why**, they're smart and know the answer, just don't want to bother you with enormous amount of ifs and whens.
