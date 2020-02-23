@@ -69,7 +69,7 @@ in most cases it's impossible.
 Take a look at young polish boy,
 who doesn't understand why german soldiers put a gun against him,
 he did as his mummy said, he shouldn't be hurt:
-[photo](https://commons.wikimedia.org/wiki/File:Stroop_Report_-_Warsaw_Ghetto_Uprising_06.jpg)).
+[photo](https://commons.wikimedia.org/wiki/File:Stroop_Report_-_Warsaw_Ghetto_Uprising_06.jpg).
 
 ## Magical code
 
@@ -81,10 +81,11 @@ Our Child gets new illusion: *If I do as industry giants say, I will be a succes
 We're looking for magic which will protect us in the complicated world of software development.
 Even in case of failure we tend to think that *I didn't managed to do as giants said*
 or *I did as giant said, it's not my failure*.
+Acting like that we hope that giant take care of us, our project, and our career success.
 
-## Reality
+## The reality
 
-In real world where we live magic doesn't exist.
+In real world, where we live, magic doesn't exist.
 So if your idea is based on magic it will probably fail...
 Or maybe not.
 It can so happen that you'll luckily reach your destination following the white rabbit.
@@ -97,13 +98,26 @@ They are different.
 Direct will lead you to success fast.
 But not direct can be more funny and give you more experience.
 
-The trick is to guarantee you success you need to see the path and understand how does it work.
-Even if you was successful once it can stop working for different preconditions.
+## Let the Adult rule
 
-## Let's the Adult rule
+When you code for money you want to act as a professional.
+Professional solves people's problem.
+He solve it in the most effective way.
+Professional doesn't sell not direct ways to get a fun during his work.
 
-Everything is your hands.
-You're the responsible for your project, for your code, for your life.
-Guys from the book won't protect you.
-Analyze, ask your self the question **Why am I doing it?**.
-Ask giants **Why**, they're smart and know the answer, just don't want to bother you with enormous amount of ifs and whens.
+The Adult ego state is professional inside us.
+It makes decisions based on analysis.
+But it's not easy to make it the ruler of your life.
+All transactional analysis is about giving the Adult more power.
+
+For me working stategy was just start acting as a professional.
+I don't do anything until I answer myself **Why am I doing it?**.
+Everything is in my hands.
+I'm responsible for my project, my code, and my life.
+Guys from the book won't protect me.
+
+But don't get me wrong.
+Guys who I call industry giants are really smart.
+The know why and when you can get benefits from approaches which they sell.
+The main idea it that you **have** to know it too.
+Otherwise you success will be based on magic, which in real world nothing more than a luck.
