@@ -46,18 +46,9 @@ Adult is coldblooded.
 It's ideal state to make important decisions.
 
 * Child: a state in which people behave, feel, and think similarly to how they did in childhood.
+The Child is the source of emotions, creation, recreation, spontaneity, and intimacy.
 
-For example, a person who receives a poor evaluation at work may respond by looking at the floor and crying or pouting, as when scolded as a child. Conversely, a person who receives a good evaluation may respond with a broad smile and a joyful gesture of thanks. The Child is the source of emotions, creation, recreation, spontaneity, and intimacy.
-
-Transactional analysis (TA) is a psychoanalytic theory and method of therapy wherein social transactions are analyzed to determine the ego state of the patient (whether parent-like, childlike, or adult-like) as a basis for understanding behavior. In transactional analysis, the patient is taught to alter the ego state as a way to solve emotional problems. The method deviates from Freudian psychoanalysis which focuses on increasing awareness of the contents of unconsciously held ideas. Eric Berne developed the concept and paradigm of transactional analysis in the late 1950s.
-
-## The ego state (TODO: rewrite)
-You as a person consist of at least 3 different personalities --
-[Child, Adult, and Parent](https://en.wikipedia.org/wiki/Transactional_analysis#The_ego-state_(or_Parent%E2%80%93Adult%E2%80%93Child_(PAC))_models), also known as an ego states:
-
-
-Child is one of the most valuable state in us -- it makes us creative, makes us alive.
-Eric Bern use Child, where first letter is upper case, to talk about ego state, so do I.
+TA as a method of therapy analyze and teach patients analyze and alter their ego states. 
 
 ## Illusions
 
