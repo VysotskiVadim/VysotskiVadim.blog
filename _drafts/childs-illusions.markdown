@@ -28,7 +28,7 @@ I found a theory in Transactional Analysis, which explains this phenomenon.
 ## Transactional Analysis
 
 Transaction analysis (TA) is is a psychoanalytic theory and method of therapy invented by Eric Berne.
-In TA we analyze people behavior by splitting its conversations in basics transactions, i.e. transaction is a unit of human communication.
+TA analyzes people behavior by splitting its conversations in basics transactions, i.e. transaction is a unit of human communication.
 According to TA in one time human can be in one ego state: Child, Adult, or Parent.
 Being in different state led to different behavior.
 Ego states are written starting with upper case letter, i.e. Child is ego state, but child is just a child.
