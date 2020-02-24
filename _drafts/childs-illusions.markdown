@@ -27,14 +27,34 @@ I found a theory in Transactional Analysis, which explains this phenomenon.
 
 ## Transactional Analysis (TODO: rewrite)
 
+Transaction analysis (TA) is is a psychoanalytic theory and method of therapy invented by Eric Berne.
+In TA we analyze people behavior by splitting its conversations in basics transactions, i.e. transaction is a unit of human communication.
+According to TA in one time human can be in one ego state: Child, Adult, or Parent.
+Being in different state led to different behavior.
+Ego states are written starting with upper case letter, i.e. Child is ego state, but child is just a child.
+
+* Parent: a state where person is following known rules.
+Usually we follow rules given us by our parents.
+It's like a our parent which is always watching on us and whispering what is wrong and what is right.
+This state saves our time a lot: in our live we have to make enormous amount of decisions.
+If we would carefully consider every decisions we have to make we have no time left to live.
+The majority of decisions can be made by Parent without any harm for us.
+
+* Adult: a state where person makes decisions based on logic and analysis.
+Adult doesn't make decisions fast, but it carefully consider all preconditions and consequences.
+Adult is coldblooded.
+It's ideal state to make important decisions.
+
+* Child: a state in which people behave, feel, and think similarly to how they did in childhood.
+
+For example, a person who receives a poor evaluation at work may respond by looking at the floor and crying or pouting, as when scolded as a child. Conversely, a person who receives a good evaluation may respond with a broad smile and a joyful gesture of thanks. The Child is the source of emotions, creation, recreation, spontaneity, and intimacy.
+
 Transactional analysis (TA) is a psychoanalytic theory and method of therapy wherein social transactions are analyzed to determine the ego state of the patient (whether parent-like, childlike, or adult-like) as a basis for understanding behavior. In transactional analysis, the patient is taught to alter the ego state as a way to solve emotional problems. The method deviates from Freudian psychoanalysis which focuses on increasing awareness of the contents of unconsciously held ideas. Eric Berne developed the concept and paradigm of transactional analysis in the late 1950s.
 
 ## The ego state (TODO: rewrite)
 You as a person consist of at least 3 different personalities --
 [Child, Adult, and Parent](https://en.wikipedia.org/wiki/Transactional_analysis#The_ego-state_(or_Parent%E2%80%93Adult%E2%80%93Child_(PAC))_models), also known as an ego states:
-* Parent: a state in which people behave, feel, and think in response to an unconscious mimicking of how their parents (or other parental figures) acted, or how they interpreted their parent's actions. For example, a person may shout at someone out of frustration because they learned from an influential figure in childhood the lesson that this seemed to be a way of relating that worked.
-* Adult: a state of the ego which is most like an artificially intelligent system processing information and making predictions about major emotions that could affect its operation. While a person is in the Adult ego state, he/she is directed towards an objective appraisal of reality.
-* Child: a state in which people behave, feel, and think similarly to how they did in childhood. For example, a person who receives a poor evaluation at work may respond by looking at the floor and crying or pouting, as when scolded as a child. Conversely, a person who receives a good evaluation may respond with a broad smile and a joyful gesture of thanks. The Child is the source of emotions, creation, recreation, spontaneity, and intimacy.
+
 
 Child is one of the most valuable state in us -- it makes us creative, makes us alive.
 Eric Bern use Child, where first letter is upper case, to talk about ego state, so do I.
@@ -121,3 +141,13 @@ Guys who I call industry giants are really smart.
 The know why and when you can get benefits from approaches which they sell.
 The main idea it that you **have** to know it too.
 Otherwise you success will be based on magic, which in real world nothing more than a luck.
+
+## Links
+
+* [Transactional Analysis in Wikipedia](https://en.wikipedia.org/wiki/Transactional_analysis)
+* [Игры, в которые играют люди. Люди, которые играют в игры](https://www.litres.ru/erik-bern/igry-v-kotorye-igraut-ludi-ludi-kotorye-igraut-v-igry/?lfrom=583296668&ref_key=d87de77f3d6dd6b69c3b619a67b3e591f96847d4e0ad5054570da505ad32bee1&ref_offer=1)
+* [Games People Play: The Basic Handbook of Transactional Analysis](https://www.amazon.com/Games-People-Play-Transactional-Analysis/dp/0345410033/)
+
+I read Eric Bern in translation to Russian language.
+This is the best book, just 10 Freuds out of 10.
+If you're able to read it without translation I believe you'll enjoy even more than I did.
