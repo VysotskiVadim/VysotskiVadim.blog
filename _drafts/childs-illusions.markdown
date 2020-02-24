@@ -25,7 +25,7 @@ so that if you act in different way they call it *"wrong"*.
 They see only one approach and don't even want to consider others.
 I found a theory in Transactional Analysis, which explains this phenomenon.
 
-## Transactional Analysis (TODO: rewrite)
+## Transactional Analysis
 
 Transaction analysis (TA) is is a psychoanalytic theory and method of therapy invented by Eric Berne.
 In TA we analyze people behavior by splitting its conversations in basics transactions, i.e. transaction is a unit of human communication.
