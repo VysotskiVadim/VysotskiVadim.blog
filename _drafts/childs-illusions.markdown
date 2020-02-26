@@ -10,14 +10,14 @@ postImage:
 ---
 
 The first step of learning new things is to start doing it by following rules given by teachers.
-You don't ask why, there are too much materials to know at the beginning.
+You don't ask why there are too many materials to know at the beginning.
 After a while when you get some knowledge you start looking deep at the area.
 Your main question now is **why**.
-Usually after many **why**s you find out that there is no approach which is just *right*.
+Usually, after many **why**s you find out that there is no approach which is just *right*.
 There are many approaches which can lead you to success.
 They are just different, with different pros and cons.
 People who are aware of the majority of ways to success in their field,
-and know which one suits given situation better are called an experts.
+and know which one suits given situation better are called experts.
 
 I often meet smart people, who don't want to go further than following rules without asking why.
 They stick to an idea that there is something *"right"* in the world,
@@ -28,14 +28,14 @@ I found a theory in Transactional Analysis, which explains this phenomenon.
 ## Transactional Analysis
 
 Transaction analysis (TA) is is a psychoanalytic theory and method of therapy invented by Eric Berne.
-TA analyzes people behavior by splitting its conversations in basics transactions, i.e. transaction is a unit of human communication.
-According to TA in one time human can be in one ego state: Child, Adult, or Parent.
-Being in different state led to different behavior.
-Ego states are written starting with upper case letter, i.e. Child is ego state, but child is just a child.
+TA analyzes people's behavior by splitting their conversations in basics transactions, i.e. transaction is a unit of human communication.
+According to TA at any moment of time a person can be in one ego state: Child, Adult, or Parent.
+Being in different states led to different behavior.
+Ego states are written starting with upper case letters, i.e. Child is ego state, but a child is just a child.
 
-* Parent: a state where person is following known rules.
-Usually we follow rules given us by our parents.
-It's like a our parent which is always watching on us and whispering what is wrong and what is right.
+* Parent: a state where a person is following known rules.
+Usually, we follow rules given to us by our parents.
+It's like our parent which always watch on us and whispers what is wrong and what is right.
 This state saves our time a lot: in our live we have to make enormous amount of decisions.
 If we would carefully consider every decisions we have to make we have no time left to live.
 The majority of decisions can be made by Parent without any harm for us.
@@ -121,15 +121,15 @@ It makes decisions based on analysis.
 But it's not easy to make it the ruler of your life.
 All transactional analysis is about giving the Adult more power.
 
-For me working strategy is just to start acting as a professional.
+For me, a working strategy is just to start acting as a professional.
 I don't do anything until I answer myself **Why am I doing it?**.
 Everything is in my hands.
-I'm responsible for my project, my code and my life.
+I'm responsible for my project, my code, and my life.
 Guys from the book won't protect me.
 
 But don't get me wrong.
 Guys who I call industry giants are really smart.
-The know why and when you can get benefits from approaches which they sell.
+The know why and when you can get benefits from the approaches which they sell.
 The main idea it that you **have** to know it too.
 Otherwise you success will be based on magic, which in real world nothing more than a luck.
 
