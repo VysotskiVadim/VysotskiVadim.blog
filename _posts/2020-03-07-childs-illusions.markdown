@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Child's illusions
-description: "Why we don't stop to blindly follow given rules."
+date: 2029-03-07 23:27:00 +0300
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Domenico_ghirlandaio%2C_ritratto_di_nonno_con_nipote.jpg/176px-Domenico_ghirlandaio%2C_ritratto_di_nonno_con_nipote.jpg
-description: "It's easy to understand generic programming, variance, covariance, contravariance by simple examples."
+description: "Why so many developers blindly follow some rules without proper understanding? Transactional Analysis has an answer."
 postImage:
   src: Domenico_ghirlandaio_ritratto_di_nonno_con_nipote
   alt: An Old Man and his Grandson
