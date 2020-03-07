@@ -138,6 +138,7 @@ Otherwise you success will be based on magic, which in real world nothing more t
 * [Transactional Analysis in Wikipedia](https://en.wikipedia.org/wiki/Transactional_analysis)
 * [Игры, в которые играют люди. Люди, которые играют в игры](https://www.litres.ru/erik-bern/igry-v-kotorye-igraut-ludi-ludi-kotorye-igraut-v-igry/?lfrom=583296668&ref_key=d87de77f3d6dd6b69c3b619a67b3e591f96847d4e0ad5054570da505ad32bee1&ref_offer=1)
 * [Games People Play: The Basic Handbook of Transactional Analysis](https://www.amazon.com/Games-People-Play-Transactional-Analysis/dp/0345410033/)
+* [An Old Man and his Grandson](https://en.wikipedia.org/wiki/An_Old_Man_and_his_Grandson)
 
 I read Eric Bern in translation to Russian language.
 This is the best book, just 10 Freuds out of 10.
