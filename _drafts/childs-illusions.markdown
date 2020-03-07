@@ -52,33 +52,33 @@ TA as a method of therapy analyze and teach patients analyze and alter their ego
 
 ## Illusions
 
-From the earliest childhood we'd been taught a simple rule: *"Do what I said and you'll be fine."*
-All of us heard that from parents, and we believe it.
-This is an example of illusion.
-Child inside us believes in illusions despite your age.
+The Child inside us believes in illusions.
+Some of them, as Freud pointed, we get in the first month of our live.
+Those 3 first and strongest universal illusions are: *"I'm immortal, almighty, and unbeatable"*.
+Of course real world proves us that it's not true.
+So instead of them we get something different -- conditional illusions, like *"if I ... then ..."*.
+For instance: "If I behave well then Santa Claus will come".
 
-Illusions can be different: *if I win the lottery I will make my dream come true and will be happy*.
-People waist all their lives waiting for miracle.
-Every game miracle happens for at least one person.
-But usually he finds out that things he can buy doesn't make them happy,
-because this things are real, not magic like in their illusions.
-The majority of winners waist all money and return back to regular live.
-This happens because all the system of illusions is built on top of magic.
-Prize should appear by magic, and it should be magical.
-Child always became disappointed when he see the real things when magic was expected.
+All parents support illusions.
+From the earliest childhood we'd been taught a simple rule:
+*"Do what I said and you'll be fine."*
+All of us heard that from parents, and we believe it.
+Our belief is so strong that nothing can shake it.
+Even in case of failure we tend to think that it's all our fault,
+we just hadn't done everything right. 
 
 One of the most illustrative example of illusion is nazis.
-Hitler promised them the Greater German Reich if they kill all other nations.
+Hitler promised to the Germans the Greater German Reich if they kill all other nations.
 This promise and strong believe made them immortal and all-powerful during genocide of civilians of different nations.
 Despite the fact that they committed a horrible crime they consider it as an act of love,
 their Child believed
-*"If you do as I say, I will love and protect you, you're nothing without me."*
+*"If I do as he says, I will be loved and protected you, I'm nothing without him."*
 But reality beat their believe -- they were defeated during the WW2.
 
 It's hard to overcome Child believe,
-in most cases it's impossible.
-Take a look at young polish boy,
-who doesn't understand why german soldiers put a gun against him,
+in the most cases it's impossible.
+The well-known picture of young polish boy in an illustrative example.
+He doesn't understand why soldiers put a gun against him,
 he did as his mummy said, he shouldn't be hurt:
 [photo](https://commons.wikimedia.org/wiki/File:Stroop_Report_-_Warsaw_Ghetto_Uprising_06.jpg).
 
@@ -100,7 +100,7 @@ In real world, where we live, magic doesn't exist.
 So if your idea is based on magic it will probably fail...
 Or maybe not.
 It can happen that you'll luckily reach your destination following the white rabbit.
-As I said before there aremany ways which leads to success.
+As I said before there are many ways which leads to success.
 
 {% include image.html src="paths_to_success" alt="many path to success" %}
 
