@@ -27,8 +27,8 @@ I found a theory in Transactional Analysis, which explains this phenomenon.
 
 ## Transactional Analysis
 
-Transaction analysis (TA) is is a psychoanalytic theory and method of therapy invented by Eric Berne.
-TA analyzes people's behavior by splitting their conversations in basics transactions, i.e. transaction is a unit of human communication.
+Transaction analysis (TA) is a psychoanalytic theory and method of therapy invented by Eric Berne.
+TA analyzes people's behavior by splitting their conversations in basic transactions, i.e. transaction is a unit of human communication.
 According to TA at any moment of time a person can be in one ego state: Child, Adult, or Parent.
 Being in different states led to different behavior.
 Ego states are written starting with upper case letters, i.e. Child is ego state, but a child is just a child.
@@ -48,7 +48,7 @@ It's ideal state to make important decisions.
 * Child: a state in which people behave, feel, and think similarly to how they did in childhood.
 The Child is the source of emotions, creation, recreation, spontaneity, and intimacy.
 
-TA as a method of therapy analyze and teach patients analyze and alter their ego states. 
+TA as a method of therapy which analyzes and teaches patients to analyze and to alter their ego states. 
 
 ## Illusions
 
@@ -72,7 +72,7 @@ Hitler promised to the Germans the Greater German Reich if they kill all other n
 This promise and strong believe made them immortal and all-powerful during genocide of civilians of different nations.
 Despite the fact that they committed a horrible crime they consider it as an act of love,
 their Child believed
-*"If I do as he says, I will be loved and protected you, I'm nothing without him."*
+*"If I do as he says, I will be loved and protected, I'm nothing without him."*
 But reality beat their believe -- they were defeated during the WW2.
 
 It's hard to overcome Child believe,
@@ -100,7 +100,7 @@ In real world, where we live, magic doesn't exist.
 So if your idea is based on magic it will probably fail...
 Or maybe not.
 It can happen that you'll luckily reach your destination following the white rabbit.
-As I said before there are many ways which leads to success.
+As I said before there are many ways which lead to success.
 
 {% include image.html src="paths_to_success" alt="many path to success" %}
 
