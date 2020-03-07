@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Child's illusions
-date: 2029-03-07 23:27:00 +0300
+date: 2029-07-03 23:27:00 +0300
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Domenico_ghirlandaio%2C_ritratto_di_nonno_con_nipote.jpg/176px-Domenico_ghirlandaio%2C_ritratto_di_nonno_con_nipote.jpg
 description: "Why so many developers blindly follow some rules without proper understanding? Transactional Analysis has an answer."
 postImage:
