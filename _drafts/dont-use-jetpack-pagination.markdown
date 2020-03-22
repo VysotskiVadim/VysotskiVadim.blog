@@ -42,4 +42,4 @@ Factory has an extension method `toLiveData` which transforms it to `LiveData<Pa
 You're supposed to use special adapter for recycler view `PagedListAdapter`.
 So every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
 
-{% include_relative jetpack-paging.html %}
+{% include_relative jetpack-paging-architecture.html %}
