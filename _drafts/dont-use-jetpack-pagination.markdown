@@ -43,3 +43,19 @@ You're supposed to use special adapter for recycler view `PagedListAdapter`.
 So every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
 
 {% include_relative jetpack-paging-architecture.html %}
+
+Looks good, isn't it?
+You get a library with many features:
+* loads data by pages
+* data invalidation
+* built-in diff util
+
+## Issue 1: display the status
+
+Users don't want just wait, even if data is loading,
+they should see at least loading indicator.
+Using Jetpack Paging you're just passing `PageList<T>` object to `PagedListAdapter`.
+How do you supposed to show loading?
+There is two strategies.
+If you'd like to show place holder loading `PagedListAdapter` pass `null` as an item to view holder if it isn't loaded yet.
+![example of place holder loading](https://raw.githubusercontent.com/zalog/placeholder-loading/HEAD/docs/imgs/placeholder-loading-demo-3.gif)
