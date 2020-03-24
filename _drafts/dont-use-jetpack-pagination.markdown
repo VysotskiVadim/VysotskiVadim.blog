@@ -57,8 +57,15 @@ they should see at least loading indicator.
 Using Jetpack Paging you're just passing `PageList<T>` object to `PagedListAdapter`.
 How do you supposed to show loading?
 There is two strategies.
+
 If you'd like to show place holder loading `PagedListAdapter` pass `null` as an item to view holder if it isn't loaded yet.
 ![example of place holder loading](https://raw.githubusercontent.com/zalog/placeholder-loading/HEAD/docs/imgs/placeholder-loading-demo-3.gif)
+
+But if you'd like to show some custom loading indicator,
+it's going to be match harder because all you have is `PagedList<T>`.
+All work to get date is hidden somewhere deep in Data layer.
+There is a workaround, you can add 
+
 
 ## Issue 2: display custom data associated with the request
 display all items count
