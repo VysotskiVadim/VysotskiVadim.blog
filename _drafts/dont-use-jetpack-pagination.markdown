@@ -50,7 +50,7 @@ You get a library with many features:
 * data invalidation
 * built-in diff util
 
-## Issue 1: display the status
+## Issue 1: display current status
 
 Users don't want just wait, even if data is loading,
 they should see at least loading indicator.
@@ -60,14 +60,17 @@ There is two strategies.
 
 If you'd like to show place holder loading `PagedListAdapter` pass `null` as an item to view holder if it isn't loaded yet.
 
-![place holder](https://raw.githubusercontent.com/zalog/placeholder-loading/HEAD/docs/imgs/placeholder-loading-demo-3.gif){: width="50%" align="center"}
+![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/placeholder-loading-demo.gif){: height="200px"}
+![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/progress-bar.gif){: height="200px"}
 
+But if you'd like to show some custom loading indicator, it's going to be match harder.
+View Model
+*(presenter or any other class which is responsible for UI behavior)*
+isn't mediator in data flow to UI.
+All that view model has is `PagedList<T>`,
+which encapsulates all data loading process from you.
 
-But if you'd like to show some custom loading indicator,
-it's going to be match harder because all you have is `PagedList<T>`.
-All work to get date is hidden somewhere deep in Data layer.
-There is a workaround, you can add 
-
+As a result you 
 
 ## Issue 2: display custom data associated with the request
 display all items count
