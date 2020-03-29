@@ -59,7 +59,9 @@ How do you supposed to show loading?
 There is two strategies.
 
 If you'd like to show place holder loading `PagedListAdapter` pass `null` as an item to view holder if it isn't loaded yet.
-![example of place holder loading](https://raw.githubusercontent.com/zalog/placeholder-loading/HEAD/docs/imgs/placeholder-loading-demo-3.gif)
+
+![place holder](https://raw.githubusercontent.com/zalog/placeholder-loading/HEAD/docs/imgs/placeholder-loading-demo-3.gif){: width="50%" align="center"}
+
 
 But if you'd like to show some custom loading indicator,
 it's going to be match harder because all you have is `PagedList<T>`.
