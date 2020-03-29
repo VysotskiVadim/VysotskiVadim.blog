@@ -53,7 +53,7 @@ You get a library with many features:
 * data invalidation
 * built-in diff util
 
-## Issue #1: Display current status
+## Issue #1: Display current status {#current_status}
 
 Users don't want just wait, even if data is loading, something should happening on the screen.
 At least user should see some animations.
@@ -74,7 +74,7 @@ View Model
 isn't mediator in data flow to UI.
 `PagedList<T>` hides data loading process from you.
 
-#### Workaround #1: Get current status
+#### Workaround #1: Get current status {#get_current_status}
 
 ***Warning**: this workaround is just for your information, you'll see later that it's useless.*
 
@@ -82,7 +82,7 @@ isn't mediator in data flow to UI.
 `PagedList<T>.addWeakLoadStateListener` is made for `PagedListAdapter` to update itself once data in `PageList<T>` is changed.
 That's why listeners are weak.
 
-## Issue #2: Network error handling
+## Issue #2: Network error handling {#network_errors}
 
 Network is unstable.
 We're always ready to get an error during data loading.
@@ -149,7 +149,7 @@ for example actions which should be at the end of the list.
 Only one limitation -- you can't change items count during mapping.
 I think this limitation prevent you from breaking Room's out-of-the-box data sources.
 
-#### Workaround #3: Custom map
+#### Workaround #3: Custom map {#custom_map}
 
 *Warning: workaround works only if you use custom* `DataSource<T>`.
 
@@ -190,5 +190,5 @@ override fun <NewValue> mapByPage(func: (List<Value>) -> List<NewValue>) =
     }, loadingState)
 ```
 
-## Issue 3: Display custom data associated with the request
+## Issue #4: Display custom data associated with the request
 display all items count
