@@ -9,7 +9,7 @@ Libs do their work, and do it well, stable and fast.
 I trusted they so much so when I faced task of showing paged result,
 I didn't have any doubts to use [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging).
 It was a mistake.
-During the usage of Jetpack Paging library I had experienced many technical challenges because of it.
+During the usage of Jetpack Paging library I had experienced many technical challenges.
 So this article not just a nagging about my pain,
 it also includes workaround which I used.
 If you use Jetpack Paging I believe you'll find them useful.
@@ -52,25 +52,36 @@ You get a library with many features:
 
 ## Issue 1: display current status
 
-Users don't want just wait, even if data is loading,
-they should see at least loading indicator.
-Using Jetpack Paging you're just passing `PageList<T>` object to `PagedListAdapter`.
-How do you supposed to show loading?
-There is two strategies.
-
-If you'd like to show place holder loading `PagedListAdapter` pass `null` as an item to view holder if it isn't loaded yet.
+Users don't want just wait, even if data is loading, something should happening on the screen.
+At least user should see some animations.
+For page loading there is 2 standard approaches:
+1. Show placeholder instead of each item which is loading right now;
+1. Show usual progress bar at the end of the list.
 
 ![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/placeholder-loading-demo.gif){: height="200px"}
 ![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/progress-bar.gif){: height="200px"}
 
-But if you'd like to show some custom loading indicator, it's going to be match harder.
+Using Jetpack Paging it's very easy to implement place holder based loading.
+`PagedListAdapter` passes `null` as an item to view holder if it isn't loaded yet.
+But if you'd like to show some different loading animations, it's going to be much harder.
+
+The source of the difficulties is that
 View Model
 *(presenter or any other class which is responsible for UI behavior)*
 isn't mediator in data flow to UI.
-All that view model has is `PagedList<T>`,
-which encapsulates all data loading process from you.
+`PagedList<T>` hides data loading process from you.
 
-As a result you 
+#### Workaround 1: get status from `PagedList`
 
-## Issue 2: display custom data associated with the request
+**Warning**: *this workaround is just for your information, you'll see later that it's useless.*
+
+`PagedList<T>` provides ability to add state listeners using `addWeakLoadStateListener`.
+`PagedList<T>.addWeakLoadStateListener` is made for `PagedListAdapter` to update itself once data in `PageList<T>` is changed.
+That's why listeners are weak.
+
+## Issue 2: network error handling
+
+
+
+## Issue 3: display custom data associated with the request
 display all items count
