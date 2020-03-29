@@ -13,6 +13,9 @@ During the usage of Jetpack Paging library I had experienced many technical chal
 So this article not just a nagging about my pain,
 it also includes workaround which I used.
 If you use Jetpack Paging I believe you'll find them useful.
+Workarounds will be present in the same order I used them.
+Usually old workaround was replaces by a new one.
+So to get the best solution I recommend you read till the end of the article.
 
 ## Looks good at the first glance
 
@@ -42,7 +45,7 @@ Factory has an extension method `toLiveData` which transforms it to `LiveData<Pa
 You're supposed to use special adapter for recycler view `PagedListAdapter`.
 So every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
 
-{% include_relative jetpack-paging-architecture.html %}
+{% include_relative _jetpack-paging-architecture.html %}
 
 Looks good, isn't it?
 You get a library with many features:
@@ -105,7 +108,7 @@ public void onPageError(@PageResult.ResultType int resultType,
 ```
 Library throws exception with message **TODO** if you call `onError` callback during initial page load.
 
-#### Workaround #2: Parallel streams of data
+#### Workaround #2: Parallel streams of data {#parallel_streams}
 
 Maybe I should have called it best practice instead of workaround.
 Because solution was found in the 
@@ -131,7 +134,61 @@ data class Listing<T>(
 Using this solution View Model just passes through to UI `PagedList<T>`
 and listen other streams of data to handle cases like showing loading indicator and error handling.
 
-## Issue 4: Items mapping
+## Issue #3: Items mapping
+
+When I work with View Model and `RecyclerView`,
+I usually transform list of domain object to list of view objects in View Model.
+If items appearance depends on data in domain object it usually different types of view object.
+Recycler View maps different view objects to different views.
+View model can add additional items like headers or
+for example actions which should be at the end of the list.
+
+{% include_relative _viewmodel-list-view-item.html %}
+
+`DataSource.Factory` lets you `map` or `mapByPage` items.
+Only one limitation -- you can't change items count during mapping.
+I think this limitation prevent you from breaking Room's out-of-the-box data sources.
+
+#### Workaround #3: Custom map
+
+*Warning: workaround works only if you use custom* `DataSource<T>`.
+
+To be able to map pages and change items count you have to implement custom map in your `Listing` class.
+My implementation differ from `Listing` proposed in [previous workaround](#parallel_streams).
+I pass `DataSource.Factory` instead of `PagedList<T>` and have different state reporting.
+```kotlin
+class PagedResultImpl<Key, Value>(
+    override val dataSourceFactory: DataSource.Factory<Key, Value>,
+    override val loadingState: LiveData<PageLoadingState>
+) : PagedResult<Key, Value> {
+
+    ...
+}
+```
+Code looks complex, but idea is strait-forward.
+Copy `WrapperPageKeyedDataSource` and replace call to `DataSource.convert` function by function which doesn't throws exceptions like original.
+```java
+static <A, B> List<B> convert(Function<List<A>, List<B>> function, List<A> source) {
+    return function.apply(source);
+}
+```
+The implement `map` and `mapByPage` in your `Listing` class.
+You can copy them from `DataSource.Factory`.
+```kotlin
+override fun <NewValue> map(func: (Value) -> NewValue): PagedResult<Key, NewValue> =
+        PagedResultImpl(dataSourceFactory.map(func), loadingState)
+
+override fun <NewValue> mapByPage(func: (List<Value>) -> List<NewValue>) =
+    PagedResultImpl(object : DataSource.Factory<Key, NewValue>() {
+        override fun create(): DataSource<Key, NewValue> {
+            return CustomWrapperPageKeyedDataSource<Key, Value, NewValue>(
+                dataSourceFactory.create() as PageKeyedDataSource<Key, Value>
+            ) { input ->
+                func(input)
+            }
+        }
+    }, loadingState)
+```
 
 ## Issue 3: Display custom data associated with the request
 display all items count
