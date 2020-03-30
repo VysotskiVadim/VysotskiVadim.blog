@@ -190,7 +190,7 @@ override fun <NewValue> mapByPage(func: (List<Value>) -> List<NewValue>) =
     }, loadingState)
 ```
 
-## Issue #4: Unit Testing
+## Issue #4: Unit Testing {#unit_testing}
 
 I usually split feature in a few units:
 1. UI behavior - View Model;
@@ -199,13 +199,50 @@ I usually split feature in a few units:
 
 Each of them I cover by tests.
 Jetpack pagination causes issues on all layers.
-
 It's hard to implement test double for your `Listing` object.
 Don't even try to mock it.
 Use stubs or fakes.
-
 Another challenge is to test View Model.
-View Model provides 
+Basically you need to trigger data loading in test, 
+and then verify View Model state.
+How can you start data loading if everything that you have is `LiveData<PagedList<T>>` property on View Model.
+
+#### Workaround #4: Act as UI
+
+To start data loading you have to act like UI.
+Start with getting live data value via subscriptions.
+```kotlin
+fun <T> LiveData<T>.getValueForTest(): T? {
+    var value: T? = null
+    val observer = Observer<T> {
+        value = it
+    }
+    observeForever(observer)
+    removeObserver(observer)
+    return value
+}
+```
+When you got `PagedList<T>` using `getValueForTest` you can fetch first page:
+
+```kotlin
+fun <T> LiveData<PagedList<T>>.fetchData() {
+    getValueForTest()!!.loadAround(0)
+}
+```
+`PagedList` loads data when you request item which isn't loaded,
+or item which is close to loaded items boundary. 
+
+```kotlin
+fun <T> LiveData<PagedList<T>>.fetchOneMorePage() {
+    val pagedList = getValueForTest()!!
+    val lastLoadedItemIndex = pagedList.loadedCount - 1
+    pagedList.loadAround(lastLoadedItemIndex)
+}
+```
+`getValueForTest` is extension for live data to 
+
+
+
 
 ## Issue #4: Display custom data associated with the request
 display all items count
