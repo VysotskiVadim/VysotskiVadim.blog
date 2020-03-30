@@ -172,7 +172,7 @@ static <A, B> List<B> convert(Function<List<A>, List<B>> function, List<A> sourc
     return function.apply(source);
 }
 ```
-The implement `map` and `mapByPage` in your `Listing` class.
+Then implement `map` and `mapByPage` in your `Listing` class.
 You can copy them from `DataSource.Factory`.
 ```kotlin
 override fun <NewValue> map(func: (Value) -> NewValue): PagedResult<Key, NewValue> =
@@ -189,6 +189,23 @@ override fun <NewValue> mapByPage(func: (List<Value>) -> List<NewValue>) =
         }
     }, loadingState)
 ```
+
+## Issue #4: Unit Testing
+
+I usually split feature in a few units:
+1. UI behavior - View Model;
+1. Business login - Use Case;
+1. Data - Repository
+
+Each of them I cover by tests.
+Jetpack pagination causes issues on all layers.
+
+It's hard to implement test double for your `Listing` object.
+Don't even try to mock it.
+Use stubs or fakes.
+
+Another challenge is to test View Model.
+View Model provides 
 
 ## Issue #4: Display custom data associated with the request
 display all items count
