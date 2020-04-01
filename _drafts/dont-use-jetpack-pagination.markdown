@@ -230,7 +230,8 @@ fun <T> LiveData<PagedList<T>>.fetchData() {
 }
 ```
 `PagedList` loads data when you request item which isn't loaded,
-or item which is close to loaded items boundary. 
+or item which is close to loaded items boundary.
+So if you'd like to load next page, just load around last loaded item.
 
 ```kotlin
 fun <T> LiveData<PagedList<T>>.fetchOneMorePage() {
@@ -239,10 +240,13 @@ fun <T> LiveData<PagedList<T>>.fetchOneMorePage() {
     pagedList.loadAround(lastLoadedItemIndex)
 }
 ```
-`getValueForTest` is extension for live data to 
 
+Using given extension you're ready to test view model states switching during pagination:
 
-
+```kotlin
+listViewModel.items.getValueForTest()!!.fetchData()
+assertEquals(State.OnlineDataLoaded(totalItemsCount = TEST_TOTAL_ITEMS_COUNT), listViewModel.state.getValueForTest())
+```
 
 ## Issue #4: Display custom data associated with the request
 display all items count
