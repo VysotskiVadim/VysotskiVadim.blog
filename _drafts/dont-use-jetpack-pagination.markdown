@@ -226,7 +226,7 @@ When you got `PagedList<T>` using `getValueForTest` you can fetch first page:
 
 ```kotlin
 fun <T> LiveData<PagedList<T>>.fetchData() {
-    getValueForTest()!!.loadAround(0)
+    getValueForTest()!!.get(0)
 }
 ```
 `PagedList` loads data when you request item which isn't loaded,
