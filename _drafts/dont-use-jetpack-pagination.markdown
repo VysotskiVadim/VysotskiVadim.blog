@@ -249,4 +249,116 @@ assertEquals(State.OnlineDataLoaded(totalItemsCount = TEST_TOTAL_ITEMS_COUNT), l
 ```
 
 ## Issue #4: Display custom data associated with the request
-display all items count
+
+Imagine super simple feature:
+show items count on the screen with items list.
+It's easy, you get it from server with data:
+```json
+{
+    "totalItemsCount": 23423,
+    "items": [
+        ...
+    ],
+    "nextCursor": "akskdjf42efjowefij92jf"
+}
+```
+If you pass
+[parallel streams of data](#parallel_streams)
+thought your architecture layers,
+you will see that it just doesn't support this simple scenario without workarounds.
+Every time you need to pass something else you have to create another stream,
+or `LiveData<Any>`, no no no, stop it, don't even want to think about it.
+At this moment I realized that architecture built on top of Jetpack Pagination forces
+you to create new workarounds for every new feature.
+
+To minimize damage from lib we can put all Jetpack Pagination related code
+in the outside layer of architecture: UI.
+`PageList` should survive after orientation change,
+so making View Model responsible for connection between 
+Jetpack Pagination and the rest of the architecture is reasonable decision.
+
+Let's get rid of workarounds at least in core part of app architecture.
+```kotlin
+interface ItemsSearchUseCase {
+    suspend fun getItemsSearchPage(criteria: ItemsSearchCriteria, pageParams: PaginationParams): ItemsPagedResult<Item>
+}
+
+data class PaginationParams(val cursor: PaginationCursor, val pageSize: Int)
+```
+Different screens requires different data passed, so I created specific `PagedResult` for every feature which requires pagination.
+If the majority of your screens requires the same data you can create only one.
+```kotlin
+sealed class ItemsPagedResult<T> {
+    data class ItemsPage<T>(
+        val itemsCount: Int,
+        val items: List<T>,
+        val nextCursor: PaginationCursor,
+        val connectionType: ConnectionType
+    ) : ItemsPagedResult<T>()
+
+    data class Error<T>(val error: Throwable) : ItemsPagedResult<T>()
+}
+```
+You maybe wondering, if I make new result types for new features, why is it generic?
+To support data mapping when it's going through layers.
+```kotlin
+fun <NewT> map(mapper: (List<T>) -> List<NewT>): ItemsPagedResult<NewT> = when (this) {
+    is ItemsPage<T> -> ItemsPage(
+        itemsCount = itemsCount,
+        items = mapper(items),
+        nextCursor = nextCursor,
+        connectionType = connectionType
+    )
+    is Error<T> -> Error(error)
+}
+```
+
+To convert result at view model layer use following function:
+```kotlin
+fun <T> CoroutineScope.transformToJetpackPagedResult(pageLoader: ItemsPageLoader<T>): LiveData<PagedList<T>> {
+    val scope = this
+    return object : DataSource.Factory<PaginationCursor, T>() {
+        override fun create(): DataSource<PaginationCursor, T> {
+            return ItemsPaginationDataSource(scope, pageLoader)
+        }
+    }.toLiveData(Config(30, prefetchDistance = 30, enablePlaceholders = false)
+}
+```
+`transformToJetpackPagedResult` uses 2 unknown for you types.
+
+`ItemsPageLoader` is an abstraction over specific loading implementation.
+Draw attention that it returns only positive result `ItemsPagedResult.ItemsPage<T>`, because
+[as we discussed](#network_errors) Jetpack Paging doesn't handle errors.
+```kotlin
+interface ItemsPageLoader<T> {
+    suspend fun loadPage(cursor: PaginationCursor, loadSize: Int): ItemsPagedResult.ItemsPage<T>
+}
+```
+
+And custom data source which always successfully loads data form `ItemsPageLoader`.
+In my implementation we go always forward, so case with load before isn't implemented.
+```kotlin
+private class ItemsPaginationDataSource<T>(
+    private val scope: CoroutineScope,
+    private val pageLoader: ItemsPageLoader<T>
+) : PageKeyedDataSource<PaginationCursor, T>() {
+
+    override fun loadInitial(params: LoadInitialParams<PaginationCursor>, callback: LoadInitialCallback<PaginationCursor, T>) {
+        scope.launch {
+            val result = pageLoader.loadPage(FIRST_PAGE, params.requestedLoadSize)
+            callback.onResult(result.items, NO_PAGE, result.nextCursor)
+        }
+    }
+
+    override fun loadAfter(params: LoadParams<PaginationCursor>, callback: LoadCallback<PaginationCursor, T>) {
+        scope.launch {
+            val result = pageLoader.loadPage(params.key, params.requestedLoadSize)
+            callback.onResult(result.items, result.nextCursor)
+        }
+    }
+
+    override fun loadBefore(params: LoadParams<PaginationCursor>, callback: LoadCallback<PaginationCursor, T>) {
+        error("this should never happen")
+    }
+}
+```
