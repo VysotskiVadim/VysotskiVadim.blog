@@ -5,12 +5,12 @@ description: "Why I'm unhappy using Jatpack pagination library."
 ---
 
 I like libraries provided by Google in Jetpack suite.
-Libs do their work, and do it well, stable and fast.
-I trusted they so much so when I faced task of showing paged result,
+Libs do their work, and do it well, stable, and fast.
+I trusted they so much, so when I faced the task of showing paged result,
 I didn't have any doubts to use [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging).
 It was a mistake.
-During the usage of Jetpack Paging library I had experienced many technical challenges.
-So this article not just a nagging about my pain,
+During the usage of Jetpack Paging library I experienced many technical challenges.
+This article not just a nagging about my pain,
 it also includes workaround which I used.
 If you use Jetpack Paging I believe you'll find them useful.
 Workarounds will be present in the same order I used them.
@@ -39,11 +39,11 @@ each of the methods takes callback as a parameter,
 so when asynchronous loading is finished you suppose to call
 `callback.onResult(...)` or `callback.onError(...)`.
 
-You `DataSource` is wrapped by `DataSource.Factory` which creates it.
+Your `DataSource` is wrapped by `DataSource.Factory` which creates it.
 Factory has an extension method `toLiveData` which transforms it to `LiveData<PagedList<T>>`.
-`PagedList` is basically a lazy load list which loads data from its `DataSource` when user scrolls.
-You're supposed to use special adapter for recycler view `PagedListAdapter`.
-So every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
+`PagedList` is basically a lazy loading list which loads data from its `DataSource` when user scrolls.
+You're supposed to use special adapter for recycler view -- `PagedListAdapter`.
+Every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
 
 {% include_relative _jetpack-paging-architecture.html %}
 
@@ -60,7 +60,7 @@ For page loading there is 2 standard approaches:
 
 Using Jetpack Paging it's very easy to implement place holder based loading.
 `PagedListAdapter` passes `null` as an item to view holder if it isn't loaded yet.
-But if you want to just show a progress bar, it will much harder.
+But if you want to show a progress bar, it will much harder.
 
 The source of the difficulties is that
 View Model
@@ -108,9 +108,9 @@ Maybe I should have called it best practice instead of workaround.
 Because solution was found in the 
 [official architecture components samples repository](https://github.com/android/architecture-components-samples/tree/7057c6f3a5a10e2ce28cd000d2037f718008cab2/PagingWithNetworkSample).
 
-The idea is to create few streams of data, so that page loading in always successful.
+The idea is to create few streams of data, so that page loading is always successful.
 Second stream reports cases which library can't handle: loading status and errors.
-In sample guys return to View Model a `Listing` object:
+In the sample guys return to View Model a `Listing` object:
 ```kotlin
 data class Listing<T>(
     // the LiveData of paged lists for the UI to observe
@@ -125,7 +125,7 @@ data class Listing<T>(
     // retries any failed requests.
     val retry: () -> Unit)
 ```
-Using this solution View Model just passes through to UI `PagedList<T>`
+Using this solution View Model just passes `PagedList<T>` through to UI 
 and listen other streams of data to handle cases like showing loading indicator and error handling.
 
 ## Issue #3: Items mapping
@@ -135,13 +135,13 @@ I usually transform list of domain object to list of view objects in View Model.
 If items appearance depends on data in domain object it usually different types of view object.
 Recycler View maps different view objects to different views.
 View model can add additional items like headers or
-for example actions which should be at the end of the list.
+actions which should be at the end of the list.
 
 {% include_relative _viewmodel-list-view-item.html %}
 
 `DataSource.Factory` lets you `map` or `mapByPage` items.
 Only one limitation -- you can't change items count during mapping.
-I think this limitation prevent you from breaking Room's out-of-the-box data sources.
+It prevent you from breaking Room's out-of-the-box data sources.
 
 #### Workaround #3: Custom map {#custom_map}
 
@@ -199,11 +199,12 @@ Use stubs or fakes.
 Another challenge is to test View Model.
 Basically you need to trigger data loading in test, 
 and then verify View Model state.
-How can you start data loading if everything that you have is `LiveData<PagedList<T>>` property on View Model.
+How can you start data loading if everything that you have is `LiveData<PagedList<T>>` property on View Model?
 
 #### Workaround #4: Act as UI
 
-To begin data loading you have to act like UI.
+To trigger data loading in unit test you have to act like UI.
+
 Start with getting live data value via subscription.
 ```kotlin
 fun <T> LiveData<T>.getValueForTest(): T? {
@@ -269,7 +270,7 @@ you to create new workarounds for every new feature.
 
 To minimize damage from lib we can put all Jetpack Pagination related code
 in the outside layer of architecture: UI.
-`PageList` should survive after orientation change,
+`PageList` should survive after configuration change,
 so making View Model responsible for connection between 
 Jetpack Pagination and the rest of the architecture is reasonable decision.
 
@@ -297,7 +298,7 @@ sealed class ItemsPagedResult<T> {
     data class Error<T>(val error: Throwable) : ItemsPagedResult<T>()
 }
 ```
-You maybe wondering, if I make new result types for new features, why is it generic?
+You're maybe wondering, if I make new result types for new features, why is it generic?
 To support data mapping when it's going through layers.
 ```kotlin
 fun <NewT> map(mapper: (List<T>) -> List<NewT>): ItemsPagedResult<NewT> = when (this) {
@@ -331,7 +332,7 @@ Draw attention that it returns only positive result `ItemsPagedResult.ItemsPage<
 typealias ItemsPageLoader<T> = suspend (ItemsPageLoadingParams) -> ItemsPagedResult.ItemsPage<T>
 ```
 
-And custom data source which always successfully loads data form `ItemsPageLoader`.
+Custom `DataSource` which always successfully loads data form `ItemsPageLoader`.
 In my implementation we go always forward, so case with load before isn't implemented.
 ```kotlin
 private class ItemsPaginationDataSource<T>(
@@ -368,7 +369,7 @@ class PaginationExampleViewModel(
 }
 ```
 
-View Model gets uses case as constructor parameter,
+View Model gets use case as constructor parameter,
 we all use DI now days, isn't it?
 
 View Model has a state, which represents what is happening right now:
@@ -385,7 +386,7 @@ sealed class State {
 private val _state = MutableLiveData<State>()
 val state: LiveData<State> get() = _state
 ```
-View observe `state` property on view model and displays loading indicator,
+View observes `state` property and displays loading indicator,
 or loading error with retry button,
 or data associated with all result, in our example it's total items count.
 
@@ -403,11 +404,11 @@ private suspend fun loadItemsPage(params: ItemsPageLoadingParams): ItemsPagedRes
     }
 }
 ```
-View Model just gets result from use case, and pass it to paging if it's successful.
+View Model just gets result from use case, and passes it to paging if it's successful.
 If something goes wrong, it should be handled by view model.
 In example we show error message with retry button to user.
 When user clicks retry *(view calls `retry` on error state)*,
-view model repeat request.
+view model repeats request.
 ```kotlin
 private suspend fun retryWhenUserAskForIt(params: ItemsPageLoadingParams): ItemsPagedResult.ItemsPage<Item> {
     val retryAfterUserAction = CompletableDeferred<ItemsPagedResult.ItemsPage<Item>>()
@@ -432,7 +433,7 @@ val pages = viewModelScope.transformToJetpackPagedResult {
 ```
 
 Congratulations!
-Now you have a clean code at least in the core architecture layers.
+Now you have clean code at least in the core architecture layers.
 
 ## Summary
 
@@ -442,4 +443,4 @@ the thing is it's difficult to create a silver bullet which handles different ca
 Nice try Google, but I say **NO** to Jetpack Pagination.
 It's match easier to implement custom mechanism which handles exactly what you need.
 How to do it?
-Stay tuned and I'll show to you soon.
+Stay tuned and I'll show it to you soon.
