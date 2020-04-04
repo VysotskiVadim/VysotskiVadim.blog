@@ -248,7 +248,7 @@ listViewModel.items.getValueForTest()!!.fetchData()
 assertEquals(State.OnlineDataLoaded(totalItemsCount = TEST_TOTAL_ITEMS_COUNT), listViewModel.state.getValueForTest())
 ```
 
-## Issue #4: Display custom data associated with the request
+## Issue #5: Display custom data associated with the request
 
 Imagine super simple feature:
 show items count on the screen with items list.
@@ -271,11 +271,14 @@ or `LiveData<Any>`, no no no, stop it, don't even want to think about it.
 At this moment I realized that architecture built on top of Jetpack Pagination forces
 you to create new workarounds for every new feature.
 
+## Workaround #5: Isolate workarounds
+
 To minimize damage from lib we can put all Jetpack Pagination related code
 in the outside layer of architecture: UI.
 `PageList` should survive after orientation change,
 so making View Model responsible for connection between 
 Jetpack Pagination and the rest of the architecture is reasonable decision.
+
 
 Let's get rid of workarounds at least in core part of app architecture.
 ```kotlin
@@ -321,18 +324,16 @@ fun <T> CoroutineScope.transformToJetpackPagedResult(pageLoader: ItemsPageLoader
         override fun create(): DataSource<PaginationCursor, T> {
             return ItemsPaginationDataSource(scope, pageLoader)
         }
-    }.toLiveData(Config(30, prefetchDistance = 30, enablePlaceholders = false)
+    }.toLiveData(Config(30, prefetchDistance = 30, enablePlaceholders = false))
 }
 ```
 `transformToJetpackPagedResult` uses 2 unknown for you types.
 
 `ItemsPageLoader` is an abstraction over specific loading implementation.
 Draw attention that it returns only positive result `ItemsPagedResult.ItemsPage<T>`, because
-[as we discussed](#network_errors) Jetpack Paging doesn't handle errors.
+[as we've already discussed](#network_errors) Jetpack Paging doesn't handle errors.
 ```kotlin
-interface ItemsPageLoader<T> {
-    suspend fun loadPage(cursor: PaginationCursor, loadSize: Int): ItemsPagedResult.ItemsPage<T>
-}
+typealias ItemsPageLoader<T> = suspend (ItemsPageLoadingParams) -> ItemsPagedResult.ItemsPage<T>
 ```
 
 And custom data source which always successfully loads data form `ItemsPageLoader`.
@@ -345,14 +346,14 @@ private class ItemsPaginationDataSource<T>(
 
     override fun loadInitial(params: LoadInitialParams<PaginationCursor>, callback: LoadInitialCallback<PaginationCursor, T>) {
         scope.launch {
-            val result = pageLoader.loadPage(FIRST_PAGE, params.requestedLoadSize)
+            val result = pageLoader(ItemsPageLoadingParams(FIRST_PAGE, params.requestedLoadSize))
             callback.onResult(result.items, NO_PAGE, result.nextCursor)
         }
     }
 
     override fun loadAfter(params: LoadParams<PaginationCursor>, callback: LoadCallback<PaginationCursor, T>) {
         scope.launch {
-            val result = pageLoader.loadPage(params.key, params.requestedLoadSize)
+            val result = pageLoader(ItemsPageLoadingParams(params.key, params.requestedLoadSize))
             callback.onResult(result.items, result.nextCursor)
         }
     }
@@ -360,5 +361,79 @@ private class ItemsPaginationDataSource<T>(
     override fun loadBefore(params: LoadParams<PaginationCursor>, callback: LoadCallback<PaginationCursor, T>) {
         error("this should never happen")
     }
+}
+```
+
+Let's consider how paging looks in view model.
+```kotlin
+class PaginationExampleViewModel(
+    private val exampleUseCase: ExampleUseCase
+) : ViewModel() {
+   ...
+}
+```
+
+We inject user case to view model, which is basically can return one page of data:
+```kotlin
+interface ExampleUseCase {
+    suspend fun requestPage(cursor: PaginationCursor, loadSize: Int): ItemsPagedResult<Item>
+}
+```
+
+View Model has a state, which represents what is happening right now:
+```kotlin
+sealed class State {
+    object Loading : State()
+    class RetryableError(private val retry: () -> Unit) : State() {
+        fun retry() = retry.invoke()
+    }
+
+    data class Loaded(val totalItemsCount: Int) : State()
+}
+
+private val _state = MutableLiveData<State>()
+val state: LiveData<State> get() = _state
+```
+View observe `state` property on view model and displays loading indicator,
+or loading error with retry button,
+or data associated with all result, in our example it's total items count.
+
+Next step is to implement `loadPage` function in View Model.
+We are going to use in `transformToJetpackPagedResult` function,
+so it should have the same signature as `ItemsPageLoader`.
+```kotlin
+private suspend fun loadItemsPage(params: ItemsPageLoadingParams): ItemsPagedResult.ItemsPage<Item> {
+    val loadPageResult = exampleUseCase.requestPage(params.cursor, params.loadSize)
+    return when (loadPageResult) {
+        is ItemsPagedResult.ItemsPage -> loadPageResult
+        is ItemsPagedResult.Error -> {
+            retryWhenUserAskForIt(params)
+        }
+    }
+}
+```
+In example I just took result from use case, and pass it to paging if it's successful.
+But error should be handled by View Model.
+```kotlin
+private suspend fun retryWhenUserAskForIt(params: ItemsPageLoadingParams): ItemsPagedResult.ItemsPage<Item> {
+    val retryAfterUserAction = CompletableDeferred<ItemsPagedResult.ItemsPage<Item>>()
+    _state.value = State.RetryableError {
+        viewModelScope.launch {
+            retryAfterUserAction.complete(loadItemsPage(params))
+        }
+    }
+    return retryAfterUserAction.await()
+}
+```
+View model just wait until user click retry to take result from use case again.
+
+Last step is `PagedList` itself.
+Now you can easily create it using `transformToJetpackPagedResult`
+```kotlin
+val pages = viewModelScope.transformToJetpackPagedResult {
+    _state.value = State.Loading
+    val page = loadItemsPage(it)
+    _state.value = State.Loaded(page.itemsCount)
+    page
 }
 ```
