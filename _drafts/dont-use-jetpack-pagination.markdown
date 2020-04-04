@@ -20,7 +20,7 @@ So to get the best solution I recommend you read till the end of the article.
 ## Looks good at the first glance
 
 When you start implementing custom DataSource, everything looks good.
-You extend `PageKeyedDataSource` and implement 3 methods: `loadInitial`, `loadAfter`, and `loadAfter`.
+You extend `PageKeyedDataSource` and implement 3 methods: `loadInitial`, `loadAfter`, and `loadBefore`.
 ```kotlin
 override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, RedditPost>) {
     // your implementation
