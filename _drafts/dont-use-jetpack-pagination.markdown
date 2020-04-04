@@ -271,7 +271,7 @@ or `LiveData<Any>`, no no no, stop it, don't even want to think about it.
 At this moment I realized that architecture built on top of Jetpack Pagination forces
 you to create new workarounds for every new feature.
 
-## Workaround #5: Isolate workarounds
+### Workaround #5: Isolate workarounds
 
 To minimize damage from lib we can put all Jetpack Pagination related code
 in the outside layer of architecture: UI.
@@ -364,21 +364,17 @@ private class ItemsPaginationDataSource<T>(
 }
 ```
 
-Let's consider how paging looks in view model.
+Consider example of pagination at View Model Layer.
 ```kotlin
 class PaginationExampleViewModel(
-    private val exampleUseCase: ExampleUseCase
+    private val searchItemsUseCase: SearchItemsUseCase
 ) : ViewModel() {
    ...
 }
 ```
 
-We inject user case to view model, which is basically can return one page of data:
-```kotlin
-interface ExampleUseCase {
-    suspend fun requestPage(cursor: PaginationCursor, loadSize: Int): ItemsPagedResult<Item>
-}
-```
+View Model gets uses case as constructor parameter,
+we all use DI now days, isn't it?
 
 View Model has a state, which represents what is happening right now:
 ```kotlin
@@ -403,7 +399,7 @@ We are going to use in `transformToJetpackPagedResult` function,
 so it should have the same signature as `ItemsPageLoader`.
 ```kotlin
 private suspend fun loadItemsPage(params: ItemsPageLoadingParams): ItemsPagedResult.ItemsPage<Item> {
-    val loadPageResult = exampleUseCase.requestPage(params.cursor, params.loadSize)
+    val loadPageResult = searchItemsUseCase.requestPage(searchCriteria, pageParams)
     return when (loadPageResult) {
         is ItemsPagedResult.ItemsPage -> loadPageResult
         is ItemsPagedResult.Error -> {
@@ -413,7 +409,10 @@ private suspend fun loadItemsPage(params: ItemsPageLoadingParams): ItemsPagedRes
 }
 ```
 In example I just took result from use case, and pass it to paging if it's successful.
-But error should be handled by View Model.
+If something goes wrong, it should be handled by view model.
+In example we show error message with retry button to user.
+When user clicks retry (view call `retry` on error state),
+view model repeat request.
 ```kotlin
 private suspend fun retryWhenUserAskForIt(params: ItemsPageLoadingParams): ItemsPagedResult.ItemsPage<Item> {
     val retryAfterUserAction = CompletableDeferred<ItemsPagedResult.ItemsPage<Item>>()
@@ -425,7 +424,6 @@ private suspend fun retryWhenUserAskForIt(params: ItemsPageLoadingParams): Items
     return retryAfterUserAction.await()
 }
 ```
-View model just wait until user click retry to take result from use case again.
 
 Last step is `PagedList` itself.
 Now you can easily create it using `transformToJetpackPagedResult`
@@ -437,3 +435,16 @@ val pages = viewModelScope.transformToJetpackPagedResult {
     page
 }
 ```
+
+Congratulations!
+Now you have a clean code in the core architecture layers.
+
+## Summary
+
+Jetpack Paging is good library which reveals the complexity of pagination.
+Pagination itself isn't such a complex task,
+the thing is it's difficult to create a silver bullet which handles different cases.
+Nice try Google, but I say **NO** to Jetpack Pagination.
+It's match easier to implement custom mechanism which handles exactly what you need.
+How to do it?
+Stay tuned and you'll know soon.
