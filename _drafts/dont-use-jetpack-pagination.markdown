@@ -1,12 +1,16 @@
 ---
 layout: post
 title:  Don't use Jetpack Pagination
-description: "Why I'm unhappy using Jatpack pagination library."
+description: "My experience of using Jetpack Pagination: display status, handle errors, unit testing, mapping, clean architecture."
+image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/jetpack-pagination-image.jpg
+postImage:
+  src: jetpack-pagination-image
+  alt: Don't use library if isn't designed to solve your problem
 ---
 
 I like libraries provided by Google in Jetpack suite.
 Libs do their work, and do it well, stable, and fast.
-I trusted they so much, so when I faced the task of showing paged result,
+I trusted them so much, so when I faced the task of showing paged result,
 I didn't have any doubts to use [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging).
 It was a mistake.
 During the usage of Jetpack Paging library I experienced many technical challenges.
@@ -16,6 +20,12 @@ If you use Jetpack Paging I believe you'll find them useful.
 Workarounds will be present in the same order I used them.
 Usually old workaround was replaces by a new one.
 So to get the best solution I recommend you read till the end of the article.
+
+* [Workaround #1: Get current status](#get_current_status)
+* [Workaround #2: Parallel streams of data](#parallel_streams)
+* [Workaround #3: Custom map](#custom_map)
+* [Workaround #4: Act as UI](#workaround-4-act-as-ui)
+* [Workaround #5: Isolate workarounds](#workaround-5-isolate-workarounds)
 
 ## Looks good at the first glance
 
