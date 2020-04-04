@@ -432,7 +432,7 @@ val pages = viewModelScope.transformToJetpackPagedResult {
 ```
 
 Congratulations!
-Now you have a clean code in the core architecture layers.
+Now you have a clean code at least in the core architecture layers.
 
 ## Summary
 
