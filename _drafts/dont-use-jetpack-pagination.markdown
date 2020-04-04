@@ -47,12 +47,6 @@ So every time live data with `PagedList<T>` changes you should call `PagedListAd
 
 {% include_relative _jetpack-paging-architecture.html %}
 
-Looks good, isn't it?
-You get a library with many features:
-* loads data by pages
-* data invalidation
-* built-in diff util
-
 ## Issue #1: Display current status {#current_status}
 
 Users don't want just wait, even if data is loading, something should happening on the screen.
@@ -66,7 +60,7 @@ For page loading there is 2 standard approaches:
 
 Using Jetpack Paging it's very easy to implement place holder based loading.
 `PagedListAdapter` passes `null` as an item to view holder if it isn't loaded yet.
-But if you'd like to show some different loading animations, it's going to be much harder.
+But if you want to just show a progress bar, it will much harder.
 
 The source of the difficulties is that
 View Model
@@ -209,8 +203,8 @@ How can you start data loading if everything that you have is `LiveData<PagedLis
 
 #### Workaround #4: Act as UI
 
-To start data loading you have to act like UI.
-Start with getting live data value via subscriptions.
+To begin data loading you have to act like UI.
+Start with getting live data value via subscription.
 ```kotlin
 fun <T> LiveData<T>.getValueForTest(): T? {
     var value: T? = null
@@ -288,8 +282,9 @@ interface ItemsSearchUseCase {
 
 data class PaginationParams(val cursor: PaginationCursor, val pageSize: Int)
 ```
-Different screens requires different data passed, so I created specific `PagedResult` for every feature which requires pagination.
-If the majority of your screens requires the same data you can create only one.
+Different screens require different data passed,
+so I create specific `PagedResult` for every feature which requires pagination.
+If the majority of your screens require the same data you can create only one.
 ```kotlin
 sealed class ItemsPagedResult<T> {
     data class ItemsPage<T>(
@@ -316,7 +311,7 @@ fun <NewT> map(mapper: (List<T>) -> List<NewT>): ItemsPagedResult<NewT> = when (
 }
 ```
 
-To convert result at view model layer use following function:
+To create `LiveData<PagedList<T>>` in a View Model use following function:
 ```kotlin
 fun <T> CoroutineScope.transformToJetpackPagedResult(pageLoader: ItemsPageLoader<T>): LiveData<PagedList<T>> {
     val scope = this
@@ -408,10 +403,10 @@ private suspend fun loadItemsPage(params: ItemsPageLoadingParams): ItemsPagedRes
     }
 }
 ```
-In example I just took result from use case, and pass it to paging if it's successful.
+View Model just gets result from use case, and pass it to paging if it's successful.
 If something goes wrong, it should be handled by view model.
 In example we show error message with retry button to user.
-When user clicks retry (view call `retry` on error state),
+When user clicks retry *(view calls `retry` on error state)*,
 view model repeat request.
 ```kotlin
 private suspend fun retryWhenUserAskForIt(params: ItemsPageLoadingParams): ItemsPagedResult.ItemsPage<Item> {
@@ -447,4 +442,4 @@ the thing is it's difficult to create a silver bullet which handles different ca
 Nice try Google, but I say **NO** to Jetpack Pagination.
 It's match easier to implement custom mechanism which handles exactly what you need.
 How to do it?
-Stay tuned and you'll know soon.
+Stay tuned and I'll show to you soon.
