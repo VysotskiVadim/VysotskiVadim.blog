@@ -9,16 +9,17 @@ postImage:
 ---
 
 I like libraries provided by Google in Jetpack suite.
-Libs do their work, and do it well, stable, and fast.
-I trusted them so much, so when I faced the task of showing paged result,
+Libs do their work and do it well, stable, and fast.
+I trusted them so much, so when I faced the task of showing a paged result,
 I didn't have any doubts to use [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging).
 It was a mistake.
-During the usage of Jetpack Paging library I experienced many technical challenges.
-This article not just a nagging about my pain,
+During the usage of Jetpack Paging library,
+I experienced many technical challenges.
+This article not just nagging about my pain,
 it also includes workaround which I used.
 If you use Jetpack Paging I believe you'll find them useful.
 Workarounds will be present in the same order I used them.
-Usually old workaround was replaces by a new one.
+Usually, an old workaround was replaced by a new one.
 So to get the best solution I recommend you read till the end of the article.
 
 * [Workaround #1: Get current status](#get_current_status)
@@ -45,13 +46,13 @@ override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<Strin
 }
 
 ```
-each of the methods takes callback as a parameter,
+each of the methods takes the callback as a parameter,
 so when asynchronous loading is finished you suppose to call
 `callback.onResult(...)` or `callback.onError(...)`.
 
 Your `DataSource` is wrapped by `DataSource.Factory` which creates it.
 Factory has an extension method `toLiveData` which transforms it to `LiveData<PagedList<T>>`.
-`PagedList` is basically a lazy loading list which loads data from its `DataSource` when user scrolls.
+`PagedList` is a lazy loading list that loads data from its `DataSource` when a user scrolls.
 You're supposed to use special adapter for recycler view -- `PagedListAdapter`.
 Every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
 
@@ -61,7 +62,7 @@ Every time live data with `PagedList<T>` changes you should call `PagedListAdapt
 
 Users don't want just wait, even if data is loading, something should happening on the screen.
 At least user should see some animations.
-For page loading there is 2 standard approaches:
+For page loading there are 2 standard approaches:
 1. Show placeholder instead of each item which is loading right now;
 1. Show usual progress bar at the end of the list.
 
@@ -72,10 +73,9 @@ Using Jetpack Paging it's very easy to implement place holder based loading.
 `PagedListAdapter` passes `null` as an item to view holder if it isn't loaded yet.
 But if you want to show a progress bar, it will much harder.
 
-The source of the difficulties is that
-View Model
+The source of the difficulties is that View Model
 *(presenter or any other class which is responsible for UI behavior)*
-isn't mediator in data flow to UI.
+isn't a mediator in a data flow to UI.
 `PagedList<T>` hides data loading process from you.
 
 #### Workaround #1: Get current status {#get_current_status}
@@ -141,7 +141,7 @@ and listen other streams of data to handle cases like showing loading indicator 
 ## Issue #3: Items mapping
 
 When I work with View Model and `RecyclerView`,
-I usually transform list of domain object to list of view objects in View Model.
+I usually transform a list of domain objects to a list of view objects in View Model.
 If items appearance depends on data in domain object it usually different types of view object.
 Recycler View maps different view objects to different views.
 View model can add additional items like headers or
