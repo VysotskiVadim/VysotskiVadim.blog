@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Don't use Jetpack Pagination
+date: 2020-04-05 13:30:00 +0300
 description: "My experience of using Jetpack Pagination: display status, handle errors, unit testing, mapping, clean architecture."
 image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/jetpack-pagination-image.jpg
 postImage:
