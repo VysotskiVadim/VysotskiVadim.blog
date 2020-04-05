@@ -151,14 +151,14 @@ actions which should be at the end of the list.
 
 `DataSource.Factory` lets you `map` or `mapByPage` items.
 Only one limitation -- you can't change items count during mapping.
-It prevent you from breaking Room's out-of-the-box data sources.
+It prevents you from breaking Room's out-of-the-box data sources.
 
 #### Workaround #3: Custom map {#custom_map}
 
 *Warning: workaround works only if you use custom* `DataSource<T>`.
 
 To be able to map pages and change items count you have to implement custom map in your `Listing` class.
-My implementation differ from `Listing` proposed in [previous workaround](#parallel_streams).
+My implementation differs from `Listing` proposed in [the previous workaround](#parallel_streams).
 I pass `DataSource.Factory` instead of `PagedList<T>` and have different state reporting.
 ```kotlin
 class PagedResultImpl<Key, Value>(
@@ -196,7 +196,7 @@ override fun <NewValue> mapByPage(func: (List<Value>) -> List<NewValue>) =
 
 ## Issue #4: Unit Testing {#unit_testing}
 
-I usually split feature in a few units:
+I usually split feature into a few units:
 1. UI behavior - View Model;
 1. Business login - Use Case;
 1. Data - Repository
@@ -207,13 +207,13 @@ It's hard to implement test double for your `Listing` object.
 Don't even try to mock it.
 Use stubs or fakes.
 Another challenge is to test View Model.
-Basically you need to trigger data loading in test, 
+Basically, you need to trigger data loading in test, 
 and then verify View Model state.
 How can you start data loading if everything that you have is `LiveData<PagedList<T>>` property on View Model?
 
 #### Workaround #4: Act as UI
 
-To trigger data loading in unit test you have to act like UI.
+To trigger data loading in a unit test you have to act like UI.
 
 Start with getting live data value via subscription.
 ```kotlin
@@ -280,12 +280,12 @@ you to create new workarounds for every new feature.
 
 To minimize damage from lib we can put all Jetpack Pagination related code
 in the outside layer of architecture: UI.
-`PageList` should survive after configuration change,
-so making View Model responsible for connection between 
-Jetpack Pagination and the rest of the architecture is reasonable decision.
+`PageList` should survive after a configuration change,
+so making View Model responsible for the connection between 
+Jetpack Pagination and the rest of the architecture is a reasonable decision.
 
 
-Let's get rid of workarounds at least in core part of app architecture.
+Let's get rid of workarounds at least in the core part of app architecture.
 ```kotlin
 interface ItemsSearchUseCase {
     suspend fun getItemsSearchPage(criteria: ItemsSearchCriteria, pageParams: PaginationParams): ItemsPagedResult<Item>
@@ -343,7 +343,7 @@ typealias ItemsPageLoader<T> = suspend (ItemsPageLoadingParams) -> ItemsPagedRes
 ```
 
 Custom `DataSource` which always successfully loads data form `ItemsPageLoader`.
-In my implementation we go always forward, so case with load before isn't implemented.
+In my implementation, we go always forward, so the case with load before isn't implemented.
 ```kotlin
 private class ItemsPaginationDataSource<T>(
     private val scope: CoroutineScope,
@@ -379,8 +379,8 @@ class PaginationExampleViewModel(
 }
 ```
 
-View Model gets use case as constructor parameter,
-we all use DI now days, isn't it?
+View Model gets use case as a constructor parameter,
+we all use DI nowadays, isn't it?
 
 View Model has a state, which represents what is happening right now:
 ```kotlin
@@ -414,9 +414,9 @@ private suspend fun loadItemsPage(params: ItemsPageLoadingParams): ItemsPagedRes
     }
 }
 ```
-View Model just gets result from use case, and passes it to paging if it's successful.
+View Model just gets a result from the use case and passes it to paging if it's successful.
 If something goes wrong, it should be handled by view model.
-In example we show error message with retry button to user.
+In the example, we show an error message with retry button to user.
 When user clicks retry *(view calls `retry` on error state)*,
 view model repeats request.
 ```kotlin
@@ -447,10 +447,10 @@ Now you have clean code at least in the core architecture layers.
 
 ## Summary
 
-Jetpack Paging is good library which reveals the complexity of pagination.
+Jetpack Paging is a good library that reveals the complexity of pagination generalization.
 Pagination itself isn't such a complex task,
 the thing is it's difficult to create a silver bullet which handles different cases.
-Nice try Google, but I say **NO** to Jetpack Pagination.
-It's match easier to implement custom mechanism which handles exactly what you need.
+Nice try Google, but I say **NO** to Jetpack Pagination in my projects.
+It's much easier to implement a custom mechanism that handles exactly what I need.
 How to do it?
 Stay tuned and I'll show it to you soon.
