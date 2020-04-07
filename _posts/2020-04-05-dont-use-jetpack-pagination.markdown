@@ -228,16 +228,16 @@ fun <T> LiveData<T>.getValueForTest(): T? {
     return value
 }
 ```
-When you got `PagedList<T>` using `getValueForTest` you can fetch first page:
+When you got `PagedList<T>` using `getValueForTest` you can fetch first page by accessing `PagedList<T>`:
 
 ```kotlin
 fun <T> LiveData<PagedList<T>>.fetchData() {
-    getValueForTest()!!.get(0)
+    getValueForTest()!!
 }
 ```
-`PagedList` loads data when you request item which isn't loaded,
-or item which is close to loaded items boundary.
-So if you'd like to load next page, just load around last loaded item.
+`PagedList<T>` loads initial data when it's created.
+Next page loading occurs when you request an item which is close to loaded items boundary.
+So if you'd like to load the next page, just load around last loaded item.
 
 ```kotlin
 fun <T> LiveData<PagedList<T>>.fetchOneMorePage() {
