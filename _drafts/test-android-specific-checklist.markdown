@@ -12,8 +12,10 @@ Article contains not obvious test scenarios which can be easy missed during feat
 * Life cycle
     * Configuration Change
     * Process death
-* UI performance
-    * Dropped frames
+* performance
+    * Dropped frames (Chareographer, frames bars)
     * overdraw
+    * app start time (activity manager via adb)
+    * android vitals
 * Security ?
 * Accessability ?
