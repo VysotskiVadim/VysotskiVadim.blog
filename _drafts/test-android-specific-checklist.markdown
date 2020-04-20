@@ -19,3 +19,10 @@ Article contains not obvious test scenarios which can be easy missed during feat
     * android vitals
 * Security ?
 * Accessability ?
+
+## Life cycle
+
+Android Framework provides developers components with entry points,
+where they implement application UI and logic.
+Those components have a non trivial life cycle, that is controlled by the framework.
+Image below demonstrates you complexity of life cycle.
