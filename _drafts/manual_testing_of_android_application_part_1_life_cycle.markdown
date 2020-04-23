@@ -1,8 +1,21 @@
 ---
 layout: post
-title:  "Manual testing of Android application. Part 1: life cycle." 
-description: "Learn how to manually test Android application against integration with system life cycle. Spot not obvious bugs which 100% will happen at users device before release."
+title:  "Manual testing of Android applications. Part 1: life cycle." 
+description: "Learn how to manually test Android application against integration with system life cycle. Spot not obvious bugs which 100% will happen on users device before release."
 ---
+
+
+
+Modern operation systems provide huge amount of features,
+which we use every day without even noticing it.
+For instance when you turn on Dark Theme all apps became dark.
+Or how it so happens that you can run 
+
+Android Operation System has features which is actively in use,
+but regular user doesn't notice it.
+Multitasking is one of them.
+User can switch between many apps in a short period of time.
+Given limited amount of device's resource Android has  
 
 I wrote this checklist to share with Quality Assurance engineers from my team,
 as a reminder how to test our app in terms of integration with Android OS.
@@ -65,6 +78,8 @@ If the your app has a splash screen,
 you will see it during switching back.
 
 
-### Most common mistakes
+# Common bugs
+
+Let's practice by finding common bugs related to life cycle using algorithm we've just considered.
 
 #### Dialog action {#dialog_action_after_configuration_change}
