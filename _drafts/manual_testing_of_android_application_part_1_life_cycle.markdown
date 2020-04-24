@@ -1,10 +1,15 @@
 ---
 layout: post
 title:  "Manual testing of Android applications. Part 1: life cycle." 
-description: "Learn how to manually test Android application against integration with system life cycle. Spot not obvious bugs which 100% will happen on users device before release."
+description: "Android application testing guide for manual QA."
 ---
 
 
+
+Techniques like *Boundary Value Analysis* and *Equivalence Partitioning* 
+are popular in testing because 
+they help us spot error faster by identifying areas
+with a higher chance of bugs.
 
 Modern operation systems provide huge amount of features,
 which we use every day without even noticing it.
