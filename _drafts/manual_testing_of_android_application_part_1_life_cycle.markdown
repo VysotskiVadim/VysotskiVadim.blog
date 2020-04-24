@@ -4,12 +4,16 @@ title:  "Manual testing of Android applications. Part 1: life cycle."
 description: "Android application testing guide for manual QA."
 ---
 
+To find bugs faster contributing less effort you need a knowledge, 
+an answer to the question
+*what do developers usually forget to handle?*.
+Start from checking things where chance of error is higher reduce your work.
+This idea isn't new in software testing.
+We already have popular techniques like 
+*Boundary Value Analysis* and *Equivalence Partitioning*,
+that is based on same idea:
+**identify as small as possible set of test cases which covers all possible scenarios**.
 
-
-Techniques like *Boundary Value Analysis* and *Equivalence Partitioning* 
-are popular in testing because 
-they help us spot error faster by identifying areas
-with a higher chance of bugs.
 
 Modern operation systems provide huge amount of features,
 which we use every day without even noticing it.
