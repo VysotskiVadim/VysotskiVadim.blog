@@ -4,31 +4,15 @@ title:  "Manual testing of Android applications. Part 1: life cycle."
 description: "Android application testing guide for manual QA."
 ---
 
-To find bugs faster contributing less effort you need a knowledge, 
-an answer to the question
-*what do developers usually forget to handle?*.
-Start from checking things where chance of error is higher reduce your work.
-This idea isn't new in software testing.
-We already have popular techniques like 
-*Boundary Value Analysis* and *Equivalence Partitioning*,
-that is based on same idea:
-**identify as small as possible set of test cases which covers all possible scenarios**.
+To find bugs faster contributing less effort you need an answer to the question
+*what do developers usually forget to handle?*
+If you start from checking things where chance of error is higher -
+you will find a bug faster.
 
-
-Modern operation systems provide huge amount of features,
-which we use every day without even noticing it.
-For instance when you turn on Dark Theme all apps became dark.
-Or how it so happens that you can run 
-
-Android Operation System has features which is actively in use,
-but regular user doesn't notice it.
-Multitasking is one of them.
-User can switch between many apps in a short period of time.
-Given limited amount of device's resource Android has  
-
-I wrote this checklist to share with Quality Assurance engineers from my team,
-as a reminder how to test our app in terms of integration with Android OS.
-Article contains not obvious test scenarios which can be easy missed during feature testing.
+This article teaches you find bugs related to application life cycle.
+Life cycle handling isn't such a complicated thing itself,
+it's just easy to forget about it.
+And developers often forget.
 
 
 # Life cycle
@@ -41,14 +25,14 @@ that is controlled by the framework.
 During the lifetime components are created and destroyed.
 Developers are in charge of state saving and restoring.
 
-Basic algorithm to spot life cycle related bugs are following:
+Basic algorithm to spot life cycle related bugs is following:
 1. Open a screen;
 2. Change a screen state, for instance launch long running process to see a loading indicator;
 3. Trigger life cycle event (will see them later);
 4. Verify that application is in correct state;
 
 We will consider different life cycle events,
-just trigger them in third step of bug detection algorithm.
+just trigger them in the third step of bug detection algorithm.
 
 ### Configuration Changes {#configuration_change}
 OS has many different configurations which affect UI appearance:
@@ -60,7 +44,6 @@ When one of configuration parameters changes Android recreates components to ado
     <img height='400px' src='https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/configuration_change_night_mode.gif'>
 </div>
 The easiest way to trigger configuration change is to rotate device or turn on/off night mode.
-Despite the fact that configuration is constantly changing developers sometime forget handle it.
 
 ### Process Death {#process_death}
 Android manages RAM memory without user interaction.
@@ -83,7 +66,7 @@ in developer options.
 
 To test switch from testing app to any other,
 wait for a few seconds and switch back.
-If the your app has a splash screen,
+If your app has a splash screen,
 you will see it during switching back.
 
 
