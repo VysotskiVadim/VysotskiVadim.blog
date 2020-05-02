@@ -78,6 +78,7 @@ feature work good until a life cycle event.
 
 #### Not saved state {#not_saved_state}
 
-
+On **STATE** tab you'll find following feature:
+every time user clicks **+1** button number
 
 #### Dialog action {#dialog_action_after_configuration_change}
