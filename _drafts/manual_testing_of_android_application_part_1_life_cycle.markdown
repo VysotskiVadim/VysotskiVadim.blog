@@ -72,14 +72,16 @@ you will see it during switching back.
 
 # Practice
 
-Let's practice by finding common bugs related to life cycle using algorithm we've just considered.
-All this bugs was found in real Android projects, and replicated by me in [test application](https://github.com/VysotskiVadim/lifecycle-testing).
+Let's practice by finding common bugs related to life cycle using 
+[algorithm, that we've just considered](#detection_algorithm).
+All this bugs was found in real Android projects,
+and replicated by me in [test application](https://github.com/VysotskiVadim/lifecycle-testing).
 All considered bugs will have one common thing:
 feature work good until a life cycle event.
 
 ### Not saved state {#not_saved_state}
 
-On **STATE** tab you can find following feature:
+On *STATE* tab you can find following feature:
 every time user clicks **+1** button counter increases by 1.
 
 <div align='center'>
@@ -91,10 +93,10 @@ Let's try
 with
 [configuration change](#configuration_change):
 
-1. Open STATE tab;
+1. Open the *STATE* tab;
 2. Click three times to change counter to three;
 3. Rotate device to trigger configuration change;
-4. Check that counter is still three after rotation.
+4. Check that counter is still there after rotation.
 
 <div align='center'>
     <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.gif'>
@@ -110,11 +112,25 @@ But sometimes developers forget to restore one of many text pieces on the screen
 ### Dialog action {#dialog_action_after_configuration_change}
 
 In the next example user can choose a pill: red or blue.
-After she click "Choose a pill" button,
-dialog appear with possible options.
-When user select option,
+After she clicks "Choose a pill" button,
+dialog appears with possible options.
+When user select a pill,
 her choice is displayed on the screen.
 
 <div align='center'>
-    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.gif'>
+    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice.gif'>
 </div>
+
+Let's use
+[bug detection algorithm](#detection_algorithm)
+with
+[configuration change](#configuration_change)
+and check that user can complete the journey:
+
+1. Open the *DIALOG* tab;
+2. Click "Choose a pill" button;
+3. Rotate device to trigger configuration change;
+4. Check that dialog is still present;
+5. Select a pill;
+6. Verify that selected option is on the screen;
+
