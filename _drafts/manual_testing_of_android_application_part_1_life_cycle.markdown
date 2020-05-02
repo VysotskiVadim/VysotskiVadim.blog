@@ -100,4 +100,21 @@ with
     <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.gif'>
 </div>
 
-#### Dialog action {#dialog_action_after_configuration_change}
+As you can see actual result differs from our expectation.
+After configuration change counter was reset to 0.
+
+Of course this is simplified example,
+you probably will never find this bug.
+But sometimes developers forget to restore one of many text pieces on the screen.
+
+### Dialog action {#dialog_action_after_configuration_change}
+
+In the next example user can choose a pill: red or blue.
+After she click "Choose a pill" button,
+dialog appear with possible options.
+When user select option,
+her choice is displayed on the screen.
+
+<div align='center'>
+    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.gif'>
+</div>
