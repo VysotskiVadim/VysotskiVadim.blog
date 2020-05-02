@@ -134,3 +134,10 @@ and check that user can complete the journey:
 5. Select a pill;
 6. Verify that selected option is on the screen;
 
+<div align='center'>
+    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice-after-configuration-change.gif'>
+</div>
+
+Dialog is still present after configuration change,
+but it does nothing.
+User has chosen a red pill, but there is still blue on the screen.
