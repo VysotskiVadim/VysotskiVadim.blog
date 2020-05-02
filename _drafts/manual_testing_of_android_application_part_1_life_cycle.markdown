@@ -23,8 +23,9 @@ Those components have a non-trivial life cycle
 that is controlled by the framework.
 During the lifetime components are created and destroyed.
 Developers are in charge of state saving and restoring.
+It's easy to spot life cycle related bug in 4 simple steps.
 
-Basic algorithm to spot life cycle related bugs is following:
+#### Life cycle bug detection algorithm: {#detection_algorithm}
 1. Open a screen;
 2. Change a screen state, i.e. do anything that changes UI: input text, start loading, ets;
 3. Trigger life cycle event (will see them later);
@@ -76,9 +77,27 @@ All this bugs was found in real Android projects, and replicated by me in [test 
 All considered bugs will have one common thing:
 feature work good until a life cycle event.
 
-#### Not saved state {#not_saved_state}
+### Not saved state {#not_saved_state}
 
-On **STATE** tab you'll find following feature:
-every time user clicks **+1** button number
+On **STATE** tab you can find following feature:
+every time user clicks **+1** button counter increases by 1.
+
+<div align='center'>
+    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter.gif'>
+</div>
+
+Let's try
+[bug detection algorithm](#detection_algorithm)
+with
+[configuration change](#configuration_change):
+
+1. Open STATE tab;
+2. Click three times to change counter to three;
+3. Rotate device to trigger configuration change;
+4. Check that counter is still three after rotation.
+
+<div align='center'>
+    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.gif'>
+</div>
 
 #### Dialog action {#dialog_action_after_configuration_change}
