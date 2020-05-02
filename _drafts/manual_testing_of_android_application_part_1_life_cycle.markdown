@@ -1,19 +1,18 @@
 ---
 layout: post
-title:  "Manual testing of Android applications. Part 1: life cycle." 
+title:  "QA guide to advanced Android applications testing. Part 1: life cycle." 
 description: "Android application testing guide for manual QA."
 ---
 
-To find bugs faster contributing less effort you need an answer to the question
-*what do developers usually forget to handle?*
+To find bugs faster and contributing less effort you need to know
+*what developers usually forget to handle?*
 If you start from checking things where chance of error is higher -
 you will find a bug faster.
 
 This article teaches you find bugs related to application life cycle.
 Life cycle handling isn't such a complicated thing itself,
-it's just easy to forget about it.
-And developers often forget.
-
+it's just super easy to forget about it,
+and developers off course often do.
 
 # Life cycle
 
@@ -27,7 +26,7 @@ Developers are in charge of state saving and restoring.
 
 Basic algorithm to spot life cycle related bugs is following:
 1. Open a screen;
-2. Change a screen state, for instance launch long running process to see a loading indicator;
+2. Change a screen state, i.e. do anything that changes UI: input text, start loading, ets;
 3. Trigger life cycle event (will see them later);
 4. Verify that application is in correct state;
 
@@ -70,8 +69,15 @@ If your app has a splash screen,
 you will see it during switching back.
 
 
-# Common bugs
+# Practice
 
 Let's practice by finding common bugs related to life cycle using algorithm we've just considered.
+All this bugs was found in real Android projects, and replicated by me in [test application](https://github.com/VysotskiVadim/lifecycle-testing).
+All considered bugs will have one common thing:
+feature work good until a life cycle event.
+
+#### Not saved state {#not_saved_state}
+
+
 
 #### Dialog action {#dialog_action_after_configuration_change}
