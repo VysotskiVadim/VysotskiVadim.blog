@@ -102,7 +102,7 @@ with
     <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.gif'>
 </div>
 
-As you can see actual result differs from our expectation.
+**Actual result:**
 After configuration change counter was reset to 0.
 
 Of course this is simplified example,
@@ -138,6 +138,7 @@ and check that user can complete the journey:
     <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice-after-configuration-change.gif'>
 </div>
 
+**Actual result:**
 Dialog is still present after configuration change,
 but it does nothing.
 User has chosen a red pill, but there is still blue on the screen.
@@ -148,3 +149,49 @@ Consider following feature:
 When user enters the screen, app loads some data from the server and lets user edit it.
 Once user press "Update" buton, information is updated on the server.
 
+<div align='center'>
+    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input.gif'>
+</div>
+
+This examples works good after configuration change,
+so this time we try
+[bug detection algorithm](#detection_algorithm)
+with
+[process death](#process_death).
+
+
+1. Set background process limit to *No background processes*;
+1. Open the *INPUT* tab;
+2. Fill-up input fields;
+3. Switch to different app to cause a process death;
+4. Switch back to original app; 
+5. Verify that your input is still present;
+
+<div align='center'>
+    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input-after-process-deadth.gif'>
+</div>
+
+**Actual result:** 
+App overrides inputted data by data from server.
+
+This scenario may seems complex and unlikely to happen,
+but on second thought it's common thing.
+Imaging: you're filling-up a huge form,
+and after a minute of hard work somebody calls you.
+When you answer a call phone switches apps,
+so there is a chance that system can kill the app.
+The chance is much higher if it's a video call.
+
+# Summary
+
+Life cycle related bugs are tricky,
+you won't see them if you just work with the app.
+But users are different: 
+they use app laying down on sofa,
+turning from side to side,
+causing configuration change because of rotation;
+their phones run out of battery,
+causing configuration change because of night node.
+Knowledge that you get in this article
+is a powerful weapon in you hand against life cycle related bugs.
+Don't let them reach your users, good luck!
