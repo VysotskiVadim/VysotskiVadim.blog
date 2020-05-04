@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "QA guide to advanced Android applications testing. Part 1: life cycle." 
-description: "Android application testing guide for manual QA."
+title:  "QA guide to Android applications testing. Part 1: Lifecycle." 
+description: "Test Android applications like a professional: learn technique of catching Lifecycle related bugs."
 ---
 
 To find bugs faster and contributing less effort you need to know
@@ -9,29 +9,29 @@ To find bugs faster and contributing less effort you need to know
 If you start from checking things where chance of error is higher -
 you will find a bug faster.
 
-This article teaches you find bugs related to application life cycle.
-Life cycle handling isn't such a complicated thing itself,
+This article teaches you find bugs related to application Lifecycle.
+Lifecycle handling isn't such a complicated thing itself,
 it's just super easy to forget about it,
 and developers off course often do.
 
-# Life cycle
+# Lifecycle
 
 Android Framework provides components with entry points,
 where developers implement application UI and logic.
-Those components have a non-trivial life cycle
+Those components have a non-trivial Lifecycle
 ([example](https://media.springernature.com/original/springer-static/image/chp%3A10.1007%2F978-3-319-59608-2_35/MediaObjects/450970_1_En_35_Fig1_HTML.gif)),
 that is controlled by the framework.
 During the lifetime components are created and destroyed.
 Developers are in charge of state saving and restoring.
-It's easy to spot life cycle related bug in 4 simple steps.
+It's easy to spot Lifecycle related bug in 4 simple steps.
 
-#### Life cycle bug detection algorithm: {#detection_algorithm}
+#### Lifecycle bug detection algorithm: {#detection_algorithm}
 1. Open a screen;
 2. Change a screen state, i.e. do anything that changes UI: input text, start loading, ets;
-3. Trigger life cycle event (will see them later);
+3. Trigger Lifecycle event (will see them later);
 4. Verify that application is in correct state;
 
-We will consider different life cycle events,
+We will consider different Lifecycle events,
 just trigger them in the third step of bug detection algorithm.
 
 ### Configuration Changes {#configuration_change}
@@ -72,12 +72,12 @@ you will see it during switching back.
 
 # Practice
 
-Let's practice by finding common bugs related to life cycle using 
+Let's practice by finding common bugs related to Lifecycle using 
 [algorithm, that we've just considered](#detection_algorithm).
 All this bugs was found in real Android projects,
 and replicated by me in [test application](https://github.com/VysotskiVadim/lifecycle-testing).
 All considered bugs will have one common thing:
-feature work good until a life cycle event.
+feature work good until a Lifecycle event.
 
 ### Not saved state {#not_saved_state}
 
@@ -184,7 +184,7 @@ The chance is much higher if it's a video call.
 
 # Summary
 
-Life cycle related bugs are tricky,
+Lifecycle related bugs are tricky,
 you won't see them if you just work with the app.
 But users are different: 
 they use app laying down on sofa,
@@ -193,5 +193,5 @@ causing configuration change because of rotation;
 their phones run out of battery,
 causing configuration change because of night node.
 Knowledge that you get in this article
-is a powerful weapon in you hand against life cycle related bugs.
+is a powerful weapon in you hand against Lifecycle related bugs.
 Don't let them reach your users, good luck!
