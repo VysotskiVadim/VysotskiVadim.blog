@@ -141,3 +141,10 @@ and check that user can complete the journey:
 Dialog is still present after configuration change,
 but it does nothing.
 User has chosen a red pill, but there is still blue on the screen.
+
+### User input loss
+
+Consider following feature:
+When user enters the screen, app loads some data from the server and lets user edit it.
+Once user press "Update" buton, information is updated on the server.
+
