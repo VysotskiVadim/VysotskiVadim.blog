@@ -1,18 +1,18 @@
 ---
 layout: post
-title:  "QA guide to Android applications testing. Part 1: Lifecycle." 
+title:  "QA guide to Android application testing. Part 1: Lifecycle." 
 description: "Test Android applications like a professional: learn technique of catching Lifecycle related bugs."
 ---
 
 To find bugs faster and contributing less effort you need to know
 *what developers usually forget to handle?*
-If you start from checking things where chance of error is higher -
+If you start checking things where the chance of error is higher -
 you will find a bug faster.
 
-This article teaches you find bugs related to application Lifecycle.
+This article teaches you to find bugs related to an application Lifecycle.
 Lifecycle handling isn't such a complicated thing itself,
 it's just super easy to forget about it,
-and developers off course often do.
+and developers of course often do.
 
 # Lifecycle
 
@@ -27,41 +27,42 @@ It's easy to spot Lifecycle related bug in 4 simple steps.
 
 #### Lifecycle bug detection algorithm: {#detection_algorithm}
 1. Open a screen;
-2. Change a screen state, i.e. do anything that changes UI: input text, start loading, ets;
+2. Change a screen state, i.e. do anything that changes UI: input text, start loading, etc;
 3. Trigger Lifecycle event (will see them later);
-4. Verify that application is in correct state;
+4. Verify that application is in the correct state;
 
 We will consider different Lifecycle events,
-just trigger them in the third step of bug detection algorithm.
+just trigger them in the third step of the bug detection algorithm.
 
 ### Configuration Changes {#configuration_change}
-OS has many different configurations which affect UI appearance:
+OS has many different configurations that affect UI appearance:
 orientation (vertical/horizontal), Day/Night mode, system language, and others...
-When one of configuration parameters changes Android recreates components to adopt app for a new settings.
+When one of the configuration parameters changes Android recreates components to adopt the app for a new setting.
 
 <div align='center'>
     <img height='400px' src='https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/configuration_change_orientation.gif'>
     <img height='400px' src='https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/configuration_change_night_mode.gif'>
 </div>
-The easiest way to trigger configuration change is to rotate device or turn on/off night mode.
+The easiest way to trigger configuration change is to rotate a device or turn on/off night mode.
 
 ### Process Death {#process_death}
-Android manages RAM memory without user interaction.
+Android manages RAM without user interaction.
 When there is a low amount of available memory,
 OS trying to free up some space.
-It selects a process with lowest priority among running processes and kill it.
+It selects a process with the lowest priority among running processes and kills it.
 Visible applications have the highest priority.
-So when user switch between apps,
-and there is a memory starvation,
-previous app is likely to be killed by OS.
-When user switch back to the previous app its state is restored,
-so user even doesn't notice that violence took place here.
+So when a user switches between apps,
+and there is memory starvation,
+the previous app is likely to be killed by OS.
+When a user switches back to the previous app its state is restored,
+so a user even doesn't notice that violence took place here.
 
 <div style="margin: 10px" align="center">
     {% include image.html src='background_process_limits' alt='background processes limit in settings' width='300px' %}
 </div>
 
-For testing purposes you can set **Background process limit** to **No background process**
+For testing purposes,
+you can set **Background process limit** to **No background process**
 in developer options.
 
 To test switch from testing app to any other,
@@ -73,15 +74,15 @@ you will see it during switching back.
 # Practice
 
 Let's practice by finding common bugs related to Lifecycle using 
-[algorithm, that we've just considered](#detection_algorithm).
-All this bugs was found in real Android projects,
-and replicated by me in [test application](https://github.com/VysotskiVadim/lifecycle-testing).
+[the algorithm, that we've just considered](#detection_algorithm).
+All these bugs were found in real Android projects
+and replicated by me in [the test application](https://github.com/VysotskiVadim/lifecycle-testing).
 All considered bugs will have one common thing:
-feature work good until a Lifecycle event.
+feature works well until a Lifecycle event.
 
 ### Not saved state {#not_saved_state}
 
-On *STATE* tab you can find following feature:
+On the *STATE* tab, you can find the following feature:
 every time user clicks **+1** button counter increases by 1.
 
 <div align='center'>
@@ -89,7 +90,7 @@ every time user clicks **+1** button counter increases by 1.
 </div>
 
 Let's try
-[bug detection algorithm](#detection_algorithm)
+[the bug detection algorithm](#detection_algorithm)
 with
 [configuration change](#configuration_change):
 
@@ -105,16 +106,16 @@ with
 **Actual result:**
 After configuration change counter was reset to 0.
 
-Of course this is simplified example,
-you probably will never find this bug.
+Of course, this is a simplified example,
+you probably will never find bug exactly like this.
 But sometimes developers forget to restore one of many text pieces on the screen.
 
 ### Dialog action {#dialog_action_after_configuration_change}
 
-In the next example user can choose a pill: red or blue.
-After she clicks "Choose a pill" button,
-dialog appears with possible options.
-When user select a pill,
+In the next example, a user can choose a pill: red or blue.
+After she clicks the "Choose a pill" button,
+a dialog appears with possible options.
+When a user selects a pill,
 her choice is displayed on the screen.
 
 <div align='center'>
@@ -122,7 +123,7 @@ her choice is displayed on the screen.
 </div>
 
 Let's use
-[bug detection algorithm](#detection_algorithm)
+[the bug detection algorithm](#detection_algorithm)
 with
 [configuration change](#configuration_change)
 and check that user can complete the journey:
@@ -132,28 +133,28 @@ and check that user can complete the journey:
 3. Rotate device to trigger configuration change;
 4. Check that dialog is still present;
 5. Select a pill;
-6. Verify that selected option is on the screen;
+6. Verify that the selected option is on the screen;
 
 <div align='center'>
     <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice-after-configuration-change.gif'>
 </div>
 
 **Actual result:**
-Dialog is still present after configuration change,
+Dialog is still present after the configuration change,
 but it does nothing.
-User has chosen a red pill, but there is still blue on the screen.
+a user has chosen a red pill, but there is still blue on the screen.
 
 ### User input loss
 
-Consider following feature:
-When user enters the screen, app loads some data from the server and lets user edit it.
-Once user press "Update" buton, information is updated on the server.
+Consider the following feature:
+when a user enters the screen, the app loads some data from the server and lets a user edit it.
+Once a user presses the "Update" button, new information is updated on the server.
 
 <div align='center'>
     <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input.gif'>
 </div>
 
-This examples works good after configuration change,
+This example works well after a configuration change,
 so this time we try
 [bug detection algorithm](#detection_algorithm)
 with
@@ -163,8 +164,8 @@ with
 1. Set background process limit to *No background processes*;
 1. Open the *INPUT* tab;
 2. Fill-up input fields;
-3. Switch to different app to cause a process death;
-4. Switch back to original app; 
+3. Switch to a different app to cause a process death;
+4. Switch back to the original app; 
 5. Verify that your input is still present;
 
 <div align='center'>
@@ -172,14 +173,14 @@ with
 </div>
 
 **Actual result:** 
-App overrides inputted data by data from server.
+App overrides inputted data by data from the server.
 
-This scenario may seems complex and unlikely to happen,
-but on second thought it's common thing.
+This scenario may seem complex and unlikely to happen,
+but on second thought it's a common thing.
 Imaging: you're filling-up a huge form,
 and after a minute of hard work somebody calls you.
 When you answer a call phone switches apps,
-so there is a chance that system can kill the app.
+so there is a chance that the system can kill the app.
 The chance is much higher if it's a video call.
 
 # Summary
@@ -187,11 +188,11 @@ The chance is much higher if it's a video call.
 Lifecycle related bugs are tricky,
 you won't see them if you just work with the app.
 But users are different: 
-they use app laying down on sofa,
+they use app laying down on a sofa,
 turning from side to side,
 causing configuration change because of rotation;
 their phones run out of battery,
 causing configuration change because of night node.
-Knowledge that you get in this article
-is a powerful weapon in you hand against Lifecycle related bugs.
+The knowledge that you get in this article
+is a powerful weapon in your hand against Lifecycle related bugs.
 Don't let them reach your users, good luck!
