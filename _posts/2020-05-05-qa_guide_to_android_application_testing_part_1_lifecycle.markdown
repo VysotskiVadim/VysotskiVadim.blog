@@ -9,7 +9,7 @@ postImage:
   alt: 'A bird caught a bug'
 ---
 
-To find bugs faster and contributing less effort you need to know
+To find bugs faster contributing less effort you need to know
 *what developers usually forget to handle*.
 If you start checking things where the chance of error is higher -
 you will find a bug faster.
