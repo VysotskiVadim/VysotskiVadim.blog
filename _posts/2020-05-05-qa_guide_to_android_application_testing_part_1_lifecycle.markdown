@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2020-05-05 12:00:00 +0300
 title:  "QA guide to Android application testing. Part 1: Lifecycle." 
 description: "Test Android applications like a professional: learn technique of catching Lifecycle related bugs."
 image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/resized/caught-a-bug_768.jpg
@@ -9,7 +10,7 @@ postImage:
 ---
 
 To find bugs faster and contributing less effort you need to know
-*what developers usually forget to handle?*
+*what developers usually forget to handle*.
 If you start checking things where the chance of error is higher -
 you will find a bug faster.
 
@@ -183,8 +184,9 @@ This scenario may seem complex and unlikely to happen,
 but on second thought it's a common thing.
 Imaging: you're filling-up a huge form,
 and after a minute of hard work somebody calls you.
-When you answer a call phone switches apps,
-so there is a chance that the system can kill the app.
+When you answer a call, phone switches apps.
+Now your app with a form in the background,
+so there is a chance that the system can kill it.
 The chance is much higher if it's a video call.
 
 # Summary
