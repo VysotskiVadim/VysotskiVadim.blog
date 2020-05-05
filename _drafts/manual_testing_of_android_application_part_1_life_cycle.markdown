@@ -2,6 +2,10 @@
 layout: post
 title:  "QA guide to Android application testing. Part 1: Lifecycle." 
 description: "Test Android applications like a professional: learn technique of catching Lifecycle related bugs."
+image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/resized/caught-a-bug_768.jpg
+postImage:
+  src: caught-a-bug
+  alt: 'A bird caught a bug'
 ---
 
 To find bugs faster and contributing less effort you need to know
@@ -196,3 +200,8 @@ causing configuration change because of night node.
 The knowledge that you get in this article
 is a powerful weapon in your hand against Lifecycle related bugs.
 Don't let them reach your users, good luck!
+
+## Links
+* Post image was taken from [flickr](https://flic.kr/p/c9vEmb)
+* [Process and Application Lifecycle](https://developer.android.com/guide/components/activities/process-lifecycle)
+* [Activity Lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle)
