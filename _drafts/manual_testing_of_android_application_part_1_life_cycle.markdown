@@ -205,3 +205,4 @@ Don't let them reach your users, good luck!
 * Post image was taken from [flickr](https://flic.kr/p/c9vEmb)
 * [Process and Application Lifecycle](https://developer.android.com/guide/components/activities/process-lifecycle)
 * [Activity Lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle)
+* [Example application](https://github.com/VysotskiVadim/lifecycle-testing)
