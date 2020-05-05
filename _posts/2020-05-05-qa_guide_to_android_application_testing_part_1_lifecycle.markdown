@@ -42,7 +42,8 @@ just trigger them in the third step of the bug detection algorithm.
 ### Configuration Changes {#configuration_change}
 OS has many different configurations that affect UI appearance:
 orientation (vertical/horizontal), Day/Night mode, system language, and others...
-When one of the configuration parameters changes Android recreates components to adopt the app for a new setting.
+When one of the configuration parameters changes,
+Android recreates components to adopt the app for a new setting.
 
 <div align='center'>
     <img height='400px' src='https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/configuration_change_orientation.gif'>
@@ -70,7 +71,7 @@ For testing purposes,
 you can set **Background process limit** to **No background process**
 in developer options.
 
-To test switch from testing app to any other,
+To test: switch from testing app to any other,
 wait for a few seconds and switch back.
 If your app has a splash screen,
 you will see it during switching back.
