@@ -54,7 +54,7 @@ The easiest way to trigger configuration change is to rotate a device or turn on
 ### Process Death {#process_death}
 Android manages RAM without user interaction.
 When there is a low amount of available memory,
-OS trying to free up some space.
+OS tries to free up some space.
 It selects a process with the lowest priority among running processes and kills it.
 Visible applications have the highest priority.
 So when a user switches between apps,
@@ -113,16 +113,16 @@ with
 After configuration change counter was reset to 0.
 
 Of course, this is a simplified example,
-you probably will never find bug exactly like this.
+you will probably never find bug exactly like this.
 But sometimes developers forget to restore one of many text pieces on the screen.
 
 ### Dialog action {#dialog_action_after_configuration_change}
 
 In the next example, a user can choose a pill: red or blue.
-After she clicks the "Choose a pill" button,
+After clicking the "Choose a pill" button,
 a dialog appears with possible options.
 When a user selects a pill,
-her choice is displayed on the screen.
+a chosen option is displayed on the screen.
 
 <div align='center'>
     <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice.gif'>
@@ -146,9 +146,9 @@ and check that user can complete the journey:
 </div>
 
 **Actual result:**
-Dialog is still present after the configuration change,
+Dialog is still presented after the configuration change,
 but it does nothing.
-a user has chosen a red pill, but there is still blue on the screen.
+A user has chosen a red pill, but there is still blue on the screen.
 
 ### User input loss
 
@@ -199,7 +199,7 @@ they use app laying down on a sofa,
 turning from side to side,
 causing configuration change because of rotation;
 their phones run out of battery,
-causing configuration change because of night node.
+causing configuration change because of night mode.
 The knowledge that you get in this article
 is a powerful weapon in your hand against Lifecycle related bugs.
 Don't let them reach your users, good luck!
