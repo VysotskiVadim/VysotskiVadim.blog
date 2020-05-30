@@ -16,6 +16,7 @@
     {%- include footer.html -%}
 
   </body>
-  <script type="text/javascript" src="https://app.diagrams.net/js/viewer.min.js"></script>
-
+  {% if page.diagrams %}
+    <script type="text/javascript" src="https://app.diagrams.net/js/viewer.min.js"></script>
+  {% endif %}
 </html>

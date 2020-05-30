@@ -7,6 +7,7 @@ image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/asset
 postImage:
   src: jetpack-pagination-image
   alt: Don't use library if isn't designed to solve your problem
+diagrams: true
 ---
 
 I like libraries provided by Google in Jetpack suite.
