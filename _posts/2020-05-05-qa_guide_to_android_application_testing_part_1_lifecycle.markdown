@@ -46,8 +46,9 @@ When one of the configuration parameters changes,
 Android recreates components to adopt the app for a new setting.
 
 <div align='center'>
-    <img height='400px' src='https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/configuration_change_orientation.gif'>
-    <img height='400px' src='https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/configuration_change_night_mode.gif'>
+    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/configuration_change_orientation.webm' %}
+
+    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/configuration_change_night.webm' %}
 </div>
 The easiest way to trigger configuration change is to rotate a device or turn on/off night mode.
 
@@ -92,7 +93,7 @@ On the *STATE* tab, you can find the following feature:
 every time user clicks **+1** button counter increases by 1.
 
 <div align='center'>
-    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter.gif'>
+    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter.webm' %}
 </div>
 
 Let's try
@@ -106,7 +107,7 @@ with
 4. Check that counter is still there after rotation.
 
 <div align='center'>
-    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.gif'>
+     {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.webm' %}
 </div>
 
 **Actual result:**
@@ -125,7 +126,7 @@ When a user selects a pill,
 a chosen option is displayed on the screen.
 
 <div align='center'>
-    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice.gif'>
+     {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice.webm' %}
 </div>
 
 Let's use
@@ -142,7 +143,7 @@ and check that user can complete the journey:
 6. Verify that the selected option is on the screen;
 
 <div align='center'>
-    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice-after-configuration-change.gif'>
+     {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice-after-configuration-change.webm' %}
 </div>
 
 **Actual result:**
@@ -157,7 +158,7 @@ when a user enters the screen, the app loads some data from the server and lets 
 Once a user presses the "Update" button, new information is updated on the server.
 
 <div align='center'>
-    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input.gif'>
+    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input.webm' %}
 </div>
 
 This example works well after a configuration change,
@@ -175,7 +176,7 @@ with
 5. Verify that your input is still present;
 
 <div align='center'>
-    <img height='400px' src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input-after-process-deadth.gif'>
+    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input-after-process-deadth.webm' %}
 </div>
 
 **Actual result:** 
