@@ -456,3 +456,7 @@ Nice try Google, but I say **NO** to Jetpack Pagination in my projects.
 It's much easier to implement a custom mechanism that handles exactly what I need.
 How to do it?
 Stay tuned and I'll show it to you soon.
+
+## Links
+* Post image was taken from [flickr](https://flic.kr/p/7yv4t7)
+* [Official architecture components samples repository](https://github.com/android/architecture-components-samples/tree/7057c6f3a5a10e2ce28cd000d2037f718008cab2/PagingWithNetworkSample)
