@@ -27,8 +27,8 @@ So to get the best solution I recommend you read till the end of the article.
 * [Workaround #1: Get current status](#get_current_status)
 * [Workaround #2: Parallel streams of data](#parallel_streams)
 * [Workaround #3: Custom map](#custom_map)
-* [Workaround #4: Act as UI](#workaround-4-act-as-ui)
-* [Workaround #5: Isolate workarounds](#workaround-5-isolate-workarounds)
+* [Workaround #4: Act as UI](#act_as_ui)
+* [Workaround #5: Isolate workarounds](#isolate_workarounds)
 
 ## Looks good at the first glance
 
@@ -213,7 +213,7 @@ Basically, you need to trigger data loading in test,
 and then verify View Model state.
 How can you start data loading if everything that you have is `LiveData<PagedList<T>>` property on View Model?
 
-#### Workaround #4: Act as UI
+#### Workaround #4: Act as UI {#act_as_ui}
 
 To trigger data loading in a unit test you have to act like UI.
 
@@ -278,7 +278,7 @@ or `LiveData<Any>`, no no no, stop it, don't even want to think about it.
 At this moment I realized that architecture built on top of Jetpack Pagination forces
 you to create new workarounds for every new feature.
 
-### Workaround #5: Isolate workarounds
+### Workaround #5: Isolate workarounds {#isolate_workarounds}
 
 To minimize damage from lib we can put all Jetpack Pagination related code
 in the outside layer of architecture: UI.
