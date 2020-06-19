@@ -10,25 +10,29 @@ postImage:
 diagrams: true
 ---
 
-I like libraries provided by Google in Jetpack suite.
-Libs do their work and do it well, stable, and fast.
-I trusted them so much, so when I faced the task of showing a paged result,
-I didn't have any doubts to use [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging).
-It was a mistake.
-During the usage of Jetpack Paging library,
-I experienced many technical challenges.
-This article not just nagging about my pain,
-it also includes workaround which I used.
-If you use Jetpack Paging I believe you'll find them useful.
+Despite the name, this article is mostly about my experience of adopting
+[Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging) to my project.
+I don't recommend using this library for projects with the same specifics as my current one: 
+* Not trivial offline work logic;
+* Unit testing;
+* Complex UI.
+
+It appeared that Jetpack Paging doesn't play well with given preconditions.
+But it plays, and I would say it's good enough that we haven't got rid of it yet.
+If you're ready to know how to make the most of Jetpack Paging, this post is for you, enjoy the reading.
+As our way to cook pagination isn't just a standard well know approach,
+I call it **workarounds**.
 Workarounds will be present in the same order I used them.
 Usually, an old workaround was replaced by a new one.
 So to get the best solution I recommend you read till the end of the article.
 
+Here the map for quick navigation if you've already read the article and want to refresh some details.
 * [Workaround #1: Get current status](#get_current_status)
 * [Workaround #2: Parallel streams of data](#parallel_streams)
 * [Workaround #3: Custom map](#custom_map)
 * [Workaround #4: Act as UI](#act_as_ui)
 * [Workaround #5: Isolate workarounds](#isolate_workarounds)
+
 
 ## Looks good at the first glance
 
