@@ -453,13 +453,14 @@ Now you have clean code at least in the core architecture layers.
 
 ## Summary
 
-Jetpack Paging is a good library that reveals the complexity of pagination generalization.
+Jetpack Paging is a great library that reveals the complexity of pagination generalization.
 Pagination itself isn't such a complex task,
 the thing is it's difficult to create a silver bullet which handles different cases.
-Nice try Google, but I say **NO** to Jetpack Pagination in my projects.
+Jetpack Paging is well applicable for simple apps: *display exactly what you have in a database and load more on the fly*.
+I would say **NO** to Jetpack Pagination in my projects.
+Unfortunately, the majority of them don't fit the *"simple projects"* category.
 It's much easier to implement a custom mechanism that handles exactly what I need.
-How to do it?
-Stay tuned and I'll show it to you soon.
+I will write an article about it, stay tuned.
 
 ## Links
 * Post image was taken from [flickr](https://flic.kr/p/7yv4t7)
