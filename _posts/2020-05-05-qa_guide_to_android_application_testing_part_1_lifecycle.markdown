@@ -50,7 +50,16 @@ Android recreates components to adopt the app for a new setting.
 
     {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/configuration_change_night.webm' %}
 </div>
-The easiest way to trigger configuration change is to rotate a device or turn on/off night mode.
+Expected behavior is to get an app in the same state, but adopted to a new configuration.
+For instance, user filled up a few fields,
+switched to phone settings,
+then changed system language,
+and returned to an app.
+In that case, expected state is fields are filled,
+but all text in the app is changed to a selected language.
+
+The easiest way to trigger configuration change is to rotate a device or turn on/off night mode
+*(turn on battery saver to get night mode)*.
 
 ### Process Death {#process_death}
 Android manages RAM without user interaction.
