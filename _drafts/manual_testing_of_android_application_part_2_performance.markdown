@@ -8,3 +8,4 @@ description: "Checklist for QA engineer to test integration with Android OS"
     * overdraw
     * app start time (activity manager via adb)
     * android vitals
+* Memory leaks: leak canary
