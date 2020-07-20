@@ -451,6 +451,50 @@ val pages = viewModelScope.transformToJetpackPagedResult {
 Congratulations!
 Now you have clean code at least in the core architecture layers.
 
+## Issue #6: Remove item
+
+Removing item from list is common thing, required for many features.
+You can see an example in any email client:
+TODO: put example here
+
+As an Android developer you probably think:
+I just need to remove item from `PagedList` and call `notifyItemRemoved`.
+Easy!
+But then you notice that `PagedList` doesn't let you change loaded items.
+
+### Workaround #6: Don't change - update
+
+When you submit a new `PagedList` to a `PagedAdapter`,
+it uses `DiffUtil` to compare lists and show you updates.
+Let's try to do it.
+
+First of all you need to be able to update `PagedList` inside view model.
+To achieve this, we need to stop using standard `toLiveData` builder
+and build `PagedList` manually.
+
+```kotlin
+fun <T> CoroutineScope.createPagedList(
+    pageLoader: PageLoader<T>
+): PagedList<T> {
+    val scope = this
+    val immediateExecutor = Executor { it.run() }
+    val config = Config(
+        pageSize = PAGE_SIZE,
+        prefetchDistance = PREFETCH_DISTANCE,
+        initialLoadSizeHint = PAGE_SIZE
+    )
+    val dataSource = PaginationDataSource(scope, pageLoader)
+    return PagedList.Builder(dataSource, config)
+        .setNotifyExecutor(immediateExecutor)
+        .setFetchExecutor(immediateExecutor)
+        .setInitialKey(FIRST_PAGE)
+        .build()
+}
+```
+
+
+
+
 ## Summary
 
 Jetpack Paging is a great library that reveals the complexity of pagination generalization.
