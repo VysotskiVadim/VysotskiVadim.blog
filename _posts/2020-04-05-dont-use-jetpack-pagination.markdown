@@ -14,7 +14,7 @@ Despite the name, this article is mostly about my experience of adopting
 [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging) to my project.
 I don't recommend using this library for projects with the same specifics as my current one: 
 * Not trivial offline work logic;
-* Unit testing;
+* Test driven development;
 * Complex UI.
 
 It appeared that Jetpack Paging doesn't play well with given preconditions.
@@ -27,11 +27,11 @@ Usually, an old workaround was replaced by a new one.
 So to get the best solution I recommend you read till the end of the article.
 
 Here the map for quick navigation if you've already read the article and want to refresh some details.
-* [Workaround #1: Get current status](#get_current_status)
-* [Workaround #2: Parallel streams of data](#parallel_streams)
+* [Workaround #1: Get current status to show loading](#get_current_status)
+* [Workaround #2: Parallel streams of data to handle network errors](#parallel_streams)
 * [Workaround #3: Custom map](#custom_map)
-* [Workaround #4: Act as UI](#act_as_ui)
-* [Workaround #5: Isolate workarounds](#isolate_workarounds)
+* [Workaround #4: Act as UI to unit test](#act_as_ui)
+* [Workaround #5: Isolate workarounds to make code clean](#isolate_workarounds)
 
 
 ## Looks good at the first glance
@@ -64,7 +64,7 @@ Every time live data with `PagedList<T>` changes you should call `PagedListAdapt
 
 {% include_relative _jetpack-paging-architecture.html %}
 
-## Issue #1: Display current status {#current_status}
+## Issue #1: Display loading {#current_status}
 
 Users don't want just wait, even if data is loading, something should happening on the screen.
 At least user should see some animations.
