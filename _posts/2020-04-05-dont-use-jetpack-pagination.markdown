@@ -474,13 +474,13 @@ and build `PagedList` manually.
 
 ```kotlin
 fun <T> CoroutineScope.createPagedList(
-    pageLoader: PageLoader<T>
+    pageLoader: ItemsPageLoader<T>
 ): PagedList<T> {
     val scope = this
     val immediateExecutor = Executor { it.run() }
     val config = Config(
-        pageSize = PAGE_SIZE,
-        prefetchDistance = PREFETCH_DISTANCE,
+        pageSize = 30,
+        prefetchDistance = 30 / 2,
         initialLoadSizeHint = PAGE_SIZE
     )
     val dataSource = PaginationDataSource(scope, pageLoader)
@@ -491,9 +491,39 @@ fun <T> CoroutineScope.createPagedList(
         .build()
 }
 ```
+and change pages creation in the view model
+```kotlin
+private val _pages = MutableLiveData<PagedList<ExampleListItem>>()
+val pages : LiveData<PagedList<ExampleListItem>> by lazy {
+    _pages.value = viewModelScope.createPagedList {
+        _state.value = State.Loading
+        val page = loadItemsPage(it)
+        _state.value = State.Loaded(page.itemsCount)
+        page
+    }
+    _pages
+}
+```
 
+Now you're ready to implement removing item from the list in 3 simple stems:
+1. Get loaded items
+2. Remove an item
+3. Create new `PagedList` with new item
 
+To get loaded items call `PagedList.snapshot`.
+Don't forget to filter `null`s if you use placeholders loading animation.
+```kotlin
+val loadedItems = _pages.value?.snapshot()!!.filterNotNull()
+```
 
+It's straight forward to remove an item:
+```kotlin
+val updatedList = loadedItems.filter { it.id != id }
+```
+
+The third step is a bit more complex.
+To create a new `PagedList` with predefined content
+you need to pass `DataSource` calls back immediately on `loadInitial`
 
 ## Summary
 
