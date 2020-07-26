@@ -1,12 +1,11 @@
 ---
 layout: post
-title:  Don't use Jetpack Pagination v2
-date: 2020-04-05 13:30:00 +0300
-description: "My experience of using Jetpack Pagination: display status, handle errors, unit testing, mapping, clean architecture."
+title:  Jetpack Pagination on steroids
+description: "My experience of using Jetpack Pagination: clean architecture, unit testing, refresh and update list."
 image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/resized/pages_768.jpg
 postImage:
-  src: pages
-  alt: An open book with pages
+  src: pagination2
+  alt: An opened book with many pages
 diagrams: true
 ---
 
