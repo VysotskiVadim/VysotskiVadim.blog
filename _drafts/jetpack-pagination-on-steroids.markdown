@@ -4,12 +4,43 @@ title:  Jetpack Pagination on steroids
 description: "My experience of using Jetpack Pagination: clean architecture, unit testing, refresh and update list."
 image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/resized/pages_768.jpg
 postImage:
-  src: pagination2
+  src: pagination-2
   alt: An opened book with many pages
 diagrams: true
 ---
 
-Despite the name, this article is mostly about my experience of adopting
+Some time ago we needed to implement pagination for the Android application.
+As I trusted Jetpack library suite a lot,
+I chose Jetpack Paging 2 without any doubts,
+and convinced my team that this is the best choice for us.
+But it appeared that Jetpack paging has many limitations and disadvantages.
+Let's see what is wrong with it.
+
+### Jetepack Paging issues and limitations
+
+Jetpack paging is build on top of idea that data base should be the single source of truth.
+App immediately shows cached result from a data base and then load more when user reaches the end of the list.
+So that Jetpack Paging has good integration with Room, and let you load more data to the DB using boundary callbacks.
+Despite the idea having DB as a single source of truth has many advantages,
+it doesn't work for all app.
+
+My app displays search result.
+Our product guys decided that app shouldn't display cached data immediately because it could be outdated.
+But we want to show cached data if user is offline, but not in case of server error.
+Despite this logic is simple,
+it doesn't fit well Jetpack Pagination Architecture.
+
+One other limitation is that Jetpack Paging forces you to use it's type `DataSourceFactory<T>` on all architecture layers:
+from data source(data base) to UI(view).
+Code cleanliness is only small part of the problem,
+the other parts are:
+1. Complexity of mocking of `DataSourceFactory<T>`
+2. `DataSourceFactory<T>` isn't expendable, i.e you can transfer any data together with page items(total count for example).
+Given that Jetpack Paging doesn't handle errors(it's just crashes)
+recommended approach is use parallel data streams based on `LiveData`, IS STILL ACTUAL FOR JETPACK 3?
+That is even more complicated to mock and work with.
+
+
 [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging) to my project.
 I don't recommend using this library for projects with the same specifics as my current one: 
 * Not trivial offline work logic;
@@ -61,202 +92,9 @@ Factory has an extension method `toLiveData` which transforms it to `LiveData<Pa
 You're supposed to use special adapter for recycler view -- `PagedListAdapter`.
 Every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
 
-{% include_relative _jetpack-paging-architecture.html %}
+{% include_relative _jetpack-paging-architecture-2.html %}
 
-## Issue #1: Display loading {#current_status}
 
-Users don't want just wait, even if data is loading, something should happening on the screen.
-At least user should see some animations.
-For page loading there are 2 standard approaches:
-1. Show placeholder instead of each item which is loading right now;
-1. Show usual progress bar at the end of the list.
-
-![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/placeholder-loading-demo.gif){: height="200px"}
-![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/progress-bar.gif){: height="200px"}
-
-Using Jetpack Paging it's very easy to implement place holder based loading.
-`PagedListAdapter` passes `null` as an item to view holder if it isn't loaded yet.
-But if you want to show a progress bar, it will much harder.
-
-The source of the difficulties is that View Model
-*(presenter or any other class which is responsible for UI behavior)*
-isn't a mediator in a data flow to UI.
-`PagedList<T>` hides data loading process from you.
-
-#### Workaround #1: Get current status {#get_current_status}
-
-***Warning**: this workaround is just for your information, you'll see later that it's useless.*
-
-`PagedList<T>` provides ability to add state listeners using `addWeakLoadStateListener`.
-`PagedList<T>.addWeakLoadStateListener` is made for `PagedListAdapter` to update itself once data in `PageList<T>` is changed.
-That's why listeners are weak.
-
-## Issue #2: Network error handling {#network_errors}
-
-Network is unstable.
-We're always ready to get an error during data loading.
-When you implement `DataSource` and see `onError` callback,
-you tend to think that Jetpack Paging ready to handle errors as well.
-Well... It's 99% ready.
-`ContiguousPagedList` version 2.1.1:
-```java
-@Override
-public void onPageError(@PageResult.ResultType int resultType,
-        @NonNull Throwable error, boolean retryable) {
-    LoadState errorState = retryable ? LoadState.RETRYABLE_ERROR : LoadState.ERROR;
-
-    if (resultType == PageResult.PREPEND) {
-        mLoadStateManager.setState(LoadType.START, errorState, error);
-    } else if (resultType == PageResult.APPEND) {
-        mLoadStateManager.setState(LoadType.END, errorState, error);
-    } else {
-        // TODO: pass init signal through to *previous* list
-        throw new IllegalStateException("TODO");
-    }
-}
-```
-Library throws exception with message **TODO** if you call `onError` callback during initial page load.
-
-#### Workaround #2: Parallel streams of data {#parallel_streams}
-
-Maybe I should have called it best practice instead of workaround.
-Because solution was found in the 
-[official architecture components samples repository](https://github.com/android/architecture-components-samples/tree/7057c6f3a5a10e2ce28cd000d2037f718008cab2/PagingWithNetworkSample).
-
-The idea is to create few streams of data, so that page loading is always successful.
-Second stream reports cases which library can't handle: loading status and errors.
-In the sample guys return to View Model a `Listing` object:
-```kotlin
-data class Listing<T>(
-    // the LiveData of paged lists for the UI to observe
-    val pagedList: LiveData<PagedList<T>>,
-    // represents the network request status to show to the user
-    val networkState: LiveData<NetworkState>,
-    // represents the refresh status to show to the user. Separate from networkState, this
-    // value is importantly only when refresh is requested.
-    val refreshState: LiveData<NetworkState>,
-    // refreshes the whole data and fetches it from scratch.
-    val refresh: () -> Unit,
-    // retries any failed requests.
-    val retry: () -> Unit)
-```
-Using this solution View Model just passes `PagedList<T>` through to UI 
-and listen other streams of data to handle cases like showing loading indicator and error handling.
-
-## Issue #3: Items mapping
-
-When I work with View Model and `RecyclerView`,
-I usually transform a list of domain objects to a list of view objects in View Model.
-If items appearance depends on data in domain object it usually different types of view object.
-Recycler View maps different view objects to different views.
-View model can add additional items like headers or
-actions which should be at the end of the list.
-
-{% include_relative _viewmodel-list-view-item.html %}
-
-`DataSource.Factory` lets you `map` or `mapByPage` items.
-Only one limitation -- you can't change items count during mapping.
-It prevents you from breaking Room's out-of-the-box data sources.
-
-#### Workaround #3: Custom map {#custom_map}
-
-*Warning: workaround works only if you use custom* `DataSource<T>`.
-
-To be able to map pages and change items count you have to implement custom map in your `Listing` class.
-My implementation differs from `Listing` proposed in [the previous workaround](#parallel_streams).
-I pass `DataSource.Factory` instead of `PagedList<T>` and have different state reporting.
-```kotlin
-class PagedResultImpl<Key, Value>(
-    override val dataSourceFactory: DataSource.Factory<Key, Value>,
-    override val loadingState: LiveData<PageLoadingState>
-) : PagedResult<Key, Value> {
-
-    ...
-}
-```
-Code looks complex, but idea is strait-forward.
-Copy `WrapperPageKeyedDataSource` and replace call to `DataSource.convert` function by function which doesn't throws exceptions like original.
-```java
-static <A, B> List<B> convert(Function<List<A>, List<B>> function, List<A> source) {
-    return function.apply(source);
-}
-```
-Then implement `map` and `mapByPage` in your `Listing` class.
-You can copy them from `DataSource.Factory`.
-```kotlin
-override fun <NewValue> map(func: (Value) -> NewValue): PagedResult<Key, NewValue> =
-        PagedResultImpl(dataSourceFactory.map(func), loadingState)
-
-override fun <NewValue> mapByPage(func: (List<Value>) -> List<NewValue>) =
-    PagedResultImpl(object : DataSource.Factory<Key, NewValue>() {
-        override fun create(): DataSource<Key, NewValue> {
-            return CustomWrapperPageKeyedDataSource<Key, Value, NewValue>(
-                dataSourceFactory.create() as PageKeyedDataSource<Key, Value>
-            ) { input ->
-                func(input)
-            }
-        }
-    }, loadingState)
-```
-
-## Issue #4: Unit Testing {#unit_testing}
-
-I usually split feature into a few units:
-1. UI behavior - View Model;
-1. Business login - Use Case;
-1. Data - Repository
-
-Each of them I cover by tests.
-Jetpack pagination causes issues on all layers.
-It's hard to implement test double for your `Listing` object.
-Don't even try to mock it.
-Use stubs or fakes.
-Another challenge is to test View Model.
-Basically, you need to trigger data loading in test, 
-and then verify View Model state.
-How can you start data loading if everything that you have is `LiveData<PagedList<T>>` property on View Model?
-
-#### Workaround #4: Act as UI {#act_as_ui}
-
-To trigger data loading in a unit test you have to act like UI.
-
-Start with getting live data value via subscription.
-```kotlin
-fun <T> LiveData<T>.getValueForTest(): T? {
-    var value: T? = null
-    val observer = Observer<T> {
-        value = it
-    }
-    observeForever(observer)
-    removeObserver(observer)
-    return value
-}
-```
-When you got `PagedList<T>` using `getValueForTest` you can fetch first page by accessing `PagedList<T>`:
-
-```kotlin
-fun <T> LiveData<PagedList<T>>.fetchData() {
-    getValueForTest()!!
-}
-```
-`PagedList<T>` loads initial data when it's created.
-Next page loading occurs when you request an item which is close to loaded items boundary.
-So if you'd like to load the next page, just load around last loaded item.
-
-```kotlin
-fun <T> LiveData<PagedList<T>>.fetchOneMorePage() {
-    val pagedList = getValueForTest()!!
-    val lastLoadedItemIndex = pagedList.loadedCount - 1
-    pagedList.loadAround(lastLoadedItemIndex)
-}
-```
-
-Using given extension you're ready to test view model states switching during pagination:
-
-```kotlin
-listViewModel.items.getValueForTest()!!.fetchData()
-assertEquals(State.OnlineDataLoaded(totalItemsCount = TEST_TOTAL_ITEMS_COUNT), listViewModel.state.getValueForTest())
-```
 
 ## Issue #5: Display custom data associated with the request
 
