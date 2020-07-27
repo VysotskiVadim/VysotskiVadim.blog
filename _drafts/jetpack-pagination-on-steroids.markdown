@@ -70,7 +70,54 @@ I'm very comfortable with current approach,
 it's flexible and easy to unit test.
 I'm happy that I can share my hard-won way of using Jetpack Pagination with you!
 
+## Let's cook
 
+We will implement simple app that loads data by pages as user scrolls,
+and to make things funnier,
+we will add few interesting features:
+displaying of total items count,
+swipe to refresh,
+and remove item from the list.
+Example will use [cursor based pagination like twitter does](https://developer.twitter.com/en/docs/basics/cursoring).
+You can find all code
+[here](https://github.com/VysotskiVadim/jetpack-pagination-example).
+
+We start from the core.
+Our app will operate with pages of data,
+and every page has cursor.
+
+```kotlin
+interface Page<T> {
+    val items: List<T>
+    val nextCursor: PaginationCursor
+}
+```
+
+With
+[cursoring](https://developer.twitter.com/en/docs/basics/cursoring)
+technique pages identifies by the cursor,
+that is just string.
+But to make code little bit cleaner we introduce a
+type alias and a few constants
+
+```kotlin
+typealias PaginationCursor = String?
+
+val NO_PAGE: PaginationCursor = null
+val FIRST_PAGE: PaginationCursor = null
+```
+
+Despite the fact that in our implementation `null` could mean two different things,
+we give it different name to make developer's intent clean when you read the code.
+
+
+
+
+Now let's thing about example app use case:
+user enters the screen, scrolling and load data by pages.
+
+```kotlin
+```
 
 ## Issue #5: Display custom data associated with the request
 
