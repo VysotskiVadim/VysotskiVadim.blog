@@ -6,17 +6,16 @@ image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/asset
 postImage:
   src: pagination-2
   alt: An opened book with many pages
-diagrams: true
 ---
 
 Some time ago we needed to implement pagination for the Android application.
 As I trusted Jetpack library suite a lot,
-I chose Jetpack Paging 2 without any doubts,
+I chose [Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging) 2 without any doubts,
 and convinced my team that this is the best choice for us.
 But it appeared that Jetpack paging has many limitations and disadvantages.
 Let's see what is wrong with it.
 
-### Jetepack Paging issues and limitations
+### Jetpack Paging issues and limitations
 
 Jetpack paging is build on top of idea that data base should be the single source of truth.
 App immediately shows cached result from a data base and then load more when user reaches the end of the list.
@@ -35,64 +34,41 @@ from data source(data base) to UI(view).
 Code cleanliness is only small part of the problem,
 the other parts are:
 1. Complexity of mocking of `DataSourceFactory<T>`
-2. `DataSourceFactory<T>` isn't expendable, i.e you can transfer any data together with page items(total count for example).
+2. `DataSourceFactory<T>` isn't extendable, i.e you can transfer any data together with page items(total count for example).
 Given that Jetpack Paging doesn't handle errors(it's just crashes)
-recommended approach is use parallel data streams based on `LiveData`, IS STILL ACTUAL FOR JETPACK 3?
+recommended approach is use parallel data streams based on `LiveData`, **IS STILL ACTUAL FOR JETPACK 3?**
 That is even more complicated to mock and work with.
 
+In my core architecture layer I would prefer to see only my classes,
+so that I can implement different requirement without saying that lib doesn't support it,
+and I can easily test all my logic using test doubles.
 
-[Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging) to my project.
-I don't recommend using this library for projects with the same specifics as my current one: 
-* Not trivial offline work logic;
-* Test driven development;
-* Complex UI.
+### Great part of Jetpack Paging
 
-It appeared that Jetpack Paging doesn't play well with given preconditions.
-But it plays, and I would say it's good enough that we haven't got rid of it yet.
-If you're ready to know how to make the most of Jetpack Paging, this post is for you, enjoy the reading.
-As our way to cook pagination isn't just a standard well know approach,
-I call it **workarounds**.
-Workarounds will be present in the same order I used them.
-Usually, an old workaround was replaced by a new one.
-So to get the best solution I recommend you read till the end of the article.
+Jetpack Paging contains logic that is actual for any project regardless of business requirements.
+You need to load the first page immediately and then, when user is close to the end, app should load next page.
+At least I can't imagine project where requirements regarding pagination are different.
 
-Here the map for quick navigation if you've already read the article and want to refresh some details.
-* [Workaround #1: Get current status to show loading](#get_current_status)
-* [Workaround #2: Parallel streams of data to handle network errors](#parallel_streams)
-* [Workaround #3: Custom map](#custom_map)
-* [Workaround #4: Act as UI to unit test](#act_as_ui)
-* [Workaround #5: Isolate workarounds to make code clean](#isolate_workarounds)
+### Our way of using Jetpack Paging
 
+My motivation is following:
+1. I don't want to use Jetpack's type `DataSourceFactory` on all architecture layers
+2. I want to use pages loading and appending logic from the lib
+3. All error handling should be done in view model
 
-## Looks good at the first glance
+Therefore I can use only `PagedList`,
+that is responsible to load pages to put them together in one list,
+and `PagedListAdapter`,
+that is `RecyclerViewAdapter` for `PagedList`.
 
-When you start implementing custom DataSource, everything looks good.
-You extend `PageKeyedDataSource` and implement 3 methods: `loadInitial`, `loadAfter`, and `loadBefore`.
-```kotlin
-override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, RedditPost>) {
-    // your implementation
-}
-
-override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, RedditPost>) {
-    // your implementation
-}
-
-override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<String, RedditPost>) {
-    // your implementation
-}
-
-```
-each of the methods takes the callback as a parameter,
-so when asynchronous loading is finished you suppose to call
-`callback.onResult(...)` or `callback.onError(...)`.
-
-Your `DataSource` is wrapped by `DataSource.Factory` which creates it.
-Factory has an extension method `toLiveData` which transforms it to `LiveData<PagedList<T>>`.
-`PagedList` is a lazy loading list that loads data from its `DataSource` when a user scrolls.
-You're supposed to use special adapter for recycler view -- `PagedListAdapter`.
-Every time live data with `PagedList<T>` changes you should call `PagedListAdapter.submitList`.
-
-{% include_relative _jetpack-paging-architecture-2.html %}
+Unfortunately I didn't come to this conclusion during the integration with the library.
+I started from the recommended approach.
+But every time I needed to integrate a new feature with pagination
+I struggled a lot trying to overcame pagination limitations.
+And I've come to current implementation step by step.
+I'm very comfortable with current approach,
+it's flexible and easy to unit test.
+I'm happy that I can share my hard-won way of using Jetpack Pagination with you!
 
 
 
@@ -437,5 +413,5 @@ It's much easier to implement a custom mechanism that handles exactly what I nee
 I will write an article about it, stay tuned.
 
 ## Links
-* Post image was taken from [flickr](https://flic.kr/p/7yv4t7)
+* Post image was taken from [flickr](https://flic.kr/p/SdnH1B)
 * [Official architecture components samples repository](https://github.com/android/architecture-components-samples/tree/7057c6f3a5a10e2ce28cd000d2037f718008cab2/PagingWithNetworkSample)
