@@ -70,10 +70,14 @@ I'm very comfortable with current approach,
 it's flexible and easy to unit test.
 I'm happy that I can share my hard-won way of using Jetpack Pagination with you!
 
-## Let's cook
+### The output
 
-We will implement simple app that loads data by pages as user scrolls,
-and to make things funnier,
+We will implement simple app that loads data by pages as user scrolls.
+Pagination will be one directional,
+*in other words user start with page 0,
+then loads page 1 and so on.
+There is not page before page 0.*
+To make things funnier,
 we will add few interesting features:
 displaying of total items count,
 swipe to refresh,
@@ -82,9 +86,66 @@ Example will use [cursor based pagination like twitter does](https://developer.t
 You can find all code
 [here](https://github.com/VysotskiVadim/jetpack-pagination-example).
 
-We start from the core.
-Our app will operate with pages of data,
-and every page has cursor.
+### Exploring Jetpack Paging
+
+`PagedList<T>` is responsible to load pages and put them together.
+It's basically is implementation of `List<T>`,
+that expects to be used at `RecyclerViewAdapter`.
+So when adapter calls `pagesList.get(45)`, 
+`PagedList` knows that user scrolled to item on position 45,
+and if it's close to loaded items border,
+`PagedList` would load more items.
+Jetpack paging offers special adapter `PagedListAdapter`,
+designed to work with `PagedList`.
+`PagedListAdapter` aware that `PagedList` from time to time
+append new items, so it listens updates from `PagedList`.
+
+`PagedList` requires to pass it implementation of `DataSource`.
+It's easy to guess from the name that `DataSource` responsible for loading pages.
+Jetpack Paging offers different base classes for `DataSource`,
+for different pagination strategies: key(*aka cursor or token*) based, offset based, etc.
+`DataSource` has a callbacks-based API, that is not very convinient for project that uses Kotlin Coroutines,
+we we start with custom adapter.
+
+```kotlin
+private class PaginationDataSource<T>(
+    private val scope: CoroutineScope,
+    private val pageLoader: PageLoader<T>
+) : PageKeyedDataSource<PaginationCursor, T>() {
+
+    override fun loadInitial(
+        params: LoadInitialParams<PaginationCursor>,
+        callback: LoadInitialCallback<PaginationCursor, T>
+    ) {
+        scope.launch {
+            val result = pageLoader(PageLoadingArgs(FIRST_PAGE, params.requestedLoadSize))
+            callback.onResult(result.items, NO_PAGE, result.nextCursor)
+        }
+    }
+
+    override fun loadAfter(
+        params: LoadParams<PaginationCursor>,
+        callback: LoadCallback<PaginationCursor, T>
+    ) {
+        scope.launch {
+            val result = pageLoader(PageLoadingArgs(params.key, params.requestedLoadSize))
+            callback.onResult(result.items, result.nextCursor)
+        }
+    }
+
+    override fun loadBefore(
+        params: LoadParams<PaginationCursor>,
+        callback: LoadCallback<PaginationCursor, T>
+    ) {
+        error("not supported")
+    }
+}
+```
+
+Given data source adapter just transforms
+callbacks api to suspending functions calls.
+As callbacks have many parameters, but suspending function could has only one result,
+we grouped parameters to a new class `Page`
 
 ```kotlin
 interface Page<T> {
@@ -93,13 +154,12 @@ interface Page<T> {
 }
 ```
 
-With
-[cursoring](https://developer.twitter.com/en/docs/basics/cursoring)
-technique pages identifies by the cursor,
-that is just string.
-But to make code little bit cleaner we introduce a
-type alias and a few constants
-
+that represents a page.
+For our example I've chosen cursor based pagination,
+as it's superior to offset based.
+When we load page of data, server gives app a cursor,
+that will be used to get next page.
+Cursor is a `String`, but to make code cleaner we introduce a type alice.
 ```kotlin
 typealias PaginationCursor = String?
 
@@ -107,10 +167,31 @@ val NO_PAGE: PaginationCursor = null
 val FIRST_PAGE: PaginationCursor = null
 ```
 
+
+When adapter accesses items 
+It keeps already loaded items and when user scrolls to some point it loads more,
+to append to already loaded.
+Once more 
+
+
+
+
+We start from the core.
+Our app will operate with pages of data,
+and every page has cursor.
+
+
+With
+[cursoring](https://developer.twitter.com/en/docs/basics/cursoring)
+technique pages identifies by the cursor,
+that is just string.
+But to make code little bit cleaner we introduce a
+type alias and a few constants
+
+
+
 Despite the fact that in our implementation `null` could mean two different things,
 we give it different name to make developer's intent clean when you read the code.
-
-
 
 
 Now let's thing about example app use case:
