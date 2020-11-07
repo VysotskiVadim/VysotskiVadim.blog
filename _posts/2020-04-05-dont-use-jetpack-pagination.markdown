@@ -455,16 +455,17 @@ Now you have clean code at least in the core architecture layers.
 ## Final solution {#final_solution}
 
 I ended up with a solution where I use only `PagedList` from the library.
-`PagedList` is responsible for load the next page and append to the list of already loaded pages.
+`PagedList` is responsible for the loading of the next page and appending it to the list of already loaded items.
 All other logic is written by me.
 This approach helps me effectively solve the issues discussed above.
 You can check out [example project](https://github.com/VysotskiVadim/jetpack-pagination-example)
-and see how it all fits together. You will also find the following features:
+and see how it all fit together.
+You will also find the following features:
 * Remove item from the list;
 * Pull to refresh;
 * Error handling;
 * Clean architecture
-_(unit test isn't done in example, but trust me, it easy to implement because you don't have to mock odd data sources from the library)_;
+_(unit tests aren't done in example, but trust me, it easy to implement because you don't have to mock odd data sources from the library)_;
 * Integration with Kotlin Coroutines.
 
 ## Summary
