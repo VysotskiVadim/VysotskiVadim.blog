@@ -464,7 +464,7 @@ and see how it all fits together. You will also find the following features:
 * Pull to refresh;
 * Error handling;
 * Clean architecture
-*(unit test isn't done in example, but trust me, it easy to implement because you don't have to mock odd data sources from the library)*;
+_(unit test isn't done in example, but trust me, it easy to implement because you don't have to mock odd data sources from the library)_;
 * Integration with Kotlin Coroutines.
 
 ## Summary
