@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  Don't use Jetpack Pagination
+title:  Don't use Jetpack Pagination 2
 date: 2020-04-05 13:30:00 +0300
-description: "My experience of using Jetpack Pagination: display status, handle errors, unit testing, mapping, clean architecture."
+description: "My experience of using Jetpack Pagination 2: display status, handle errors, unit testing, mapping, clean architecture."
 image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/resized/pages_768.jpg
 postImage:
   src: pages
@@ -11,13 +11,13 @@ diagrams: true
 ---
 
 Despite the name, this article is mostly about my experience of adopting
-[Jetpack Paging library](https://developer.android.com/topic/libraries/architecture/paging) to my project.
+[Jetpack Paging library 2](https://developer.android.com/topic/libraries/architecture/paging) to my project.
 I don't recommend using this library for projects with the same specifics as my current one: 
 * Not trivial offline work logic;
 * Test driven development;
 * Complex UI.
 
-It appeared that Jetpack Paging doesn't play well with given preconditions.
+It appeared that Jetpack Paging 2 doesn't play well with given preconditions.
 But it plays, and I would say it's good enough that we haven't got rid of it yet.
 If you're ready to know how to make the most of Jetpack Paging, this post is for you, enjoy the reading.
 As our way to cook pagination isn't just a standard well know approach,
@@ -32,6 +32,7 @@ Here the map for quick navigation if you've already read the article and want to
 * [Workaround #3: Custom map](#custom_map)
 * [Workaround #4: Act as UI to unit test](#act_as_ui)
 * [Workaround #5: Isolate workarounds to make code clean](#isolate_workarounds)
+* [Final solution](#final_solution)
 
 
 ## Looks good at the first glance
@@ -451,16 +452,31 @@ val pages = viewModelScope.transformToJetpackPagedResult {
 Congratulations!
 Now you have clean code at least in the core architecture layers.
 
+## Final solution {#final_solution}
+
+I ended up with a solution where I use only `PagedList` from the library.
+`PagedList` is responsible for load the next page and append to the list of already loaded pages.
+All other logic is written by me.
+This approach helps me effectively solve the issues discussed above.
+You can check out [example project](https://github.com/VysotskiVadim/jetpack-pagination-example)
+and see how it all fits together. You will also find the following features:
+* Remove item from the list;
+* Pull to refresh;
+* Error handling;
+* Clean architecture
+*(unit test isn't done in example, but trust me, it easy to implement because you don't have to mock odd data sources from the library)*;
+* Integration with Kotlin Coroutines.
+
 ## Summary
 
 Jetpack Paging is a great library that reveals the complexity of pagination generalization.
 Pagination itself isn't such a complex task,
 the thing is it's difficult to create a silver bullet which handles different cases.
-Jetpack Paging is well applicable for simple apps: *display exactly what you have in a database and load more on the fly*.
+Jetpack Paging 2 is well applicable for simple apps: *display exactly what you have in a database and load more on the fly*.
 I would say **NO** to Jetpack Pagination in my projects.
 Unfortunately, the majority of them don't fit the *"simple projects"* category.
-It's much easier to implement a custom mechanism that handles exactly what I need.
-I will write an article about it, stay tuned.
+Next time I'm going to implement pagination from the scratch.
+It doesn't seem such a complex thing after so many hours of browsing Jetpack Pagination 2 and trying to work around it's issues.
 
 ## Links
 * Post image was taken from [flickr](https://flic.kr/p/7yv4t7)
