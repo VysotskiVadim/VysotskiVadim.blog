@@ -202,7 +202,7 @@ fun Fragment.openDocumentPicker() {
 
 TODO: add video of how grayed out files looks like
 
-### MIME types Filter doesn't always work
+### MIME types filter doesn't always work
 
 Filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
 But some third party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`.
