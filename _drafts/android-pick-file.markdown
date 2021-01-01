@@ -11,7 +11,7 @@ postImage:
 ---     
 
 Some time ago,
-during implementation of "upload document" feature,
+during the implementation of a "upload document" feature,
 I was looking for simple tutorial about picking a file on Android,
 but didn't find anything that fits my requirements.
 I needed:
@@ -25,20 +25,21 @@ Please enjoy the reading or go strait to the [code of the final solution](#code)
 ### Requirements
 
 As a user I want to be able to pick a file
-from device or from the third party cloud storages
+from device or from the third party cloud storage,
 of supported format ({{page.supportedFileTypes}})
-so that it's uploaded to the server.
+so that file is uploaded to the server.
 
 In other words I had to implement file picker,
 that lets user pick only file of supported type,
-from different storages.
+from different storages: local or third party.
 
 ### Pick a file {#pick_a_file}
 
 After Android 11 the only way to access device file system is Storage Access Framework.
 
 My goal is to open document one time, read the content and upload it to the server.
-So Intent.ACTION_GET_CONTENT is exactly what I need.
+So [Intent.ACTION_GET_CONTENT](https://developer.android.com/reference/android/content/Intent#ACTION_GET_CONTENT)
+is exactly what I needed.
 
 ```kotlin
 fun Fragment.openDocumentPicker() {
@@ -54,13 +55,13 @@ const val OPEN_DOCUMENT_REQUEST_CODE = 2
 ```
 
 Executing the code above,
-Android will open system a UI,
+Android opens system UI,
 where user is able to pick file of any type from any connected third party storage.
 
 Let's quickly get thought the code:  
-`Intent.ACTION_GET_CONTENT` - open file to read content one time //TODO: link to virtual files  
-`addCategory(Intent.CATEGORY_OPENABLE)` - we don't want to deal with virtual files, only real ones. //TODO: link to virtual files  
-`OPEN_DOCUMENT_REQUEST_CODE` - id of request //TODO: link to request id  
+`Intent.ACTION_GET_CONTENT` - open file to read it's content one time, reed more in the [doc](https://developer.android.com/reference/android/content/Intent#ACTION_GET_CONTENT)
+`addCategory(Intent.CATEGORY_OPENABLE)` - we don't want to deal with [virtual files](https://www.youtube.com/watch?v=4h7yCZt231Y), only real ones, i.e. file that contains from bytes of data.
+`OPEN_DOCUMENT_REQUEST_CODE` - id of request, we use this number to understand which request caused given result.
 
 TODO: attach video
 
