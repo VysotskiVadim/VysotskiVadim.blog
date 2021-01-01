@@ -181,15 +181,14 @@ So picker shouldn't let user pick not supported file types.
 We can achieve it by specifying supported formats.
 
 ```kotlin
-object UploadDocument {
-    val supportedMimeTypes = allSupportedDocumentsTypesToExtensions.keys.toTypedArray()
-}
+
+val supportedMimeTypes = allSupportedDocumentsTypesToExtensions.keys.toTypedArray()
 
 fun Fragment.openDocumentPicker() {
     val openDocumentIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
         addCategory(Intent.CATEGORY_OPENABLE)
         type = "*/*"
-        putExtra(Intent.EXTRA_MIME_TYPES, UploadDocument.supportedMimeTypes)
+        putExtra(Intent.EXTRA_MIME_TYPES, supportedMimeTypes)
     }
 
     startActivityForResult(openDocumentIntent, OPEN_DOCUMENT_REQUEST_CODE)
@@ -197,3 +196,157 @@ fun Fragment.openDocumentPicker() {
 ```
 
 TODO: add video of how grayed out files looks like
+
+### MIME types Filter doesn't always work
+
+Filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
+But some third party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`.
+
+TODO: add image
+
+When user chooses Google Photos or Yandex Disk
+*(Dropbox didn't provide document provider in the past too)*,
+app opens, because it works not via 
+[document providers](https://developer.android.com/guide/topics/providers/document-provider#overview),
+but via intent filter.
+
+One possible solution is to change pick file intent action to `ACTION_OPEN_DOCUMENT`,
+that [works only via document providers](https://developer.android.com/reference/android/content/Intent#ACTION_OPEN_DOCUMENT).
+But I want user to be able to use all possible data source, so I won't do this.
+
+I let user get data from any source, so when user picked a file I have to check file type and show an error if it's wrong.
+
+### The code
+
+Here all code that you've seen reading the article.
+I split code in a few files:
+
+PickDocument.kt
+```kotlin
+const val OPEN_DOCUMENT_REQUEST_CODE = 2
+
+val supportedMimeTypes: Array<String> = allSupportedDocumentsTypesToExtensions.keys.toTypedArray()
+
+fun Fragment.openDocumentPicker() {
+    val openDocumentIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        addCategory(Intent.CATEGORY_OPENABLE)
+        type = "*/*"
+        putExtra(Intent.EXTRA_MIME_TYPES, supportedMimeTypes)
+    }
+
+    startActivityForResult(openDocumentIntent, OPEN_DOCUMENT_REQUEST_CODE)
+}
+
+fun Fragment.tryHandleOpenDocumentResult(requestCode: Int, resultCode: Int, data: Intent?): OpenFileResult {
+    return if (requestCode == OPEN_DOCUMENT_REQUEST_CODE) {
+        handleOpenDocumentResult(resultCode, data)
+    } else OpenFileResult.DifferentResult
+}
+
+private fun Fragment.handleOpenDocumentResult(resultCode: Int, data: Intent?): OpenFileResult {
+    return if (resultCode == Activity.RESULT_OK && data != null) {
+        val contentUri = data.data
+        if (contentUri != null) {
+            val stream =
+                try {
+                    requireActivity().application.contentResolver.openInputStream(contentUri)
+                } catch (exception: FileNotFoundException) {
+                    Timber.e(exception)
+                    return OpenFileResult.ErrorOpeningFile
+                }
+
+            val fileName = requireContext().contentResolver.queryFileName(contentUri)
+
+            if (stream != null && fileName != null) {
+                OpenFileResult.FileWasOpened(fileName, stream)
+            } else OpenFileResult.ErrorOpeningFile
+        } else {
+            OpenFileResult.ErrorOpeningFile
+        }
+    } else {
+        OpenFileResult.OpenFileWasCancelled
+    }
+}
+
+sealed class OpenFileResult {
+    object OpenFileWasCancelled : OpenFileResult()
+    data class FileWasOpened(val fileName: String, val content: InputStream) : OpenFileResult()
+    object ErrorOpeningFile : OpenFileResult()
+    object DifferentResult : OpenFileResult()
+}
+```
+
+SafUtils.kt
+```kotlin
+val allSupportedDocumentsTypesToExtensions = mapOf(
+    "application/msword" to ".doc",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document" to ".docx",
+    "application/pdf" to ".pdf",
+    "text/rtf" to ".rtf",
+    "application/rtf" to ".rtf",
+    "application/x-rtf" to ".rtf",
+    "text/richtext" to ".rtf",
+    "text/plain" to ".txt"
+)
+private val extensionsToTypes = allSupportedDocumentsTypesToExtensions.invert()
+
+fun ContentResolver.queryFileName(uri: Uri): String? {
+    val cursor: Cursor = query(uri, null, null, null, null) ?: return null
+    val nameIndex: Int = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+    cursor.moveToFirst()
+    val name: String = cursor.getString(nameIndex)
+    cursor.close()
+    return appendExtensionIfNeeded(name, uri)
+}
+
+private fun ContentResolver.appendExtensionIfNeeded(name: String, uri: Uri): String? {
+    return if (hasKnownExtension(name)) {
+        name
+    } else {
+        val type = getType(uri)
+        if (type != null && allSupportedDocumentsTypesToExtensions.containsKey(type)) {
+            return name + allSupportedDocumentsTypesToExtensions[type]
+        }
+        Timber.e("unknown file type: $type, for file: $name")
+        name
+    }
+}
+
+private fun hasKnownExtension(filename: String): Boolean {
+    val lastDotPosition = filename.indexOfLast { it == '.' }
+    if (lastDotPosition == -1) {
+        return false
+    }
+    val extension = filename.substring(lastDotPosition)
+    return extensionsToTypes.containsKey(extension)
+}
+```
+
+So that you can request document picker to appear somewhere on button click for example:
+
+```kotlin
+pickDocumentButton.setOnClickListener {
+    openDocumentPicker()
+}
+```
+
+and handle result in fragment:
+
+```kotlin
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    tryOpenDocument(requestCode, resultCode, data)
+    // try handle other results
+}
+
+private fun tryOpenDocument(requestCode: Int, resultCode: Int, data: Intent?) {
+    when (val openFileResult = tryHandleOpenDocumentResult(requestCode, resultCode, data)) {
+        is OpenFileResult.FileWasOpened -> viewModel.uploadDocument(openFileResult.fileName, openFileResult.content)
+        OpenFileResult.ErrorOpeningFile -> viewModel.errorOpeningDocument()
+        OpenFileResult.OpenFileWasCancelled -> viewModel.userCancelledOpenOfDocument()
+        OpenFileResult.DifferentResult -> {
+            // Do nothing
+        }
+    }
+}
+```
