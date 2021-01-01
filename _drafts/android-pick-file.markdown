@@ -228,11 +228,13 @@ I let user get data from any source, so when user picked a file I have to check 
 
 `GET_CONTENT` vs `ACTION_OPEN_DOCUMENT`
 
-<div align="center">
-    {% include image.html src="all-files-example" alt="Example of all files" width='300px'%}
-    {% include image.html src="filtered-files-example" alt="Example of filtered files" width='300px'%}
+<div style="display:flex;justify-content: space-between;">
+    {% include image.html src="pick-file-get-content" alt="Available third paries for get content" width='45%'%}
+    {% include image.html src="pick-file-open-document" alt="Available third parties for open document" width='45%'%}
 </div>
 
+`GET_CONTENT` contains redundant entires like Google Photo,
+but it also has additional third parties that hasn't migrated to document provider yet.
 
 ### The code {#code}
 
