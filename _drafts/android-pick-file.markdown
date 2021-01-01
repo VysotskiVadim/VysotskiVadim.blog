@@ -63,9 +63,10 @@ Let's quickly get thought the code:
 `addCategory(Intent.CATEGORY_OPENABLE)` - we don't want to deal with [virtual files](https://www.youtube.com/watch?v=4h7yCZt231Y), only real ones, i.e. file that contains from bytes of data.
 `OPEN_DOCUMENT_REQUEST_CODE` - id of request, we use this number to understand which request caused given result.
 
-User will see system UI where all real files available to pick:
+User will see system UI where all real files available to pick
+*(as you can see google slides file are virtual and not available for picking)*:
 
-{% include image.html src="all-files-example" alt="Example of all files" %}
+{% include image.html src="all-files-example" alt="Example of all files" width='400px'%}
 
 
 ### Get the bytes {#get_the_bytes}
@@ -204,7 +205,9 @@ fun Fragment.openDocumentPicker() {
 }
 ```
 
-TODO: add video of how grayed out files looks like
+As you can see all files except **.doc** one are grayed out not, and not available for picking.
+{% include image.html src="all-files-example" alt="Example of all files" width='400px'%}
+
 
 ### MIME types filter doesn't always work {#mime_filter_do_not_work}
 
