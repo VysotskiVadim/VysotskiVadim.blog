@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Pick a file on Android
-description: "Simple guide how to implement upload file feature."
+description: "Simple guide how to pick file on Android: SAF, supported types, edge cases"
 supportedFileTypes: "txt, doc, rtf, docx, pdf"
-# date:   2021-01-01 12:00:00 +0300
+date: 2021-01-01 22:30:00 +0300
 image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/pick-a-file-cover.jpg
 postImage:
   src: pick-a-file-cover
