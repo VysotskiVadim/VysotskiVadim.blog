@@ -12,15 +12,15 @@ postImage:
 
 Some time ago,
 during implementation of "upload document" feature,
-I was looking for simple tutorial about picking a file on Android.
-But didn't find anything that fits my requirements.
+I was looking for simple tutorial about picking a file on Android,
+but didn't find anything that fits my requirements.
 I needed:
 1. Simple code examples so that I can quickly implement feature step by step copy pasting code and check if it what I need;
 2. Explanation how it works with links to docs;
 3. Edge cases, or what can easily be missed, but it's important scenario for the user.
 
 Ok, as nobody has written it yet, I'm going to do it.
-Please enjoy the reading.
+Please enjoy the reading or go strait to the [code of the final solution](#code).
 
 ### Requirements
 
@@ -33,7 +33,7 @@ In other words I had to implement file picker,
 that lets user pick only file of supported type,
 from different storages.
 
-### Pick a file
+### Pick a file {#pick_a_file}
 
 After Android 11 the only way to access device file system is Storage Access Framework.
 
@@ -64,7 +64,7 @@ Let's quickly get thought the code:
 
 TODO: attach video
 
-### Get the bytes
+### Get the bytes {#get_the_bytes}
 
 Once user picked file we get a result via `onActivityResult` callback.
 Here I call `tryHandleOpenDocumentResult` and handle one of `OpenFileResult`.
@@ -120,7 +120,7 @@ and don't forget to call `close` once you're done with the stream.
 you can read about in the next section,
 or remove it's call if you don't need file name.
 
-### Get file name (optional feature)
+### Get file name (optional feature) {#get_file_name}
 
 Getting file name is a little bit more tricky.
 
@@ -179,7 +179,7 @@ You may noticed that some file types like rtf has many corresponding mime types.
 Try to specify all possible options,
 I noticed that all of them are used.
 
-### Filter file by type
+### Filter file by type {#filer_files_by_type}
 
 My "upload document" feature support only **{{page.supportedFileTypes}}** formats.
 So picker shouldn't let user pick not supported file types.
@@ -202,9 +202,9 @@ fun Fragment.openDocumentPicker() {
 
 TODO: add video of how grayed out files looks like
 
-### MIME types filter doesn't always work
+### MIME types filter doesn't always work {#mime_filter_do_not_work}
 
-Filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
+`Intent.EXTRA_MIME_TYPES` filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
 But some third party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`.
 
 TODO: add image
@@ -221,7 +221,7 @@ But I want user to be able to use all possible data source, so I won't do this.
 
 I let user get data from any source, so when user picked a file I have to check file type and show an error if it's wrong.
 
-### The code
+### The code {#code}
 
 Here all code that you've seen reading the article.
 I split code in a few files:
@@ -327,7 +327,9 @@ private fun hasKnownExtension(filename: String): Boolean {
 }
 ```
 
-So that you can request document picker to appear somewhere on button click for example:
+### How to call the code {#usage}
+
+You can request document picker to appear somewhere on button click for example:
 
 ```kotlin
 pickDocumentButton.setOnClickListener {
