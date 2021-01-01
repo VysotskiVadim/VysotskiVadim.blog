@@ -59,42 +59,6 @@ Let's quickly get thought the code:
 
 TODO: attach video
 
-### Filter file by type
-
-My "upload document" feature support only **{{page.supportedFileTypes}}** formats.
-So picker shouldn't let user pick not supported file types.
-We can achieve it by specifying supported formats.
-
-```kotlin
-object UploadDocument {
-    val supportedMimeTypes = arrayOf<String>(
-        "application/msword", // .doc
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
-        "application/pdf", // .pdf
-        "text/rtf", // .rtf
-        "application/rtf", // .rtf,
-        "application/x-rtf", // .rtf
-        "text/richtext", // .rtf"
-        "text/plain" // .txt
-    )
-}
-
-fun Fragment.openDocumentPicker() {
-    val openDocumentIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
-        addCategory(Intent.CATEGORY_OPENABLE)
-        type = "*/*"
-        putExtra(Intent.EXTRA_MIME_TYPES, UploadDocument.supportedMimeTypes)
-    }
-
-    startActivityForResult(openDocumentIntent, OPEN_DOCUMENT_REQUEST_CODE)
-}
-```
-
-TODO: add video of how grayed out files looks like
-
-You may noticed that some file types like rtf has many corresponding mime types.
-Try to specify all possible options.
-
 ### Get the bytes
 
 Once user picked file we get a result via `onActivityResult` callback.
@@ -151,7 +115,7 @@ and don't forget to call `close` once you're done with the stream.
 you can read about in the next section,
 or remove it's call if you don't need file name.
 
-### Get file name
+### Get file name (optional feature)
 
 Getting file name is a little bit more tricky.
 
@@ -206,3 +170,30 @@ but `DISPLAY_NAME` sometime doesn't contain it.
 So I check extension in `hasKnownExtension`,
 if it's empty I try to guess it based on mime type.
 
+You may noticed that some file types like rtf has many corresponding mime types.
+Try to specify all possible options,
+I noticed that all of them are used.
+
+### Filter file by type
+
+My "upload document" feature support only **{{page.supportedFileTypes}}** formats.
+So picker shouldn't let user pick not supported file types.
+We can achieve it by specifying supported formats.
+
+```kotlin
+object UploadDocument {
+    val supportedMimeTypes = allSupportedDocumentsTypesToExtensions.keys.toTypedArray()
+}
+
+fun Fragment.openDocumentPicker() {
+    val openDocumentIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
+        addCategory(Intent.CATEGORY_OPENABLE)
+        type = "*/*"
+        putExtra(Intent.EXTRA_MIME_TYPES, UploadDocument.supportedMimeTypes)
+    }
+
+    startActivityForResult(openDocumentIntent, OPEN_DOCUMENT_REQUEST_CODE)
+}
+```
+
+TODO: add video of how grayed out files looks like
