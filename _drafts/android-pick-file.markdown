@@ -24,7 +24,7 @@ Please enjoy the reading or go strait to the [code of the final solution](#code)
 
 ### Requirements
 
-As a user I want to be able to pick a file
+As a user I want to be able to pick a files
 from device or from the third party cloud storage,
 of supported format ({{page.supportedFileTypes}})
 so that file is uploaded to the server.
@@ -59,9 +59,10 @@ Android opens system UI,
 where user is able to pick file of any type from any connected third party storage.
 
 Let's quickly get thought the code:  
-`Intent.ACTION_GET_CONTENT` - open file to read it's content one time, reed more in the [doc](https://developer.android.com/reference/android/content/Intent#ACTION_GET_CONTENT)
-`addCategory(Intent.CATEGORY_OPENABLE)` - we don't want to deal with [virtual files](https://www.youtube.com/watch?v=4h7yCZt231Y), only real ones, i.e. file that contains from bytes of data.
-`OPEN_DOCUMENT_REQUEST_CODE` - id of request, we use this number to understand which request caused given result.
+`Intent.ACTION_GET_CONTENT` - open file to read content one time, reed more in the [doc](https://developer.android.com/reference/android/content/Intent#ACTION_GET_CONTENT)  
+`addCategory(Intent.CATEGORY_OPENABLE)` - we don't want to deal with [virtual files](https://www.youtube.com/watch?v=4h7yCZt231Y),
+we need only real ones, i.e. file that contains bytes of data.  
+`OPEN_DOCUMENT_REQUEST_CODE` - id of request, we will use this number during result handing.
 
 User will see system UI where all real files available to pick
 *(as you can see google slides file are virtual and not available for picking)*:
@@ -180,7 +181,7 @@ My backend requires files names to have an extension,
 so that backend knows how to process a file,
 but `DISPLAY_NAME` sometime doesn't contain it.
 So I check extension in `hasKnownExtension`,
-if it's empty I try to guess it based on mime type.
+if it's empty I try to guess file`s extension based on mime type.
 
 You may noticed that some file types like rtf has many corresponding mime types.
 Try to specify all possible options,
@@ -189,7 +190,7 @@ I noticed that all of them are used.
 ### Filter file by type {#filer_files_by_type}
 
 My "upload document" feature support only **{{page.supportedFileTypes}}** formats.
-So picker shouldn't let user pick not supported file types.
+So picker shouldn't let user pick file of not supported type.
 We can achieve it by specifying supported formats.
 
 ```kotlin
@@ -207,47 +208,51 @@ fun Fragment.openDocumentPicker() {
 }
 ```
 
-Not filtered vs filtered:
-as you can see all files except **.doc** one are grayed out not, and not available for picking.
+Not filtered*(left image)* vs filtered*(right image)*:
+as you can see all files except **.doc** one are grayed out and not available for picking.
 <div style="display:flex;justify-content: space-between;">
     {% include image.html src="all-files-example" alt="Example of all files" width='45%'%}
     {% include image.html src="filtered-files-example" alt="Example of filtered files" width='45%'%}
 </div>
 
 
-### MIME types filter doesn't always work {#mime_filter_do_not_work}
+### MIME types filter doesn't work {#mime_filter_do_not_work}
 
 `Intent.EXTRA_MIME_TYPES` filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
-But some third party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`.
+But some third party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`,
+and handling this requests in their activities.
 
 When user chooses Google Photos or Yandex Disk
-*(Dropbox didn't provide document provider in the past too)*,
-app opens, because it works not via 
-[document providers](https://developer.android.com/guide/topics/providers/document-provider#overview),
-but via intent filter.
+*(Dropbox didn't provide document provider in the past too)*
+from system file picker,
+third party app opens and user sees all files.
+Our file types filter doesn't work there.
 
-One possible solution is to change pick file intent action to `ACTION_OPEN_DOCUMENT`,
-that [works only via document providers](https://developer.android.com/reference/android/content/Intent#ACTION_OPEN_DOCUMENT).
-But I want user to be able to use all possible data source, so I won't do this.
+One possible solution is to change `GET_CONTENT` intent action to `ACTION_OPEN_DOCUMENT`.
+`ACTION_OPEN_DOCUMENT` [works only with document providers](https://developer.android.com/reference/android/content/Intent#ACTION_OPEN_DOCUMENT),
+so `EXTRA_MIME_TYPES` always works with `ACTION_OPEN_DOCUMENT` .
+But I want user to be able to use **all** possible data sources, so I keep `GET_CONTENT`.
 
-I let user get data from any source, so when user picked a file I have to check file type and show an error if it's wrong.
-
-`GET_CONTENT` vs `ACTION_OPEN_DOCUMENT`
+I let user get data from any source,
+but when user picks a file I have to check file type and show an error if picked file type isn't supported.
 
 <div style="display:flex;justify-content: space-between;">
     {% include image.html src="pick-file-get-content" alt="Available third paries for get content" width='45%'%}
     {% include image.html src="pick-file-open-document" alt="Available third parties for open document" width='45%'%}
 </div>
 
+`GET_CONTENT`*(left image)* vs `ACTION_OPEN_DOCUMENT`*(right image)*: the last option has less available data sources.
+
+
 `GET_CONTENT` contains redundant entires like Google Photo,
 but it also has additional third parties that hasn't migrated to document provider yet.
 
 ### The code {#code}
 
-Here all code that you've seen reading the article.
+Here is all code that you've seen reading the article.
 I split code in a few files:
 
-PickDocument.kt
+**PickDocument.kt**
 ```kotlin
 const val OPEN_DOCUMENT_REQUEST_CODE = 2
 
@@ -302,7 +307,7 @@ sealed class OpenFileResult {
 }
 ```
 
-SafUtils.kt
+**SafUtils.kt**
 ```kotlin
 val allSupportedDocumentsTypesToExtensions = mapOf(
     "application/msword" to ".doc",
@@ -348,9 +353,9 @@ private fun hasKnownExtension(filename: String): Boolean {
 }
 ```
 
-### How to call the code {#usage}
+### Usage examples {#usage}
 
-You can request document picker to appear somewhere on button click for example:
+You can request document picker to appear on button click for example:
 
 ```kotlin
 pickDocumentButton.setOnClickListener {
