@@ -228,6 +228,12 @@ I let user get data from any source, so when user picked a file I have to check 
 
 `GET_CONTENT` vs `ACTION_OPEN_DOCUMENT`
 
+<div align="center">
+    {% include image.html src="all-files-example" alt="Example of all files" width='300px'%}
+    {% include image.html src="filtered-files-example" alt="Example of filtered files" width='300px'%}
+</div>
+
+
 ### The code {#code}
 
 Here all code that you've seen reading the article.
