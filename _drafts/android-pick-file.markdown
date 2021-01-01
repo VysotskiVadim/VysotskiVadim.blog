@@ -11,31 +11,31 @@ postImage:
 ---     
 
 Some time ago,
-during the implementation of a "upload document" feature,
-I was looking for simple tutorial about picking a file on Android,
+during the implementation of an "upload document" feature,
+I was looking for a simple tutorial about picking a file on Android
 but didn't find anything that fits my requirements.
 I needed:
-1. Simple code examples so that I can quickly implement feature step by step copy pasting code and check if it what I need;
-2. Explanation how it works with links to docs;
-3. Edge cases, or what can easily be missed, but it's important scenario for the user.
+1. Simple code examples so that I can quickly implement feature step by step copy-pasting code and check if it what I need;
+2. Explanation of how everything works with links to docs;
+3. Edge cases, or what can easily be missed, but it's an important scenario for the user.
 
 Ok, as nobody has written it yet, I'm going to do it.
-Please enjoy the reading or go strait to the [code of the final solution](#code).
+Please enjoy the reading or go straight to the [code of the final solution](#code).
 
 ### Requirements
 
-As a user I want to be able to pick a files
-from device or from the third party cloud storage,
+As a user, I want to be able to pick a file
+from a device or from the third-party cloud storage,
 of supported format ({{page.supportedFileTypes}})
 so that file is uploaded to the server.
 
-In other words I had to implement file picker,
-that lets user pick only file of supported type,
+In other words, I had to implement file picker,
+that lets user pick only files of supported type,
 from different storages: local or third party.
 
 ### Pick a file {#pick_a_file}
 
-After Android 11 the only way to access device file system is Storage Access Framework.
+After Android 11 the only way to access file system is Storage Access Framework.
 
 My goal is to open document one time, read the content and upload it to the server.
 So [Intent.ACTION_GET_CONTENT](https://developer.android.com/reference/android/content/Intent#ACTION_GET_CONTENT)
@@ -56,7 +56,7 @@ const val OPEN_DOCUMENT_REQUEST_CODE = 2
 
 Executing the code above,
 Android opens system UI,
-where user is able to pick file of any type from any connected third party storage.
+where user is able to pick a file of any type from any connected third-party storage.
 
 Let's quickly get thought the code:  
 `Intent.ACTION_GET_CONTENT` - open file to read content one time, reed more in the [doc](https://developer.android.com/reference/android/content/Intent#ACTION_GET_CONTENT)  
@@ -74,7 +74,7 @@ User will see system UI where all real files available to pick
 
 ### Get the bytes {#get_the_bytes}
 
-Once user picked file we get a result via `onActivityResult` callback.
+Once the user picked the file we get a result via `onActivityResult` callback.
 Here I call `tryHandleOpenDocumentResult` and handle one of `OpenFileResult`.
 
 ```kotlin
@@ -117,7 +117,7 @@ sealed class OpenFileResult {
 }
 ```
 
-For my feature I need file content + file name.
+For my feature, I need file content + file name.
 
 We can get content from `contentResolver` by calling 
 `requireActivity().application.contentResolver.openInputStream(contentUri)`.
@@ -126,7 +126,7 @@ and don't forget to call `close` once you're done with the stream.
 
 `queryFileName` is a custom function,
 you can read about in the next section,
-or remove it's call if you don't need file name.
+or remove its call if you don't need the file name.
 
 ### Get file name (optional feature) {#get_file_name}
 
@@ -177,13 +177,13 @@ private fun hasKnownExtension(filename: String): Boolean {
 }
 ```
 
-My backend requires files names to have an extension,
+My backend requires file names to have an extension,
 so that backend knows how to process a file,
-but `DISPLAY_NAME` sometime doesn't contain it.
-So I check extension in `hasKnownExtension`,
-if it's empty I try to guess file`s extension based on mime type.
+but `DISPLAY_NAME` sometimes doesn't contain it.
+So I check the extension in `hasKnownExtension`,
+if it's empty I try to guess the file`s extension based on mime type.
 
-You may noticed that some file types like rtf has many corresponding mime types.
+You've probably noticed that some file types like rtf have many corresponding mime types.
 Try to specify all possible options,
 I noticed that all of them are used.
 
@@ -219,13 +219,13 @@ as you can see all files except **.doc** one are grayed out and not available fo
 ### MIME types filter doesn't work {#mime_filter_do_not_work}
 
 `Intent.EXTRA_MIME_TYPES` filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
-But some third party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`,
-and handling this requests in their activities.
+But some third-party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`,
+and handling these intents in their activities.
 
 When user chooses Google Photos or Yandex Disk
 *(Dropbox didn't provide document provider in the past too)*
-from system file picker,
-third party app opens and user sees all files.
+from the system file picker,
+the third-party app is opened and user sees all files.
 Our file types filter doesn't work there.
 
 One possible solution is to change `GET_CONTENT` intent action to `ACTION_OPEN_DOCUMENT`.
@@ -244,8 +244,8 @@ but when user picks a file I have to check file type and show an error if picked
 `GET_CONTENT`*(left image)* vs `ACTION_OPEN_DOCUMENT`*(right image)*: the last option has less available data sources.
 
 
-`GET_CONTENT` contains redundant entires like Google Photo,
-but it also has additional third parties that hasn't migrated to document provider yet.
+`GET_CONTENT` contains redundant entries like Google Photo,
+but it also has additional third parties that haven't migrated to document provider yet.
 
 ### The code {#code}
 
