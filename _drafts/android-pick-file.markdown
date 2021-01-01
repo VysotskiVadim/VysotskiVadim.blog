@@ -206,15 +206,13 @@ fun Fragment.openDocumentPicker() {
 ```
 
 As you can see all files except **.doc** one are grayed out not, and not available for picking.
-{% include image.html src="all-files-example" alt="Example of all files" width='400px'%}
+{% include image.html src="filtered-files-example" alt="Example of filtered files" width='400px'%}
 
 
 ### MIME types filter doesn't always work {#mime_filter_do_not_work}
 
 `Intent.EXTRA_MIME_TYPES` filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
 But some third party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`.
-
-TODO: add image
 
 When user chooses Google Photos or Yandex Disk
 *(Dropbox didn't provide document provider in the past too)*,
@@ -227,6 +225,8 @@ that [works only via document providers](https://developer.android.com/reference
 But I want user to be able to use all possible data source, so I won't do this.
 
 I let user get data from any source, so when user picked a file I have to check file type and show an error if it's wrong.
+
+`GET_CONTENT` vs `ACTION_OPEN_DOCUMENT`
 
 ### The code {#code}
 
