@@ -63,7 +63,10 @@ Let's quickly get thought the code:
 `addCategory(Intent.CATEGORY_OPENABLE)` - we don't want to deal with [virtual files](https://www.youtube.com/watch?v=4h7yCZt231Y), only real ones, i.e. file that contains from bytes of data.
 `OPEN_DOCUMENT_REQUEST_CODE` - id of request, we use this number to understand which request caused given result.
 
-TODO: attach video
+User will see system UI where all real files available to pick:
+
+{% include image.html src="all-files-example" alt="Example of all files" %}
+
 
 ### Get the bytes {#get_the_bytes}
 
