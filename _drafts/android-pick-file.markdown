@@ -66,7 +66,9 @@ Let's quickly get thought the code:
 User will see system UI where all real files available to pick
 *(as you can see google slides file are virtual and not available for picking)*:
 
-{% include image.html src="all-files-example" alt="Example of all files" width='400px'%}
+<div style="display:flex;justify-content: space-between;">
+    {% include image.html src="all-files-example" alt="Example of all files" width='45%'%}
+</div>
 
 
 ### Get the bytes {#get_the_bytes}
@@ -205,8 +207,12 @@ fun Fragment.openDocumentPicker() {
 }
 ```
 
-As you can see all files except **.doc** one are grayed out not, and not available for picking.
-{% include image.html src="filtered-files-example" alt="Example of filtered files" width='400px'%}
+Not filtered vs filtered:
+as you can see all files except **.doc** one are grayed out not, and not available for picking.
+<div style="display:flex;justify-content: space-between;">
+    {% include image.html src="all-files-example" alt="Example of all files" width='45%'%}
+    {% include image.html src="filtered-files-example" alt="Example of filtered files" width='45%'%}
+</div>
 
 
 ### MIME types filter doesn't always work {#mime_filter_do_not_work}
