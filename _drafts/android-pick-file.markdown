@@ -3,7 +3,12 @@ layout: post
 title:  Pick a file on Android
 description: "Simple guide how to implement upload file feature."
 supportedFileTypes: "txt, doc, rtf, docx, pdf"
----
+# date:   2021-01-01 12:00:00 +0300
+image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/pick-a-file-cover.jpg
+postImage:
+  src: pick-a-file-cover
+  alt: 'Files on the shelf'
+---     
 
 Some time ago,
 during implementation of "upload document" feature,
@@ -350,3 +355,8 @@ private fun tryOpenDocument(requestCode: Int, resultCode: Int, data: Intent?) {
     }
 }
 ```
+
+### Links
+
+* [Post image](https://flic.kr/p/RwDusv)
+* [Open file using Storage Access Framework](https://developer.android.com/guide/topics/providers/document-provider)
