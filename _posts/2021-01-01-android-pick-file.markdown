@@ -222,16 +222,23 @@ as you can see all files except **.doc** one are grayed out and not available fo
 But some third-party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`,
 and handling these intents in their activities.
 
-When user chooses Google Photos or Yandex Disk
-*(Dropbox didn't provide document provider in the past too)*
+<div align='center'>
+    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/pick-file-android/pick-file-dropbox-vs-google-photos.webm' %}
+</div>
+
+On the video,
+you can see that when user chooses Google Photos
 from the system file picker,
-the third-party app is opened and user sees all files.
-Our file types filter doesn't work there.
+the app is opened and the user sees all files.
+Our file types filter doesn't work there
+so the user can pick any photo.
 
 One possible solution is to change `GET_CONTENT` intent action to `ACTION_OPEN_DOCUMENT`.
 `ACTION_OPEN_DOCUMENT` [works only with document providers](https://developer.android.com/reference/android/content/Intent#ACTION_OPEN_DOCUMENT),
 so `EXTRA_MIME_TYPES` always works with `ACTION_OPEN_DOCUMENT` .
-But I want user to be able to use **all** possible data sources, so I keep `GET_CONTENT`.
+But I want user to be able to use **all** possible data sources,
+some cloud storage doesn't provide document provider and shows custom UI (Yandex disk for example)
+, so I keep `GET_CONTENT`.
 
 I let user get data from any source,
 but when user picks a file I have to check file type and show an error if picked file type isn't supported.
