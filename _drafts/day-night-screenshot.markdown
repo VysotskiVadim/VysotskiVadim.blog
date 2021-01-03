@@ -29,3 +29,6 @@ And don't forget about **night mode**, **that doubles** your effort for regressi
 
 In this article I want to share one practice from my project.
 I find it very useful and want to share with community.
+
+### Links
+* [Post image](https://flic.kr/p/qZYThs)
