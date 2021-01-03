@@ -2,7 +2,7 @@
 layout: post
 date: 2020-05-05 12:00:00 +0300
 title:  "QA guide to Android application testing. Part 1: Lifecycle." 
-description: "Test Android applications like a professional: learn technique of catching Lifecycle related bugs."
+description: "Learn a simple technique for catching lifecycle related bugs"
 image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/resized/caught-a-bug_768.jpg
 postImage:
   src: caught-a-bug
@@ -10,7 +10,7 @@ postImage:
 ---
 
 To find bugs faster contributing less effort you need to know
-*what developers usually forget to handle*.
+**what developers usually forget to handle**.
 If you start checking things where the chance of error is higher -
 you will find a bug faster.
 
