@@ -90,3 +90,5 @@ fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
 
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
+* [Shot](https://github.com/Karumi/Shot)
+* [Example project](https://github.com/VysotskiVadim/screenshot-tests-best-practice)
