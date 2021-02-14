@@ -16,9 +16,9 @@ Lucy works on a large project.
 Her team reuses a lot of code and easily add new features.
 Their code base is well designed.
 
-Lucy wants to implement a new functionality, but requirements hardly fit existing architecture.
+Lucy wants to implement a new functionality, but requirements hardly fits existing architecture.
 It's not a problem, because her team actively uses auto tests.
-She could adopt existing architecture to any requirement.
+She could change and adopt existing architecture to any requirement.
 Then Lucy runs tests to make sure that she hasn't broken anything.
 Now she could easily implement a new feature.
 
@@ -35,7 +35,7 @@ But you need to change it from time to time with respect to new features.
 Screenshot tests don't let me break existing UI when I modify basic Themes, Syles, or custom views.
 Test records image with UI, that user should see.
 After the code changes, test record new image and compare pixel by pixel with the previous one.
-You shouldn't change even a single pixel during refactoring.
+You shouldn't change even a single pixel during refactoring, otherwise test fails.
 
 ### Our way of doing screenshots tests
 
@@ -55,8 +55,38 @@ Dark theme support doubles testing effort.
 You have to check 2 UIs per one feature: light and dark version.
 I as a lazy developer want to avoid it by automation.
 
-We defined 2 entry points for screenshot recording: record activity and record view.
-When you call it, it automatically record screen 2 times: for day and night modes.
+We defined 2 entry points `compareDayNightScreenshots` for screenshots recording, one for activities and the other for views.
+When you call it, it automatically record screen 2 times: day and night UI.
+```kotlin
+@Test
+fun activityScreenshotTest() {
+    val scenario = ActivityScenario.launch(ScrollingActivity::class.java)
+    compareDayNightScreenshots(scenario)
+}
+
+@Test
+fun viewScreenshotTest() = compareDayNightScreenshots(R.layout.content_scrolling) {
+    ViewHelpers.setupView(it).setExactWidthPx(800).setExactHeightPx(4000).layout()
+}
+```
+After the execution we get [4 screenshots](https://github.com/VysotskiVadim/screenshot-tests-best-practice/tree/master/app/screenshots/debug).
+
+#### Entry point 1: Record activity
+
+Try read the code
+
+{% highlight kotlin linenos %}
+fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
+    activityScenario: ActivityScenario<T>
+) {
+    val activity = activityScenario.waitForActivity()
+    compareScreenshot(activity, name = screenshotName("day"))
+    activity.runOnUiThread {
+        activity.delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+    }
+    compareScreenshot(activityScenario.waitForActivity(), name = screenshotName("night"))
+}
+{% endhighlight %}
 
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
