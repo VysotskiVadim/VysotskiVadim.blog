@@ -9,7 +9,7 @@ postImage:
   alt: 'eclipse of the moon'
 ---
 
-### What and Why Screenshot Tests
+### Why Screenshot Tests?
 
 Imagine a regular software developer, let's call her Lucy.
 Lucy works on a large project.
@@ -34,6 +34,8 @@ Screenshot tests doesn't let me break existing UI when I modify basic Styles ans
 Test record image of what user should see and saves it.
 After the code changes, test record new image and compare pixel by pixel with an old one.
 You shouldn't change even a single pixel during refactoring.
+
+### Day night mode
 
 We have been using screenshot tests for 1,5 years.
 I tried many different techniques and some of them was extremely useful.
