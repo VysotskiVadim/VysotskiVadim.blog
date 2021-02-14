@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Day and Night Screenshot Tests
-description: "Best practice of using facebook screenshot tests: day night screenshots"
+title:  Day-Night Screenshot Tests
+description: "Best practice of using facebook screenshot tests: day-night screenshots"
 date:   2021-01-03 12:00:00 +0300
 image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/day-night-screenshots.jpg
 postImage:
@@ -18,7 +18,7 @@ Their code base is well designed.
 
 Lucy wants to implement a new functionality, but requirements hardly fit existing architecture.
 It's not a problem, because her team actively uses auto tests.
-She could prepare existing architecture to any requirement.
+She could adopt existing architecture to any requirement.
 Then Lucy runs tests to make sure that she hasn't broken anything.
 Now she could easily implement a new feature.
 
@@ -30,12 +30,14 @@ Android UI is not an exception.
 ### Screenshots tests
 
 You can easily create new screens if you have well designed infrastructure: Styles, Themes, and custom Views.
-But you need to change it from time to time with respect to new requirements.
+But you need to change it from time to time with respect to new features.
 
 Screenshot tests don't let me break existing UI when I modify basic Themes, Syles, or custom views.
 Test records image with UI, that user should see.
 After the code changes, test record new image and compare pixel by pixel with the previous one.
 You shouldn't change even a single pixel during refactoring.
+
+### Our way of doing screenshots tests
 
 We have been using [Shot](https://github.com/Karumi/Shot) for 1,5 year.
 It's built on top of [facebook screenshot test for Android](https://github.com/facebook/screenshot-tests-for-android)
@@ -47,12 +49,14 @@ Some of them was so useful,
 so I mush share it with you!
 Today we will talk about the top one - infrastructure for Day Night screenshot tests.
 
-### Day night test
+### Day night screenshot test
 
+Dark theme support doubles testing effort.
+You have to check 2 UIs per one feature: light and dark version.
+I as a lazy developer want to avoid it by automation.
 
-I use  for more than a year.
-It's a fork of  with extra features.
-
+We defined 2 entry points for screenshot recording: record activity and record view.
+When you call it, it automatically record screen 2 times: for day and night modes.
 
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
