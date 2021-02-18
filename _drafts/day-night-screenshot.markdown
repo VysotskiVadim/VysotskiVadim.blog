@@ -110,6 +110,8 @@ For the user it seems like UI has just changed the colors.
 Now activity is in the night mode.
 You need to get a link to a new activity and record it with overridden name.
 
+#### Entry point 2: Record view
+
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
 * [Shot](https://github.com/Karumi/Shot)
