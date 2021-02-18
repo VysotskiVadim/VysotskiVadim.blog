@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Day-Night Screenshot Tests
-description: "The best practice of using Facebook Android screenshot tests: day-night screenshots"
+description: "The best practice of Android screenshot tests: day-night screenshots"
 date:   2021-01-03 12:00:00 +0300
 image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/day-night-screenshots.jpg
 postImage:
@@ -67,7 +67,7 @@ fun viewScreenshotTest() = compareDayNightScreenshots(R.layout.content_scrolling
 ```
 After the execution we get [4 screenshots](https://github.com/VysotskiVadim/screenshot-tests-best-practice/tree/master/app/screenshots/debug).
 
-#### Entry point 1: Record an activity
+### Entry point 1: Record an activity
 
 There are 3 stages: record day UI, switch activity to the night mode, record night UI.
 
@@ -121,9 +121,36 @@ fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
 }
 {% endhighlight %}
 
-#### Entry point 2: Record a view
+### Entry point 2: Record a view
 
+There is only 2 stages in view day-night screenshot recording: record day and record night view.
 
+View is in the day mode by default.
+Do a regular actions to record screenshot: inflate, measure, layout, and draw.
+
+```kotlin
+// inflate
+val dayView = LayoutInflater.from(context).inflate(viewId, null, false)
+// measure and layout
+runOnMainSync { setupView(dayView) }
+// draw
+Screenshot.snap(dayView).setName(screenshotName("day")).record()
+```
+Congratulations, day screenshot is ready.
+
+How to record view in a night mode?
+Inflater could use different resources with respect to configuration.
+If configuration is day, it takes colors from `values/color.xml`,
+and `values-night/color.xml` for the night configuration. 
+Configuration is the part of the context.
+To start using night resources create a new context with the overridden configuration.
+
+```kotlin
+val nightConfiguration = Configuration(context.resources.configuration)
+nightConfiguration.uiMode =
+    Configuration.UI_MODE_NIGHT_YES or (nightConfiguration.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv())
+val nightContext = context.createConfigurationContext(nightConfiguration)
+```
 
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
