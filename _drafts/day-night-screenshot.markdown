@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Day-Night Screenshot Tests
-description: "Best practice of using facebook screenshot tests: day-night screenshots"
+description: "The best practice of using Facebook Android screenshot tests: day-night screenshots"
 date:   2021-01-03 12:00:00 +0300
 image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/day-night-screenshots.jpg
 postImage:
@@ -67,12 +67,43 @@ fun viewScreenshotTest() = compareDayNightScreenshots(R.layout.content_scrolling
 ```
 After the execution we get [4 screenshots](https://github.com/VysotskiVadim/screenshot-tests-best-practice/tree/master/app/screenshots/debug).
 
-#### Entry point 1: Record activity
+#### Entry point 1: Record an activity
 
-Try read the code.
-Don't worry if something isn't clear,
-explanation is right after the code.
+There are 3 stages: record day UI, switch activity to the night mode, record night UI.
 
+Activity is in the day mode by default.
+Let's start from recording a day UI:
+```kotlin
+val dayActivity = activityScenario.waitForActivity()
+compareScreenshot(dayActivity, name = screenshotName("day"))
+```
+I got the activity using `waitForActivity` [extension](https://github.com/Karumi/Shot/blob/master/shot-android/src/main/java/com/karumi/shot/ActivityScenarioUtils.kt#L14), and recorded with the overridden name.
+The light mode screenshot is ready.
+
+Why do we need to override screenshot name?
+Library uses name of the test for the screenshot by default.
+We generate 2 screenshots in one test.
+To make the screenshot name unique add *_day* and *_night* postfix to the name.
+
+Turn on the night mode.
+```kotlin
+dayActivity.runOnUiThread {
+    dayActivity.delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+}
+```
+`AppCompatActivity` lets you switch between day and night modes.
+Once you called `setLocalNightMode` activity restarts, i.e. Android recreates it.
+New activity uses night resources.
+For the user it seems like UI has just changed the colors.
+
+Now activity is in the night mode.
+You need to get a link to the new activity and record screenshot with overridden name.
+```kotlin
+val nightActivity = activityScenario.waitForActivity()
+compareScreenshot(nightActivity, name = screenshotName("night"))
+```
+
+If you put it all together you will get the first entry point.
 {% highlight kotlin %}
 fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
     activityScenario: ActivityScenario<T>
@@ -90,27 +121,9 @@ fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
 }
 {% endhighlight %}
 
-There is 3 stages: record day, switch to the night, record night.
+#### Entry point 2: Record a view
 
-Activity is in the day mode by default.
-I get the activity using `waitForActivity` [extension](https://github.com/Karumi/Shot/blob/master/shot-android/src/main/java/com/karumi/shot/ActivityScenarioUtils.kt#L14), and record with the overridden name.
-The light mode screenshot is ready.
 
-Should I override screenshot name?
-Yes.
-Library uses name of the test for screenshot by default.
-We generate 2 screenshots in one test.
-To make the screenshot name unique add *_day* and *_night* postfix to the name.
-
-`AppCompatActivity` lets you switch between day and night modes.
-Once you call `setLocalNightMode` activity restarts, i.e. Android recreates it.
-New activity uses night resources.
-For the user it seems like UI has just changed the colors.
-
-Now activity is in the night mode.
-You need to get a link to a new activity and record it with overridden name.
-
-#### Entry point 2: Record view
 
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
