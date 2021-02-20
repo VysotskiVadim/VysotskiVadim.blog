@@ -9,24 +9,19 @@ postImage:
   alt: 'eclipse of the moon'
 ---
 
-### How could screenshot tests help you?
+### Value of screenshot tests
 
-Developers like to generalize their problems to build architecture/infrastructure.
-Infrastructure is some code, that is used by many features.
-For Android UI it is Styles, Themes, and custom Views.
-Once you've defined styles guide and implemented it in styles,
+Styles, Themes, and custom Views are infrastructure for Android app UI.
+Once you've defined and implemented your style guide,
 adding a new screen is just a piece of cake.
 
-Requirements are changing.
-You get a new features that make you modify existing infrastructure a bit.
-From time to time you alter styles hierarchy or 
-add new capabilities to custom views.
+But it's hard to change infrastructure.
+When you update some basic style, you have to retest all the screens that use it.
+Don't like to do manual testing? Automate!
 
-TODO: something about regression
-
-Screenshot tests don't let me break existing screens when I modify basic Themes, Syles, or custom views.
-Test records image with UI that user should see.
-After the code changes, test records new image and compare pixel by pixel with the previous one.
+Screenshot tests are ideal solution for appearance auto testing.
+Record what user sees - pixels.
+After refactoring record a new image to compare pixel by pixel with the previous one.
 You shouldn't change even a single pixel during refactoring, otherwise test fails.
 
 ### How to do screenshot tests on Android?
