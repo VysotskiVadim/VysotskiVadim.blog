@@ -28,7 +28,7 @@ Refactoring shouldn't change even a single pixel, otherwise test fails.
 
 We have been using [Shot](https://github.com/Karumi/Shot) for 1,5 year.
 It's built on top of [facebook screenshot test for Android](https://github.com/facebook/screenshot-tests-for-android)
-and provides more features.
+to provide more features.
 Checkout [Shot's readme](https://github.com/Karumi/Shot/blob/master/README.md) to get a better understanding 
 
 I tried many different techniques of making screenshots.
