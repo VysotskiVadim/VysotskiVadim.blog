@@ -17,7 +17,7 @@ adding a new screen is just a piece of cake.
 
 But it's hard to change infrastructure.
 When you update some basic style, you have to retest all the screens that use it.
-Do you like manual testing? I don't. I like automation!
+Do you like manual testing? I don't. I prefer automation!
 
 Screenshot tests could be a solution for appearance auto testing.
 Record exactly what user sees, i.e. pixels.
@@ -28,8 +28,8 @@ Refactoring shouldn't change even a single pixel, otherwise test fails.
 
 We have been using [Shot](https://github.com/Karumi/Shot) for 1,5 year.
 It's built on top of [facebook screenshot test for Android](https://github.com/facebook/screenshot-tests-for-android)
-to provide more features.
-Checkout [Shot's readme](https://github.com/Karumi/Shot/blob/master/README.md) to get a better understanding 
+and provides more features.
+Checkout [Shot's readme](https://github.com/Karumi/Shot/blob/master/README.md) to know how it works.
 
 I tried many different techniques of making screenshots.
 Some of them was extremely useful.
@@ -40,11 +40,11 @@ Today we will talk about the top one - infrastructure for Day Night screenshot t
 
 Dark theme doubles testing effort.
 You have to check 2 UIs per one feature: light and dark version.
-I as a lazy developer want to avoid it by automation.
+But not for developer who has screenshot tests.
 
 I defined 2 entry points with name `compareDayNightScreenshots` for screenshots recording,
 one for activities and the other for views.
-It automatically records screen 2 times, for day and night mode.
+It records screen 2 times, for day and night mode.
 ```kotlin
 @Test
 fun activityScreenshotTest() {
@@ -57,45 +57,42 @@ fun viewScreenshotTest() = compareDayNightScreenshots(R.layout.content_scrolling
     ViewHelpers.setupView(it).setExactWidthPx(800).setExactHeightPx(4000).layout()
 }
 ```
-After the execution we get [4 screenshots](https://github.com/VysotskiVadim/screenshot-tests-best-practice/tree/master/app/screenshots/debug).
+After the execution I get [4 screenshots](https://github.com/VysotskiVadim/screenshot-tests-best-practice/tree/master/app/screenshots/debug).
 
-### Entry point 1: Record an activity
-
-There are 3 stages: record day UI, switch activity to the night mode, record night UI.
+### Entry point #1: Record whole activity
 
 Activity is in the day mode by default.
-Let's start from recording a day UI:
+We can record day UI immediately:
 ```kotlin
 val dayActivity = activityScenario.waitForActivity()
 compareScreenshot(dayActivity, name = screenshotName("day"))
 ```
+In the code above
 I got the activity using `waitForActivity` [extension](https://github.com/Karumi/Shot/blob/master/shot-android/src/main/java/com/karumi/shot/ActivityScenarioUtils.kt#L14), and recorded with the overridden name.
-The light mode screenshot is ready.
 
 Why do we need to override screenshot name?
 Library uses name of the test for the screenshot by default.
-We generate 2 screenshots in one test.
+But we're going to generate 2 screenshots in one test.
 To make the screenshot name unique add *_day* and *_night* postfix to the name.
 
-Turn on the night mode.
+Next step is to turn on night mode
 ```kotlin
 dayActivity.runOnUiThread {
     dayActivity.delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
 }
 ```
 `AppCompatActivity` lets you switch between day and night modes.
-Once you called `setLocalNightMode` activity restarts, i.e. Android recreates it.
-New activity uses night resources.
+When you call `setLocalNightMode` activity restarts, i.e. Android recreates it.
+Recreated activity uses night resources.
 For the user it seems like UI has just changed the colors.
 
-Now activity is in the night mode.
-You need to get a link to the new activity and record screenshot with overridden name.
+Get a link to the new activity and record screenshot with overridden name again.
 ```kotlin
 val nightActivity = activityScenario.waitForActivity()
 compareScreenshot(nightActivity, name = screenshotName("night"))
 ```
 
-If you put it all together you will get the first entry point.
+Put it all together and you get the entry point for activity screenshot recording.
 {% highlight kotlin %}
 fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
     activityScenario: ActivityScenario<T>
@@ -113,20 +110,16 @@ fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
 }
 {% endhighlight %}
 
-### Entry point 2: Record a view
+### Entry point #2: Record a view
 
-#### View's screenshot recording process in a nutshell
-
+View's screenshot recording process in a nutshell:
 1. Inflate the view, i.e. create views hierarchy from xml using `LayoutInflater`;
-2. Measure and Layout the view,
-*read [Measure and Layout phases](https://developer.android.com/guide/topics/ui/how-android-draws)*;
+2. Measure and Layout the view;
 3. Record the screenshot.
-*Under the hood library just draws the view on a bitmap and saves to the storage.*
+
+We will repeat it 2 times: for day and night view.
 
 #### Record a day view
-
-This is how recording looks like in code:
-
 ```kotlin
 // inflate
 val dayView = LayoutInflater.from(context).inflate(viewId, null, false)
@@ -137,7 +130,8 @@ Screenshot.snap(dayView).setName(screenshotName("day")).record()
 ```
 
 `setupView` is a function that measures and layouts a view.
-I pass it as a parameter to `compareDayNightScreenshots`.
+I pass it as a parameter to entry point `compareDayNightScreenshots`.
+If you don't know what is measure\layout\draw - read [the doc(https://developer.android.com/guide/topics/ui/how-android-draws).
 ```kotlin
 compareDayNightScreenshots(R.layout.content_scrolling) {
     ViewHelpers.setupView(it).setExactWidthPx(800).setExactHeightPx(4000).layout()
@@ -147,13 +141,12 @@ compareDayNightScreenshots(R.layout.content_scrolling) {
 `runOnMainSync` is custom utils function that executes block of code in main thread and blocks instrumentation thread.
 
 #### Record a night view
-How to create night view?
-Inflater could use different resources with respect to configuration.
-If configuration is day, it takes colors from `values/color.xml`,
-and `values-night/color.xml` for the night configuration. 
-Configuration is the part of the context.
-To start using night resources create a new context with the overridden configuration.
+For a night view `Inflater` uses night resources.
+Instead of `values/color.xml`
+it takes values from `values-night/color.xml`.
+`Inflater` choses right file based on `Configuration`, that is the part of the context.
 
+To start using night resources create a new context with the overridden configuration.
 ```kotlin
 val nightConfiguration = Configuration(context.resources.configuration)
 nightConfiguration.uiMode =
@@ -177,9 +170,8 @@ val context = ContextThemeWrapper(
 )
 ```
 
-#### Record day-night view result
-
-Pull all code to a single function:
+#### Record day night view
+Let's put all code above into one function to create entry point for views.
 ```kotlin
 fun compareDayNightScreenshots(
     @LayoutRes viewId: Int,
