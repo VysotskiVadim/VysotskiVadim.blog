@@ -43,7 +43,7 @@ Today we will talk about the top one - infrastructure for Day Night screenshot t
 
 ### Day night screenshot test
 
-Dark theme support doubles testing effort.
+Dark theme doubles testing effort.
 You have to check 2 UIs per one feature: light and dark version.
 I as a lazy developer want to avoid it by automation.
 
@@ -119,10 +119,17 @@ fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
 
 ### Entry point 2: Record a view
 
-There is only 2 stages in view day-night screenshot recording: record day and record night view.
+#### View's screenshot recording process in a nutshell
 
-View is in the day mode by default.
-Do a regular actions to record screenshot: inflate, measure, layout, and draw.
+1. Inflate the view, i.e. create views hierarchy from xml using `LayoutInflater`;
+2. Measure and Layout the view,
+*read [Measure and Layout phases](https://developer.android.com/guide/topics/ui/how-android-draws)*;
+3. Record the screenshot.
+*Under the hood library just draws the view on a bitmap and saves to the storage.*
+
+#### Record a day view
+
+This is how recording looks like in code:
 
 ```kotlin
 // inflate
@@ -132,9 +139,19 @@ runOnMainSync { setupView(dayView) }
 // draw
 Screenshot.snap(dayView).setName(screenshotName("day")).record()
 ```
-Congratulations, day screenshot is ready.
 
-How to record view in a night mode?
+`setupView` is a function that measures and layouts a view.
+I pass it as a parameter to `compareDayNightScreenshots`.
+```kotlin
+compareDayNightScreenshots(R.layout.content_scrolling) {
+    ViewHelpers.setupView(it).setExactWidthPx(800).setExactHeightPx(4000).layout()
+}
+```
+
+`runOnMainSync` is custom utils function that executes block of code in main thread and blocks instrumentation thread.
+
+#### Record a night view
+How to create night view?
 Inflater could use different resources with respect to configuration.
 If configuration is day, it takes colors from `values/color.xml`,
 and `values-night/color.xml` for the night configuration. 
@@ -148,7 +165,56 @@ nightConfiguration.uiMode =
 val nightContext = context.createConfigurationContext(nightConfiguration)
 ```
 
+Now inflate and record the night view.
+```kotlin
+val nightView = LayoutInflater.from(nightContext).inflate(viewId, null, false)
+runOnMainSync { setupView(nightView) }
+Screenshot.snap(nightView).setName(screenshotName("night")).record()
+```
+#### Themes
+
+To let the view access app theme, wrap your context in theme wrapper.
+```kotlin
+val context = ContextThemeWrapper(
+    InstrumentationRegistry.getInstrumentation().targetContext,
+    theme
+)
+```
+
+#### Record day-night view result
+
+Pull all code to a single function:
+```kotlin
+fun compareDayNightScreenshots(
+    @LayoutRes viewId: Int,
+    @StyleRes theme: Int = R.style.Theme_Screenshottestsbestpractice,
+    setupView: (View) -> Unit
+) {
+    val context = ContextThemeWrapper(
+        InstrumentationRegistry.getInstrumentation().targetContext,
+        theme
+    )
+    val dayView = LayoutInflater.from(context).inflate(viewId, null, false)
+    runOnMainSync { setupView(dayView) }
+    Screenshot.snap(dayView).setName(screenshotName("day")).record()
+
+    val nightConfiguration = Configuration(context.resources.configuration)
+    nightConfiguration.uiMode =
+        Configuration.UI_MODE_NIGHT_YES or (nightConfiguration.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv())
+    val nightContext = context.createConfigurationContext(nightConfiguration)
+    val nightModeWrapper = ContextThemeWrapper(
+        nightContext,
+        theme
+    )
+
+    val nightView = LayoutInflater.from(nightModeWrapper).inflate(viewId, null, false)
+    runOnMainSync { setupView(nightView) }
+    Screenshot.snap(nightView).setName(screenshotName("night")).record()
+}
+```
+
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
 * [Shot](https://github.com/Karumi/Shot)
 * [Example project](https://github.com/VysotskiVadim/screenshot-tests-best-practice)
+* [How Android draws](https://developer.android.com/guide/topics/ui/how-android-draws)
