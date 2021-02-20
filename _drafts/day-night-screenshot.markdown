@@ -34,12 +34,12 @@ Checkout [Shot's readme](https://github.com/Karumi/Shot/blob/master/README.md) t
 I tried many different techniques of making screenshots.
 Some of them was extremely useful.
 I mush share at least one technique with you!
-Today we will talk about the top one - infrastructure for Day Night screenshot tests.
+Today we will talk about the my favorite - infrastructure for Day Night screenshot tests.
 
 ### Day night screenshot test
 
-Dark theme doubles testing effort.
-You have to check 2 UIs per one feature: light and dark version.
+With dart theme you have to check 2 UIs per one feature: light and dark version.
+It doubles testing effort.
 But not for developer who has screenshot tests.
 
 I defined 2 entry points with name `compareDayNightScreenshots` for screenshots recording,
@@ -121,7 +121,9 @@ View's recording is even more straight-forward:
 2. Measure and Layout the view;
 3. Record the screenshot.
 
-Repeat it 2 times, for day and night view.
+Repeat the process above 2 times, for day and night view.
+
+*If you don't know what measure\layout\draw is - check out [the doc](https://developer.android.com/guide/topics/ui/how-android-draws).*
 
 #### Record a day view
 ```kotlin
@@ -135,7 +137,7 @@ Screenshot.snap(dayView).setName(screenshotName("day")).record()
 
 `setupView` is a function that measures and layouts a view.
 I pass it as a parameter to entry point `compareDayNightScreenshots`.
-If you don't know what is measure\layout\draw - read [the doc](https://developer.android.com/guide/topics/ui/how-android-draws).
+
 ```kotlin
 compareDayNightScreenshots(R.layout.content_scrolling) {
     ViewHelpers.setupView(it).setExactWidthPx(800).setExactHeightPx(4000).layout()
