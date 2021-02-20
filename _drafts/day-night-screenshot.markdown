@@ -42,8 +42,9 @@ Dark theme doubles testing effort.
 You have to check 2 UIs per one feature: light and dark version.
 I as a lazy developer want to avoid it by automation.
 
-We defined 2 entry points `compareDayNightScreenshots` for screenshots recording, one for activities and the other for views.
-When you call it, it automatically record screen 2 times: day and night UI.
+I defined 2 entry points with name `compareDayNightScreenshots` for screenshots recording,
+one for activities and the other for views.
+It automatically records screen 2 times, for day and night mode.
 ```kotlin
 @Test
 fun activityScreenshotTest() {
