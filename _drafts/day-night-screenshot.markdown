@@ -20,31 +20,30 @@ When you update some basic style, you have to retest all the screens that use it
 Do you like manual testing? I don't. I prefer automation!
 
 Screenshot tests could be a solution for appearance auto testing.
-Record exactly what user sees, i.e. pixels.
+Record exactly what the user sees, i.e. pixels.
 After refactoring record a new image to compare pixel by pixel with the previous one.
 Refactoring shouldn't change even a single pixel, otherwise test fails.
 
 ### How to do screenshot tests on Android?
 
-We have been using [Shot](https://github.com/Karumi/Shot) for 1,5 year.
-It's built on top of [facebook screenshot test for Android](https://github.com/facebook/screenshot-tests-for-android)
+We have been using [Shot](https://github.com/Karumi/Shot) for 1,5 years.
+It's built on top of [the facebook screenshot test for Android](https://github.com/facebook/screenshot-tests-for-android)
 and provides more features.
 Checkout [Shot's readme](https://github.com/Karumi/Shot/blob/master/README.md) to know how it works.
 
 I tried many different techniques of making screenshots.
-Some of them was extremely useful.
-I mush share at least one technique with you!
-Today we will talk about the my favorite - infrastructure for Day Night screenshot tests.
+Some of them are extremely useful.
+Today we will talk about my favorite - infrastructure for Day Night screenshot tests.
 
-### Day night screenshot test
+### Day-Night screenshot test
 
-With dart theme you have to check 2 UIs per one feature: light and dark version.
-It doubles testing effort.
-But not for developer who has screenshot tests.
+With a dark theme, you have to check 2 UIs per one feature: light and dark versions.
+It doubles the testing effort.
+But not for a developer who has screenshot tests.
 
-I defined 2 entry points with name `compareDayNightScreenshots` for screenshots recording,
+I defined 2 entry points with the name `compareDayNightScreenshots` for screenshots recording,
 one for activities and the other for views.
-It records screen 2 times, for day and night mode.
+It records the screen 2 times, for day and night mode.
 ```kotlin
 @Test
 fun activityScreenshotTest() {
@@ -57,7 +56,7 @@ fun viewScreenshotTest() = compareDayNightScreenshots(R.layout.content_scrolling
     ViewHelpers.setupView(it).setExactWidthPx(800).setExactHeightPx(4000).layout()
 }
 ```
-After the execution I get [4 screenshots](https://github.com/VysotskiVadim/screenshot-tests-best-practice/tree/master/app/screenshots/debug).
+After the execution, I get [4 screenshots](https://github.com/VysotskiVadim/screenshot-tests-best-practice/tree/master/app/screenshots/debug).
 
 ### Entry point #1: Record whole activity
 
@@ -71,8 +70,8 @@ compareScreenshot(dayActivity, name = screenshotName("day"))
 In the code above
 I got the activity using `waitForActivity` [extension](https://github.com/Karumi/Shot/blob/master/shot-android/src/main/java/com/karumi/shot/ActivityScenarioUtils.kt#L14), and recorded with the overridden name.
 
-Why do we need to override screenshot name?
-Library uses name of the test for the screenshot by default.
+Why do we need to override the screenshot name?
+Library uses the name of the test for the screenshot by default.
 But we're going to generate 2 screenshots in one test.
 To make the screenshot name unique add *_day* and *_night* postfix to the name.
 
@@ -85,8 +84,8 @@ dayActivity.runOnUiThread {
 ```
 `AppCompatActivity` lets you switch between day and night modes.
 When you call `setLocalNightMode` activity restarts, i.e. Android recreates it.
-Recreated activity uses night resources.
-For the user it seems like UI has just changed the colors.
+The recreated activity uses night resources.
+For a user, it seems like UI has just changed the colors.
 
 Get a link to the new activity and record screenshot with overridden name again.
 ```kotlin
@@ -144,13 +143,13 @@ compareDayNightScreenshots(R.layout.content_scrolling) {
 }
 ```
 
-`runOnMainSync` is custom utils function that executes block of code in main thread and blocks instrumentation thread.
+`runOnMainSync` is custom utils function that executes a block of code on the main thread and blocks the instrumentation thread.
 
 #### Record a night view
-For a night view `Inflater` uses night resources.
-Instead of `values/color.xml`
+For a night view, `Inflater` uses night resources.
+Instead of `values/color.xml`,
 it takes values from `values-night/color.xml`.
-`Inflater` choses right file based on `Configuration`, that is the part of the context.
+`Inflater` picks the right file based on `Configuration`, that is the part of the context.
 
 To start using night resources create a new context with the overridden configuration.
 ```kotlin
@@ -168,7 +167,7 @@ Screenshot.snap(nightView).setName(screenshotName("night")).record()
 ```
 #### Themes
 
-To let the view access the app theme, wrap your context in theme wrapper.
+To let the view access the app theme, wrap your context in the theme wrapper.
 ```kotlin
 val context = ContextThemeWrapper(
     InstrumentationRegistry.getInstrumentation().targetContext,
