@@ -9,31 +9,27 @@ postImage:
   alt: 'eclipse of the moon'
 ---
 
-### Introduction
+### How could screenshot tests help you?
 
-Imagine a regular software developer, let's call her Lucy.
-She wants to implement a new functionality, but requirements hardly fits existing architecture.
-It's not a problem, because her team actively uses auto tests.
-She could change and adopt existing architecture to any requirement.
-Then Lucy runs tests to make sure that she hasn't broken anything.
-Now she could easily implement a new feature.
+Developers like to generalize their problems to build architecture/infrastructure.
+Infrastructure is some code, that is used by many features.
+For Android UI it is Styles, Themes, and custom Views.
+Once you've defined styles guide and implemented it in styles,
+adding a new screen is just a piece of cake.
 
-Developers handle rapidly changing requirements using **Refactoring + Auto Tests**.
-It's straight forward to add new feature if requirements is aligned with existing architecture.
-You aren't afraid to change app's architecture if you're confident in your tests.
-Android UI is not an exception.
+Requirements are changing.
+You get a new features that make you modify existing infrastructure a bit.
+From time to time you alter styles hierarchy or 
+add new capabilities to custom views.
 
-### Screenshots tests
+TODO: something about regression
 
-You can easily create new screens if you have well designed infrastructure: Styles, Themes, and custom Views.
-But you need to change it from time to time with respect to new features.
-
-Screenshot tests don't let me break existing UI when I modify basic Themes, Syles, or custom views.
+Screenshot tests don't let me break existing screens when I modify basic Themes, Syles, or custom views.
 Test records image with UI that user should see.
-After the code changes, test record new image and compare pixel by pixel with the previous one.
+After the code changes, test records new image and compare pixel by pixel with the previous one.
 You shouldn't change even a single pixel during refactoring, otherwise test fails.
 
-### Our way of doing screenshots tests
+### How to do screenshot tests on Android?
 
 We have been using [Shot](https://github.com/Karumi/Shot) for 1,5 year.
 It's built on top of [facebook screenshot test for Android](https://github.com/facebook/screenshot-tests-for-android)
@@ -41,8 +37,8 @@ and provides more features.
 Checkout [Shot's readme](https://github.com/Karumi/Shot/blob/master/README.md) to get a better understanding 
 
 I tried many different techniques of making screenshots.
-Some of them was so useful,
-so I mush share it with you!
+Some of them was extremely useful.
+I mush share at least one technique with you!
 Today we will talk about the top one - infrastructure for Day Night screenshot tests.
 
 ### Day night screenshot test
