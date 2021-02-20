@@ -17,12 +17,12 @@ adding a new screen is just a piece of cake.
 
 But it's hard to change infrastructure.
 When you update some basic style, you have to retest all the screens that use it.
-Don't like to do manual testing? Automate!
+Do you like manual testing? I don't. I like automation!
 
-Screenshot tests are ideal solution for appearance auto testing.
-Record what user sees - pixels.
+Screenshot tests could be a solution for appearance auto testing.
+Record exactly what user sees, i.e. pixels.
 After refactoring record a new image to compare pixel by pixel with the previous one.
-You shouldn't change even a single pixel during refactoring, otherwise test fails.
+Refactoring shouldn't change even a single pixel, otherwise test fails.
 
 ### How to do screenshot tests on Android?
 
