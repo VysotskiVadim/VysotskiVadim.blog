@@ -213,6 +213,12 @@ fun compareDayNightScreenshots(
 }
 ```
 
+### Summary
+
+If you already use Shot of Facebook screenshot tests,
+just copy my infrastructure to your project. 
+You will get more screenshots and less testing effort.
+
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
 * [Shot](https://github.com/Karumi/Shot)
