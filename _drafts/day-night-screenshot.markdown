@@ -61,6 +61,7 @@ After the execution I get [4 screenshots](https://github.com/VysotskiVadim/scree
 
 ### Entry point #1: Record whole activity
 
+#### Record day Activity
 Activity is in the day mode by default.
 We can record day UI immediately:
 ```kotlin
@@ -75,7 +76,8 @@ Library uses name of the test for the screenshot by default.
 But we're going to generate 2 screenshots in one test.
 To make the screenshot name unique add *_day* and *_night* postfix to the name.
 
-Next step is to turn on night mode
+#### Switch Activity to the night mode
+
 ```kotlin
 dayActivity.runOnUiThread {
     dayActivity.delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
@@ -92,8 +94,9 @@ val nightActivity = activityScenario.waitForActivity()
 compareScreenshot(nightActivity, name = screenshotName("night"))
 ```
 
+#### Result
 Put it all together and you get the entry point for activity screenshot recording.
-{% highlight kotlin %}
+```kotlin
 fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
     activityScenario: ActivityScenario<T>
 ) {
@@ -108,16 +111,17 @@ fun <T : AppCompatActivity> ScreenshotTest.compareDayNightScreenshots(
     val nightActivity = activityScenario.waitForActivity()
     compareScreenshot(nightActivity, name = screenshotName("night"))
 }
-{% endhighlight %}
+```
 
 ### Entry point #2: Record a view
 
-View's screenshot recording process in a nutshell:
+View's recording is even more straight-forward:
+
 1. Inflate the view, i.e. create views hierarchy from xml using `LayoutInflater`;
 2. Measure and Layout the view;
 3. Record the screenshot.
 
-We will repeat it 2 times: for day and night view.
+Repeat it 2 times, for day and night view.
 
 #### Record a day view
 ```kotlin
@@ -131,7 +135,7 @@ Screenshot.snap(dayView).setName(screenshotName("day")).record()
 
 `setupView` is a function that measures and layouts a view.
 I pass it as a parameter to entry point `compareDayNightScreenshots`.
-If you don't know what is measure\layout\draw - read [the doc(https://developer.android.com/guide/topics/ui/how-android-draws).
+If you don't know what is measure\layout\draw - read [the doc](https://developer.android.com/guide/topics/ui/how-android-draws).
 ```kotlin
 compareDayNightScreenshots(R.layout.content_scrolling) {
     ViewHelpers.setupView(it).setExactWidthPx(800).setExactHeightPx(4000).layout()
@@ -162,7 +166,7 @@ Screenshot.snap(nightView).setName(screenshotName("night")).record()
 ```
 #### Themes
 
-To let the view access app theme, wrap your context in theme wrapper.
+To let the view access the app theme, wrap your context in theme wrapper.
 ```kotlin
 val context = ContextThemeWrapper(
     InstrumentationRegistry.getInstrumentation().targetContext,
@@ -170,8 +174,8 @@ val context = ContextThemeWrapper(
 )
 ```
 
-#### Record day night view
-Let's put all code above into one function to create entry point for views.
+#### Result
+Put all code above into one function to create entry point for views.
 ```kotlin
 fun compareDayNightScreenshots(
     @LayoutRes viewId: Int,
