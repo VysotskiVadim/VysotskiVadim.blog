@@ -1,4 +1,5 @@
 rm _data/preloadedImages.yml
+
 for fullFileName in ./assets/*.jpg; do
     fileName=$(basename $fullFileName .jpg)
     echo "converting ${fileName}"
