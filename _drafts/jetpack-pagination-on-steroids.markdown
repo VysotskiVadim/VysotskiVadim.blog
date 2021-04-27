@@ -2,7 +2,7 @@
 layout: post
 title:  Jetpack Pagination on steroids
 description: "My experience of using Jetpack Pagination: clean architecture, unit testing, refresh and update list."
-image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/resized/pages_768.jpg
+image: /assets/resized/pages_768.jpg
 postImage:
   src: pagination-2
   alt: An opened book with many pages

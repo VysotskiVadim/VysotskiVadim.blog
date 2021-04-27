@@ -3,7 +3,7 @@ layout: post
 title:  Don't use Jetpack Pagination 2
 date: 2020-04-05 13:30:00 +0300
 description: "My experience of using Jetpack Pagination 2: display status, handle errors, unit testing, mapping, clean architecture."
-image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/resized/pages_768.jpg
+image: /assets/resized/pages_768.jpg
 postImage:
   src: pages
   alt: An open book with pages
@@ -73,8 +73,8 @@ For page loading there are 2 standard approaches:
 1. Show placeholder instead of each item which is loading right now;
 1. Show usual progress bar at the end of the list.
 
-![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/placeholder-loading-demo.gif){: height="200px"}
-![place holder](https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/progress-bar.gif){: height="200px"}
+![place holder](/assets/placeholder-loading-demo.gif){: height="200px"}
+![place holder](/assets/progress-bar.gif){: height="200px"}
 
 Using Jetpack Paging it's very easy to implement place holder based loading.
 `PagedListAdapter` passes `null` as an item to view holder if it isn't loaded yet.

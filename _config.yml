@@ -37,7 +37,7 @@ plugins:
   - jekyll-feed
 
 images:
-  baseUrl: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets
+  baseUrl: /assets/
   srcset:
     - 1920
     - 1600

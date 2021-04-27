@@ -3,7 +3,7 @@ layout: post
 date: 2020-05-05 12:00:00 +0300
 title:  "QA guide to Android application testing. Part 1: Lifecycle." 
 description: "Learn a simple technique for catching lifecycle related bugs"
-image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/resized/caught-a-bug_768.jpg
+image: /assets/resized/caught-a-bug_768.jpg
 postImage:
   src: caught-a-bug
   alt: 'A bird caught a bug'
@@ -46,9 +46,9 @@ When one of the configuration parameters changes,
 Android recreates components to adopt the app for a new setting.
 
 <div align='center'>
-    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/configuration_change_orientation.webm' %}
+    {% include video.html src='/assets/qa-guide-lifecycle/configuration_change_orientation.webm' %}
 
-    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/configuration_change_night.webm' %}
+    {% include video.html src='/assets/qa-guide-lifecycle/configuration_change_night.webm' %}
 </div>
 Expected behavior is to get an app in the same state, but adopted to a new configuration.
 For instance, user filled up a few fields,
@@ -102,7 +102,7 @@ On the *STATE* tab, you can find the following feature:
 every time user clicks **+1** button counter increases by 1.
 
 <div align='center'>
-    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter.webm' %}
+    {% include video.html src='/assets/qa-guide-lifecycle/counter.webm' %}
 </div>
 
 Let's try
@@ -116,7 +116,7 @@ with
 4. Check that counter is still there after rotation.
 
 <div align='center'>
-     {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/counter_configuration_changed.webm' %}
+     {% include video.html src='/assets/qa-guide-lifecycle/counter_configuration_changed.webm' %}
 </div>
 
 **Actual result:**
@@ -135,7 +135,7 @@ When a user selects a pill,
 a chosen option is displayed on the screen.
 
 <div align='center'>
-     {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice.webm' %}
+     {% include video.html src='/assets/qa-guide-lifecycle/pills-choice.webm' %}
 </div>
 
 Let's use
@@ -152,7 +152,7 @@ and check that user can complete the journey:
 6. Verify that the selected option is on the screen;
 
 <div align='center'>
-     {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/pills-choice-after-configuration-change.webm' %}
+     {% include video.html src='/assets/qa-guide-lifecycle/pills-choice-after-configuration-change.webm' %}
 </div>
 
 **Actual result:**
@@ -167,7 +167,7 @@ when a user enters the screen, the app loads some data from the server and lets 
 Once a user presses the "Update" button, new information is updated on the server.
 
 <div align='center'>
-    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input.webm' %}
+    {% include video.html src='/assets/qa-guide-lifecycle/input.webm' %}
 </div>
 
 This example works well after a configuration change,
@@ -185,7 +185,7 @@ with
 5. Verify that your input is still present;
 
 <div align='center'>
-    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/qa-guide-lifecycle/input-after-process-deadth.webm' %}
+    {% include video.html src='/assets/qa-guide-lifecycle/input-after-process-deadth.webm' %}
 </div>
 
 **Actual result:** 

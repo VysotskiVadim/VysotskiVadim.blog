@@ -3,7 +3,7 @@ layout: post
 title:  Day-Night Screenshot Tests
 description: "The best practice of Android screenshot tests: day-night screenshots"
 date:   2021-02-21 00:00:00 +0300
-image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/day-night-screenshots.jpg
+image: /assets/day-night-screenshots.jpg
 postImage:
   src: day-night-screenshots
   alt: 'eclipse of the moon'

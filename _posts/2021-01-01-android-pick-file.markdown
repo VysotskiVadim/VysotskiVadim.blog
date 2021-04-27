@@ -4,7 +4,7 @@ title:  Pick a file on Android
 description: "Simple guide how to pick file on Android: SAF, supported types, edge cases"
 supportedFileTypes: "txt, doc, rtf, docx, pdf"
 date: 2021-01-01 22:30:00 +0300
-image: https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/pick-a-file-cover.jpg
+image: /assets/pick-a-file-cover.jpg
 postImage:
   src: pick-a-file-cover
   alt: 'Files on the shelf'
@@ -223,7 +223,7 @@ But some third-party app lets user access files via specifying intent filter for
 and handling these intents in their activities.
 
 <div align='center'>
-    {% include video.html src='https://media.githubusercontent.com/media/VysotskiVadim/VysotskiVadim.github.io/master/assets/pick-file-android/pick-file-dropbox-vs-google-photos.webm' %}
+    {% include video.html src='/assets/pick-file-android/pick-file-dropbox-vs-google-photos.webm' %}
 </div>
 
 On the video,

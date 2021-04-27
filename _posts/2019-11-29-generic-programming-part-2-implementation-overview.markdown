@@ -2,7 +2,7 @@
 layout: post
 title: "Generic Programming - Implementation Overview"
 date: 2019-11-29 12:00:00 +0300
-image: https://github.com/VysotskiVadim/VysotskiVadim.github.io/raw/master/assets/Asteracea_poster_3_part_2.jpg
+image: /assets/Asteracea_poster_3_part_2.jpg
 description: "Comparison of generic programming in C++, Java, C#(.Net): history, under the hood, variance, pros anc cons of each approach"
 postImage:
   src: Asteracea_poster_3_part_2
