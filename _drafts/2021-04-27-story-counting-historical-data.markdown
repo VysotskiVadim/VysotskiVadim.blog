@@ -69,35 +69,26 @@ So you create new user story for each discover piece of functionality.
 
 ### Story of one release
 
-#### What we had in the beginning
+#### Start of the project
 
 In the beginning, we had many high-level stories like “Sign in”, “Search”, etc.
 Usually, it’s called an epic.
-Epics consist of user stories.
-When all stories are closed, the epic is done.
+But we created them as stories in jira, it means I counted them on the graphics.
 
-Consider example of epics.
-Epic "Sign in" contains user stories: 
-* As a user I want to sign in using email and password
-* As a user I want to sign in using google account
-* ...
-
-Epic "Products" contains:
-* As a user I want to see the list of all products
-* As a user I want to scroll to see all available products
-* ...
-
-I Hope you get the idea.
+We had many meetings to discover and creates new stories for the epics.
+PO asked developers "What do we need to implement sign in?".
+Developers were telling details of implementation: "We need integrate with Google to provide google sign".
+PO created new stories for the discovered details. 
 
 #### 6 weeks of development
+
+After 6 weeks of work we got at least some historical data.
+Trends predicted release on Match 22.
 
 {% include image.html src="story-counting-diagram-explanation-due-date" alt="commutative flow diagram of created and closed stories with trends and comments" %}
 
 ### Summary
 
-If you already use Shot of Facebook screenshot tests,
-just copy my infrastructure to your project. 
-You will get more screenshots and less testing effort.
 
 ### Links
 * [Post image](https://flic.kr/p/qZYThs)
