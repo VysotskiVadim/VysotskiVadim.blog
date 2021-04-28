@@ -100,13 +100,28 @@ In week 18 created stories trend is almost parallel to the closed stories trend.
 No due date prediction this time.
 We won't ever release the app if we continue adding so many stories.
 
-{% include image.html src="story-counting-week-18" alt="commutative flow for week 12" %}
+{% include image.html src="story-counting-week-18" alt="commutative flow for week 18" %}
+
+#### Release
+
+We released the app on July 7th.
+At some point, PO just stopped adding new user stories.
+All epics were split into stories and clarified.
+
+{% include image.html src="story-counting-release" alt="commutative flow for released app" %}
+
+All features were complement on May 28.
+Than we had our first and long regression.
+It took 40 days.
+
+{% include image.html src="story-counting-release-with-comments" alt="commutative flow for released app with comments" %}
+
 
 ### Summary
 
 
 ### Links
-* [Post image](https://flic.kr/p/qZYThs)
-* [Shot](https://github.com/Karumi/Shot)
-* [Example project](https://github.com/VysotskiVadim/screenshot-tests-best-practice)
-* [How Android draws](https://developer.android.com/guide/topics/ui/how-android-draws)
+* [Post image](https://flic.kr/p/JxqpKJ)
+* [#NoEstimates video by Allen Holub](https://youtu.be/QVBlnCTu9Ms)
+* [#NoEstimates Part 1 — Doing Scrum Without Estimates](https://neilkillick.medium.com/noestimates-part-1-doing-scrum-without-estimates-b42c4a453dc6)
+* [An unbiased look at the #NoEstimates debate](https://techbeacon.com/app-dev-testing/noestimates-debate-unbiased-look-origins-arguments-thought-leaders-behind-movement)
