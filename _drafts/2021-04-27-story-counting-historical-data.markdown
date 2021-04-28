@@ -119,7 +119,6 @@ It took 40 days.
 
 #### Prediction vs Reality
 
-
 | Weeks of development | Predicted Release Date |
 | ----------- | ----------- |
 | 6           | Match 22    |
@@ -128,6 +127,15 @@ It took 40 days.
 | All features are completed| May 28 |
 | Regression testing are completed |  July 7|
 
+### Lessons leaned
+
+In our case *created stories* count trend was parallel to *closed stories*.
+At some point of time we just stopped adding more stories and than release the app.
+
+{% include image.html src="story-counting-release-created-closed-trends" alt="commutative flow for released app with trends" %}
+
+I believe story counting predictions works only if the majority of stories are created in advance.
+A prediction can't be more accurate than the plan. Vague plan - vague predicted release date.
 
 ### Summary
 
