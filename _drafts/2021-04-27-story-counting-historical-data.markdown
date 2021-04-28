@@ -135,15 +135,40 @@ It took 40 days.
 | All features are completed| May 28 |
 | Regression testing are completed |  July 7|
 
-### Lessons leaned
+
+#### Analysis of results
 
 In our case *created stories* count trend was parallel to *closed stories*.
-At some point of time we just stopped adding more stories and than release the app.
+At some point of time we had just stopped adding more stories and than release the app.
 
 {% include image.html src="story-counting-release-created-closed-trends" alt="commutative flow for released app with trends" %}
 
-I believe story counting predictions works only if the majority of stories are created in advance.
-A prediction can't be more accurate than the plan. Vague plan - vague predicted release date.
+We failed to predict user stories count.
+Imagine a team where developers close stories faster than PO creates them.
+When the team closes all stories, a release doesn’t happen.
+We release the app when all functionality of MVP is ready.
+I.e. we need to close all epics.
+
+Closed stories count is linear.
+It should be predictable.
+What would happen if we spent more time and broke epic to story at the beginning?
+
+#### All stories created in advance
+
+
+Let's use the final number of stories - 97.
+
+{% include image.html src="story-counting-6-weeks-stories-created" alt="commutative flow after 6 weeks if all stories were created" %}
+
+| Weeks of development | Predicted Release Date |
+| ----------- | ----------- |
+| 2           | Unknown     |
+| 6           | May 3       |
+| 12          | July 5      |
+| 18          | June 17     |
+| Actual date |  July 7     |
+
+
 
 ### Story Points vs Story Counting 
 
@@ -156,6 +181,9 @@ If you believe in story points-based burndown predictions, you can believe in st
 
 Story Counting isn't a silver bullet.
 You need to invest you time and create stories in advance. 
+
+I believe story counting predictions works only if the majority of stories are created in advance.
+A prediction can't be more accurate than the plan. Vague plan - vague predicted release date.
 
 
 ### Links
