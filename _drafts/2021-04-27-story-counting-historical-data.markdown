@@ -137,7 +137,17 @@ At some point of time we just stopped adding more stories and than release the a
 I believe story counting predictions works only if the majority of stories are created in advance.
 A prediction can't be more accurate than the plan. Vague plan - vague predicted release date.
 
+### Story Points vs Story Counting 
+
+The team’s velocity is equally linear for both approaches.
+If you believe in story points-based burndown predictions, you can believe in story counting as well.
+
+{% include image.html src="story-counting-vs-story-points" alt="story counting vs story points" %}
+
 ### Summary
+
+Story Counting isn't a silver bullet.
+You need to invest you time and create stories in advance. 
 
 
 ### Links
