@@ -117,6 +117,18 @@ It took 40 days.
 {% include image.html src="story-counting-release-with-comments" alt="commutative flow for released app with comments" %}
 
 
+#### Prediction vs Reality
+
+
+| Weeks of development | Predicted Release Date |
+| ----------- | ----------- |
+| 6           | Match 22    |
+| 12          | June 5      |
+| 18          | Unknown     |
+| All features are completed| May 28 |
+| Regression testing are completed |  July 7|
+
+
 ### Summary
 
 
