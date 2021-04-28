@@ -80,9 +80,16 @@ PO asked developers "What do we need to implement sign in?".
 Developers were telling details of implementation: "We need integrate with Google to provide google sign".
 PO created new stories for the discovered details. 
 
+#### 2 weeks of development
+
+After 2 weeks of work we got at least some historical data.
+Trends predicted release on May 4.
+
+{% include image.html src="story-counting-2-weeks" alt="commutative flow for week 6" %}
+
 #### 6 weeks of development
 
-After 6 weeks of work we got at least some historical data.
+After 6 weeks of work release date came closer.
 Trends predicted release on Match 22.
 
 {% include image.html src="story-counting-diagram-explanation-due-date" alt="commutative flow for week 6" %}
@@ -121,6 +128,7 @@ It took 40 days.
 
 | Weeks of development | Predicted Release Date |
 | ----------- | ----------- |
+| 2           | May 4       |
 | 6           | Match 22    |
 | 12          | June 5      |
 | 18          | Unknown     |
