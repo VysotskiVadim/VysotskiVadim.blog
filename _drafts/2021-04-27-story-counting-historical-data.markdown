@@ -94,6 +94,14 @@ After 12 weeks predicted due date became June 5.
 
 {% include image.html src="story-counting-week-12" alt="commutative flow for week 12" %}
 
+#### 18 weeks of development
+
+In week 18 created stories trend is almost parallel to the closed stories trend.
+No due date prediction this time.
+We won't ever release the app if we continue adding so many stories.
+
+{% include image.html src="story-counting-week-18" alt="commutative flow for week 12" %}
+
 ### Summary
 
 
