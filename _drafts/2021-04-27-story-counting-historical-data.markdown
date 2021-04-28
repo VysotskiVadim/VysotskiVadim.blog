@@ -85,7 +85,14 @@ PO created new stories for the discovered details.
 After 6 weeks of work we got at least some historical data.
 Trends predicted release on Match 22.
 
-{% include image.html src="story-counting-diagram-explanation-due-date" alt="commutative flow diagram of created and closed stories with trends and comments" %}
+{% include image.html src="story-counting-diagram-explanation-due-date" alt="commutative flow for week 6" %}
+
+#### 12 weeks of development
+
+We created more and more stories as we went.
+After 12 weeks predicted due date became June 5.
+
+{% include image.html src="story-counting-week-12" alt="commutative flow for week 12" %}
 
 ### Summary
 
