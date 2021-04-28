@@ -3,13 +3,13 @@ layout: post
 title: Does Story Counting work?
 description: "Verifying story counting on historical data from real project. #NoEstimates"
 date:   2021-04-27 00:00:00 +0300
-image: /assets/day-night-screenshots.jpg
+image: /assets/resized/story-counting-post-image_640.jpg
 postImage:
-  src: day-night-screenshots
-  alt: 'eclipse of the moon'
+  src: story-counting-post-image
+  alt: 'Tools for counting'
 ---
 
-### Origin
+### Introduction
 
 [Allen Holub](https://twitter.com/allenholub) says that we can predict a release date without estimations using story counting.
 Check out [#NoEstimates video](https://youtu.be/QVBlnCTu9Ms) on youtube.
