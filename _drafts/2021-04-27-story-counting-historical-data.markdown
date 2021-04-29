@@ -92,7 +92,7 @@ Trends predicted release on May 4.
 After 6 weeks of work release date came closer.
 Trends predicted release on Match 22.
 
-{% include image.html src="story-counting-diagram-explanation-due-date" alt="commutative flow for week 6" %}
+{% include image.html src="story-counting-diagram-explanation-trend" alt="commutative flow for week 6" %}
 
 #### 12 weeks of development
 
@@ -155,10 +155,9 @@ What would have happened if we had spent more time and broken epic to stories at
 
 #### All stories created in advance
 
-We could spend more time discovering and splitting down epics at the begining.
+We could spend more time discovering and splitting down epics at the beginning.
 Would it help us?
-
-Let's use the final number of stories - 97.
+Let's try to predict release date using the final number of stories - 97.
 
 {% include image.html src="story-counting-6-weeks-stories-created" alt="commutative flow after 6 weeks if all stories were created" %}
 
