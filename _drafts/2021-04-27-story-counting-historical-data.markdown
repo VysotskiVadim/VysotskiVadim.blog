@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Does Story Counting work?
-description: "Verifying story counting on historical data from real project. #NoEstimates"
+description: "Verifying story counting on historical data from the real project. #NoEstimates"
 date:   2021-04-27 00:00:00 +0300
 image: /assets/resized/story-counting-post-image_640.jpg
 postImage:
