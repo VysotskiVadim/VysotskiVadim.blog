@@ -155,21 +155,24 @@ What would have happened if we had spent more time and broken epic to stories at
 
 #### All stories created in advance
 
-We could spend more time discovering and splitting down epics at the beginning.
+We could spend more time discovering and splitting down epics in the beginning.
 Would it help us?
 Let's try to predict release date using the final number of stories - 97.
 
 {% include image.html src="story-counting-6-weeks-stories-created" alt="commutative flow after 6 weeks if all stories were created" %}
 
-| Weeks of development | Predicted Release Date |
-| ----------- | ----------- |
-| 2           | Unknown     |
-| 6           | May 3       |
-| 12          | July 5      |
-| 18          | June 17     |
-| Actual date |  July 7     |
+| Weeks of development | Predicted Release Date | Diff with reality\* |
+| :-----------: | :-----------: | :----------: |
+| 2           | Unknown     | Unknown  |
+| 6           | May 3       | 32%      |
+| 12          | July 5      | 1%       |
+| 18          | June 17     | 10%      |
+| Actual date |  July 7     |          |
 
+**\*** How far predicted due date from the actual with respect to release length.
+(Diff in days * 100%) / release duration in days.
 
+whole duration 202 days
 
 ### Story Points vs Story Counting 
 
@@ -181,6 +184,7 @@ If you believe in story points-based burndown predictions, you can believe in st
 ### Summary
 
 Story Counting isn't a silver bullet.
+If you need 
 You need to invest you time and create stories in advance. 
 
 I believe story counting predictions works only if the majority of stories are created in advance.
