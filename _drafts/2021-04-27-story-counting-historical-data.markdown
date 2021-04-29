@@ -151,7 +151,7 @@ I.e. we need to close all epics.
 
 Closed stories count is linear.
 It should be predictable.
-What would happen if we spent more time and broke epic to story at the beginning?
+What would have happened if we had spent more time and had broken epic to stories at the beginning?
 
 #### All stories created in advance
 
