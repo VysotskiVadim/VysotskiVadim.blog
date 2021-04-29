@@ -82,7 +82,7 @@ In the beginning, we had many high-level stories like “Sign in”, “Search�
 Usually, it’s called an epic.
 But we created them as stories in Jira, which means I counted them on the graphics.
 
-We had many meetings to discover and creates new stories for the epics.
+We had many meetings to discover and create new stories for the epics.
 PO asked developers "What do we need to implement sign-in?".
 Developers were telling details of implementation: "We need integrate with Google to provide google sign".
 PO created new stories for the discovered details. 
@@ -150,7 +150,7 @@ At some point in time, we had just stopped adding more stories and released the 
 
 {% include image.html src="story-counting-release-created-closed-trends" alt="commutative flow for released app with trends" %}
 
-We failed to predict user stories count.
+Story counting failed to predict user stories count.
 Imagine a team where developers close stories faster than PO creates them.
 When the team closes all stories, a release doesn’t happen.
 We release the app when all the functionality of MVP is ready.
