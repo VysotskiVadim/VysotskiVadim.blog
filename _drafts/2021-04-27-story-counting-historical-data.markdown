@@ -133,7 +133,7 @@ It took 40 days.
 | 12          | June 5      |
 | 18          | Unknown     |
 | All features are completed| May 28 |
-| Regression testing are completed |  July 7|
+| App tested and released |  July 7|
 
 
 #### Analysis of results
