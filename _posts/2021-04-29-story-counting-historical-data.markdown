@@ -2,7 +2,7 @@
 layout: post
 title: Does Story Counting work?
 description: "Verifying story counting on historical data from the real project. #NoEstimates"
-date:   2021-04-27 00:00:00 +0300
+date:   2021-04-29 13:00:00 +0300
 image: /assets/resized/story-counting-post-image_640.jpg
 postImage:
   src: story-counting-post-image
@@ -38,8 +38,9 @@ The trend shows our progress if we continue to work at the average tempo.
 
 {% include image.html src="story-counting-diagram-explanation-trend" alt="commutative flow diagram of created and closed stories with trends" %}
 
-To build a trend calculate average velocity per day: `average velocity = (count of closed stories in the last 14 days) / 14`.
-Every day add average day velocity: `next day = previous day + average velocity`
+To build a trend calculate average velocity per day: `average close velocity = (count of closed stories in the last 14 days) / 14`.
+Repeat the same for created stories count.
+Every day add average day velocity: `next day = previous day + average velocity`.
 
 #### Step 3
 Predict the due date.
