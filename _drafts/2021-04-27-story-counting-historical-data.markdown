@@ -19,12 +19,12 @@ No more countless meetings where you argue is that 2 or 3 story points story.
 
 Let's check if story counting works.
 I have historical data from one of my projects.
-I will try to predict release date, and than compare with the real one.
+I will try to predict the release date and then compare it with the real one.
 
-### Brief introduction to Story Counting
+### A brief introduction to Story Counting
 
 Allen explains Story Counting very well in the [#NoEstimates video](https://youtu.be/QVBlnCTu9Ms).
-If you don't want to spend 38 minutes, read at lest brief explanation from this section.
+If you don’t want to spend 38 minutes, read at least a brief explanation from this section.
 
 #### Step 1
 Build a commutative flow diagram to predict the due date.
@@ -53,25 +53,25 @@ It says March 22.
 ### Dictionary
 
 Let's refresh and align our dictionary.
-I use following terms in the article.
+I use the following terms in the article.
 
 **User story** - describes one feature.
 It's like a task for one developer.
 Cards that you move in Jira from "In progress" to "Closed" in most cases are user stories.
 
-**Epic** - bunch of user stories related to the same piece of functionality.
-Some features are too big, for example *"Sign in"*.
-It can be spited in many user stories like:
-*"As a user I want to sign in using email and password"*,
-*"As a user I want to sign in using google account"*,
+**Epic** - a bunch of user stories related to the same piece of functionality.
+Some features are too big, for example, *"Sign in"*.
+It can be split into many user stories like:
+*"As a user, I want to sign in using email and password"*,
+*"As a user, I want to sign in using Google account"*,
 etc.
 
 Epics are handy when you aren't sure how exactly you're going to implement the feature.
 You know that you need *"Sign in"* features, but you don't know all the details.
 You discuss features with your team.
-During the discussion you realize that *"Sign in"* requires:
+During the discussion, you realize that *"Sign in"* requires:
 *"Password complexity validation"*, *"Sign in via Google"*, "Forget password".
-So you create new user story for each discover piece of functionality.
+So you create a new user story for each discovered piece of functionality.
 
 ### Story of one release
 
@@ -79,24 +79,24 @@ So you create new user story for each discover piece of functionality.
 
 In the beginning, we had many high-level stories like “Sign in”, “Search”, etc.
 Usually, it’s called an epic.
-But we created them as stories in Jira, it means I counted them on the graphics.
+But we created them as stories in Jira, which means I counted them on the graphics.
 
 We had many meetings to discover and creates new stories for the epics.
-PO asked developers "What do we need to implement sign in?".
+PO asked developers "What do we need to implement sign-in?".
 Developers were telling details of implementation: "We need integrate with Google to provide google sign".
 PO created new stories for the discovered details. 
 
 #### 2 weeks of development
 
-After 2 weeks of work we got at least some historical data.
-Trends predicted release on 4 May.
+After 2 weeks of work, we got at least some historical data.
+Trends predicted release date on 4 May.
 
 {% include image.html src="story-counting-2-weeks" alt="commutative flow for week 6" %}
 
 #### 6 weeks of development
 
-After 6 weeks of work release date came closer.
-Trends predicted release on 22 Match.
+After 6 weeks of work, the release date came closer.
+Trends predicted release date on 22 Match.
 
 {% include image.html src="story-counting-diagram-explanation-trend" alt="commutative flow for week 6" %}
 
@@ -123,8 +123,8 @@ All epics were split into stories and clarified.
 
 {% include image.html src="story-counting-release" alt="commutative flow for released app" %}
 
-All features were complement on 28 May.
-Than we had our first and long regression.
+All features were completed on 28 May.
+Then we had our first and long regression.
 It took 40 days.
 
 {% include image.html src="story-counting-release-with-comments" alt="commutative flow for released app with comments" %}
@@ -145,7 +145,7 @@ It took 40 days.
 #### Analysis of results
 
 In my case *created stories* count trend was parallel to *closed stories*.
-At some point of time we had just stopped adding more stories and released the app.
+At some point in time, we had just stopped adding more stories and released the app.
 
 {% include image.html src="story-counting-release-created-closed-trends" alt="commutative flow for released app with trends" %}
 
@@ -162,9 +162,9 @@ It should be predictable.
 
 We could spend more time discovering and splitting down epics in the beginning.
 Would it help us to get a better prediction?
-Let's try to predict release date using the final number of stories - 97.
+Let’s try to predict the release date using the final number of stories - 97.
 
-On diagram created stories count became parallel to X-axis.
+On the diagram created stories count became parallel to X-axis.
 {% include image.html src="story-counting-6-weeks-stories-created" alt="commutative flow after 6 weeks if all stories were created" %}
 
 | Weeks of development | Predicted Release Date | Diff with reality\* |
@@ -175,7 +175,7 @@ On diagram created stories count became parallel to X-axis.
 | 18          | June 17     | 10%      |
 | Actual date |  July 7     |          |
 
-**\*** How far predicted due date from the actual date with respect to release length.
+**\*** How far the predicted due date from the actual date with respect to release length.
 (Diff in days * 100%) / release duration in days.
 
 ### Story Points vs Story Counting 
