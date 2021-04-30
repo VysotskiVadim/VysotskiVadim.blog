@@ -3,7 +3,7 @@
     style="z-index:0;width:100%;"
     src="data:image/jpg;base64,{{site.data.preloadedImages[include.src]}}">
   <img
-    style="position:absolute;z-index:1;left:0;width:100%;"
+    style="position:absolute;z-index:1;left:0;top:0;width:100%;"
     src="{{site.images.baseUrl}}/{{ include.src }}.jpg"
     srcset="{% for width in site.images.srcset %}{{ site.images.baseUrl }}/resized/{{ include.src }}_{{ width }}.jpg {{ width }}w{% if forloop.last == false %}, {% endif %}{% endfor %}"
     alt="{{ include.alt }}">
