@@ -137,7 +137,7 @@ It took 40 days.
 | Weeks of development | Predicted Release Date |
 | ----------- | ----------- |
 | 2           | 4 May       |
-| 6           | 22 Match    |
+| 6           | 22 March    |
 | 12          | 5 June      |
 | 18          | Unknown     |
 | All features are completed| 28 May |
