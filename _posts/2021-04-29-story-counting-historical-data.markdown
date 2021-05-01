@@ -27,8 +27,9 @@ Allen explains Story Counting very well in the [#NoEstimates video](https://yout
 If you don’t want to spend 38 minutes, read at least a brief explanation from this section.
 
 #### Step 1
-Build a commutative flow diagram to predict the due date.
-The X-axis is time, Y-axis is stories count. Every day put two points: created and closed stories count.
+Build a commutative flow diagram to predict the release date.
+The X-axis is time, the Y-axis is stories count.
+Every day put two points: created and closed stories count.
 
 {% include image.html src="story-counting-diagram-explanation" alt="commutative flow diagram of created and closed stories" %}
 
@@ -43,8 +44,8 @@ Repeat the same for created stories count.
 Every day add average day velocity: `next day = previous day + average velocity`.
 
 #### Step 3
-Predict the due date.
-Created and closed stories trends meet at the predicted due date.
+Predict the release date date.
+Created and closed stories trends meet at the predicted release date.
 
 {% include image.html src="story-counting-diagram-explanation-due-date" alt="commutative flow diagram of created and closed stories with trends and comments" %}
 
@@ -68,7 +69,7 @@ It can be split into many user stories like:
 etc.
 
 Epics are handy when you aren't sure how exactly you're going to implement the feature.
-You know that you need *"Sign in"* features, but you don't know all the details.
+You know that you need *"Sign in"* feature, but you don't know all the details.
 You discuss features with your team.
 During the discussion, you realize that *"Sign in"* requires:
 *"Password complexity validation"*, *"Sign in via Google"*, "Forget password".
@@ -76,10 +77,10 @@ So you create a new user story for each discovered piece of functionality.
 
 ### Story of one release
 
-#### Start of the project
+#### The beginning
 
 In the beginning, we had many high-level stories like “Sign in”, “Search”, etc.
-Usually, it’s called an epic.
+Usually, they're called epics.
 But we created them as stories in Jira, which means I counted them on the graphics.
 
 We had many meetings to discover and create new stories for the epics.
@@ -97,21 +98,21 @@ Trends predicted release date on 4 May.
 #### 6 weeks of development
 
 After 6 weeks of work, the release date came closer.
-Trends predicted release date on 22 Match.
+Trends predicted release date on 22 March.
 
 {% include image.html src="story-counting-diagram-explanation-trend" alt="commutative flow for week 6" %}
 
 #### 12 weeks of development
 
 We created more and more stories as we went.
-After 12 weeks predicted due date became 5 June.
+After 12 weeks predicted release date became 5 June.
 
 {% include image.html src="story-counting-week-12" alt="commutative flow for week 12" %}
 
 #### 18 weeks of development
 
 In week 18 created stories trend is almost parallel to the closed stories trend.
-No due date prediction this time.
+No release date prediction this time.
 We won't ever release the app if we continue adding so many stories.
 
 {% include image.html src="story-counting-week-18" alt="commutative flow for week 18" %}
