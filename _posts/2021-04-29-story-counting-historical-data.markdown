@@ -190,7 +190,7 @@ If you believe in story points-based burndown predictions, you can believe in st
 ### Summary
 
 Story Counting isn't a silver bullet.
-It won't help you if don't invest time in discovery and requirements clarification in the beginning.
+It won't help you if you don't invest time in discovery and requirements clarification in the beginning.
 The more stories you create at the beginning, the more exact due date you get.
 A prediction can't be more accurate than the plan. Vague plan - vague predicted release date.
 
