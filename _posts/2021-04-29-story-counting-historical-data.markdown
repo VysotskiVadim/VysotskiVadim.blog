@@ -14,7 +14,7 @@ postImage:
 [Allen Holub](https://twitter.com/allenholub) says that we can predict a release date without estimations using Story Counting.
 Check out his [#NoEstimates video](https://youtu.be/QVBlnCTu9Ms) on youtube.
 
-Story Counting sounds like a dream for me.
+Story Counting sounds like a dream to me.
 No more countless meetings where you argue is that 2 or 3 story points story.
 
 Let's check if story counting works.
@@ -29,7 +29,7 @@ If you don’t want to spend 38 minutes, read at least a brief explanation from 
 #### Step 1
 Build a cumulative flow diagram to predict the release date.
 The X-axis is time, the Y-axis is stories count.
-Every day put two points: created and closed stories count.
+Put two points every day: one for created and one for closed stories count.
 
 {% include image.html src="story-counting-diagram-explanation" alt="cumulative flow diagram of created and closed stories" %}
 
@@ -39,9 +39,12 @@ The trend shows our progress if we continue to work at the average tempo.
 
 {% include image.html src="story-counting-diagram-explanation-trend" alt="cumulative flow diagram of created and closed stories with trends" %}
 
-To build a trend calculate average velocity per day: `average close velocity = (count of closed stories in the last 14 days) / 14`.
+To build a trend, calculate an average velocity per day.
+`average close velocity = (count of closed stories in the last 14 days) / 14`.
+Closed stories count is increasing every day by average day velocity.
+Add velocity every day to the last known value.
+`next day = previous day + average velocity`.
 Repeat the same for created stories count.
-Every day add average day velocity: `next day = previous day + average velocity`.
 
 #### Step 3
 Predict the release date.
@@ -81,31 +84,31 @@ So you create a new user story for each discovered piece of functionality.
 
 In the beginning, we had many high-level stories like “Sign in”, “Search”, etc.
 Usually, they're called epics.
-But we created them as stories in Jira, which means I counted them on the graphics.
+But we created them as stories in Jira, which means I counted them on the graphs.
 
 We had many meetings to discover and create new stories for the epics.
 PO asked developers "What do we need to implement sign-in?".
-Developers were telling details of implementation: "We need to integrate with Google to provide google sign".
+Developers were telling details of implementation: "We need to integrate Google SDK to provide google sign-in".
 PO created new stories for the discovered details. 
 
 #### 2 weeks of development
 
 After 2 weeks of work, we got at least some historical data.
-Trends predicted release date on 4 May.
+Trends predicted release date on May 4.
 
 {% include image.html src="story-counting-2-weeks" alt="cumulative flow for week 6" %}
 
 #### 6 weeks of development
 
 After 6 weeks of work, the release date came closer.
-Trends predicted release date on 22 March.
+Trends predicted release date on March 22.
 
 {% include image.html src="story-counting-diagram-explanation-trend" alt="cumulative flow for week 6" %}
 
 #### 12 weeks of development
 
 We created more and more stories as we went.
-After 12 weeks predicted release date became 5 June.
+After 12 weeks predicted release date became June 5.
 
 {% include image.html src="story-counting-week-12" alt="cumulative flow for week 12" %}
 
@@ -119,13 +122,13 @@ We won't ever release the app if we continue adding so many stories.
 
 #### Release
 
-We released the app on 7 July.
+We released the app on July 7.
 At some point, PO just stopped adding new user stories.
 All epics were split into stories and clarified.
 
 {% include image.html src="story-counting-release" alt="cumulative flow for released app" %}
 
-All features were completed on 28 May.
+All features were completed on May 28.
 Then we had our first and long regression.
 It took 40 days.
 
@@ -136,17 +139,17 @@ It took 40 days.
 
 | Weeks of development | Predicted Release Date |
 | ----------- | ----------- |
-| 2           | 4 May       |
-| 6           | 22 March    |
-| 12          | 5 June      |
+| 2           | May 4       |
+| 6           | March 22    |
+| 12          | June 5      |
 | 18          | Unknown     |
-| All features are completed| 28 May |
-| App tested and released |  7 July |
+| All features are completed| May 28 |
+| App tested and released |  July 7  |
 
 
 #### Analysis of results
 
-In my case *created stories* count trend was parallel to *closed stories*.
+In my case *created stories* count trend was parallel to *closed stories* count trend.
 At some point in time, we had just stopped adding more stories and released the app.
 
 {% include image.html src="story-counting-release-created-closed-trends" alt="cumulative flow for released app with trends" %}
@@ -162,7 +165,7 @@ It should be predictable.
 
 #### What if all stories were created in advance
 
-We could spend more time discovering and splitting down epics in the beginning.
+We could have spent more time discovering and splitting down epics in the beginning of the project.
 Would it help us to get a better prediction?
 Let’s try to predict the release date using the final number of stories - 97.
 
@@ -177,8 +180,8 @@ On the diagram created stories count became parallel to X-axis.
 | 18          | June 17     | 10%      |
 | Actual date |  July 7     |          |
 
-**\*** How far the predicted due date from the actual date with respect to release length.
-(Diff in days * 100%) / release duration in days.
+**\*** How far the predicted release date is from the actual date with respect to release length.
+`diff = (Diff in days * 100%) / release duration in days`.
 
 ### Story Points vs Story Counting 
 
@@ -191,7 +194,7 @@ If you believe in story points-based burndown predictions, you can believe in st
 
 Story Counting isn't a silver bullet.
 It won't help you if you don't invest time in discovery and requirements clarification in the beginning.
-The more stories you create at the beginning, the more exact due date you get.
+The more stories you create at the beginning, the more accurate due date you get.
 A prediction can't be more accurate than the plan. Vague plan - vague predicted release date.
 
 ### Links
