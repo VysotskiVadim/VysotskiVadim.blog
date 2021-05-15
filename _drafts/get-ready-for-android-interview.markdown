@@ -23,6 +23,13 @@ This article contains all the materials I revised and learned during the prepara
 
 ## Kotlin {#kotlin}
 
+* [JvmStatic, JvmOverloads, JvmField](https://blog.mindorks.com/jvmstatic-jvmoverloads-and-jvmfield-in-kotlin)
+* When for enums and sealed classes in the byte code
+* infix function
+* operators overloading
+* Hight order functions in byte code
+* Delegates
+
 ## Multithreading {#multithreading}
 
 * Thread: [Thread in computing](https://en.wikipedia.org/wiki/Thread_(computing))
@@ -45,3 +52,6 @@ This article contains all the materials I revised and learned during the prepara
 ## Architecture {#architecture}
 
 ## Software engineering practices {#practices}
+
+* Continuous integration
+* TDD
