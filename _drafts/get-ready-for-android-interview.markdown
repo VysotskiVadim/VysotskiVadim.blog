@@ -2,6 +2,10 @@
 layout: post
 title:  Get ready for a Senior Android Developer interview (To be updated)
 description: "List of topics and questions with links to materials for Senior Android Developer position interview"
+description: "It's easy to understand generic programming, variance, covariance, contravariance by simple examples."
+postImage:
+  src: get-ready-for-android-job-interview
+  alt: Job interview for senior android developer position
 ---
 
 I'm looking for a new Senior Android Developer job.
