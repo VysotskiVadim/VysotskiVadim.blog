@@ -34,7 +34,8 @@ This article contains all the materials I revised and learned during the prepara
 
 * Thread: [Thread in computing](https://en.wikipedia.org/wiki/Thread_(computing))
 * Synchronization: 
-[java.util.concurrent.Locks](https://www.baeldung.com/java-concurrent-locks)
+[java.util.concurrent.Locks](https://www.baeldung.com/java-concurrent-locks),
+[Compare and swap](https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/)
 
 ## RxJava {#rxjava}
 
@@ -44,7 +45,7 @@ This article contains all the materials I revised and learned during the prepara
 [Scheduler](http://reactivex.io/documentation/scheduler.html)
 * [Single, Maybe and Completable](https://medium.com/tompee/rxjava-ninja-single-maybe-and-completable-b5907dddc5e4)
 * [Flowable](https://medium.com/android-news/rxjava-flowables-what-when-and-how-to-use-it-9f674eb3ecb5)
-* [Guess the execution thread in rx chain tasks](https://lorentzos.com/i-bet-your-rxjava-is-on-the-wrong-thread-ae02e66a3eac)
+* [Guess the execution thread in rx chain tasks](https://lorentzos.com/i-bet-your-rxjava-is-on-the-wrong-thread-ae02e66a3eac)🤯
 * [40 interview questions and answers for RxJava](https://www.veskoiliev.com/40-rxjava-interview-questions-and-answers/)
 
 ## Kotlin Coroutines {#kotlin-coroutines}
