@@ -12,7 +12,7 @@ I'm looking for a new Senior Android Developer job.
 I'm going to get through many job interviews soon.
 This article contains all the materials I revised and learned during the preparation.
 
-## Table of content
+#### Table of content
 
 * [Kotlin](#kotlin)
 * [Multithreading](#multithreading)
@@ -35,7 +35,7 @@ This article contains all the materials I revised and learned during the prepara
 * Thread: [Thread in computing](https://en.wikipedia.org/wiki/Thread_(computing))
 * Synchronization: 
 [java.util.concurrent.Locks](https://www.baeldung.com/java-concurrent-locks),
-[Compare and swap](https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/)
+[Compare and swap algorithm (Atomic)](https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/)
 
 ## RxJava {#rxjava}
 
@@ -52,5 +52,7 @@ This article contains all the materials I revised and learned during the prepara
 ## Kotlin Coroutines {#kotlin-coroutines}
 
 ## Architecture {#architecture}
+
+* [Clean architecture for dummies](https://medium.com/codex/clean-architecture-for-dummies-df6561d42c94)
 
 ## Software engineering practices {#practices}
