@@ -175,6 +175,15 @@ private fun hasKnownExtension(filename: String): Boolean {
     val extension = filename.substring(lastDotPosition)
     return extensionsToTypes.containsKey(extension)
 }
+
+// utils function
+fun <K, V> Map<K, V>.invert(): Map<V, K> {
+    val inverted = mutableMapOf<V, K>()
+    for (item in this) {
+        inverted[item.value] = item.key
+    }
+    return inverted
+}
 ```
 
 My backend requires file names to have an extension,
