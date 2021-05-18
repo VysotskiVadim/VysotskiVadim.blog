@@ -23,8 +23,8 @@ This article contains all the materials I revised and learned during the prepara
 
 ## Kotlin {#kotlin}
 
+* [Calling Kotlin from Java](https://kotlinlang.org/docs/java-to-kotlin-interop.html#package-level-functions)
 * [Optional arguments in the byte code](https://twitter.com/VysotskiVadim/status/1394296768368680967)
-* [JvmStatic, JvmOverloads, JvmField](https://blog.mindorks.com/jvmstatic-jvmoverloads-and-jvmfield-in-kotlin)
 * [Enums + when in byte code](https://medium.com/androiddevelopers/when-using-enums-and-r8-3f8f314c0a13)
 * [Infix notation](https://reedonline.atlassian.net/browse/MOBP-2705)
 * operators overloading
@@ -48,6 +48,7 @@ This article contains all the materials I revised and learned during the prepara
 * [Connectable Observable](http://introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect)
 * [Guess the execution thread in rx chain](https://lorentzos.com/i-bet-your-rxjava-is-on-the-wrong-thread-ae02e66a3eac)🤯
 * [Flowable](https://medium.com/android-news/rxjava-flowables-what-when-and-how-to-use-it-9f674eb3ecb5)
+* [Rx java practice](https://github.com/sergiiz/RxBasicsKata)
 * [40 interview questions and answers for RxJava](https://www.veskoiliev.com/40-rxjava-interview-questions-and-answers/)
 
 ## Kotlin Coroutines {#kotlin-coroutines}
