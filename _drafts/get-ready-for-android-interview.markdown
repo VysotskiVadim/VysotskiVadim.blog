@@ -23,8 +23,9 @@ This article contains all the materials I revised and learned during the prepara
 
 ## Kotlin {#kotlin}
 
+* [Optional arguments in the byte code](https://twitter.com/VysotskiVadim/status/1394296768368680967)
 * [JvmStatic, JvmOverloads, JvmField](https://blog.mindorks.com/jvmstatic-jvmoverloads-and-jvmfield-in-kotlin)
-* When for enums and sealed classes in the byte code
+* [Enums + when in byte code](https://medium.com/androiddevelopers/when-using-enums-and-r8-3f8f314c0a13)
 * infix function
 * operators overloading
 * Hight order functions in byte code
