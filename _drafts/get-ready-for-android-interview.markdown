@@ -49,7 +49,6 @@ This article contains all the materials I revised and learned during the prepara
 * [Connectable Observable](http://introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect)
 * [Guess the execution thread in rx chain](https://lorentzos.com/i-bet-your-rxjava-is-on-the-wrong-thread-ae02e66a3eac)🤯
 * [Flowable](https://medium.com/android-news/rxjava-flowables-what-when-and-how-to-use-it-9f674eb3ecb5)
-* [Rx java practice](https://github.com/sergiiz/RxBasicsKata)
 * [40 interview questions and answers for RxJava](https://www.veskoiliev.com/40-rxjava-interview-questions-and-answers/)
 
 ## Kotlin Coroutines {#kotlin-coroutines}
