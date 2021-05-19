@@ -26,6 +26,7 @@ This article contains all the materials I revised and learned during the prepara
 * [Calling Kotlin from Java](https://kotlinlang.org/docs/java-to-kotlin-interop.html#package-level-functions)
 * [Optional arguments in the byte code](https://twitter.com/VysotskiVadim/status/1394296768368680967)
 * [Enums + when in byte code](https://medium.com/androiddevelopers/when-using-enums-and-r8-3f8f314c0a13)
+* [default arguments](https://medium.com/androiddevelopers/dont-argue-with-default-arguments-2245b2c752c)
 * [Infix notation](https://reedonline.atlassian.net/browse/MOBP-2705)
 * operators overloading
 * Hight order functions in byte code
