@@ -28,9 +28,8 @@ This article contains all the materials I revised and learned during the prepara
 * [Enums + when in byte code](https://medium.com/androiddevelopers/when-using-enums-and-r8-3f8f314c0a13)
 * [default arguments](https://medium.com/androiddevelopers/dont-argue-with-default-arguments-2245b2c752c)
 * [Infix notation](https://reedonline.atlassian.net/browse/MOBP-2705)
-* operators overloading
-* Hight order functions in byte code
-* Delegates
+* [Delegated properties](https://kotlinlang.org/docs/delegated-properties.html)
+* [Operators overloading](https://kotlinlang.org/docs/operator-overloading.html)
 
 ## Multithreading {#multithreading}
 
@@ -50,6 +49,7 @@ This article contains all the materials I revised and learned during the prepara
 * [Guess the execution thread in rx chain](https://lorentzos.com/i-bet-your-rxjava-is-on-the-wrong-thread-ae02e66a3eac)🤯
 * [Flowable](https://medium.com/android-news/rxjava-flowables-what-when-and-how-to-use-it-9f674eb3ecb5)
 * [40 interview questions and answers for RxJava](https://www.veskoiliev.com/40-rxjava-interview-questions-and-answers/)
+* [RxJava practical tasks](https://github.com/vanniktech/RxRiddles)
 
 ## Kotlin Coroutines {#kotlin-coroutines}
 
