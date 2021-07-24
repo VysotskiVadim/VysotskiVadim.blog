@@ -17,7 +17,7 @@ When the user picked the color, he presses the "Done" button.
 The app navigates back to screen **A**.
 Child screen **B** needs to pass the picked color to its parent screen **A**.
 
-Jetpack Navigation Architecture component calls passing result from child to parent screen a ["Returning a result to the previous Destination"](https://developer.android.com/guide/navigation/navigation-programmatic#returning_a_result)
+Jetpack Navigation Architecture component calls the passing result from child to parent screen a ["Returning a result to the previous Destination"](https://developer.android.com/guide/navigation/navigation-programmatic#returning_a_result)
 
 But I don't like the code from the official guide.
 It looks too complex for such a task.
