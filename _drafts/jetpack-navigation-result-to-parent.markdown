@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "A convenient API for returning a result to the previous Destination"
-date: 2019-11-29 12:00:00 +0300
+title: "Jetpack Navigation. A convenient API for returning a result to the previous Destination."
+date: 2021-07-24 19:00:00 +0300
 image: /assets/Asteracea_poster_3_part_2.jpg
 description: "Return a result to the previous Destination using Android Jetpack Navigation with beautiful API"
 postImage:
