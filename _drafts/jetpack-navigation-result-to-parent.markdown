@@ -12,15 +12,16 @@ postImage:
 ## Introduction
 
 I often need to launch a screen **B***(child)* from a screen **A***(parent)*.
-A user do some actions on the screen B, for example picks color using full-screen color picker.
-When the user picked the color, he presses "Done" button.
-App navigates back to the screen A.
-Child screen **B** needs to pass picked color to it's parent screen **A**.
+A user does some actions on screen B, for example, picks color using a full-screen color picker.
+When the user picked the color, he presses the "Done" button.
+The app navigates back to screen **A**.
+Child screen **B** needs to pass the picked color to its parent screen **A**.
 
 Jetpack Navigation Architecture component calls passing result from child to parent screen a ["Returning a result to the previous Destination"](https://developer.android.com/guide/navigation/navigation-programmatic#returning_a_result)
 
 But I don't like the code from the official guide.
-It looks too complex for such task. Don't worry if you don't understand it.
+It looks too complex for such a task.
+Don't worry if you don't understand it.
 ```kotlin
 val navController = findNavController();
 // After a configuration change or process death, the currentBackStackEntry
@@ -51,7 +52,7 @@ viewLifecycleOwner.lifecycle.addObserver(LifecycleEventObserver { _, event ->
 
 The approach above works fine.
 But I don't want to see this code in many fragments of my app.
-Obvious solution for me was to write a wrapper that uses official approach under the hood but provides convenient API.
+An obvious solution for me was to write a wrapper that uses the official approach under the hood but provides a convenient API.
 
 I implemented the wrapper. Here's how I get a result from a child screen(previous destination):
 ```kotlin
@@ -63,13 +64,13 @@ findNavController().handleResult<PickIntervalResult>(
     binding.textNotifications.text = result.toString()
 }
 ```
-And here's how to return result to a parent from a child:
+And here's how to return a result to a parent from a child:
 ```kotlin
 findNavController().finishWithResult(PickIntervalResult.WEEKLY)
 ```
 
 Hope this wrapper can be useful for you as well.
-To implement the similar wrapper read this article or go straight to the [code in github](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/app/src/main/java/dev/vadzimv/jetpack/navigation/example/navigation/Result.kt) and play with example.
+To implement a similar wrapper read this article or go straight to the [code in github](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/app/src/main/java/dev/vadzimv/jetpack/navigation/example/navigation/Result.kt) and play with the example app.
 
 
 ## Pass result to a parent from a child screen
@@ -89,12 +90,12 @@ private fun resultName(resultSourceId: Int) = "result-$resultSourceId"
 ```
 
 The saved state handle is a map of keys and values.
-I put result as a value.
+I put the result as a value.
 Key is generated based on the child screen destination id by `resultName` function.
-Key contains id of child screen because parent could have a few children,
+Key contains the id of the child screen because the parent could have a few children,
 and it needs to know the source of the result.
 
-Passing result to a parent is the last step on every child screen.
+Passing a result to a parent is the last step on every children's screen.
 Close the current screen on the last step calling `popBackStack()`.
 
 `SavedStateHandle` doesn't work with any class because it deals with a process death.
