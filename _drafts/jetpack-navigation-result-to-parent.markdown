@@ -11,10 +11,16 @@ postImage:
 
 ## Introduction
 
-You can get result from a previous destination using Jetpack Navigation,
-[see the official guide](https://developer.android.com/guide/navigation/navigation-programmatic#returning_a_result).
-But I don't like the code. 
-It looks too complex for such task.
+I often need to launch a screen **B***(child)* from a screen **A***(parent)*.
+A user do some actions on the screen B, for example picks color using full-screen color picker.
+When the user picked the color, he presses "Done" button.
+App navigates back to the screen A.
+Child screen **B** needs to pass picked color to it's parent screen **A**.
+
+Jetpack Navigation Architecture component calls passing result from child to parent screen a ["Returning a result to the previous Destination"](https://developer.android.com/guide/navigation/navigation-programmatic#returning_a_result)
+
+But I don't like the code from the official guide.
+It looks too complex for such task. Don't worry if you don't understand it.
 ```kotlin
 val navController = findNavController();
 // After a configuration change or process death, the currentBackStackEntry
@@ -45,8 +51,7 @@ viewLifecycleOwner.lifecycle.addObserver(LifecycleEventObserver { _, event ->
 
 The approach above works fine.
 But I don't want to see this code in many fragments of my app.
-Obvious solution for me was to write a wrapper that uses official approach under the hood
-but provides convenient API.
+Obvious solution for me was to write a wrapper that uses official approach under the hood but provides convenient API.
 
 I implemented the wrapper. Here's how I get a result from a child screen(previous destination):
 ```kotlin
@@ -64,10 +69,10 @@ findNavController().finishWithResult(PickIntervalResult.WEEKLY)
 ```
 
 Hope this wrapper can be useful for you as well.
-To implement the similar wrapper you can read article or go straight to the [code in github](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/app/src/main/java/dev/vadzimv/jetpack/navigation/example/navigation/Result.kt).
+To implement the similar wrapper read this article or go straight to the [code in github](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/app/src/main/java/dev/vadzimv/jetpack/navigation/example/navigation/Result.kt) and play with example.
 
 
-## Pass result to parent from child screen
+## Pass result to a parent from a child screen
 
 To pass result to a parent screen, just put it in the saved state handle of parent's back stack entry.
 
@@ -85,9 +90,11 @@ private fun resultName(resultSourceId: Int) = "result-$resultSourceId"
 
 The saved state handle is a map of keys and values.
 I put result as a value.
-Key is generated based on the child screen destination id in `resultName`.
+Key is generated based on the child screen destination id by `resultName` function.
+Key contains id of child screen because parent could have a few children,
+and it needs to know the source of the result.
 
-Passing result to parent is the last step on every child screen.
+Passing result to a parent is the last step on every child screen.
 Close the current screen on the last step calling `popBackStack()`.
 
 `SavedStateHandle` doesn't work with any class because it deals with a process death.
@@ -113,7 +120,7 @@ private fun <T : Parcelable> handleResultFromChild(
 ```
 
 Handle result only when the app navigates back from a child to a parent.
-Observe lifecycle of the parent's back stack entry, handle result on `ON_RESUME` event.
+To do so observe lifecycle of the parent's back stack entry, handle result on `ON_RESUME` event.
 
 ```kotlin
 fun <T : Parcelable> NavController.handleResult(
@@ -142,4 +149,4 @@ The code above also stops all listeners when the parent screen dies.
 ## This is it
 
 Go and try the wrapper in the [example app](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/app/src/main/java/dev/vadzimv/jetpack/navigation/example/navigation/Result.kt).
-Hope it makes your code easier as well.
+Hope the wrapper makes your code easier as well.
