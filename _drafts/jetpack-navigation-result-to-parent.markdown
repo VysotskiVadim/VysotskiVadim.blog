@@ -97,53 +97,36 @@ That's why generic type `T` must implement `Parcelable`.
 
 To get result back in a parent just take the result from the saved state handle.
 ```kotlin
-private fun <T : Parcelable> tryHandleResult(
-    childrenDestinationsIds: IntArray,
+private fun <T : Parcelable> handleResultFromChild(
+    @IdRes childDestinationId: Int,
     currentEntry: NavBackStackEntry,
     handler: (T) -> Unit
 ) {
-    val expectedResultKey = resultName(childDestinationId) // calculate key which child used
-    val result = currentEntry.savedStateHandle.get<T>(expectedResultKey)
-    handler(result!!) // call result's listener
-    currentEntry.savedStateHandle.remove<T>(expectedResultKey) // result is handled, remove it
-}
-
-```
-
-A parent could have a few children with the same result type.
-Let's replace a single `childDestinationId` with an array of different children `childrenDestinationsIds`.
-```kotlin
-private fun <T : Parcelable> tryHandleResult(
-    childrenDestinationsIds: IntArray,
-    currentEntry: NavBackStackEntry,
-    handler: (T) -> Unit
-) {
-    for (childrenDestination in childrenDestinationsIds) {
-        val expectedResultKey = resultName(childrenDestination)
-        if (currentEntry.savedStateHandle.contains(expectedResultKey)) {
-            val result = currentEntry.savedStateHandle.get<T>(expectedResultKey)
-            handler(result!!)
-            currentEntry.savedStateHandle.remove<T>(expectedResultKey)
-        }
+    val expectedResultKey = resultName(childDestinationId)
+    if (currentEntry.savedStateHandle.contains(expectedResultKey)) {
+        val result = currentEntry.savedStateHandle.get<T>(expectedResultKey)
+        handler(result!!)
+        currentEntry.savedStateHandle.remove<T>(expectedResultKey)
     }
 }
+
 ```
 
-Handle result only when the app navigates from a child to a parent.
+Handle result only when the app navigates back from a child to a parent.
 Observe lifecycle of the parent's back stack entry, handle result on `ON_RESUME` event.
 
 ```kotlin
 fun <T : Parcelable> NavController.handleResult(
     lifecycleOwner: LifecycleOwner,
     @IdRes currentDestinationId: Int,
-    @IdRes vararg childrenDestinationsIds: Int,
+    @IdRes childDestinationId: Int,
     handler: (T) -> Unit
 ) {
     // `getCurrentBackStackEntry` doesn't work in case of recovery from the process death when dialog is opened.
     val currentEntry = getBackStackEntry(currentDestinationId)
     val observer = LifecycleEventObserver { _, event ->
         if (event == Lifecycle.Event.ON_RESUME) {
-            tryHandleResult(childrenDestinationsIds, currentEntry, handler)
+            handleResultFromChild(childDestinationId, currentEntry, handler)
         }
     }
     currentEntry.lifecycle.addObserver(observer)
@@ -156,5 +139,7 @@ fun <T : Parcelable> NavController.handleResult(
 ```
 The code above also stops all listeners when the parent screen dies.
 
-This is it.
+## This is it
+
 Go and try the wrapper in the [example app](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/app/src/main/java/dev/vadzimv/jetpack/navigation/example/navigation/Result.kt).
+Hope it makes your code easier as well.
