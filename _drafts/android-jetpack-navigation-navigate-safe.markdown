@@ -23,4 +23,5 @@ It's better to show error message or do nothing when something goes wrong during
 In this article I will share how I used Jetpack Navigation on my last project.
 My application doesn't crash even if something goes wrong.
 
-Given approach also saved us from the issues related to double navigation. 
+Given approach also saved us from the issues related to double navigation ```java.lang.IllegalArgumentException: navigation destination XXX```.
+I can quickly click a few times on the button, which triggers navigation, but app navigates one one time.
