@@ -14,6 +14,7 @@ postImage:
 Android Jetpack navigation throws an exception if something is wrong.
 It's either work or not.
 There's not middle state of partially working.
+Sometime it's useful, sometimes not.
 
 I'm okay with unhandled exceptions during development or testing.
 But it's not acceptable for production.
@@ -94,8 +95,42 @@ It helps handle double navigation.
 Consider following example.
 
 You have a screen with 2 buttons.
-`settingsButton` navigates user to 
+`settingsButton` navigates user to settings screen.
+`homeButton` navigates user to home screen.
+
+Let's try navigating using destinations.
+```kotlin
+settingsButton.setOnClickListener {
+    findNavController().navigateSafe(R.id.settingsFragment)
+}
+homeButton.setOnClickListener {
+    findNavController().navigateSafe(R.id.homeFragment)
+}
+```
+
+What does happen when user clicks two buttons simultaneously?
+App navigates two times, to `settingsFragment` and than to `homeFragment`, or other way around.
+
+Now replace destinations by actions and try again.
+```kotlin
+settingsButton.setOnClickListener {
+    findNavController().navigateSafe(R.id.action_navigation_notifications_to_settingsFragment)
+}
+homeButton.setOnClickListener {
+    findNavController().navigateSafe(R.id.action_navigation_notifications_to_homeFragment)
+}
+```
+With actions, first of two simultaneous clicks causes navigation.
+Second click causes `IllegalStateException` which is handled by `navigateSafe` wrapper.
+I.e. first navigation wins, no crashes.
+
+## Summary
+
+Think about prod users.
+You implement your app for them.
+Don't let it crash if some screen can't be open.
 
 ## Links
 
 * [Post image](https://flic.kr/p/a2rJ6x)
+* [Example project](https://github.com/VysotskiVadim/jetpack-navigation-example)
