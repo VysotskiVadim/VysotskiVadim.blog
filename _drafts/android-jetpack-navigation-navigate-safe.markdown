@@ -2,11 +2,11 @@
 layout: post
 title: "Navigate without crashes using Android Jetpack Navigation"
 date: 2021-07-26 19:00:00 +0300
-image: /assets/parent-child-navigation.jpg
+image: /assets/jetpack-safe-helmets.jpg
 description: "Do not crash an app during navigation. Navigate safely."
 postImage:
-  src: parent-child-navigation
-  alt: A scheme of a parent to a child navigation
+  src: jetpack-safe-helmets
+  alt: Helmets makes navigation safe
 ---
 
 ## Introduction
@@ -95,3 +95,7 @@ Consider following example.
 
 You have a screen with 2 buttons.
 `settingsButton` navigates user to 
+
+## Links
+
+* [Post image](https://flic.kr/p/a2rJ6x)
