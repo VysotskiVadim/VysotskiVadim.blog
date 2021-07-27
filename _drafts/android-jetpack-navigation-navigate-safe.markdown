@@ -26,6 +26,9 @@ My application doesn't crash even if something goes wrong.
 Given approach also saved us from the issues related to double navigation ```java.lang.IllegalArgumentException: navigation destination XXX is unknown to this NavController```.
 I can quickly click a few times on the button, which triggers navigation, but app navigates one one time.
 
+If you don't want to read the article,
+feel free jumping directly to [the code](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/app/src/main/java/dev/vadzimv/jetpack/navigation/example/navigation/SafeNavigationi.kt)
+
 ## Safe navigation
 
 Safe navigation consists of a few steps. Let's consider them one by one.
@@ -36,6 +39,7 @@ To avoid crashes handle all exceptions from Jetpack Navigation library.
 I use Jetpack navigation via wrappers functions, which handles all errors.
 
 ```kotlin
+@SuppressLint("UnsafeNavigation")
 fun NavController.navigateSafe(@IdRes action: Int, args: Bundle? = null): Boolean {
     return try {
         navigate(action, args)
@@ -58,5 +62,36 @@ Every time user clicked simultaneously on two buttons the app sent not-fatal err
 And there is no stable way to distinguish potentially fixable error from junk.
 
 I decided to ignore any errors during navigation.
-I just log it and that's it.
+I just log it and this is it.
 If app can't navigate - it does nothing.
+
+### Always use navigateSafe
+
+It's hard to remember that you and your teammates should prefer `navigateSafe` over default `navigate`.
+I implemented a linter rule that reminds us about safe navigation.
+
+{% include image.html src="safe-jetpack-navigation-linter" alt="Linter rule highlight error" %}
+
+Checkout [linter rule on github](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/lintrules/src/main/java/dev/vadzimv/jetpack/navigation/lintrules/UnsafeNavigationDetector.kt)
+and checkout [the article about linter rules](https://proandroiddev.com/implementing-your-first-android-lint-rule-6e572383b292) if you aren't familiar with custom linter rules.
+
+It's a lot of code in the rule, but don't worry it's simple.
+
+Step 1: tell the linter method name that you'd like to inspect.
+```kotlin
+override fun getApplicableMethodNames(): List<String> = listOf("navigate")
+```
+Step 2: report error if `navigate` is member of `androidx.navigation.NavController`.
+```kotlin
+if (evaluator.isMemberInClass(method, "androidx.navigation.NavController")) {
+    context.report(...)
+}
+```
+### Prefer actions to directions
+
+I always use actions instead of directions.
+It helps handle double navigation.
+Consider following example.
+
+You have a screen with 2 buttons.
+`settingsButton` navigates user to 
