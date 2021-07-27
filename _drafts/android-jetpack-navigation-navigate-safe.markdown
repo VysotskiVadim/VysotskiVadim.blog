@@ -17,7 +17,7 @@ There's not middle state of partially working.
 
 I'm okay with unhandled exceptions during development or testing.
 But it's not acceptable for production.
-Image user opens settings screen and app crashes.
+Imagine user opens settings screen and app crashes.
 It's better to show error message or do nothing when something goes wrong during navigation.
 
 In this article I will share how I used Jetpack Navigation on my last project.
