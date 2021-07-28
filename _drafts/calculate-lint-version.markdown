@@ -97,4 +97,6 @@ Optional step 4. Enjoy.
 
 ## Useful links
 
-* [Example project ]
+* [Example project with custom linter rule](https://github.com/VysotskiVadim/jetpack-navigation-example).
+Checkout [root build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/build.gradle)
+and [linter's build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/lintrules/build.gradle)
