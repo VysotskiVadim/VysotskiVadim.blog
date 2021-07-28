@@ -24,7 +24,7 @@ You can't just use the latest like you do with other libraries.
 
 ## Select version number
 
-The linter version should be compatible with Android Gradle Plugin version, aka **AGP**.
+The linter version should be compatible with the Android Gradle Plugin version, aka **AGP**.
 
 Find the version of your AGP.
 Open root `build.gradle` and find **com.android.tools.build:gradle:**.
