@@ -24,7 +24,7 @@ You can't just use the latest like you do with other libraries.
 
 ## Select version number
 
-Linter's dependencies should be compatible with Android Gradle Plug, aka AGP, version that you use.
+Linter version should be compatible with Android Gradle Plugin version, aka **AGP**.
 
 Find version of your AGP.
 Open root `build.gradle` and find AGP.
@@ -41,9 +41,9 @@ buildscript {
 ```
 Mine AGP has version 4.2.2.
 
-Calculate linter's dependencies version.
+Calculate linter version.
 Add 23 to a major number.
-AGP and linter versions don't match because of
+AGP and linter versions aren't the same because of
 [historical reasons](https://googlesamples.github.io/android-custom-lint-rules/api-guide.html#example:samplelintcheckgithubproject/lintversion?).
 
 **lintVersion = gradlePluginVersion + 23.0.0**
@@ -52,9 +52,11 @@ In my case **4.2.2 + 23.0.0 = 27.2.2**.
 
 ## Automate
 
-Google samples recommend you to calculate version manually every time you update AGP.
+Google samples makes you to calculate version manually every time you update AGP.
 It's not a true dev way.
-Let's automate it in 3 steps.
+The true dev way is automation.
+
+Automate linter's version calculation in 3 steps.
 
 Step 1. Extract the AGP version to a project's ext properties.
 
@@ -77,5 +79,22 @@ Step 2. Calculate linter version in linter's `build.gradle`
 def (agp_major, agp_minor, agp_patch) = rootProject.ext.agp_version.split("\\.").collect { it.toInteger() }
 def lint_version = "${agp_major + 23}.${agp_minor}.${agp_patch}"
 ```
-Code above gets AGP version from root project's ext properties, parces it, and adds 23 to a major version.
+Code above gets AGP version from root project's ext properties, parses it, and adds 23 to a major version.
 
+Step 3. Use `lint_version` in dependencies.
+
+```groovy
+def (agp_major, agp_minor, agp_patch) = rootProject.ext.agp_version.split("\\.").collect { it.toInteger() }
+def lint_version = "${agp_major + 23}.${agp_minor}.${agp_patch}"
+
+dependencies {
+    compileOnly "com.android.tools.lint:lint-api:$lint_version"
+    compileOnly "com.android.tools.lint:lint-checks:$lint_version"
+}
+```
+
+Optional step 4. Enjoy.
+
+## Useful links
+
+* [Example project ]
