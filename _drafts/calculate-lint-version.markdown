@@ -11,7 +11,7 @@ postImage:
 
 ## Introduction
 
-When you write custom linter rule,
+When you write custom a linter rule,
 you connect two dependencies in `build.gradle` file
 ```groovy
 compileOnly "com.android.tools.lint:lint-api:$lint_version"
@@ -24,9 +24,9 @@ You can't just use the latest like you do with other libraries.
 
 ## Select version number
 
-Linter version should be compatible with Android Gradle Plugin version, aka **AGP**.
+The linter version should be compatible with Android Gradle Plugin version, aka **AGP**.
 
-Find version of your AGP.
+Find the version of your AGP.
 Open root `build.gradle` and find AGP.
 Or just search for a string **com.android.tools.build:gradle:**.
 ```groovy
@@ -39,9 +39,9 @@ buildscript {
     ...
 }
 ```
-Mine AGP has version 4.2.2.
+My AGP has version 4.2.2.
 
-Calculate linter version.
+Calculate the linter version.
 Add 23 to a major number.
 AGP and linter versions aren't the same because of
 [historical reasons](https://googlesamples.github.io/android-custom-lint-rules/api-guide.html#example:samplelintcheckgithubproject/lintversion?).
@@ -52,7 +52,7 @@ In my case **4.2.2 + 23.0.0 = 27.2.2**.
 
 ## Automate
 
-Google samples makes you to calculate version manually every time you update AGP.
+Google samples make you calculate the version manually every time you update AGP.
 It's not a true dev way.
 The true dev way is automation.
 
@@ -98,5 +98,5 @@ Optional step 4. Enjoy.
 ## Useful links
 
 * [Example project with custom linter rule](https://github.com/VysotskiVadim/jetpack-navigation-example).
-Checkout [root build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/build.gradle)
+Check out [root build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/build.gradle)
 and [linter's build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/lintrules/build.gradle)
