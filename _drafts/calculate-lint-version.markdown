@@ -11,7 +11,7 @@ postImage:
 
 ## Introduction
 
-When you write custom a linter rule,
+When you write a custom linter rule,
 you connect two dependencies in `build.gradle` file
 ```groovy
 compileOnly "com.android.tools.lint:lint-api:$lint_version"
@@ -51,11 +51,11 @@ In my case **4.2.2 + 23.0.0 = 27.2.2**.
 
 ## Automate
 
-Google samples make you calculate the version manually every time you update AGP.
+If you fallow Google samples, you will calculate the version manually every time you update AGP.
 It's not a true dev way.
 The true dev way is automation.
 
-Automate linter's version calculation in 3 steps.
+Automate linter version calculation in 3 steps.
 
 Step 1. Extract the AGP version to a project's ext properties.
 
@@ -99,3 +99,4 @@ Optional step 4. Enjoy.
 * [Example project with custom linter rule](https://github.com/VysotskiVadim/jetpack-navigation-example).
 Check out [root build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/build.gradle)
 and [linter's build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/lintrules/build.gradle)
+* [Post image](https://flic.kr/p/beLdMH)
