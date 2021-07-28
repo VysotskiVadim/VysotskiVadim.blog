@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Pick linter version"
-date: 2021-07-26 19:00:00 +0300
+date: 2021-07-28 18:00:00 +0300
 image: /assets/gears-automation.jpg
 description: "How to pick lint dependency version when you implement a custom lint rule for Android project."
 postImage:
