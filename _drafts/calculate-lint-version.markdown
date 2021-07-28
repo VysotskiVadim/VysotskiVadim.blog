@@ -27,8 +27,7 @@ You can't just use the latest like you do with other libraries.
 The linter version should be compatible with Android Gradle Plugin version, aka **AGP**.
 
 Find the version of your AGP.
-Open root `build.gradle` and find AGP.
-Or just search for a string **com.android.tools.build:gradle:**.
+Open root `build.gradle` and find **com.android.tools.build:gradle:**.
 ```groovy
 buildscript {
     ...
