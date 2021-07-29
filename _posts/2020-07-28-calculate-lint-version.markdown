@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pick linter version"
+title: "Pick lint version"
 date: 2021-07-28 18:00:00 +0300
 image: /assets/gears-automation.jpg
 description: "How to pick lint dependency version when you implement a custom lint rule for Android project."
@@ -11,8 +11,8 @@ postImage:
 
 ## Introduction
 
-When you write a custom linter rule,
-you connect two dependencies in `build.gradle` file
+When you write a custom lint rule,
+you connect two dependencies in the `build.gradle` file
 ```groovy
 compileOnly "com.android.tools.lint:lint-api:$lint_version"
 compileOnly "com.android.tools.lint:lint-checks:$lint_version"
@@ -24,7 +24,7 @@ You can't just use the latest like you do with other libraries.
 
 ## Select version number
 
-The linter version should be compatible with the Android Gradle Plugin version, aka **AGP**.
+The lint version must be compatible with the Android Gradle Plugin version, aka **AGP**.
 
 Find the version of your AGP.
 Open root `build.gradle` and find **com.android.tools.build:gradle:**.
@@ -40,10 +40,10 @@ buildscript {
 ```
 My AGP has version 4.2.2.
 
-Calculate the linter version.
-Add 23 to a major number.
-AGP and linter versions aren't the same because of
-[historical reasons](https://googlesamples.github.io/android-custom-lint-rules/api-guide.html#example:samplelintcheckgithubproject/lintversion?).
+Calculate the lint version.
+Add 23 to the [major number](https://semver.org/).
+*AGP and lint versions aren't the same because of
+[some historical reasons](https://googlesamples.github.io/android-custom-lint-rules/api-guide.html#example:samplelintcheckgithubproject/lintversion?)*.
 
 **lintVersion = gradlePluginVersion + 23.0.0**
 
@@ -51,11 +51,11 @@ In my case **4.2.2 + 23.0.0 = 27.2.2**.
 
 ## Automate
 
-If you fallow Google samples, you will calculate the version manually every time you update AGP.
+If you follow Google samples, you will calculate the version manually every time you update AGP.
 It's not a true dev way.
 The true dev way is automation.
 
-Automate linter version calculation in 3 steps.
+Automate lint version calculation in 3 steps.
 
 Step 1. Extract the AGP version to a project's ext properties.
 
@@ -73,7 +73,7 @@ buildscript {
 }
 ```
 
-Step 2. Calculate linter version in linter's `build.gradle`
+Step 2. Calculate lint version in lint's `build.gradle`
 ```goovy
 def (agp_major, agp_minor, agp_patch) = rootProject.ext.agp_version.split("\\.").collect { it.toInteger() }
 def lint_version = "${agp_major + 23}.${agp_minor}.${agp_patch}"
@@ -96,7 +96,8 @@ Optional step 4. Enjoy.
 
 ## Useful links
 
-* [Example project with custom linter rule](https://github.com/VysotskiVadim/jetpack-navigation-example).
+* [Example project with custom lint rule](https://github.com/VysotskiVadim/jetpack-navigation-example).
 Check out [root build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/build.gradle)
-and [linter's build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/lintrules/build.gradle)
+and [lint's build.gradle](https://github.com/VysotskiVadim/jetpack-navigation-example/blob/master/lintrules/build.gradle)
 * [Post image](https://flic.kr/p/beLdMH)
+* [Google Samples](https://googlesamples.github.io/android-custom-lint-rules/api-guide.html)
