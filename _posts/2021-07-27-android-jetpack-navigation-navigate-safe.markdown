@@ -7,6 +7,7 @@ description: "Do not crash an app during navigation. Navigate safely."
 postImage:
   src: jetpack-safe-helmets
   alt: Helmets makes navigation safe
+twitterLink: https://twitter.com/VysotskiVadim/status/1420029690727866375
 ---
 
 ## Introduction
