@@ -7,6 +7,7 @@ description: "Return a result to the previous destination using Android Jetpack 
 postImage:
   src: parent-child-navigation
   alt: A scheme of a parent to a child navigation
+twitterLink: https://twitter.com/VysotskiVadim/status/1418972632960094217
 ---
 
 ## Introduction
