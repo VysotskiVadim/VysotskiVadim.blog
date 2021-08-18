@@ -7,6 +7,7 @@ description: "It's easy to understand generic programming, variance, covariance,
 postImage:
   src: Asteracea_poster_3
   alt: Types of Asteraceaes
+twitterLink: https://twitter.com/VysotskiVadim/status/1179369602477969408  
 ---
 
 Generic programming makes developers' life easier by giving us the ability to

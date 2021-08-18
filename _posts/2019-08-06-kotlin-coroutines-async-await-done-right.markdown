@@ -7,6 +7,7 @@ image: /assets/3-dogs-1-stick.jpg
 postImage:
   src: 3-dogs-1-stick
   alt: 'Async dogs'
+twitterLink: https://twitter.com/VysotskiVadim/status/1158773836004900864
 ---
 
 Kotlin`s suspend functions let developers write asynchronous code which is looks like the synchronous one.

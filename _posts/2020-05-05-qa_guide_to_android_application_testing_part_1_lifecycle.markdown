@@ -7,6 +7,7 @@ image: /assets/resized/caught-a-bug_768.jpg
 postImage:
   src: caught-a-bug
   alt: 'A bird caught a bug'
+twitterLink: https://twitter.com/VysotskiVadim/status/1257946161270448129
 ---
 
 To find bugs faster contributing less effort you need to know
