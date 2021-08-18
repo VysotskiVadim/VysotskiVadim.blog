@@ -7,6 +7,7 @@ description: "How to pick lint dependency version when you implement a custom li
 postImage:
   src: gears-automation
   alt: Gears
+twitterLink: https://twitter.com/VysotskiVadim/status/1420402282412265481
 ---
 
 ## Introduction
