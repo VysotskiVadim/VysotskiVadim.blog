@@ -25,11 +25,11 @@ Don't consider this article as a short version of the book.
 There is no single way to organize components, which fits every case. Values, which we're hoping to get, are opposite to each other. 
 There are 3 principles that guide components.
 
-REP, the Reuse/Release Equivalence Principle: reusable components are tracked through the release process and have release numbers. Group related classes together to release in one update. Simplifies code reuse.
+**REP**, the Reuse/Release Equivalence Principle: reusable components are tracked through the release process and have release numbers. Group related classes together to release in one update. Simplifies code reuse.
 
-CCP, the Common Closure Principle: components should not have multiple reasons to change. Group classes that change at the same time for the same reason together.
+**CCP**, the Common Closure Principle: components should not have multiple reasons to change. Group classes that change at the same time for the same reason together.
 
-CRP, the Common Reuse Principle(CRP): put classes that are reused together in the same components. Components should not contain classes that the client doesn't use.
+**CRP**, the Common Reuse Principle(CRP): put classes that are reused together in the same components. Components should not contain classes that the client doesn't use.
 
 Example.
 Group classes according to actors who request changes, i.e. follow CCP.
