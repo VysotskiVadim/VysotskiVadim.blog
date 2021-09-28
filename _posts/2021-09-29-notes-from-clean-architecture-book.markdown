@@ -4,6 +4,7 @@ title: "Notes from the Clean Architecture book"
 date: 2021-09-28 12:30:00 +0300
 image: /assets/clean-architecture-book.jpg
 description: "New things that I found in the Clean Architecture book."
+twitterLink: https://twitter.com/VysotskiVadim/status/1442784612942553090
 postImage:
   src: clean-architecture-book
   alt: Clean Architecture Cover
