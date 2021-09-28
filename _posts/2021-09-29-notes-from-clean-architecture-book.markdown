@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Notes from the Clean Architecture book"
-date: 2021-09-28 9:00:00 +0300
+date: 2021-09-28 12:30:00 +0300
 image: /assets/clean-architecture-book.jpg
 description: "New things that I found in the Clean Architecture book."
 postImage:
