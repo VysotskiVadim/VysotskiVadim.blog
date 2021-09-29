@@ -1,17 +1,34 @@
 ---
 layout: post
-title: "Unit testing without pain"
+title: "Painless unit tests"
 date: 2021-09-29 12:00:00 +0300
 image: /assets/Asteracea_poster_3_part_2.jpg
-description: "N rules that makes your tests pain free"
+description: "Rules that makes my tests valuable."
 postImage:
   src: Asteracea_poster_3_part_2
   alt: Types of Asteraceaes
 ---
 
-### Tests must help you change a system {#tests-changes}
-A test must fail when you break something, not when you add another feature.
-A tests shouldn't break because of a new field that doesn't affect the tested feature.
+### Introduction
+
+I've been writing unit tests since 2017.
+I wrote many bad tests.
+Bad tests didn't help me, they made my work harder.
+I wrote many good tests.
+Good tests helped me to refactor without bugs and deliver complex features faster.
+Every time I wrote good or bad test I wondered:
+why some tests help me work productive and some prevent from it. 
+
+Over the time I learned more about testing and developed a set of rules that I follow.
+Rules help me write good tests.
+This article is an attempt to extract the rules from my head and put it on the paper.
+
+The rules can be useful for newbies.
+Rules doesn't overwhelm you with long and complex explanations.
+When you learn more, you understand why you need them.
+Or you can violate rules to get a valuable experience 😉.
+
+# Rules
 
 ### Test is one of the clients.
 A test shouldn't require changes when you refactor inside a module.
@@ -37,7 +54,10 @@ When you want to verify an interaction with an external system - use Mock.
 
 ### Do not overspecificate
 Check only important things.
+A test must fail when you break something, not when you add another feature.
+A tests shouldn't break because of a new field that doesn't affect the tested feature.
 
-Do not check how many times SUT has called a repository, check the result.
-The way SUT interacts with the repository is implementation details that could be changed. 
+### Do not check implementation details
+
+For example it doesn't matter how many times 
 
