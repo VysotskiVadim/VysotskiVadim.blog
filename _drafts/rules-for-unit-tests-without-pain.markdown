@@ -28,29 +28,34 @@ Rules doesn't overwhelm you with long and complex explanations.
 When you learn more, you understand why you need them.
 Or you can violate rules to get a valuable experience 😉.
 
+### Dictionary
+
+**SUT** - system under the test.
+
 # Rules
 
-### Test is one of the clients.
+### Use SUT in tests as its clients do
+Use only public API in the same way as SUT's clients.
 A test shouldn't require changes when you refactor inside a module.
-Use SUT in tests like its clients do, i.e. use only public API.
 
-### Test should be specific.
+### Test should be specific
 Logic inside test isn't allowed.
 Hardcode expected result.
 Make test specific and simple.
-Remember: Code is generic, tests are specific. 
+Remember: *Code is generic, tests are specific.*
 
 ### Isolate test from the world
-Network, Filesystem, Current time, Random, Multithreading are not allowed. Fake them!
+Network, Filesystem, Current time, Random, Multithreading are not allowed.
+Fake\Stub\Mock them.
 
 ### Isolate tests from each other
 You should be able to run tests in any order and any subsets of the tests.
 Every test prepares an environment like it's the only one.
 After the run, the test cleans up the environment and leaves it in the "untouched" state.
 
-### Do not missuse test doubles
+### Do not misuse test doubles
 When you want a dependency to return a result - use Fake or Stub, do not use Mocks.
-When you want to verify an interaction with an external system - use Mock.
+Use Mocks when you want to verify an interaction with an external system.
 
 ### Do not overspecificate
 Check only important things.
@@ -58,6 +63,7 @@ A test must fail when you break something, not when you add another feature.
 A tests shouldn't break because of a new field that doesn't affect the tested feature.
 
 ### Do not check implementation details
-
-For example it doesn't matter how many times 
-
+It doesn't matter how many times SUT interacted with dependencies and which methods it used.
+It's important that SUT returns correct result or stays in correct state.
+Count calls to dependencies only in case of communication with external system, for example send email.
+If your case isn't communication with external system - you're checking implementation details by counting calls and verifying that method was called.
