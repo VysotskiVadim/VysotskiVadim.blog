@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Painless unit tests"
+title: "Rules of painless unit tests"
 date: 2021-09-29 12:00:00 +0300
-image: /assets/Asteracea_poster_3_part_2.jpg
-description: "Rules that makes my tests valuable."
+image: /assets/school-rules-1887.jpg
+description: "Rules that make my tests useful."
 postImage:
-  src: Asteracea_poster_3_part_2
-  alt: Types of Asteraceaes
+  src: school-rules-1887
+  alt: The School rules painting
 ---
 
 ### Introduction
@@ -25,8 +25,8 @@ This article is an attempt to extract the rules from my head and put them on pap
 
 The rules can be useful for newbies.
 Rules don't overwhelm you with long and complex explanations.
-When you learn more, you understand why you need them.
-Or you can violate rules to get a valuable experience 😉.
+When you learn more, you understand why the rules make sense.
+Or you can violate some rule to get a valuable experience 😉.
 
 ### Dictionary
 
