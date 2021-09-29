@@ -38,14 +38,14 @@ Or you can violate rules to get a valuable experience 😉.
 Use only public API in the same way as SUT's clients.
 A test shouldn't require changes when you refactor inside a module.
 
-### Test should be specific
+### Tests should be specific
 Logic inside test isn't allowed.
 Hardcode expected result.
 Make test specific and simple.
 Remember: *Code is generic, tests are specific.*
 
-### Isolate test from the world
-Network, Filesystem, Current time, Random, Multithreading are not allowed.
+### Isolate tests from the world
+Network, Filesystem, Current time, Random, Multithreading, Sleeps, and Delays are not allowed.
 Fake\Stub\Mock them.
 
 ### Isolate tests from each other
@@ -67,3 +67,9 @@ It doesn't matter how many times SUT interacted with dependencies and which meth
 It's important that SUT returns correct result or stays in correct state.
 Count calls to dependencies only in case of communication with external system, for example send email.
 If your case isn't communication with external system - you're checking implementation details by counting calls and verifying that method was called.
+
+### Test you tests
+
+Tests can contain mistakes.
+Break SUT to see if the test fails when the code is broken.
+Or write tests before the implementation to see how it becomes green.
