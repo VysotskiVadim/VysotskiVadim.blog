@@ -16,15 +16,15 @@ I wrote many bad tests.
 Bad tests didn't help me, they made my work harder.
 I wrote many good tests.
 Good tests helped me to refactor without bugs and deliver complex features faster.
-Every time I wrote good or bad test I wondered:
-why some tests help me work productive and some prevent from it. 
+Every time I wrote a good or a bad test I wondered:
+why some tests help me work productive and some prevent it. 
 
-Over the time I learned more about testing and developed a set of rules that I follow.
+Over time I learned more about testing and developed a set of rules that I follow.
 Rules help me write good tests.
-This article is an attempt to extract the rules from my head and put it on the paper.
+This article is an attempt to extract the rules from my head and put them on paper.
 
 The rules can be useful for newbies.
-Rules doesn't overwhelm you with long and complex explanations.
+Rules don't overwhelm you with long and complex explanations.
 When you learn more, you understand why you need them.
 Or you can violate rules to get a valuable experience 😉.
 
@@ -60,13 +60,13 @@ Use Mocks when you want to verify an interaction with an external system.
 ### Do not overspecificate
 Check only important things.
 A test must fail when you break something, not when you add another feature.
-A tests shouldn't break because of a new field that doesn't affect the tested feature.
+Tests shouldn't break because of a new field that doesn't affect the tested feature.
 
 ### Do not check implementation details
 It doesn't matter how many times SUT interacted with dependencies and which methods it used.
-It's important that SUT returns correct result or stays in correct state.
-Count calls to dependencies only in case of communication with external system, for example send email.
-If your case isn't communication with external system - you're checking implementation details by counting calls and verifying that method was called.
+It's important that SUT returns a correct result or it stays in a correct state.
+Count calls to dependencies only in case of communication with an external system, for example when you send an email.
+If your case isn't communication with an external system - you're checking implementation details by counting calls and verifying that method was called.
 
 ### Test you tests
 
