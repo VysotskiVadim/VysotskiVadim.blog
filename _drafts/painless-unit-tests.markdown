@@ -63,11 +63,15 @@ A test must fail when you break something, not when you add another feature.
 Tests shouldn't break because of a new field that doesn't affect the tested feature.
 
 ### Do not check implementation details
-If your case isn't communication with an external system,
-it doesn't matter how many times SUT interacted with dependencies and which methods it used.
+If your case isn't communication with an external system
+it doesn't matter how exactly SUT interacted with dependencies.
 It's important that SUT returns a correct result or it stays in a correct state.
-Count calls to dependencies only when it's important, for example when you send an email.
-If your case isn't communication with an external system - you're checking implementation details by counting calls and verifying that method was called.
+Internal communication is an implementation detail.
+Count calls to dependencies and check called methods when it's important, for example when you send an email.
+
+Do not check implementation details.
+Implementation details changes during refactoring.
+Tests became Red when a changed feature works fine.
 
 ### Test you tests
 Tests can contain mistakes.
