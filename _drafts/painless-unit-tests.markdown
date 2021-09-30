@@ -3,7 +3,7 @@ layout: post
 title: "Rules of painless unit tests"
 date: 2021-09-29 12:00:00 +0300
 image: /assets/school-rules-1887.jpg
-description: "Rules that make my tests useful."
+description: "Rules that make unit tests useful."
 postImage:
   src: school-rules-1887
   alt: The School rules painting
@@ -13,7 +13,7 @@ postImage:
 
 I've been writing unit tests since 2017.
 I've written many bad tests.
-Bad tests didn't help me, they made my work harder.
+Bad tests didn't help me, they made refactoring harder.
 I've also written many good tests.
 Good tests helped me to refactor without introducing regression bugs and deliver complex features faster.
 
@@ -70,7 +70,7 @@ Internal communication is an implementation detail.
 Count calls to dependencies and check called methods when it's important, for example when you send an email.
 
 Do not check implementation details.
-Implementation details changes during refactoring.
+Implementation details change during refactoring.
 Tests became Red when a changed feature works fine.
 
 ### Test you tests
@@ -79,8 +79,8 @@ Break SUT to see if the test fails when the code is broken.
 Or write tests before the implementation to see how it becomes green.
 
 ### Class ≠ Unit
-Don't create a test file per every class.
+Don't create a test file for every class.
 Test code by units.
-Unit is a group of coherent classes that're hidden behind a [facade](https://en.wikipedia.org/wiki/Facade_pattern).
+A unit is a group of coherent classes that are hidden behind a [facade](https://en.wikipedia.org/wiki/Facade_pattern).
 Unit tests help you refactor code inside a unit.
-Just change code and run tests.
+Just change the code and run tests.
