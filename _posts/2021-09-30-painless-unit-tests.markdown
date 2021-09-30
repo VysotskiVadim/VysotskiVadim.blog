@@ -81,7 +81,7 @@ A unit is a group of coherent classes that are hidden behind a [facade](https://
 Unit tests help you refactor code inside a unit.
 Just change the code and run tests.
 
-### Isolate tests from each other {№isolate-test-from-each-other}
+### Isolate tests from each other {#isolate-test-from-each-other}
 You should be able to run tests in any order and any subsets of the tests.
 Every test prepares an environment like it's the only one.
 After the run, the test cleans up the environment and leaves it in the "untouched" state.
