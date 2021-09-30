@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rules of painless unit tests"
-date: 2021-09-29 12:00:00 +0300
+date: 2021-09-30 10:00:00 +0300
 image: /assets/school-rules-1887.jpg
 description: "Rules that make unit tests useful."
 postImage:
