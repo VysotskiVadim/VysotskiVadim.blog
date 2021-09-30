@@ -34,36 +34,31 @@ Or you can violate some rule to get a valuable experience 😉.
 
 # Rules
 
-### Use SUT in tests as its clients do
+### Use SUT in tests as its clients do {#use-sut-as-client}
 Use only public API in the same way as SUT's clients.
 You will be changing implementation during refactoring.
 A test shouldn't require changes when you refactor inside a unit.
 
-### Tests should be specific
+### Tests should be specific {#test-specific-code-generic}
 Logic inside test isn't allowed.
 Hardcode expected result.
 Make test specific and simple.
 Remember: *Code is generic, tests are specific.*
 
-### Isolate tests from the world
+### Isolate tests from the world {#isolate-by-doubles}
 Network, Filesystem, Current time, Random, Multithreading, Sleeps, and Delays are not allowed.
 Fake\Stub\Mock them.
 
-### Isolate tests from each other
-You should be able to run tests in any order and any subsets of the tests.
-Every test prepares an environment like it's the only one.
-After the run, the test cleans up the environment and leaves it in the "untouched" state.
-
-### Do not misuse test doubles
+### Do not misuse test doubles {#test-doubles-misuse}
 When you want a dependency to return a result - use Fake or Stub, do not use Mocks.
 Use Mocks when you want to verify an interaction with an external system.
 
-### Do not overspecificate
+### Do not overspecificate {#overspecification}
 Check only important things.
 A test must fail when you break something, not when you add another feature.
 Tests shouldn't break because of a new field that doesn't affect the tested feature.
 
-### Do not check implementation details
+### Do not check implementation details {#implementation-details}
 If your case isn't communication with an external system
 it doesn't matter how exactly SUT interacted with dependencies.
 It's important that SUT returns a correct result or it stays in a correct state.
@@ -74,14 +69,19 @@ Do not check implementation details.
 Implementation details change during refactoring.
 Tests became Red when a changed feature works fine.
 
-### Test you tests
+### Test you tests {#test-tests}
 Tests can contain mistakes.
 Break SUT to see if the test fails when the code is broken.
 Or write tests before the implementation to see how it becomes green.
 
-### Class ≠ Unit
+### Class ≠ Unit {#class-is-not-unit}
 Don't create a test file for every class.
 Test code by units.
 A unit is a group of coherent classes that are hidden behind a [facade](https://en.wikipedia.org/wiki/Facade_pattern).
 Unit tests help you refactor code inside a unit.
 Just change the code and run tests.
+
+### Isolate tests from each other #{isolate-test-from-each-other}
+You should be able to run tests in any order and any subsets of the tests.
+Every test prepares an environment like it's the only one.
+After the run, the test cleans up the environment and leaves it in the "untouched" state.
