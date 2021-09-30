@@ -12,13 +12,13 @@ postImage:
 ### Introduction
 
 I've been writing unit tests since 2017.
-I wrote many bad tests.
+I've written many bad tests.
 Bad tests didn't help me, they made my work harder.
-I wrote many good tests.
-Good tests helped me to refactor without bugs and deliver complex features faster.
+I've also written many good tests.
+Good tests helped me to refactor without introducing regression bugs and deliver complex features faster.
+
 Every time I wrote a good or a bad test I wondered:
 why some tests help me work productive and some prevent it. 
-
 Over time I learned more about testing and developed a set of rules that I follow.
 Rules help me write good tests.
 This article is an attempt to extract the rules from my head and put them on paper.
