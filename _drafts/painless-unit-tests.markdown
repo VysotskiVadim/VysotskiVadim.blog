@@ -36,6 +36,7 @@ Or you can violate some rule to get a valuable experience 😉.
 
 ### Use SUT in tests as its clients do
 Use only public API in the same way as SUT's clients.
+You will be changing implementation during refactoring.
 A test shouldn't require changes when you refactor inside a unit.
 
 ### Tests should be specific
