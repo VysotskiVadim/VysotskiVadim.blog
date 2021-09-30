@@ -36,7 +36,7 @@ Or you can violate some rule to get a valuable experience 😉.
 
 ### Use SUT in tests as its clients do
 Use only public API in the same way as SUT's clients.
-A test shouldn't require changes when you refactor inside a module.
+A test shouldn't require changes when you refactor inside a unit.
 
 ### Tests should be specific
 Logic inside test isn't allowed.
@@ -69,7 +69,13 @@ Count calls to dependencies only in case of communication with an external syste
 If your case isn't communication with an external system - you're checking implementation details by counting calls and verifying that method was called.
 
 ### Test you tests
-
 Tests can contain mistakes.
 Break SUT to see if the test fails when the code is broken.
 Or write tests before the implementation to see how it becomes green.
+
+### Class ≠ Unit
+Don't create a test file per every class.
+Test code by units.
+Unit is a group of coherent classes that're hidden behind a [facade](https://en.wikipedia.org/wiki/Facade_pattern).
+Unit tests help you refactor code inside a unit.
+Just change code and run tests.
