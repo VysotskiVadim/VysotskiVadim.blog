@@ -69,6 +69,12 @@ Do not check implementation details.
 Implementation details change during refactoring.
 Tests became Red when a changed feature works fine.
 
+### Use factory methods instead of constructors {#factory_methods}
+Objects, especially DTOs, tend to change over time.
+Don't create objects in tests using constructors.
+Create objects for tests using the Factory method.
+In case of a change, you will need to add a default parameter in one method rather than change all constructor invocations.
+
 ### Test you tests {#test-tests}
 Tests can contain mistakes.
 Break SUT to see if the test fails when the code is broken.
