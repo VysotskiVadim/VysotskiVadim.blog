@@ -3,21 +3,20 @@ layout: post
 title: "Android Native Text"
 date: 2021-10-1 12:00:00 +0300
 image: /assets/Asteracea_poster_3_part_2.jpg
-description: "A guide to using Android String and Plurals resources in a View Model + Unit testing them."
+description: "How to use Android String and Plurals resources in a View Model + Unit testing them."
 postImage:
   src: Asteracea_poster_3_part_2
   alt: Types of Asteraceaes
 ---
 
+This article demonstrates my favorite approach to referring string and plural resources from view model - `NativeText`.
+Thanks to [Alexey Bykov](https://twitter.com/nonewsss) for suggesting me try it.
+
 ## Why
 
-I operated with string resources in a view model to implement logic around text formatting.
-Requirements were with respect to available data concatenate a few plurals.
-For example: show how many time left before a certain date.
-Depends on a time left output could be: *"1 day", "6 days", "7 month 4 days", etc*...
-
-I wanted to keep the logic in a view model because of unit testing.
-If I kept the logic in a view I wouldn't be able to test using fast and reliable unit tests.
+I use string and plural resources in a view model because of unit testing.
+My view layer is as dump as possible, there is not conditions nor cycles.
+I put all logic in View Models and write fast and stable unit test for them. 
 
 ## Popular but not working solution {#resource-provider}
 
@@ -26,7 +25,7 @@ You can see examples in the
 [answers on the Stack Overflow](https://stackoverflow.com/questions/47628646/how-should-i-get-resourcesr-string-in-viewmodel-in-android-mvvm-and-databindi).
 
 Given approach doesn't handle changes of a phone language.
-View model isn't recreated when user changes phone's language, but view is.
+A view model isn't recreated when user changes phone's language, but view is.
 After configuration change view model will contain text from for previous locale while view will display text for a new one.
 You can reed more about the issue [in the article by Jose Alcérreca](https://medium.com/androiddevelopers/locale-changes-and-the-androidviewmodel-antipattern-84eb677660d9)
 
@@ -125,13 +124,5 @@ fun `map movie that will be released tomorrow`() {
 
 The test isn't perfect.
 In ideal world I would prefer to see `assertEquals("1 day before release", listItem.release)`
-but location mechanism isn't available on JVM.
+but localization mechanism isn't available on JVM, it's a part form the platform.
 All we can test is parameters for specific case: resource ids, arguments, etc.
-
-
-## Conclusion
-
-`NativeText` is the best solution I've know so far.
-It fits Android UI lifecycle and easily testable.
-
-Thanks to [Alexey Bykov](https://twitter.com/nonewsss) for suggesting me this approach.
