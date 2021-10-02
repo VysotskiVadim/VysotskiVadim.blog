@@ -9,26 +9,27 @@ postImage:
   alt: Types of Asteraceaes
 ---
 
-This article demonstrates my favorite approach to referring string and plural resources from view model - `NativeText`.
-Thanks to [Alexey Bykov](https://twitter.com/nonewsss) for suggesting me it.
+This article demonstrates my favorite approach to referring string and plural resources from a view model - `NativeText`.
+Thanks to [Alexey Bykov](https://twitter.com/nonewsss) for suggesting me `NativeText`
 
 ## Why
 
 I use string and plural resources in a view model because of unit testing.
-My view layer is as straight forward as possible, there is not conditions nor cycles.
-I put all logic in View Models and write fast and stable unit test for them. 
+My view layer is as straightforward as possible, there are no conditions nor cycles.
+I put all logic in View Models and write a fast and stable unit test for them. 
 
 ## Popular but not working solution {#resource-provider}
 
-Popular solution is to use `Context` in view model directly or to create abstraction around it.
+A popular solution is to use the `Context` in a view model directly or to create abstraction around it.
 You can see examples in the
 [answers on the Stack Overflow](https://stackoverflow.com/questions/47628646/how-should-i-get-resourcesr-string-in-viewmodel-in-android-mvvm-and-databindi).
+I call this solution `ResourceProvider`.
 
-Given approach doesn't fit the system lifecycle.
-It can't handle changes of a phone language.
-A view model isn't recreated when user changes phone's language, but a view is recreated.
-After configuration change a view model contains text from for the previous locale but a view displays text for a new one.
-You can reed more about the issue [in the article by Jose Alcérreca](https://medium.com/androiddevelopers/locale-changes-and-the-androidviewmodel-antipattern-84eb677660d9)
+The `ResourceProvider` approach doesn't fit the system lifecycle.
+It can't handle a phone's language changes.
+A view model isn't recreated when a user changes the phone's language, but a view is recreated.
+After configuration change, a view model contains text from the previous locale but a view displays text for a new one.
+You can read more about the issue [in the article by Jose Alcérreca](https://medium.com/androiddevelopers/locale-changes-and-the-androidviewmodel-antipattern-84eb677660d9)
 
 ## Solution that works
 
@@ -37,7 +38,7 @@ Keep a resource id:
 ```kotlin
 data class Resource(@StringRes val id: Int) : NativeText()
 ```
-and get text by resource id on UI:
+and get the text by resource id on UI:
 ```kotlin
 context.getString(id)
 ```
@@ -47,7 +48,7 @@ For string resource with arguments keep resource id and arguments:
 ```kotlin
 data class Arguments(@StringRes val id: Int, val args: List<Any>) : NativeText()
 ```
-and get text on UI:
+and get the text on UI:
 ```kotlin
 context.getString(id, *args.toTypedArray())
 ```
@@ -56,7 +57,7 @@ For plurals keep plural id, number, and arguments:
 ```kotlin
 data class Plural(@PluralsRes val id: Int, val number: Int, val args: List<Any>) : NativeText()
 ```
-and get text on UI:
+and get the text on UI:
 ```kotlin
 context.resources.getQuantityString(id, number, *args.toTypedArray())
 ```
@@ -120,8 +121,8 @@ viewModel.text.observe(this) { text
 ```
 ### Unit testing
 
-Unit testing is straight forward because view model doesn't interact with an Android Framework.
-Just compare view model filed with expected resource.
+Unit testing is straightforward because a view model doesn't interact with an Android Framework.
+Just compare a view model's filed with an expected resource.
 
 Here's example of how I check logic inside a mapper:
 ```kotlin
@@ -140,6 +141,6 @@ fun `map movie that will be released tomorrow`() {
 ```
 
 The test isn't perfect.
-In ideal world I would prefer to see `assertEquals("1 day before release", listItem.release)`
-but localization mechanism isn't available on JVM, it's a part form the platform.
-All we can test is parameters for specific case: resource ids, arguments, etc.
+I would prefer to see `assertEquals("1 day before release", listItem.release)`
+but the localization mechanism isn't available on JVM that runs unit test, the localization is a part form the platform.
+All we can test is parameters for a specific case: resource ids, arguments, etc.
