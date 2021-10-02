@@ -10,23 +10,24 @@ postImage:
 ---
 
 This article demonstrates my favorite approach to referring string and plural resources from view model - `NativeText`.
-Thanks to [Alexey Bykov](https://twitter.com/nonewsss) for suggesting me try it.
+Thanks to [Alexey Bykov](https://twitter.com/nonewsss) for suggesting me it.
 
 ## Why
 
 I use string and plural resources in a view model because of unit testing.
-My view layer is as dump as possible, there is not conditions nor cycles.
+My view layer is as straight forward as possible, there is not conditions nor cycles.
 I put all logic in View Models and write fast and stable unit test for them. 
 
 ## Popular but not working solution {#resource-provider}
 
-Popular solution is to use `Context` directly or to create abstraction around it.
+Popular solution is to use `Context` in view model directly or to create abstraction around it.
 You can see examples in the
 [answers on the Stack Overflow](https://stackoverflow.com/questions/47628646/how-should-i-get-resourcesr-string-in-viewmodel-in-android-mvvm-and-databindi).
 
-Given approach doesn't handle changes of a phone language.
-A view model isn't recreated when user changes phone's language, but view is.
-After configuration change view model will contain text from for previous locale while view will display text for a new one.
+Given approach doesn't fit the system lifecycle.
+It can't handle changes of a phone language.
+A view model isn't recreated when user changes phone's language, but a view is recreated.
+After configuration change a view model contains text from for the previous locale but a view displays text for a new one.
 You can reed more about the issue [in the article by Jose Alcérreca](https://medium.com/androiddevelopers/locale-changes-and-the-androidviewmodel-antipattern-84eb677660d9)
 
 ## Solution that works
@@ -102,11 +103,27 @@ fun NativeText.toCharSequence(context: Context): CharSequence {
 }
 ```
 
+### Example
+
+View model that always says "Hi":
+```kotlin
+class ExampleViewModel: ViewModel(){
+  val text = MutableLiveData<NativeText>(NativeText.Resource(R.String.example_hi))
+}
+```
+
+Observe a live data in an activity and resolve text there:
+```kotlin
+viewModel.text.observe(this) { text
+  textView.text = text.toCharSequence(this)
+}
+```
 ### Unit testing
 
 Unit testing is straight forward because view model doesn't interact with an Android Framework.
 Just compare view model filed with expected resource.
 
+Here's example of how I check logic inside a mapper:
 ```kotlin
 @Test
 fun `map movie that will be released tomorrow`() {
