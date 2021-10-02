@@ -4,6 +4,7 @@ title: "Android Native Text"
 date: 2021-10-1 12:00:00 +0300
 image: /assets/tired-author.jpg
 description: "How to use Android String and Plurals resources in a View Model + Unit testing them."
+twitterLink: https://twitter.com/VysotskiVadim/status/1444278980765442048?s=20
 postImage:
   src: tired-author
   alt: Tired author
