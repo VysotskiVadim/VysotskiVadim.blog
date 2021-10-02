@@ -12,7 +12,7 @@ postImage:
 This article demonstrates my favorite approach to referring string and plural resources from a view model - `NativeText`.
 Thanks to [Alexey Bykov](https://twitter.com/nonewsss) for suggesting me `NativeText`
 
-## Why
+## Why {#why}
 
 I use string and plural resources in a view model because of unit testing.
 My view layer is as straightforward as possible, there are no conditions nor cycles.
@@ -28,10 +28,10 @@ I call this solution `ResourceProvider`.
 The `ResourceProvider` approach doesn't fit the system lifecycle.
 It can't handle a phone's language changes.
 A view model isn't recreated when a user changes the phone's language, but a view is recreated.
-After configuration change, a view model contains text from the previous locale but a view displays text for a new one.
+After configuration change, the view model contains text from the previous locale but the view displays text for a new one.
 You can read more about the issue [in the article by Jose Alcérreca](https://medium.com/androiddevelopers/locale-changes-and-the-androidviewmodel-antipattern-84eb677660d9)
 
-## Solution that works
+## Solution that works {#native-text}
 
 Don't keep text from resources in a view model.
 Keep a resource id:
@@ -104,7 +104,7 @@ fun NativeText.toCharSequence(context: Context): CharSequence {
 }
 ```
 
-### Example
+### Example {#native-text-example}
 
 View model that always says "Hi":
 ```kotlin
@@ -119,7 +119,7 @@ viewModel.text.observe(this) { text
   textView.text = text.toCharSequence(this)
 }
 ```
-### Unit testing
+### Unit testing {#unit-testing-example}
 
 Unit testing is straightforward because a view model doesn't interact with an Android Framework.
 Just compare a view model's filed with an expected resource.
