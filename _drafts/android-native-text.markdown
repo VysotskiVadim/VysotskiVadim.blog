@@ -2,11 +2,11 @@
 layout: post
 title: "Android Native Text"
 date: 2021-10-1 12:00:00 +0300
-image: /assets/Asteracea_poster_3_part_2.jpg
+image: /assets/tired-author.jpg
 description: "How to use Android String and Plurals resources in a View Model + Unit testing them."
 postImage:
-  src: Asteracea_poster_3_part_2
-  alt: Types of Asteraceaes
+  src: tired-author
+  alt: Tired author
 ---
 
 This article demonstrates my favorite approach to referring string and plural resources from a view model - `NativeText`.
