@@ -67,7 +67,7 @@ Did you notice that all classes from example extend `NativeText`?
 
 Instead of concatenation keep a list of `NativeText`:
 ```kotlin
-  data class Multi(val text: List<NativeText>) : NativeText()
+data class Multi(val text: List<NativeText>) : NativeText()
 ```
 and concatenate strings on UI:
 ```kotlin
