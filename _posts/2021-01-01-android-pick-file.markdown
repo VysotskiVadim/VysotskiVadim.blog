@@ -133,6 +133,8 @@ Here are utils functions to work with file names.
 I keep them in the **SafUtils.kt** file.
 
 ```kotlin
+private const val TAG = "SafUtils"
+
 val allSupportedDocumentsTypesToExtensions = mapOf(
     "application/msword" to ".doc",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document" to ".docx",
@@ -162,7 +164,7 @@ private fun ContentResolver.appendExtensionIfNeeded(name: String, uri: Uri): Str
         if (type != null && allSupportedDocumentsTypesToExtensions.containsKey(type)) {
             return name + allSupportedDocumentsTypesToExtensions[type]
         }
-        Timber.e("unknown file type: $type, for file: $name")
+        Log.e(TAG, "unknown file type: $type, for file: $name")
         name
     }
 }
@@ -185,15 +187,20 @@ private fun <K, V> Map<K, V>.invert(): Map<V, K> {
 }
 ```
 
-My backend requires file names to have an extension,
-so that it knows how to process a file,
-but `DISPLAY_NAME` sometimes doesn't contain it.
+My backend requires file names to have an extension
+so that it knows how to process a file.
+But the `DISPLAY_NAME` sometimes doesn't contain an extention, just a name.
 So I check the extension in `hasKnownExtension`,
 if it's empty I try to guess the file`s extension based on mime type.
 
-You've probably noticed that some file types like rtf have many corresponding mime types.
+Some file types like rtf have many corresponding mime types.
 Try to specify all possible options,
 I noticed that all of them are used.
+
+Call the `queryFileName` function from the `handleOpenDocumentResult` to get file name.
+```kotlin
+val fileName = requireContext().contentResolver.queryFileName(contentUri)
+```
 
 ### Filter file by type {#filer_files_by_type}
 
