@@ -11,28 +11,20 @@ postImage:
 twitterLink: https://twitter.com/VysotskiVadim/status/1427957292176191489
 ---     
 
-Some time ago,
-during the implementation of an "upload document" feature,
-I was looking for a simple tutorial about picking a file on Android
-but didn't find anything that fits my requirements.
-I needed:
-1. Simple code examples so that I can quickly implement feature step by step copy-pasting code and check if it what I need;
+I was looking for a simple tutorial which explains how to pick a file on Android but didn't find anything that:
+1. Has simple code examples so that I can quickly implement feature step by step copy-pasting code and check if it what I need;
 2. Explanation of how everything works with links to docs;
 3. Edge cases, or what can easily be missed, but it's an important scenario for the user.
 
-Ok, as nobody has written it yet, I'm going to do it.
+As nobody has written it yet, I'm going to do it.
 Please enjoy the reading or go straight to the [code of the final solution](#code).
 
 ### Requirements
 
-As a user, I want to be able to pick a file
-from a device or from the third-party cloud storage,
+As a user, I want to pick a file
+from my phone or from a third-party cloud storage*(like Dropbox or Goole Drive)*,
 of supported format ({{page.supportedFileTypes}})
 so that file is uploaded to the server.
-
-In other words, I had to implement file picker,
-that lets user pick only files of supported type,
-from different storages: local or third party.
 
 ### Pick a file {#pick_a_file}
 
@@ -75,8 +67,8 @@ User will see system UI where all real files available to pick
 
 ### Get the bytes {#get_the_bytes}
 
-Once the user picked the file we get a result via `onActivityResult` callback.
-Here I call `tryHandleOpenDocumentResult` and handle one of `OpenFileResult`.
+I use following utils functions to work with files.
+I keep them in the `PickDocument.kt` file.
 
 ```kotlin
 fun Fragment.tryHandleOpenDocumentResult(requestCode: Int, resultCode: Int, data: Intent?): OpenFileResult {
@@ -97,7 +89,7 @@ private fun Fragment.handleOpenDocumentResult(resultCode: Int, data: Intent?): O
                     return OpenFileResult.ErrorOpeningFile
                 }
 
-            val fileName = requireContext().contentResolver.queryFileName(contentUri)
+            val fileName = "not implemented" // will implement file names later
 
             if (stream != null && fileName != null) {
                 OpenFileResult.FileWasOpened(fileName, stream)
@@ -118,20 +110,27 @@ sealed class OpenFileResult {
 }
 ```
 
-For my feature, I need file content + file name.
+Notice that I get `contentResolver` from the `Aplication`, not from the `Activity` to avoid memory leask.
 
-We can get content from `contentResolver` by calling 
-`requireActivity().application.contentResolver.openInputStream(contentUri)`.
-Don't get `contentResolver` from activity to avoid memory leaks
-and don't forget to call `close` once you're done with the stream.
+Call `tryHandleOpenDocumentResult` from the `onActivityResult`:
+```kotlin
+when (val result = tryHandleOpenDocumentResult(requestCode, resultCode, data)) {
+    OpenFileResult.DifferentResult, OpenFileResult.OpenFileWasCancelled -> { }
+    OpenFileResult.ErrorOpeningFile -> Log.e(TAG, "error opening file")
+    is OpenFileResult.FileWasOpened -> {
+        // access result.fileName and result.content here
+    }
+}
+```
 
-`queryFileName` is a custom function,
-you can read about in the next section,
-or remove its call if you don't need the file name.
+Call `close` on the `InputStream` when you finished reading the file.
 
 ### Get file name (optional feature) {#get_file_name}
 
 Getting file name is a little bit more tricky.
+
+Here are utils functions to work with file names.
+I keep them in the **SafUtils.kt** file.
 
 ```kotlin
 val allSupportedDocumentsTypesToExtensions = mapOf(
@@ -177,8 +176,7 @@ private fun hasKnownExtension(filename: String): Boolean {
     return extensionsToTypes.containsKey(extension)
 }
 
-// utils function
-fun <K, V> Map<K, V>.invert(): Map<V, K> {
+private fun <K, V> Map<K, V>.invert(): Map<V, K> {
     val inverted = mutableMapOf<V, K>()
     for (item in this) {
         inverted[item.value] = item.key
@@ -188,7 +186,7 @@ fun <K, V> Map<K, V>.invert(): Map<V, K> {
 ```
 
 My backend requires file names to have an extension,
-so that backend knows how to process a file,
+so that it knows how to process a file,
 but `DISPLAY_NAME` sometimes doesn't contain it.
 So I check the extension in `hasKnownExtension`,
 if it's empty I try to guess the file`s extension based on mime type.
