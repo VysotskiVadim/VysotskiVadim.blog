@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Pick a file on Android
-description: "Simple guide how to pick file on Android: SAF, supported types, edge cases"
+description: "Simple guide of how to pick a file on Android: SAF, supported types, edge cases"
 supportedFileTypes: "txt, doc, rtf, docx, pdf"
 date: 2021-01-01 22:30:00 +0300
 image: /assets/pick-a-file-cover.jpg
@@ -11,8 +11,8 @@ postImage:
 twitterLink: https://twitter.com/VysotskiVadim/status/1427957292176191489
 ---     
 
-I was looking for a simple tutorial which explains how to pick a file on Android but didn't find anything that:
-1. Has simple code examples so that I can quickly implement feature step by step copy-pasting code and check if it what I need;
+I was looking for a simple tutorial that explains how to pick a file on Android but didn't find anything that:
+1. Has simple code examples;
 2. Explanation of how everything works with links to docs;
 3. Edge cases, or what can easily be missed, but it's an important scenario for the user.
 
@@ -22,7 +22,7 @@ Please enjoy the reading or go straight to the [code of the final solution](#cod
 ### Requirements
 
 As a user, I want to pick a file
-from my phone or from a third-party cloud storage*(like Dropbox or Goole Drive)*,
+from my phone or third-party cloud storage*(like Dropbox or Goole Drive)*,
 of supported format ({{page.supportedFileTypes}})
 so that file is uploaded to the server.
 
@@ -49,16 +49,16 @@ const val OPEN_DOCUMENT_REQUEST_CODE = 2
 
 Executing the code above,
 Android opens system UI,
-where user is able to pick a file of any type from any connected third-party storage.
+where the user can pick a file of any type from any connected third-party storage.
 
-Let's quickly get thought the code:  
+Let's quickly get through the code:  
 `Intent.ACTION_GET_CONTENT` - open file to read content one time, reed more in the [doc](https://developer.android.com/reference/android/content/Intent#ACTION_GET_CONTENT)  
 `addCategory(Intent.CATEGORY_OPENABLE)` - we don't want to deal with [virtual files](https://www.youtube.com/watch?v=4h7yCZt231Y),
 we need only real ones, i.e. file that contains bytes of data.  
 `OPEN_DOCUMENT_REQUEST_CODE` - id of request, we will use this number during result handing.
 
-User will see system UI where all real files available to pick
-*(as you can see google slides file are virtual and not available for picking)*:
+Users will see system UI where all real files are available to pick
+*(as you can see google slides files are virtual and not available for picking)*:
 
 <div style="display:flex;justify-content: space-between;">
     {% include image.html src="all-files-example" alt="Example of all files" width='45%'%}
@@ -110,7 +110,7 @@ sealed class OpenFileResult {
 }
 ```
 
-Notice that I get `contentResolver` from the `Aplication`, not from the `Activity` to avoid memory leask.
+Notice that I get `contentResolver` from the `Application`, not from the `Activity` to avoid memory leak.
 
 Call `tryHandleOpenDocumentResult` from the `onActivityResult`:
 ```kotlin
@@ -127,7 +127,7 @@ Call `close` on the `InputStream` when you finished reading the file.
 
 ### Get file name (optional feature) {#get_file_name}
 
-Getting file name is a little bit more tricky.
+Getting a file's name is a little bit more tricky.
 
 Here are utils functions to work with file names.
 I keep them in the **SafUtils.kt** file.
@@ -189,7 +189,7 @@ private fun <K, V> Map<K, V>.invert(): Map<V, K> {
 
 My backend requires file names to have an extension
 so that it knows how to process a file.
-But the `DISPLAY_NAME` sometimes doesn't contain an extention, just a name.
+But the `DISPLAY_NAME` sometimes doesn't contain an extension, just a name.
 So I check the extension in `hasKnownExtension`,
 if it's empty I try to guess the file`s extension based on mime type.
 
@@ -205,7 +205,7 @@ val fileName = requireContext().contentResolver.queryFileName(contentUri)
 ### Filter file by type {#filer_files_by_type}
 
 My "upload document" feature support only **{{page.supportedFileTypes}}** formats.
-Picker shouldn't let user pick file of not supported type.
+Picker shouldn't let users pick a file of a not supported type.
 We can achieve it by specifying supported formats in
 
 ```kotlin
@@ -224,7 +224,7 @@ fun Fragment.openDocumentPicker() {
 ```
 
 Not filtered*(left image)* vs filtered*(right image)*:
-as you can see all files except **.doc** one are grayed out and not available for picking.
+as you can see all files except **.doc** are grayed out and not available for picking.
 <div style="display:flex;justify-content: space-between;">
     {% include image.html src="all-files-example" alt="Example of all files" width='45%'%}
     {% include image.html src="filtered-files-example" alt="Example of filtered files" width='45%'%}
@@ -233,7 +233,7 @@ as you can see all files except **.doc** one are grayed out and not available fo
 
 ### MIME types filter doesn't work {#mime_filter_do_not_work}
 
-`Intent.EXTRA_MIME_TYPES` filter works only for third party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
+`Intent.EXTRA_MIME_TYPES` filter works only for third-party [document providers](https://developer.android.com/guide/topics/providers/document-provider#overview).
 But some third-party app lets user access files via specifying intent filter for `android.intent.action.GET_CONTENT`,
 and handling these intents in their activities.
 
@@ -242,35 +242,35 @@ and handling these intents in their activities.
 </div>
 
 Google Photos handles `ACTION_GET_CONTENT`.
-It lets user pick any photo no matter which `EXTRA_MIME_TYPES` you've set.
+It lets the user pick any photo no matter which `EXTRA_MIME_TYPES` you've set.
 So `EXTRA_MIME_TYPES` doesn't always work with `ACTION_GET_CONTENT`. 
 
 One possible solution is to change `GET_CONTENT` intent action to `ACTION_OPEN_DOCUMENT`.
 `ACTION_OPEN_DOCUMENT` [works only with document providers](https://developer.android.com/reference/android/content/Intent#ACTION_OPEN_DOCUMENT),
 so `EXTRA_MIME_TYPES` will always work.
 
-`ACTION_OPEN_DOCUMENT` reduces amout of sources user can pick a file from.
-Some cloud storages doesn't provide document provider and shows custom UI (Yandex disk for example)
-, so I keep using `GET_CONTENT`.
+`ACTION_OPEN_DOCUMENT` reduces the number of sources the user can pick a file from.
+Some cloud storages don't provide a document provider and show custom UI (Yandex disk for example),
+so I keep using `GET_CONTENT`.
 
 <div style="display:flex;justify-content: space-between;">
     {% include image.html src="pick-file-get-content" alt="Available third paries for get content" width='45%'%}
     {% include image.html src="pick-file-open-document" alt="Available third parties for open document" width='45%'%}
 </div>
 
-`GET_CONTENT`*(left image)* vs `ACTION_OPEN_DOCUMENT`*(right image)*: the last option has less available data sources.
+`GET_CONTENT`*(left image)* vs `ACTION_OPEN_DOCUMENT`*(right image)*: the last option has fewer available data sources.
 
 `GET_CONTENT` contains redundant entries like Google Photo,
-but it also has additional third parties that haven't migrated to document provider yet.
+but it also has additional third parties that haven't migrated to the document provider yet.
 
-I let user get data from any source,
-but I check file type and show an error if picked file type isn't supported.
+I let users get data from any source,
+but I check file type and show an error if a picked file type isn't supported.
 
 ### The code {#code}
 
-Checkout the [file picker repository](https://github.com/VysotskiVadim/android-pick-file-example).
+Check out the [file picker repository](https://github.com/VysotskiVadim/android-pick-file-example).
 
 ### Links
 
 * [Post image](https://flic.kr/p/RwDusv)
-* [Open file using Storage Access Framework](https://developer.android.com/guide/topics/providers/document-provider)
+* [Open a file using Storage Access Framework](https://developer.android.com/guide/topics/providers/document-provider)
