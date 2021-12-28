@@ -11,8 +11,8 @@ postImage:
 twitterLink: https://twitter.com/VysotskiVadim/status/1427957292176191489
 ---     
 
-I was looking for a simple tutorial that explains how to pick a file on Android but didn't find anything that:
-1. Has simple code examples;
+I was looking for a simple tutorial that explains how to pick a file on Android but didn't find anything that has:
+1. Simple code examples;
 2. Explanation of how everything works with links to docs;
 3. Edge cases, or what can easily be missed, but it's an important scenario for the user.
 
@@ -204,9 +204,9 @@ val fileName = requireContext().contentResolver.queryFileName(contentUri)
 
 ### Filter file by type {#filer_files_by_type}
 
-My "upload document" feature support only **{{page.supportedFileTypes}}** formats.
+My "upload document" feature supports only **{{page.supportedFileTypes}}** formats.
 Picker shouldn't let users pick a file of a not supported type.
-We can achieve it by specifying supported formats in
+We can achieve it by specifying supported formats in the `Intent`.
 
 ```kotlin
 
