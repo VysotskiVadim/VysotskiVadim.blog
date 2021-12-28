@@ -205,8 +205,8 @@ val fileName = requireContext().contentResolver.queryFileName(contentUri)
 ### Filter file by type {#filer_files_by_type}
 
 My "upload document" feature support only **{{page.supportedFileTypes}}** formats.
-So picker shouldn't let user pick file of not supported type.
-We can achieve it by specifying supported formats.
+Picker shouldn't let user pick file of not supported type.
+We can achieve it by specifying supported formats in
 
 ```kotlin
 
@@ -241,22 +241,17 @@ and handling these intents in their activities.
     {% include video.html src='/assets/pick-file-android/pick-file-dropbox-vs-google-photos.webm' %}
 </div>
 
-On the video,
-you can see that when user chooses Google Photos
-from the system file picker,
-the app is opened and the user sees all files.
-Our file types filter doesn't work there
-so the user can pick any photo.
+Google Photos handles `ACTION_GET_CONTENT`.
+It lets user pick any photo no matter which `EXTRA_MIME_TYPES` you've set.
+So `EXTRA_MIME_TYPES` doesn't always work with `ACTION_GET_CONTENT`. 
 
 One possible solution is to change `GET_CONTENT` intent action to `ACTION_OPEN_DOCUMENT`.
 `ACTION_OPEN_DOCUMENT` [works only with document providers](https://developer.android.com/reference/android/content/Intent#ACTION_OPEN_DOCUMENT),
-so `EXTRA_MIME_TYPES` always works with `ACTION_OPEN_DOCUMENT` .
-But I want user to be able to use **all** possible data sources,
-some cloud storage doesn't provide document provider and shows custom UI (Yandex disk for example)
-, so I keep `GET_CONTENT`.
+so `EXTRA_MIME_TYPES` will always work.
 
-I let user get data from any source,
-but when user picks a file I have to check file type and show an error if picked file type isn't supported.
+`ACTION_OPEN_DOCUMENT` reduces amout of sources user can pick a file from.
+Some cloud storages doesn't provide document provider and shows custom UI (Yandex disk for example)
+, so I keep using `GET_CONTENT`.
 
 <div style="display:flex;justify-content: space-between;">
     {% include image.html src="pick-file-get-content" alt="Available third paries for get content" width='45%'%}
@@ -265,9 +260,11 @@ but when user picks a file I have to check file type and show an error if picked
 
 `GET_CONTENT`*(left image)* vs `ACTION_OPEN_DOCUMENT`*(right image)*: the last option has less available data sources.
 
-
 `GET_CONTENT` contains redundant entries like Google Photo,
 but it also has additional third parties that haven't migrated to document provider yet.
+
+I let user get data from any source,
+but I check file type and show an error if picked file type isn't supported.
 
 ### The code {#code}
 
