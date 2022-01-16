@@ -21,8 +21,6 @@ I noticed changes in my tests after reading this book.
 
 ## Notes
 
-#### No time for testing loop
-
 The more stress you have the less testing you do.
 The less testing you do the more errors you make.
 The more errors you make the more stress you have.
@@ -32,3 +30,7 @@ Automatic tests could break the cycle.
 The more stress you have the more tests you write and run.
 The more tests you run and write the fewer errors you make.
 The fewer errors you make the less stress you have.
+
+Tests that you get out of the TDD cycle don’t cover all testing for a project.
+However, TDD affects the way you test.
+When your code becomes stable enough, a professional tester could get enough time for usability, exploratory, and other types of testing.
