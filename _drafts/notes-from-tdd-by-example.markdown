@@ -34,3 +34,9 @@ The fewer errors you make the less stress you have.
 Tests that you get out of the TDD cycle don’t cover all testing for a project.
 However, TDD affects the way you test.
 When your code becomes stable enough, a professional tester could get enough time for usability, exploratory, and other types of testing.
+
+How to improve tests coverage?
+An obvious option is to add more tests to cover all possible inputs/cases/states.
+The other option is to simplify the logic.
+Decrease the count of possible cases/states/inputs on the refactoring step.
+You will get better tests coverage with the same set of tests.
