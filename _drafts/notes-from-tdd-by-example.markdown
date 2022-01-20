@@ -40,3 +40,10 @@ An obvious option is to add more tests to cover all possible inputs/cases/states
 The other option is to simplify the logic.
 Decrease the count of possible cases/states/inputs on the refactoring step.
 You will get better tests coverage with the same set of tests.
+
+General pattern. 
+Write a test that verifies one scenario of usage.
+Verify the test fails.
+Hardcode results in the implementation to support only one scenario.
+Verify the test passes.
+Make implementation generic, i.e. support other scenarios, on the refactoring stage.
