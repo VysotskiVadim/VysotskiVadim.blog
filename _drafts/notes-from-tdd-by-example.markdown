@@ -47,3 +47,8 @@ Verify the test fails.
 Hardcode results in the implementation to support only one scenario.
 Verify the test passes.
 Make implementation generic, i.e. support other scenarios, on the refactoring stage.
+
+You have `test1` which tests `behavior1`.
+You want to test `behavior2` which depends on the `behavior1`.
+I always had doubts if I should verify `behavior1` in `test2`.
+Kent Beck says that `test2` can be simple and confident that `behavior1` works if we already have `test1`.
