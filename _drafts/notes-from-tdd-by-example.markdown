@@ -52,3 +52,10 @@ You have `test1` which tests `behavior1`.
 You want to test `behavior2` which depends on the `behavior1`.
 I always had doubts if I should verify `behavior1` in `test2`.
 Kent Beck says that `test2` can be simple and confident that `behavior1` works if we already have `test1`.
+
+Should I run a new test if I know it will fail?
+Yes, always!
+You save yourself from errors in the test.
+If a red test becomes green after implementation - it tests what you want.
+
+Test your test by hardcoding behavior for a scenario you're testing.
