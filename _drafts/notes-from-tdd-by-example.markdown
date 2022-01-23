@@ -26,7 +26,7 @@ The less testing you do the more errors you make.
 The more errors you make the more stress you have.
 It's a loop that makes your state worse each iteration.
 
-Auto tests could break the cycle.
+Automated tests could break the cycle.
 The more stress you have the more tests you write and run.
 The more tests you run and write the fewer errors you make.
 The fewer errors you make the less stress you have.
