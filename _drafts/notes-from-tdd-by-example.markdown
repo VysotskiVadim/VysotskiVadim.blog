@@ -58,4 +58,12 @@ Yes, always!
 You save yourself from errors in the test.
 If a red test becomes green after implementation - it tests what you want.
 
-Test your test by hardcoding behavior for a scenario you're testing.
+Make your tests fast.
+Fast tests lead to frequent runs, which leads to faster feedback.
+Application(E2E) tests can't be fast enough.
+Seek tests at a smaller scale than the whole application.
+
+It's fast to test small and isolated modules.
+Break your problem into small and independent pieces.
+Then compose a solution out of many highly cohesive and loosely coupled modules.
+Test each of the modules in isolation.
