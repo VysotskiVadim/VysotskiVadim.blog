@@ -37,7 +37,7 @@ When your code becomes stable enough, a professional tester could get enough tim
 
 How to improve tests coverage?
 An obvious option is to add more tests to cover all possible inputs/cases/states.
-The other option is to simplify the logic.
+Another option is to simplify the logic.
 Decrease the count of possible cases/states/inputs on the refactoring step.
 You will get better tests coverage with the same set of tests.
 
@@ -67,3 +67,4 @@ It's fast to test small and isolated modules.
 Break your problem into small and independent pieces.
 Then compose a solution out of many highly cohesive and loosely coupled modules.
 Test each of the modules in isolation.
+
