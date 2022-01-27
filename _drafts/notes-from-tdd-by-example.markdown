@@ -41,12 +41,20 @@ Another option is to simplify the logic.
 Decrease the count of possible cases/states/inputs on the refactoring step.
 You will get better tests coverage with the same set of tests.
 
-General pattern.
-Write a test that verifies one scenario of usage.
-Verify the test fails.
-Hardcode results.
-Verify the test passes.
-Make implementation generic, i.e. supports more than 1 scenario, on the refactoring stage.
+General pattern.  
+Write a test that verifies one scenario of usage.  
+Verify the test fails.  
+Hardcode results.  
+Verify the test passes.  
+Refactor implementation by rewriting to a generic solution, i.e. supports more than 1 scenario.  
+
+The triangulation technique.  
+Write a test that verifies one scenario of usage.  
+Verify the test fails.  
+Hardcode results.  
+Verify the test passes.  
+Write another test that verifies another scenario of usage.  
+Implement a generic solution.  
 
 You have `test1` which tests `behavior1`.
 You want to test `behavior2` which depends on the `behavior1`.
