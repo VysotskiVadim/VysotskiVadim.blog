@@ -41,12 +41,12 @@ Another option is to simplify the logic.
 Decrease the count of possible cases/states/inputs on the refactoring step.
 You will get better tests coverage with the same set of tests.
 
-General pattern. 
+General pattern.
 Write a test that verifies one scenario of usage.
 Verify the test fails.
-Hardcode results in the implementation to support only one scenario.
+Hardcode results.
 Verify the test passes.
-Make implementation generic, i.e. support other scenarios, on the refactoring stage.
+Make implementation generic, i.e. supports more than 1 scenario, on the refactoring stage.
 
 You have `test1` which tests `behavior1`.
 You want to test `behavior2` which depends on the `behavior1`.
