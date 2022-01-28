@@ -76,3 +76,8 @@ Break your problem into small and independent pieces.
 Then compose a solution out of many highly cohesive and loosely coupled modules.
 Test each of the modules in isolation.
 
+Test Driven Development isn't a testing technique.
+TDD helps me design a unit by trying to use it in tests.
+I can design a complex feature stepping tiny steps,
+focusing only on the current tiny problem, 
+getting feedback about design and stability immediately.
