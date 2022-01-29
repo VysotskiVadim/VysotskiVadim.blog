@@ -81,3 +81,7 @@ TDD helps me design a unit by trying to use it in tests.
 I can design a complex feature stepping tiny steps,
 focusing only on the current tiny problem, 
 getting feedback about design and stability immediately.
+
+TDD doesn't guarantee flashes of insight at the right moment.
+But TDD creates a perfect environment for them.
+Confidence giving tests let up apply any insight as soon as it comes.
