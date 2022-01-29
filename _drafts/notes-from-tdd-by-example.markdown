@@ -82,6 +82,12 @@ I can design a complex feature stepping tiny steps,
 focusing only on the current tiny problem, 
 getting feedback about design and stability immediately.
 
+Clean code that works is a goal of TDD.
+
 TDD doesn't guarantee flashes of insight at the right moment.
 But TDD creates a perfect environment for them.
 Confidence giving tests let up apply any insight as soon as it comes.
+
+Just make things work on the implementation stage.
+Don't waist your time on cleaning up the code.
+Duplication will help you find missing design elements later on refactoring stage.
