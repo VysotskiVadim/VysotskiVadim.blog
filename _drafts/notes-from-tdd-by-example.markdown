@@ -94,3 +94,10 @@ Duplication will help you find missing design elements later on refactoring stag
 
 The less code you need to write to get to a green bar, the safer you are.
 Don't write tests that make you write much code on the implementation stage.
+
+What if I write tests after code?
+Code without tests makes you less confident and more stressed.
+The more stress you have the less testing you do.
+The less testing you do the more stress you have.
+You're getting into cycle.  
+Write tests before code.
