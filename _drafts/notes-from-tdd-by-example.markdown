@@ -101,3 +101,6 @@ The more stress you have the less testing you do.
 The less testing you do the more stress you have.
 You're getting into cycle.  
 Write tests before code.
+
+Start a test from an assert.
+A project starts from a story, a feature from a test, a test from an assert.
