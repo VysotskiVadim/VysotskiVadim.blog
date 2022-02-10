@@ -89,8 +89,8 @@ But TDD creates a perfect environment for them.
 Confidence giving tests let up apply any insight as soon as it comes.
 
 Just make things work on the implementation stage.
-Don't waist your time on cleaning up the code.
-Duplication will help you find missing design elements later on refactoring stage.
+Don’t waste your time cleaning up the code. 
+Duplication will help you find missing design elements later in the refactoring stage.
 
 The less code you need to write to get to a green bar, the safer you are.
 Don't write tests that make you write much code on the implementation stage.
