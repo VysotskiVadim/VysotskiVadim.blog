@@ -104,3 +104,7 @@ Write tests before code.
 
 Start a test from an assert.
 A project starts from a story, a feature from a test, a test from an assert.
+
+Don't test 10 different inputs if they lead to the same design and implementation decisions as three inputs.
+
+You're writing tests for a reader, not a computer only.
