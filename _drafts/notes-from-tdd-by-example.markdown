@@ -108,3 +108,19 @@ A project starts from a story, a feature from a test, a test from an assert.
 Don't test 10 different inputs if they lead to the same design and implementation decisions as three inputs.
 
 You're writing tests for a reader, not a computer only.
+
+Focus only on one problem.
+Don't spread your mental resources on other things.
+Concentration increases your productivity.  
+Red stage - think about what you want from a unit.  
+Green stage - work on making test green, don't care about quality.  
+Refactoring stage - make the code that works clean.  
+
+What if I get an insight about a feature Y when I'm working on a feature X.
+Write the insight down and get back later to it.
+Don't let new ideas spoil your concentration.
+
+Write all your ideas about a unit down.
+Select an easiest one to achieve and start your TDD cycle.
+Consider every idea as a step to your goal.
+Implementing ideas one by one, you're moving step by step to the goal.
