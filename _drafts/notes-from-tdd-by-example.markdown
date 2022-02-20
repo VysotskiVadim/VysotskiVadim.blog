@@ -13,11 +13,10 @@ postImage:
 I bought the "Test Driven Development: By Example" by Kent Beck on [amazon](https://www.amazon.com/dp/B095SQ9WP4/ref=cm_sw_r_tw_dp_56ZFZYAG5RRE5356BWB8) for kindle.
 While reading the book I wrote a few notes which I'd like to share.
 
-Notes are just a few ideas I took away from the book, nothing more.
+Warning ⚠️  
+The notes are just ideas I got or learned reading the book.
 They don't represent or substitute the book.
-The "Money" and "XUnit" examples are the most valuable things I found in this book.
-I do recommend you to see how Kent develops using TDD and shares his thought meanwhile.
-I noticed changes in my tests after reading this book.
+I may have understand Kent wrong.
 
 ## Notes
 
