@@ -124,3 +124,10 @@ Write all your ideas about a unit down.
 Select an easiest one to achieve and start your TDD cycle.
 Consider every idea as a step to your goal.
 Implementing ideas one by one, you're moving step by step to the goal.
+
+A program grows from known to unknown.
+In the beginning, you don't know how exactly you're going to solve your problem.
+On each TDD cycle, you learn more about it.
+New knowledge affects your code: you're changing API, tests, and implementation.
+New code brings you new knowledge and ideas about the problem.
+This feedback loop is how a program grows in TDD.
