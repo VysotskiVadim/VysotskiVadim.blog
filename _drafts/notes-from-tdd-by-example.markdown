@@ -130,3 +130,7 @@ On each TDD cycle, you learn more about it.
 New knowledge affects your code: you're changing API, tests, and implementation.
 New code brings you new knowledge and ideas about the problem.
 This feedback loop is how a program grows in TDD.
+
+Test doubles add risk to your project.
+Their behavior can be different from real objects.
+Write tests for a test double to reduce that risk. 
