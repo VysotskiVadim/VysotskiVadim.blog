@@ -16,7 +16,7 @@ While reading the book I wrote a few notes which I'd like to share.
 Warning ⚠️  
 The notes are just ideas I got or learned reading the book.
 They don't represent or substitute the book.
-I may have understand Kent wrong.
+I may have understood Kent wrong.
 
 ## Notes
 
