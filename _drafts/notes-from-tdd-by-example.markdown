@@ -141,5 +141,10 @@ Whenever a method is called, append it to the log string.
 Compare log string with an expected result in a test.
 `assertEquals("methodA methodC methodB", subjectUnderTest.logString)`
 
+Are you working alone or independently from the team?
 Finish day's work on the red stage.
 A broken test will help you quickly remember where you stopped yesterday.
+
+Are you working with a team and integrating your code often?
+Finish day's work with green tests only.
+You won't know the next morning if the feature isn't implemented yet or one of your colleagues has broken something.
