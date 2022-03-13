@@ -135,3 +135,8 @@ Test doubles add risk to your project.
 Their behavior can be different from real objects.
 Write tests for a test double to reduce that risk.
 You can replace the test double with a real object in tests later.
+
+The log string pattern helps you to check the order of called methods.
+Whenever a method is called, append it to the log string.
+Compare log string with an expected result in a test.
+`assertEquals("methodA methodC methodB", subjectUnderTest.logString)`
