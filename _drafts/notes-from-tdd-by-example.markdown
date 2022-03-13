@@ -133,4 +133,5 @@ This feedback loop is how a program grows in TDD.
 
 Test doubles add risk to your project.
 Their behavior can be different from real objects.
-Write tests for a test double to reduce that risk. 
+Write tests for a test double to reduce that risk.
+You can replace the test double with a real object in tests later.
