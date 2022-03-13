@@ -140,3 +140,6 @@ The log string pattern helps you to check the order of called methods.
 Whenever a method is called, append it to the log string.
 Compare log string with an expected result in a test.
 `assertEquals("methodA methodC methodB", subjectUnderTest.logString)`
+
+Finish day's work on the red stage.
+A broken test will help you quickly remember where you stopped yesterday.
