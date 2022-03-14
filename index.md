@@ -4,5 +4,5 @@
 
 layout: home
 ---
-Hi. You're reading the personal blog of Vadzim Vysotski, a Belarusian software engineer from Gdańsk(Poland).
+Hi. You're reading a personal blog of Vadzim Vysotski, a Belarusian software engineer from Gdańsk(Poland).  
 I stand with Ukraine 🇺🇦
