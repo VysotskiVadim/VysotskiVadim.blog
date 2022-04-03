@@ -160,3 +160,10 @@ It doesn't really matter how the library behaves until the feature works.
 Why not write tests for your unit which uses the library internally.
 Learn and explore the new library developing your unit in tiny steps.
 This way you're gonna get red tests only when changes in the library affect your functionality.
+
+## TO BE CONTINUED
+
+I have a bunch of highlights in the book that I haven’t converted to notes yet.
+I’m trying to find some time to add a note every week. 
+It's going to be more notes.
+Stay tuned.
