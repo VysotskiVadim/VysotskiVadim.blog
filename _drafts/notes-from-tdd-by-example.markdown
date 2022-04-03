@@ -148,3 +148,15 @@ A broken test will help you quickly remember where you stopped yesterday.
 Are you working with a team and integrating your code often?
 Finish day's work with green tests only.
 You won't know the next morning if the feature isn't implemented yet or one of your colleagues has broken something.
+
+Kent suggests learning how a new library works via tests.
+Instead of trying using the library in your app, write a test for it.
+This way you check if the library behaves in the way you think it does.
+Plus, on each update, you can rerun tests to make sure that the library didn't change the behavior you rely on.  
+But I prefer a different strategy.
+My final goal is to make a feature that works.
+Why do I need to have tests against a library which is not my final goal?
+It doesn't really matter how the library behaves until the feature works.
+Why not write tests for your unit which uses the library internally.
+Learn and explore the new library developing your unit in tiny steps.
+This way you're gonna get red tests only when changes in the library affect your functionality.
