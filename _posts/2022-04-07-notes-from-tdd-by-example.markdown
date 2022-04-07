@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  Notes from the "TDD by example book"
+title:  Notes from the "Test Driven Development by example" book
+date: 2022-04-07 12:00:00 +0200
 description: "My notes after reading the Test Driven Development: By Example book"
-image: /assets/resized/pages_768.jpg
+image: /assets/resized/tdd-by-example_768.jpg
 postImage:
-  src: pagination-2
+  src: tdd-by-example
   alt: An opened book with many pages
 ---
 
