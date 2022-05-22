@@ -26,7 +26,7 @@ This numbers help you understand how different decisions affect execution time o
 ## Measurements
 
 I run tests a few times from Android Studio.
-I gathered execution times in [the table]() and calculated average time.
+I gathered execution times in [the table](https://docs.google.com/spreadsheets/d/1WaZOIJ67hcxg6cnQPjiuo-eVsp-acmwTQvJcZdnKUK4/edit?usp=sharing) and calculated average time.
 The numbers you've seen in the article are average execution time of a several tries.
 
 I run tests using following hardware:
