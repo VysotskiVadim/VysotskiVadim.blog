@@ -62,7 +62,29 @@ fun `two plus two copy`() { // executes for 0.2 milliseconds
 
 ## Mock
 
-Consider a simple `Plus` object.
+How long does it take to run [2 tests](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/ObjectMockingMockito.kt) which use a mock?
+There're many different mocking libraries.
+I measured two I used at work: [Mockito](https://github.com/mockito/mockito-kotlin) and [Mockk](https://mockk.io/).
+
+#### Mockito
+
+```kotlin
+val plus = mock<Plus> {
+    on { doPlus(2, 2) } doReturn  4
+}
+
+@Test
+fun `two plus two`() { // executes for 469 milliseconds
+    assertEquals(4, plus.doPlus(2, 2))
+}
+
+@Test
+fun `two plus two copy 1`() { // executes for 0.8 milliseconds
+    assertEquals(4, plus.doPlus(2, 2))
+}
+```
+
+`469.8` milliseconds. Slower that the baseline. Mockito slown down only first test.  
 
 ## Coroutines
 ## Static mocking
@@ -80,6 +102,8 @@ I.e what does it show if result is 1.5 or 1.7?
 It can either show 2 or 1.
 Let's assume Android Studio rounds in a worst way for measurement - takes only integer part of a number, i.e. 1.7 displays as 1.
 Expected measurements accuracy is ±0.9 milliseconds then.
+
+See version of the libraries in the [gradle file](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/build.gradle#L40).
 
 I run tests using following hardware:
 ```
