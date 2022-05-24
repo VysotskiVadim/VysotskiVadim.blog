@@ -7,6 +7,7 @@ description: "Slow your tests down in a few simple steps."
 postImage:
   src: slow-down
   alt: A slow down sign
+linkToGithubText: "See full file on github."
 ---
 ## Intro
 
@@ -20,7 +21,7 @@ This numbers help you understand how different decisions affect execution time o
 
 ## Baseline
 
-How long does it take to run [two tests](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Baseline.kt) which do almost nothing?
+How long does it take to run two tests which do almost nothing?
 
 ```kotlin
 @Test
@@ -34,13 +35,15 @@ fun `baseline copy`() { // executes for 0.2 milliseconds
 }
 ```
 
+*[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Baseline.kt)*
+
 **1.8** milliseconds. First test always takes a bit more time.
 Let's use those numbers as a baseline.
 I will try adding different test doubles and libraries to see what can slow tests down.
 
 ## Regular objects
 
-How logs does it take to run [two tests](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Objects.kt) which operates with a real object?
+How logs does it take to run two tests which operates with a real object?
 
 ```kotlin
 val plus = object : Plus {
@@ -58,11 +61,13 @@ fun `two plus two copy`() { // executes for 0.2 milliseconds
 }
 ```
 
+*[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Objects.kt)*
+
 **2.4** milliseconds. With respect to the [measurements accuracy](#measurements), results are the same. Subs and Fakes, which are just classes developer write for tests, don't slow tests down.
 
 ## Mock
 
-How long does it take to run [2 tests](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/ObjectMockingMockito.kt) which use a mock?
+How long does it take to run 2 tests which use a mock?
 There're many different mocking libraries.
 I measured two I used at work: [Mockito](https://github.com/mockito/mockito-kotlin) and [Mockk](https://mockk.io/).
 
@@ -84,7 +89,9 @@ fun `two plus two copy 1`() { // executes for 0.8 milliseconds
 }
 ```
 
-`469.8` milliseconds. Slower that the baseline. Mockito slown down only first test.  
+*[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/ObjectMockingMockito.kt)*
+
+**469.8** milliseconds. Slower than the baseline. Mockito slowed down only the first test.  
 
 ## Coroutines
 ## Static mocking
