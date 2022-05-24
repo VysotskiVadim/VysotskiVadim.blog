@@ -83,32 +83,32 @@ I measured two I used at work: [Mockito](https://github.com/mockito/mockito-kotl
 
 ```kotlin
 @Test
-fun `two plus two`() { // executes for 446.8 milliseconds
+fun `a - two plus two`() { // executes for 446.8 milliseconds
     val plus = createMockPlus()
     assertEquals(4, plus.doPlus(2, 2))
 }
 
 @Test
-fun `two plus two copy`() { // executes for 0.6 milliseconds
+fun `b - two plus two copy`() { // executes for 0.6 milliseconds
     val plus = createMockPlus()
     assertEquals(4, plus.doPlus(2, 2))
 }
 
 @Test
-fun `two plus two copy with verify`() { // executes for 1.2 milliseconds
+fun `c - two plus two copy with verify`() { // executes for 1.2 milliseconds
     val plus = createMockPlus()
     assertEquals(4, plus.doPlus(2, 2))
     verify(plus) { plus.doPlus(2,2) }
 }
 
 @Test
-fun `two minus two`() { // executes for 13.6 milliseconds
+fun `d - two minus two`() { // executes for 13.6 milliseconds
     val minus = createMockMinus()
     assertEquals(0, minus.doMinus(2, 2))
 }
 
 @Test
-fun `two minus two copy 1`() { // executes for 0.4 milliseconds
+fun `e - two minus two copy 1`() { // executes for 0.4 milliseconds
     val minus = createMockMinus()
     assertEquals(0, minus.doMinus(2, 2))
 }
@@ -125,9 +125,25 @@ private fun createMockMinus() = mock<Minus> {
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/ObjectMockingMockito.kt)*
 
 You need **447.4** milliseconds to run 2 tests which uses Mockito.
-It's much slower than the baseline but doesn't seem critical.
+It's 248 times slower than the baseline!
+Whole test suite of 5 tests executed for 462.6 milliseconds.
 
-Mockito slowed down only the first test.  
+Test `a` was the slowest - 446.8 milliseconds.
+Mockito initializes when you create a mock for the first time.
+The initialization happens 1 time per test run, no matter how much tests you have 1 or 10000.
+
+The test `b` was as fast as the baseline.
+It uses the same mock as the test `a`.
+Mockito doesn't slow a test down if you mock the same interface for a second time.
+
+The test `c` is the same as `b` and `a` but it also verify calls on mocked object.
+It was as fast as the baseline.
+
+The test `d` took a bit more time than the baseline - 13.6 milliseconds.
+It created mock for a new interface.
+No tests had used an interface `Minus` before.
+Mockito is a little bit slower when it deals with a new type.
+
 
 ## Coroutines
 ## Static mocking
