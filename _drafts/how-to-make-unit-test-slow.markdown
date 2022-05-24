@@ -25,12 +25,12 @@ How long does it take to run two tests which do almost nothing?
 
 ```kotlin
 @Test
-fun baseline() { // executes for 1.6 milliseconds
+fun `a - baseline`() { // executes for 1.6 milliseconds
     assertEquals(4, 2 + 2)
 }
 
 @Test
-fun `baseline copy`() { // executes for 0.2 milliseconds
+fun `b - baseline copy`() { // executes for 0.2 milliseconds
     assertEquals(4, 2 + 2)
 }
 ```
@@ -41,51 +41,84 @@ fun `baseline copy`() { // executes for 0.2 milliseconds
 Let's use those numbers as a baseline.
 I will try adding different test doubles and libraries to see what can slow tests down.
 
+A first letter in tests name make the execution order predictable.
+All tests classes are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in alphabetical order. 
+
 ## Regular objects
 
 How logs does it take to run two tests which operates with a real object?
 
 ```kotlin
-val plus = object : Plus {
-    override fun doPlus(a: Int, b: Int): Int = a + b
-}
-
 @Test
-fun `two plus two`() { // executes for 2.2 milliseconds
+fun `two plus two`() { // executes for 2 milliseconds
+    val plus = createPlus()
     assertEquals(4, plus.doPlus(2, 2))
 }
 
 @Test
 fun `two plus two copy`() { // executes for 0.2 milliseconds
+    val plus = createPlus()
     assertEquals(4, plus.doPlus(2, 2))
+}
+
+private fun createPlus() = object : Plus {
+    override fun doPlus(a: Int, b: Int): Int = a + b
 }
 ```
 
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Objects.kt)*
 
-**2.4** milliseconds. With respect to the [measurements accuracy](#measurements), results are the same. Subs and Fakes, which are just classes developer write for tests, don't slow tests down.
+**2.2** milliseconds. With respect to the [measurements accuracy](#measurements), results are the same as in the [baseline](#baseline)
+
+Subs and Fakes are classes that a developer write manually for tests.
+They don't slow tests down.
 
 ## Mock
 
-How long does it take to run 2 tests which use a mock?
+How long does it take to run tests which use a mock?
 There're many different mocking libraries.
 I measured two I used at work: [Mockito](https://github.com/mockito/mockito-kotlin) and [Mockk](https://mockk.io/).
 
 #### Mockito
 
 ```kotlin
-val plus = mock<Plus> {
+@Test
+fun `two plus two`() { // executes for 446.8 milliseconds
+    val plus = createMockPlus()
+    assertEquals(4, plus.doPlus(2, 2))
+}
+
+@Test
+fun `two plus two copy`() { // executes for 0.6 milliseconds
+    val plus = createMockPlus()
+    assertEquals(4, plus.doPlus(2, 2))
+}
+
+@Test
+fun `two plus two copy with verify`() { // executes for 1.2 milliseconds
+    val plus = createMockPlus()
+    assertEquals(4, plus.doPlus(2, 2))
+    verify(plus) { plus.doPlus(2,2) }
+}
+
+@Test
+fun `two minus two`() { // executes for 13.6 milliseconds
+    val minus = createMockMinus()
+    assertEquals(0, minus.doMinus(2, 2))
+}
+
+@Test
+fun `two minus two copy 1`() { // executes for 0.4 milliseconds
+    val minus = createMockMinus()
+    assertEquals(0, minus.doMinus(2, 2))
+}
+
+private fun createMockPlus() = mock<Plus> {
     on { doPlus(2, 2) } doReturn  4
 }
 
-@Test
-fun `two plus two`() { // executes for 469 milliseconds
-    assertEquals(4, plus.doPlus(2, 2))
-}
-
-@Test
-fun `two plus two copy 1`() { // executes for 0.8 milliseconds
-    assertEquals(4, plus.doPlus(2, 2))
+private fun createMockMinus() = mock<Minus> {
+    on { doMinus(2, 2) } doReturn 0
 }
 ```
 
