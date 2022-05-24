@@ -124,7 +124,10 @@ private fun createMockMinus() = mock<Minus> {
 
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/ObjectMockingMockito.kt)*
 
-**469.8** milliseconds. Slower than the baseline. Mockito slowed down only the first test.  
+You need **447.4** milliseconds to run 2 tests which uses Mockito.
+It's much slower than the baseline but doesn't seem critical.
+
+Mockito slowed down only the first test.  
 
 ## Coroutines
 ## Static mocking
