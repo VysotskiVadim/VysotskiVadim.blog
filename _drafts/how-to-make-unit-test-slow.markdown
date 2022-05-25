@@ -50,13 +50,13 @@ How logs does it take to run two tests which operates with a real object?
 
 ```kotlin
 @Test
-fun `two plus two`() { // executes for 2 milliseconds
+fun `a - two plus two`() { // executes for 2 milliseconds
     val plus = createPlus()
     assertEquals(4, plus.doPlus(2, 2))
 }
 
 @Test
-fun `two plus two copy`() { // executes for 0.2 milliseconds
+fun `b - two plus two copy`() { // executes for 0.2 milliseconds
     val plus = createPlus()
     assertEquals(4, plus.doPlus(2, 2))
 }
@@ -70,7 +70,8 @@ private fun createPlus() = object : Plus {
 
 **2.2** milliseconds. With respect to the [measurements accuracy](#measurements), results are the same as in the [baseline](#baseline)
 
-Subs and Fakes are classes that a developer write manually for tests.
+Subs and Fakes are classes that a developer write manually for tests,
+i.e. they are simple objects.
 They don't slow tests down.
 
 ## Mock
@@ -130,19 +131,15 @@ Whole test suite of 5 tests executed for 462.6 milliseconds.
 
 Test `a` was the slowest - 446.8 milliseconds.
 Mockito initializes when you create a mock for the first time.
-The initialization happens 1 time per test run, no matter how much tests you have 1 or 10000.
+The initialization happens 1 time per test run, no matter how many tests you have, 1 or 10000.
 
-The test `b` was as fast as the baseline.
-It uses the same mock as the test `a`.
-Mockito doesn't slow a test down if you mock the same interface for a second time.
-
-The test `c` is the same as `b` and `a` but it also verify calls on mocked object.
-It was as fast as the baseline.
+Tests `b` and `c` are as fast as the baseline.
+Mockito doesn't slow tests down when you mock something for a second time or verify a behavior.
 
 The test `d` took a bit more time than the baseline - 13.6 milliseconds.
-It created mock for a new interface.
+It created a mock for a new interface.
 No tests had used an interface `Minus` before.
-Mockito is a little bit slower when it deals with a new type.
+Mockito needs more time when it deals with a new type.
 
 
 ## Coroutines
