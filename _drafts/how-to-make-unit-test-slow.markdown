@@ -80,7 +80,7 @@ How long does it take to run tests which use a mock?
 There're many different mocking libraries.
 I measured two I used at work: [Mockito](https://github.com/mockito/mockito-kotlin) and [Mockk](https://mockk.io/).
 
-#### Mockito
+### Mockito
 
 ```kotlin
 @Test
@@ -141,6 +141,62 @@ It created a mock for a new interface.
 No tests had used an interface `Minus` before.
 Mockito needs more time when it deals with a new type.
 
+How much time does Mockito need to create a mock of a new type?
+It depends on the type.
+See examples of different Android classes.
+
+```kotlin
+@Test
+fun `a - warm up mockito`() { // executes for 436.8 milliseconds
+    mock<Any>()
+}
+
+open class Activity1 : Activity()
+open class Activity2 : Activity()
+
+@Test
+fun `b - create activity 1`() { // executes for 607 milliseconds
+    val activity = mock<Activity1>()
+}
+
+@Test
+fun `c - create activity 2`() { // executes for 274.6 milliseconds
+    val activity = mock<Activity2>()
+}
+
+@Test
+fun `d - create context`() { // executes for 57.8 milliseconds
+    val context = mock<Context>()
+}
+
+@Test
+fun `e - create context 2`() { // executes for 0.4 milliseconds
+    val context = mock<Context>()
+}
+
+@Test
+fun `f - create location`() { // executes for 34.2 milliseconds
+    val location = mock<Location>()
+}
+
+@Test
+fun `g - create location 2`() { // executes for 0.2 milliseconds
+    val location = mock<Location>()
+}
+```
+
+*[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/AndroidClassesMockito.kt)*
+
+It took more time to mock `Activity1` than `Activity2`: 607 vs 274 ms.
+If you mock `Activity3`, `Activity4`, etc, each of them would take ~250 ms to initialize.
+Compare mocking a new object 13 ms vs mocking a new activity ~250 ms.
+Mocking the same activity for a second time is as fast as the baseline.
+
+Summary.
+Mockito slows you down whenever you mock a type for a first time.
+The more complex class is, the more time it takes to mock.
+The time Mockito takes doesn't seem critical even for a large core base.
+1000 unit tests * 250ms = 4 minutes.
 
 ## Coroutines
 ## Static mocking
