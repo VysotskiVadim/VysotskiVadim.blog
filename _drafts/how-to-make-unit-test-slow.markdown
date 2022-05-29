@@ -198,10 +198,112 @@ The more complex class is, the more time it takes to mock.
 The time Mockito takes doesn't seem critical even for a large core base.
 1000 unit tests * 250ms = 4 minutes.
 
-## Coroutines
+### Mockk
+
+```kotlin
+@Test
+fun `a - two plus two`() { // executes for 1915.8 milliseconds
+    val plus = createMockPlus()
+    assertEquals(4, plus.doPlus(2, 2))
+}
+
+@Test
+fun `b - two plus two copy`() { // executes for 1.2 milliseconds
+    val plus = createMockPlus()
+    assertEquals(4, plus.doPlus(2, 2))
+}
+
+@Test
+fun `c - two plus two copy with verify`() { // executes for 11.6 milliseconds
+    val plus = createMockPlus()
+    assertEquals(4, plus.doPlus(2, 2))
+    verify { plus.doPlus(2, 2) }
+}
+
+@Test
+fun `d - two minus two`() { // executes for 39.6 milliseconds
+    val minus = createMockMinus()
+    assertEquals(0, minus.doMinus(2, 2))
+}
+
+@Test
+fun `e - two minus two copy 1`() { // executes for 1.2 milliseconds
+    val minus = createMockMinus()
+    assertEquals(0, minus.doMinus(2, 2))
+}
+
+private fun createMockPlus() = mockk<Plus> {
+    every { doPlus(2, 2) } returns 4
+}
+
+private fun createMockMinus() = mockk<Minus> {
+    every { doMinus(2, 2) } returns 0
+}
+```
+
+You need **1918** ms to run 2 tests if you mock using Mockk library.
+It's 4.2 time slower than Mockito and 1065 time slower than the baseline.
+
+Mockk is similar to Mockito in the majority of aspects:
+* A first usage is the slowest - 1915 ms;
+* A second mocking of the same object is fast - 13 ms;
+* Every time you mock a new object it's a bit slower - 39 ms;
+
+The difference between Mockk and Mockito is that Mockk's verify slows a test down - 11.6 ms.
+The slow down happens every time you verify behavior of a new object, the second usage is fast.
+
+Let's check speed of mocking for different objects from Android.
+
+```kotlin
+@Test
+fun `a - warm up mockk`() { // executes for 966.8 milliseconds
+    mockk<Any>()
+}
+
+open class Activity1 : Activity()
+open class Activity2 : Activity()
+
+@Test
+fun `b - create activity 1`() { // executes for 676.6 milliseconds
+    val activity = mockk<Activity1>()
+}
+
+@Test
+fun `c - create activity 2`() { // executes for 41.8 milliseconds
+    val activity = mockk<Activity2>()
+}
+
+@Test
+fun `d - create context`() { // executes for 288.4 milliseconds
+    val context = mockk<Context>()
+}
+
+@Test
+fun `e - create context 2`() { // executes for 0 milliseconds
+    val context = mockk<Context>()
+}
+
+@Test
+fun `f - create location`() { // executes for 65.2 milliseconds
+    val location = mockk<Location>()
+}
+
+@Test
+fun `g - create location 2`() { // executes for 0.4 milliseconds
+    val location = mockk<Location>()
+}
+```
+
+Again pattern is very similar to Mockito but slower.
+But Mockk beated Mockito in creation of `Activity2`.
+
+How much Mockk affects tests execution speed?
+Imaging you have 1000 tests where you mock new Activities.
+
 ## Static mocking
 ## Robolectric
-## Combine
+## Coroutines
+## Slowest test
 ## Summary
 ## Measurements
 
