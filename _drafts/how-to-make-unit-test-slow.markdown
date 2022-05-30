@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Slow unit tests"
+title: "Slow unit tests. Part 1 - objects mocking."
 date: 2022-03-14 12:00:00 +0300
 image: /assets/slow-down.jpg
-description: "Slow your tests down in a few simple steps."
+description: "What does make unit tests slow? Is it objects mocking?"
 postImage:
   src: slow-down
   alt: A slow down sign
@@ -15,9 +15,20 @@ I've seen a test suite which could have completed in seconds but was executing f
 What did make it so slow?
 This is the question I'm trying to answer.
 
-
 I measured different factors that could slow tests down in isolation.
 This numbers help you understand how different decisions affect execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
+
+I did quite a lot of experiments and measurements.
+It it would be uncomfortable to read everything in one article, so I split whole material in a few parts.
+You're reading part one.
+It focuses on objects mocking.
+
+## Other "Slow unit tests" articles
+
+1. [Object mocking]()
+2. Static mocking *(not ready yet)*
+3. Coroutines *(not ready yet)*
+4. Robolectric *(not ready yet)*
 
 ## Baseline
 
@@ -91,8 +102,8 @@ I measured two I used at work: [Mockito](https://github.com/mockito/mockito-kotl
 
 #### Small objects
 
-Mocks have a more complex behaviour than real objects.
-I need more interfaces to mock to explore their behavior.
+Mocks have a more complex behavior than real objects.
+We'll explore mocks using 2 interfaces that represent math operations.
 
 ```kotlin
 interface Plus {
@@ -148,7 +159,7 @@ private fun createMockMinus() = mock<Minus> {
 
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/ObjectMockingMockito.kt)*
 
-You need **447.4** milliseconds to run 2 tests which uses Mockito.
+You need **447.4** milliseconds to run 2 tests which use Mockito.
 It's 248 times slower than the baseline!
 Whole test suite of 5 tests executed for 462.6 milliseconds.
 
@@ -157,7 +168,7 @@ Mockito initializes when you create a mock for the first time.
 The initialization happens 1 time per test run, no matter how many tests you have, 1 or 10000.
 
 Tests `b` and `c` are as fast as the baseline.
-Mockito doesn't slow tests down when you mock something for a second time or verify a behavior.
+Mockito doesn't slow tests down when you mock the same class for a second time or verify a behavior.
 
 The test `d` took a bit more time than the baseline - 13.6 milliseconds.
 It created a mock for a new interface.
@@ -214,10 +225,10 @@ fun `g - create location 2`() { // executes for 0.2 milliseconds
 
 It took more time to mock `Activity1` than `Activity2`: 607 vs 274 ms.
 If you mock `Activity3`, `Activity4`, etc, each of them would take ~250 ms to initialize.
-Compare mocking a new object 13 ms vs mocking a new activity ~250 ms.
+Compare mocking a small object 13 ms vs mocking a new activity ~250 ms.
 Mocking the same activity for a second time is as fast as the baseline.
 
-Summary.
+#### Summary
 Mockito slows you down whenever you mock a type for a first time.
 The more complex class is, the more time it takes to mock.
 The time Mockito takes doesn't seem critical even for a large core base.
@@ -331,14 +342,8 @@ Imaging you have 1000 tests where you mock new Activities.
 1000 tests * 41.8 ms = 42 seconds of execution.
 Doesn't seem critical for me.
 
-#### Static mocking
-
-
-
-## Robolectric
-## Coroutines
-## Slowest test
 ## Summary
+
 ## Measurements
 
 I run each test 5 times from Android Studio and gathered execution times in [the table](https://docs.google.com/spreadsheets/d/e/2PACX-1vQb3HN-M4jj417zp1hl77S2at7_3YUfbdMFZhpWLRjVKRBlRFmibZDS8KDidZlMmEBVuQ990FltpSv8/pubhtml) and calculated average time.
