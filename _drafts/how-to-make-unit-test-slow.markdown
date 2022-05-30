@@ -42,11 +42,18 @@ Let's use those numbers as a baseline.
 I will try adding different test doubles and libraries to see what can slow tests down.
 
 A first letter in tests name make the execution order predictable.
-All tests classes are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in alphabetical order. 
+All tests classes are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in an alphabetical order. 
 
 ## Regular objects
 
 How logs does it take to run two tests which operates with a real object?
+
+```kotlin
+interface Plus {
+    fun doPlus(a: Int, b: Int): Int
+}
+```
+*[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/main/java/dev/vadzimv/slowtests/Math.kt)*
 
 ```kotlin
 @Test
@@ -81,6 +88,22 @@ There're many different mocking libraries.
 I measured two I used at work: [Mockito](https://github.com/mockito/mockito-kotlin) and [Mockk](https://mockk.io/).
 
 ### Mockito
+
+#### Small objects
+
+Mocks have a more complex behaviour than real objects.
+I need more interfaces to mock to explore their behavior.
+
+```kotlin
+interface Plus {
+    fun doPlus(a: Int, b: Int): Int
+}
+
+interface Minus {
+    fun doMinus(a: Int, b: Int): Int
+}
+```
+*[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/main/java/dev/vadzimv/slowtests/Math.kt)*
 
 ```kotlin
 @Test
@@ -244,15 +267,15 @@ private fun createMockMinus() = mockk<Minus> {
 You need **1918** ms to run 2 tests if you mock using Mockk library.
 It's 4.2 time slower than Mockito and 1065 time slower than the baseline.
 
-Mockk is similar to Mockito in the majority of aspects:
+Mockk is similar to Mockito in many aspects:
 * A first usage is the slowest - 1915 ms;
-* A second mocking of the same object is fast - 13 ms;
-* Every time you mock a new object it's a bit slower - 39 ms;
+* A second mocking of the same class is fast - 13 ms;
+* Every time you mock a new class it's a bit slower - 39 ms;
 
 The difference between Mockk and Mockito is that Mockk's verify slows a test down - 11.6 ms.
-The slow down happens every time you verify behavior of a new object, the second usage is fast.
+The slow down happens every time you verify behavior of a new object, the second verification is fast.
 
-Let's check speed of mocking for different objects from Android.
+Let's check speed of mocking for different objects from Android Framework.
 
 ```kotlin
 @Test
@@ -294,13 +317,22 @@ fun `g - create location 2`() { // executes for 0.4 milliseconds
 }
 ```
 
-Again pattern is very similar to Mockito but slower.
-But Mockk beated Mockito in creation of `Activity2`.
+Pattern is very similar to Mockito:
+* First mocking ot a class slower than a second
+
+From the first glance it seems that Mockk slower than Mockito.
+Mockk was faster in `c - create activity 2`.
+If you mock many different activities, whole test suite can run faster with mockk.
 
 How much Mockk affects tests execution speed?
 Imaging you have 1000 tests where you mock new Activities.
+1000 tests * 41.8 ms = 42 seconds of execution.
+Doesn't seem critical for me.
 
-## Static mocking
+#### Static mocking
+
+
+
 ## Robolectric
 ## Coroutines
 ## Slowest test
