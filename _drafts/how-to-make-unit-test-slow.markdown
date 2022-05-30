@@ -164,6 +164,8 @@ It created a mock for a new interface.
 No tests had used an interface `Minus` before.
 Mockito needs more time when it deals with a new type.
 
+#### Big objects
+
 How much time does Mockito need to create a mock of a new type?
 It depends on the type.
 See examples of different Android classes.
