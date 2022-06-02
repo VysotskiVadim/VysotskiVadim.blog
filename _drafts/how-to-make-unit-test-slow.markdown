@@ -11,15 +11,16 @@ linkToGithubText: "See full file on github."
 ---
 ## Intro
 
-I've seen a test suite which could have completed in seconds but was executing for 20 minutes.
-What did make it so slow?
+I work with a test suite which could have completed in seconds but was executing for 20 minutes.
+What does make it so slow?
 This is the question I'm trying to answer.
 
 I measured different factors that could slow tests down in isolation.
 This numbers help you understand how different decisions affect execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
 
 I did quite a lot of experiments and measurements.
-It it would be uncomfortable to read everything in one article, so I split whole material in a few parts.
+It it would be uncomfortable to read everything in one article.
+I split whole material in a few parts.
 You're reading part one.
 It focuses on objects mocking.
 
@@ -342,7 +343,11 @@ Imaging you have 1000 tests where you mock new Activities.
 1000 tests * 41.8 ms = 42 seconds of execution.
 Doesn't seem critical for me.
 
-## Summary
+## What's next?
+
+Objects mocking slows unit tests down but it doesn't look like a reason which can make 1000 tests execute for 20 minutes.
+I will measure more factors in the next articles.
+Stay tuned.
 
 ## Measurements
 
