@@ -1,26 +1,26 @@
 ---
 layout: post
-title: "Slow unit tests. Part 1 - objects mocking."
+title: "Slow unit tests Part 1. Objects mocking."
 date: 2022-03-14 12:00:00 +0300
 image: /assets/slow-down.jpg
 description: "What does make unit tests slow? Is it objects mocking?"
 postImage:
   src: slow-down
   alt: A slow down sign
-linkToGithubText: "See full file on github."
+linkToGithubText: "See the full file on github."
 ---
 ## Intro
 
-I work with a test suite which could have completed in seconds but was executing for 20 minutes.
+I work with a test suite that could have been executed in seconds but it is executing for 20 minutes.
 What does make it so slow?
 This is the question I'm trying to answer.
 
 I measured different factors that could slow tests down in isolation.
-This numbers help you understand how different decisions affect execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
+Those numbers will help you understand how different decisions affect execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
 
 I did quite a lot of experiments and measurements.
-It it would be uncomfortable to read everything in one article.
-I split whole material in a few parts.
+It would be uncomfortable to read everything in one article.
+I split the whole material into a few parts.
 You're reading part one.
 It focuses on objects mocking.
 
@@ -49,16 +49,16 @@ fun `b - baseline copy`() { // executes for 0.2 milliseconds
 
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Baseline.kt)*
 
-**1.8** milliseconds. First test always takes a bit more time.
+**1.8** milliseconds. The first test always takes a bit more time.
 Let's use those numbers as a baseline.
 I will try adding different test doubles and libraries to see what can slow tests down.
 
-A first letter in tests name make the execution order predictable.
-All tests classes are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in an alphabetical order. 
+The first letter in tests names make the execution order predictable.
+All tests classes are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in alphabetical order. 
 
 ## Regular objects
 
-How logs does it take to run two tests which operates with a real object?
+How logs does it take to run two tests which operate with a real object?
 
 ```kotlin
 interface Plus {
@@ -160,9 +160,9 @@ private fun createMockMinus() = mock<Minus> {
 
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/ObjectMockingMockito.kt)*
 
-You need **447.4** milliseconds to run 2 tests which use Mockito.
+You need **447.4** milliseconds to run 2 tests that use Mockito.
 It's 248 times slower than the baseline!
-Whole test suite of 5 tests executed for 462.6 milliseconds.
+The whole test suite of 5 tests are executed for 462.6 milliseconds.
 
 Test `a` was the slowest - 446.8 milliseconds.
 Mockito initializes when you create a mock for the first time.
@@ -171,7 +171,7 @@ The initialization happens 1 time per test run, no matter how many tests you hav
 Tests `b` and `c` are as fast as the baseline.
 Mockito doesn't slow tests down when you mock the same class for a second time or verify a behavior.
 
-The test `d` took a bit more time than the baseline - 13.6 milliseconds.
+Test `d` took a bit more time than the baseline - 13.6 milliseconds.
 It created a mock for a new interface.
 No tests had used an interface `Minus` before.
 Mockito needs more time when it deals with a new type.
@@ -230,7 +230,7 @@ Compare mocking a small object 13 ms vs mocking a new activity ~250 ms.
 Mocking the same activity for a second time is as fast as the baseline.
 
 #### Summary
-Mockito slows you down whenever you mock a type for a first time.
+Mockito slows you down whenever you mock a type for the first time.
 The more complex class is, the more time it takes to mock.
 The time Mockito takes doesn't seem critical even for a large core base.
 1000 unit tests * 250ms = 4 minutes.
@@ -279,17 +279,17 @@ private fun createMockMinus() = mockk<Minus> {
 ```
 
 You need **1918** ms to run 2 tests if you mock using Mockk library.
-It's 4.2 time slower than Mockito and 1065 time slower than the baseline.
+It's 4.2 times slower than Mockito and 1065 time slower than the baseline.
 
 Mockk is similar to Mockito in many aspects:
-* A first usage is the slowest - 1915 ms;
+* The first usage is the slowest - 1915 ms;
 * A second mocking of the same class is fast - 13 ms;
 * Every time you mock a new class it's a bit slower - 39 ms;
 
 The difference between Mockk and Mockito is that Mockk's verify slows a test down - 11.6 ms.
-The slow down happens every time you verify behavior of a new object, the second verification is fast.
+The slow down happens every time you verify the behavior of a new object, the second verification is fast.
 
-Let's check speed of mocking for different objects from Android Framework.
+Let's check speed of mocking for different objects from the Android Framework.
 
 ```kotlin
 @Test
@@ -331,22 +331,24 @@ fun `g - create location 2`() { // executes for 0.4 milliseconds
 }
 ```
 
-Pattern is very similar to Mockito:
+The pattern is very similar to Mockito:
 * First mocking ot a class slower than a second
 
-From the first glance it seems that Mockk slower than Mockito.
-Mockk was faster in `c - create activity 2`.
-If you mock many different activities, whole test suite can run faster with mockk.
+At the first glance, it seems that Mockk slower than Mockito.
+But Mockk was faster in `c - create activity 2`.
+If you mock many different activities, the whole test suite can run faster with mockk.
 
-How much Mockk affects tests execution speed?
-Imaging you have 1000 tests where you mock new Activities.
+How much does Mockk affect tests execution speed?
+Imagine you have 1000 tests where you mock new Activities.
 1000 tests * 41.8 ms = 42 seconds of execution.
-Doesn't seem critical for me.
 
 ## What's next?
 
-Objects mocking slows unit tests down but it doesn't look like a reason which can make 1000 tests execute for 20 minutes.
-I will measure more factors in the next articles.
+Objects mocking slows unit tests down.
+Active mocking can make your test suite execute for a few minutes.
+But mocking doesn't look like a reason which can make 1000 tests execute for 20 minutes.
+It must be something else.
+I will measure different factors in the next articles.
 Stay tuned.
 
 ## Measurements
