@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Slow unit tests. Objects mocking."
+title: "Slow unit tests: objects mocking."
 date: 2022-03-14 12:00:00 +0300
 image: /assets/slow-down.jpg
 description: "What does make unit tests slow? Is it objects mocking?"
 postImage:
   src: slow-down
   alt: A slow down sign
-linkToGithubText: "See the full file on github."
+linkToGithubText: "See the full file on the Github."
 ---
 ## Intro
 
@@ -16,12 +16,12 @@ What does make it so slow?
 This is the question I'm trying to answer.
 
 I measured different factors that could slow tests down in isolation.
-Those numbers will help you understand how different decisions affect execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
+Those numbers will help you understand how different decisions affect the execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
 
 I did quite a lot of experiments and measurements.
 It would be uncomfortable to read everything in one article.
 I split the whole material into a few parts.
-You're reading part one that is focuses on objects mocking.
+You're reading part one that is focused on objects mocking.
 
 {% include slow-unit-tests-articles-list.markdown %}
 
@@ -47,8 +47,8 @@ fun `b - baseline copy`() { // executes for 0.2 milliseconds
 Let's use those numbers as a baseline.
 I will try adding different test doubles and libraries to see what can slow tests down.
 
-The first letter in tests names make the execution order predictable.
-All tests classes are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in alphabetical order. 
+The first letter in test names makes the execution order predictable.
+All test classes in examples are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in alphabetical order. 
 
 ## Regular objects
 
@@ -81,9 +81,9 @@ private fun createPlus() = object : Plus {
 
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Objects.kt)*
 
-**2.2** milliseconds. With respect to the [measurements accuracy](#measurements), results are the same as in the [baseline](#baseline)
+**2.2** milliseconds. With respect to the [accuracy of the measurement](#measurements), the results are the same as in the [baseline](#baseline)
 
-Subs and Fakes are classes that a developer write manually for tests,
+Subs and Fakes are classes that developers write manually for tests,
 i.e. they are simple objects.
 They don't slow tests down.
 
@@ -156,7 +156,7 @@ private fun createMockMinus() = mock<Minus> {
 
 You need **447.4** milliseconds to run 2 tests that use Mockito.
 It's 248 times slower than the baseline!
-The whole test suite of 5 tests are executed for 462.6 milliseconds.
+The whole test suite of 5 tests is executed for 462.6 milliseconds.
 
 Test `a` was the slowest - 446.8 milliseconds.
 Mockito initializes when you create a mock for the first time.
@@ -273,7 +273,7 @@ private fun createMockMinus() = mockk<Minus> {
 ```
 
 You need **1918** ms to run 2 tests if you mock using Mockk library.
-It's 4.2 times slower than Mockito and 1065 time slower than the baseline.
+It's 4.2 times slower than Mockito and 1065 times slower than the baseline.
 
 Mockk is similar to Mockito in many aspects:
 * The first usage is the slowest - 1915 ms;
@@ -283,7 +283,7 @@ Mockk is similar to Mockito in many aspects:
 The difference between Mockk and Mockito is that Mockk's verify slows a test down - 11.6 ms.
 The slow down happens every time you verify the behavior of a new object, the second verification is fast.
 
-Let's check speed of mocking for different objects from the Android Framework.
+Let's check the speed of mocking for different objects from the Android Framework.
 
 ```kotlin
 @Test
@@ -328,11 +328,11 @@ fun `g - create location 2`() { // executes for 0.4 milliseconds
 The pattern is very similar to Mockito:
 * First mocking ot a class slower than a second
 
-At the first glance, it seems that Mockk slower than Mockito.
+At the first glance, it seems that Mockk is slower than Mockito.
 But Mockk was faster in `c - create activity 2`.
 If you mock many different activities, the whole test suite can run faster with mockk.
 
-How much does Mockk affect tests execution speed?
+How much does Mockk affect test execution speed?
 Imagine you have 1000 tests where you mock new Activities.
 1000 tests * 41.8 ms = 42 seconds of execution.
 
@@ -340,13 +340,13 @@ Imagine you have 1000 tests where you mock new Activities.
 
 Objects mocking does slow unit tests down.
 Active mocking can make your test suite execute for a few minutes.
-But mocking doesn't seem like a main contribution factor in 20 minutes I have.
+But mocking doesn't seem like the main contributing factor in 20 minutes I have.
 
-Anyway when I work in TDD cycle I find even 20 seconds slow down annoying.
-I enjoy working with a tests suite which executes in less that a second, rather than waiting for 20 seconds.
-The faster you tests are, the more ofter you run them.
+When I work in the TDD cycle I find even 20 seconds of slow down annoying.
+I enjoy working with a test suite which executes in less that a second.
+The faster your tests are, the more often you run them.
 The more often you run tests, the quicker you detect a regression.
-The quicker you detect a regression, the easier for you to fix it.
+The quicker you detect a regression, the easier it for you to fix the regression.
 
 I will measure other factors in the next articles.
 We will find the reason of 20 minutes.
@@ -356,17 +356,17 @@ Stay tuned.
 
 ## Measurements
 
-I run each test 5 times from Android Studio and gathered execution times in [the table](https://docs.google.com/spreadsheets/d/e/2PACX-1vQb3HN-M4jj417zp1hl77S2at7_3YUfbdMFZhpWLRjVKRBlRFmibZDS8KDidZlMmEBVuQ990FltpSv8/pubhtml) and calculated average time.
+I run each test 5 times from Android Studio and gathered execution times in [the table](https://docs.google.com/spreadsheets/d/e/2PACX-1vQb3HN-M4jj417zp1hl77S2at7_3YUfbdMFZhpWLRjVKRBlRFmibZDS8KDidZlMmEBVuQ990FltpSv8/pubhtml) and calculated an average time.
 The numbers you've seen in the article are average execution time of a several tries.
 
 Android Studio's UI displays time in milliseconds.
 I don't know how exactly Android Studio rounds numbers.
-I.e what does it show if result is 1.5 or 1.7?
+I.e what does it show if the result is 1.5 or 1.7?
 It can either show 2 or 1.
-Let's assume Android Studio rounds in a worst way for measurement - takes only integer part of a number, i.e. 1.7 displays as 1.
-Expected measurements accuracy is ±0.9 milliseconds then.
+Let's assume Android Studio rounds in the worst way for measurement - takes only an integer part of a number, i.e. 1.7 displays as 1.
+The expected measurements accuracy is ±0.9 milliseconds then.
 
-See version of the libraries in the [gradle file](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/build.gradle#L40).
+See versions of the libraries in the [gradle file](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/build.gradle#L40).
 
 I run tests using following hardware:
 ```
@@ -383,3 +383,5 @@ I run tests using following hardware:
 
 ## Links
 * [Post image](https://www.flickr.com/photos/88158306@N03/45968616764/)
+* [Mockito](https://github.com/mockito/mockito-kotlin)
+* [Mockk](https://mockk.io/).
