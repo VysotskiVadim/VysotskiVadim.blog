@@ -21,8 +21,7 @@ Those numbers will help you understand how different decisions affect execution 
 I did quite a lot of experiments and measurements.
 It would be uncomfortable to read everything in one article.
 I split the whole material into a few parts.
-You're reading part one.
-It focuses on objects mocking.
+You're reading part one that is focuses on objects mocking.
 
 ## Other "Slow unit tests" articles
 
@@ -342,13 +341,23 @@ How much does Mockk affect tests execution speed?
 Imagine you have 1000 tests where you mock new Activities.
 1000 tests * 41.8 ms = 42 seconds of execution.
 
+## Summary
+
+Objects mocking does slow unit tests down.
+Active mocking can make your test suite execute for a few minutes.
+But mocking doesn't seem like a main contribution factor in 20 minutes I have.
+
+Anyway when I work in TDD cycle I find even 20 seconds slow down annoying.
+I enjoy working with a tests suite which executes in less that a second, rather than waiting for 20 seconds.
+The faster you tests are, the more ofter you run them.
+The more often you run tests, the quicker you detect a regression.
+The quicker you detect a regression, the easier for you to fix it.
+
 ## What's next?
 
-Objects mocking slows unit tests down.
-Active mocking can make your test suite execute for a few minutes.
-But mocking doesn't look like a reason which can make 1000 tests execute for 20 minutes.
+
 It must be something else.
-I will measure different factors in the next articles.
+I will measure other factors in the next articles.
 Stay tuned.
 
 ## Measurements
