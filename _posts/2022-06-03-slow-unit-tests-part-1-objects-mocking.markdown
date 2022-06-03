@@ -382,4 +382,5 @@ I run tests using following hardware:
 ## Links
 * [Post image](https://www.flickr.com/photos/88158306@N03/45968616764/)
 * [Mockito](https://github.com/mockito/mockito-kotlin)
-* [Mockk](https://mockk.io/).
+* [Mockk](https://mockk.io/)
+* [Examples](https://github.com/VysotskiVadim/slow-unit-tests)
