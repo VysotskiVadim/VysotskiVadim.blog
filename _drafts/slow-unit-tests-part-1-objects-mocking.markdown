@@ -231,6 +231,8 @@ The time Mockito takes doesn't seem critical even for a large core base.
 
 ### Mockk
 
+The same tests with a different mocking library.
+
 ```kotlin
 @Test
 fun `a - two plus two`() { // executes for 1915.8 milliseconds
