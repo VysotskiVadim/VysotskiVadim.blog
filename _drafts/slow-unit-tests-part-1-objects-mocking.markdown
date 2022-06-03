@@ -340,16 +340,15 @@ Imagine you have 1000 tests where you mock new Activities.
 
 Objects mocking does slow unit tests down.
 Active mocking can make your test suite execute for a few minutes.
-But mocking doesn't seem like the main contributing factor in 20 minutes I have.
+But mocking doesn't seem like the main contributing factor in the 20 minutes I have.
 
 When I work in the TDD cycle I find even 20 seconds of slow down annoying.
-I enjoy working with a test suite which executes in less that a second.
+I enjoy working with a test suite that executes in less than a second.
 The faster your tests are, the more often you run them.
 The more often you run tests, the quicker you detect a regression.
-The quicker you detect a regression, the easier it for you to fix the regression.
+The quicker you detect a regression, the easier it is for you to fix the regression.
 
 I will measure other factors in the next articles.
-We will find the reason of 20 minutes.
 Stay tuned.
 
 {% include slow-unit-tests-articles-list.markdown %}
@@ -357,14 +356,14 @@ Stay tuned.
 ## Measurements
 
 I run each test 5 times from Android Studio and gathered execution times in [the table](https://docs.google.com/spreadsheets/d/e/2PACX-1vQb3HN-M4jj417zp1hl77S2at7_3YUfbdMFZhpWLRjVKRBlRFmibZDS8KDidZlMmEBVuQ990FltpSv8/pubhtml) and calculated an average time.
-The numbers you've seen in the article are average execution time of a several tries.
+The numbers you've seen in the article are the average execution time of several tries.
 
 Android Studio's UI displays time in milliseconds.
 I don't know how exactly Android Studio rounds numbers.
 I.e what does it show if the result is 1.5 or 1.7?
 It can either show 2 or 1.
 Let's assume Android Studio rounds in the worst way for measurement - takes only an integer part of a number, i.e. 1.7 displays as 1.
-The expected measurements accuracy is ±0.9 milliseconds then.
+The expected measurement accuracy is ±0.9 milliseconds then.
 
 See versions of the libraries in the [gradle file](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/build.gradle#L40).
 
