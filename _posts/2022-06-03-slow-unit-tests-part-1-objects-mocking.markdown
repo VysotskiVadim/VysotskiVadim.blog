@@ -8,6 +8,7 @@ postImage:
   src: slow-down
   alt: A slow down sign
 linkToGithubText: "See the full file on the Github."
+twitterLink: https://twitter.com/VysotskiVadim/status/1532672644809732098
 ---
 ## Intro
 
