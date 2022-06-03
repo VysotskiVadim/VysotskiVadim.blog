@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Slow unit tests: objects mocking."
-date: 2022-03-14 12:00:00 +0300
+date: 2022-06-03 11:00:00 +0200
 image: /assets/slow-down.jpg
 description: "What does make unit tests slow? Is it objects mocking?"
 postImage:
