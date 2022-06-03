@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Slow unit tests Part 1. Objects mocking."
+title: "Slow unit tests. Objects mocking."
 date: 2022-03-14 12:00:00 +0300
 image: /assets/slow-down.jpg
 description: "What does make unit tests slow? Is it objects mocking?"
@@ -23,12 +23,7 @@ It would be uncomfortable to read everything in one article.
 I split the whole material into a few parts.
 You're reading part one that is focuses on objects mocking.
 
-## Other "Slow unit tests" articles
-
-1. [Object mocking]()
-2. Static mocking *(not ready yet)*
-3. Coroutines *(not ready yet)*
-4. Robolectric *(not ready yet)*
+{% include slow-unit-tests-articles-list.markdown %}
 
 ## Baseline
 
@@ -353,12 +348,11 @@ The faster you tests are, the more ofter you run them.
 The more often you run tests, the quicker you detect a regression.
 The quicker you detect a regression, the easier for you to fix it.
 
-## What's next?
-
-
-It must be something else.
 I will measure other factors in the next articles.
+We will find the reason of 20 minutes.
 Stay tuned.
+
+{% include slow-unit-tests-articles-list.markdown %}
 
 ## Measurements
 
