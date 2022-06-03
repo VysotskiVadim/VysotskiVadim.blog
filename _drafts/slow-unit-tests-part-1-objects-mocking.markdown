@@ -327,9 +327,6 @@ fun `g - create location 2`() { // executes for 0.4 milliseconds
 }
 ```
 
-The pattern is very similar to Mockito:
-* First mocking ot a class slower than a second
-
 At the first glance, it seems that Mockk is slower than Mockito.
 But Mockk was faster in `c - create activity 2`.
 If you mock many different activities, the whole test suite can run faster with mockk.
