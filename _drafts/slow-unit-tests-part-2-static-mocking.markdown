@@ -3,7 +3,7 @@ layout: post
 title: "Slow unit tests: static mocking"
 date: 2022-09-04 11:00:00 +0200
 image: /assets/slow-down.jpg
-description: "What does make unit tests slow? Is it static mocking?"
+description: "What does make unit tests slow? Is it static mocking? Mockk vs Mockito."
 postImage:
   src: slow-down
   alt: A slow down sign
@@ -12,23 +12,22 @@ twitterLink: https://twitter.com/VysotskiVadim/status/1532672644809732098
 ---
 ## Intro
 
-I work with a test suite that could have been executed in seconds but it is executing for 20 minutes.
-What does make it so slow?
-This is the question I'm trying to answer.
+You're reading the second article where I explore slow unit tests.
+Every article from the "Slow unit test" series explore one aspect.
 
-I measured different factors that could slow tests down in isolation.
-Those numbers will help you understand how different decisions affect the execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
+This time I will measure static mocking.
+I will use two mocking libraries: Mockk and Mockito.
+The way I measured is described in the [Measurements section](#measurements).
 
-I did quite a lot of experiments and measurements.
-It would be uncomfortable to read everything in one article.
-I split the whole material into a few parts.
-You're reading part one that is focused on objects mocking.
+How do you think, who's going to be faster: Mockk or Mockito?
+Make your bet and find the answer in the article!
+
 
 {% include slow-unit-tests-articles-list.markdown %}
 
 ## Baseline
 
-How long does it take to run two tests which do almost nothing?
+I will use the same baseline: two unit tests which check `2+2`:
 
 ```kotlin
 @Test
@@ -44,14 +43,96 @@ fun `b - baseline copy`() { // executes for 0.2 milliseconds
 
 *[{{page.linkToGithubText}}](https://github.com/VysotskiVadim/slow-unit-tests/blob/main/app/src/test/java/dev/vadzimv/slowtests/Baseline.kt)*
 
-**1.8** milliseconds. The first test always takes a bit more time.
-Let's use those numbers as a baseline.
-I will try adding different test doubles and libraries to see what can slow tests down.
+You can run both tests in **1.8** milliseconds. 
+I will add static mocking and we will see if tests become slower.
 
+Why do test have some letter in the begining?
 The first letter in test names makes the execution order predictable.
 All test classes in examples are marked with `@FixMethodOrder(MethodSorters.NAME_ASCENDING)`, so JUnit runs tests in alphabetical order. 
 
-## Regular objects
+## Mockito
+
+Here's a static function which adds two numbers:
+```kotlin
+fun plus(a: Int, b: Int) = a + b
+```
+
+Let's mock unrealistic answer using Mockito:
+
+```kotlin
+inline fun mockPlus(block: () -> Unit) {
+    Mockito.mockStatic(::plus.declaringKotlinFile.java).use {
+        it.`when`<Int> { plus(2, 2) }.thenReturn(5)
+        block()
+    }
+}
+```
+Mockito replaces a real implementation of `plus` by a mock which always returns 5 when you add 2 to 2.
+After adding the mock, the following the test passes:
+
+```kotlin
+@Test
+fun `a - two + two`() {
+    mockPlus {
+        assertEquals(5, plus(2, 2))
+    }
+}
+```
+
+### How fast is Mockito's static mocking?
+
+```kotlin
+@Test
+fun `a - two + two`() { // 1235ms
+    mockPlus {
+        assertEquals(5, plus(2, 2))
+    }
+}
+
+@Test
+fun `b - two + two copy 1`() { // 1.4ms
+    mockPlus {
+        assertEquals(5, plus(2, 2))
+    }
+}
+```
+
+The result is similar to the object mocking:
+first mocking is slow, sequential mockings are fast.
+
+### Static mocking vs real implementation on big numbers
+
+What if you call a static function really often in your tests?
+
+```kotlin
+@Test
+fun `dc - two + two 10000 times`() { // 299.2ms
+    mockPlus {
+        repeat(10000) {
+            assertEquals(5, plus(2, 2))
+        }
+    }
+}
+
+@Test
+fun `e - two + two 10000 times no static mocking`() { // 2.6ms
+    repeat(10000) {
+        assertEquals(4, plus(2, 2))
+    }
+}
+```
+
+Wow, real implementation is more than 100 times faster!
+
+### Mockito summary
+
+How does Mockito affect a big test suites?
+Imagine you have 1000 unit tests.
+The execution time is going to be ~ 1235ms + 999 * 1.4 ms = **2.6** seconds.
+The test suite could have taken 0.2 seconds to execute without any mocking. But does it make a big difference for you?
+
+## Mockk
+
 
 
 ## Summary
