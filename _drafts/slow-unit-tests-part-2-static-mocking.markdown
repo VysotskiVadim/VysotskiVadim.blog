@@ -98,7 +98,7 @@ fun `b - two + two copy 1`() { // 1.4ms
 ```
 
 The result is similar to the object mocking:
-first mocking is slow, sequential mockings are fast.
+first mocking is slow, sequential mocking is fast.
 
 ### Static mocking vs real implementation on big numbers
 
