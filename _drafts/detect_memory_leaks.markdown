@@ -53,10 +53,42 @@ I will show you later how to work with a few traces.
 
 ### Analyze trace
 
-Phone records perfetto trace.
-You can open in web trace viewer.
+Download the trace from phone and open it in perfetto trace viewer.
+So much data!
+Where is memory usage?
+Find your process, then look for for RSS.
+RSS is a physical memory used by process.
+Read this to know more about other value.
 
-The trace has quite a lot of data.
-How to find memory usage there?
+Do you see a memory leak there?
+I don't.
+Are you confident enough to say that the process doesn't leak memory.
+I don't trust my human's eyes in this question.
+How to get a serious prove that there're no memory leak?
 
+Perfetto provide instruments for trace analysis.
+I'm going to use queries and batch processor.
 
+Based on examples and docs I built a following query to receive RSS over time:
+```sql
+select * from TODO
+```
+
+I've been recording a trace for 36 hours.
+I split it in a few files. 
+To split traces in a few files, just stop and start recording again.
+Batch processing let me process a few traces in parallel.
+
+I open all traces from the folder and request memory usage over time from each of them.
+
+Then contact memory usage from different files and order by time.
+
+Now I can build a chart with memory usage.
+
+Despite custom chard is more convinient then perfetto trace viwer, it's still not obvious if memory leaks is there.
+
+I build a trendline of memory.
+It reveal how memory usage changes over time.
+
+Not it's clear that there are no memory leak.
+Trend line is flat after 36 hours.
