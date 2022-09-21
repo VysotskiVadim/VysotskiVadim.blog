@@ -53,21 +53,24 @@ I will show you later how to work with a few traces.
 
 ### Analyze trace
 
-Download the trace from phone and open it in perfetto trace viewer.
-So much data!
-Where is memory usage?
-Find your process, then look for for RSS.
-RSS is a physical memory used by process.
-Read this to know more about other value.
+Download the trace from the phone and open it in using [perfetto trace viewer](https://ui.perfetto.dev/).
 
-Do you see a memory leak there?
-I don't.
-Are you confident enough to say that the process doesn't leak memory.
-I don't trust my human's eyes in this question.
-How to get a serious prove that there're no memory leak?
+
+Where to find memory usage?
+Scroll the list and find find your process.
+Find RSS chard of the process.
+RSS is physical memory used by a process.
+Read [this](https://perfetto.dev/docs/case-studies/memory#linux-memory-management) to know more about other value.
+
+{% include image.html src="detect_memory_leak_rss_chart_perfetto" alt="RSS chart in perfetto UI" %}
+
+Is there a memory leak on the chart?
+I don't know, it's hard to say looking on the chart.
+I don't think my human eye can notice a slow growth in this wavy chart.
+I need a serious prove that memory doesn't grow.
 
 Perfetto provide instruments for trace analysis.
-I'm going to use queries and batch processor.
+I'm going to use [queries](https://perfetto.dev/docs/analysis/trace-processor) and [batch processor](https://perfetto.dev/docs/analysis/batch-trace-processor).
 
 Based on examples and docs I built a following query to receive RSS over time:
 ```sql
