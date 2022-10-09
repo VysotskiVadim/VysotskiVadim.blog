@@ -1,17 +1,17 @@
 ---
 layout: post
-title: "Detect memory leaks"
+title: "Detect small memory leaks"
 date: 2022-09-17 12:00:00 +0300
-image: /assets/Asteracea_poster_3_part_2.jpg
+image: /assets/detect_memory_leak_image.jpg
 description: "Detect small memory leaks in Android applications."
 postImage:
-  src: Asteracea_poster_3_part_2
-  alt: Types of Asteraceaes
+  src: detect_memory_leak_image
+  alt: Foam reveals a leak
 ---
 
 ## TLDR;
 
-Story of how I wrote [perfetto trace analyzer](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3) to prove that the [SDK]((https://github.com/mapbox/mapbox-navigation-android)) doesn't leak the memory in a certain scenario.
+Story of how I wrote [perfetto trace analyzer](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3) to prove that [Mapbox Navigation SDK](https://github.com/mapbox/mapbox-navigation-android) doesn't leak memory in a certain scenario.
 
 ## Introduction
 
@@ -172,9 +172,15 @@ It means that the trend line is flat.
 </div>
 
 
-### So what?
+## So what?
 
 See full script on [GitHub](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3).
 
 Perfetto provides you great abilities for trace analysis.
 Even if something isn't present out of the box, you can implement it on your own.
+
+## Links
+
+* [Post image](https://flic.kr/p/FJgT4s)
+* [perfetto](https://perfetto.dev/)
+* [Record trace on device](https://developer.android.com/topic/performance/tracing/on-device)
