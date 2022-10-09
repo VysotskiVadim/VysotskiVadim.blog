@@ -174,8 +174,6 @@ It means that the trend line is flat.
 
 ## So what?
 
-See full script on .
-
 Perfetto provides you great abilities for trace analysis.
 Even if something isn't present out of the box, you can implement it on your own.
 
