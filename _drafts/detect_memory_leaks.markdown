@@ -174,13 +174,14 @@ It means that the trend line is flat.
 
 ## So what?
 
-See full script on [GitHub](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3).
+See full script on .
 
 Perfetto provides you great abilities for trace analysis.
 Even if something isn't present out of the box, you can implement it on your own.
 
 ## Links
 
+* [Full trace analyzer](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3)
 * [Post image](https://flic.kr/p/FJgT4s)
 * [perfetto](https://perfetto.dev/)
 * [Record trace on device](https://developer.android.com/topic/performance/tracing/on-device)
