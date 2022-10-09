@@ -12,11 +12,11 @@ postImage:
 ## Introduction
 
 Regular Android application doesn't live long.
-Users switch between applications and OS kills unused applications.
+Users switch between applications and OS kills unused ones.
 Even if an application leaks a little memory, it usually don't cause crash with out of memory exception (OOM).
 
 Some Android applications do live long.
-I had a case with navigation app that uses [Mapbox Navigation SDK](https://github.com/mapbox/mapbox-navigation-android).
+I had a case with navigator app that uses [Mapbox Navigation SDK](https://github.com/mapbox/mapbox-navigation-android).
 The app was always in foreground, it was restarted only together with OS.
 Small memory leak can cause OOM after a day, or week, or month.
 How to detect a small memory leak if it can reveal itself only after a month?
@@ -74,21 +74,44 @@ I'm going to use [queries](https://perfetto.dev/docs/analysis/trace-processor) a
 
 Based on examples and docs I built a following query to receive RSS over time:
 ```sql
-select * from TODO
+select c.ts / 1000000 as timestamp, c.value / 1000 as rss from counter as c left join process_counter_track as t on c.track_id = t.id left join process as p using (upid) where t.name like 'mem.rss' and p.name like '{packageName}' order by c.ts
 ```
 
 I've been recording a trace for 36 hours.
-I split it in a few files. 
-To split traces in a few files, just stop and start recording again.
-Batch processing let me process a few traces in parallel.
+I stopped and started recording again a few time to analyze intermediate result.
+So it's not a single 36 hours trace, it's 3 traces around 12 hours each. 
 
-I open all traces from the folder and request memory usage over time from each of them.
+Use [batch processor](https://perfetto.dev/docs/analysis/batch-trace-processor) to process a few traces in parallel.
 
-Then contact memory usage from different files and order by time.
+Open all traces from the a folder with traces.
+```python
+files = glob.glob(f'{tracesFolder}/*.perfetto-trace')
+if (len(files) == 0):
+    print(f"no trace files found in {tracesFolder}")
+    exit()
+
+
+print("loading:" + ' '.join(files))
+with BatchTraceProcessor(files) as btp:
+```
+
+Request memory usage over time from each of them.
+```python
+rssMemorySets = btp.query(f"select c.ts / 1000000 as timestamp, c.value / 1000 as rss from counter as c left join process_counter_track as t on c.track_id = t.id left join process as p using (upid) where t.name like 'mem.rss' and p.name like '{packageName}' order by c.ts")
+```
+
+Contact memory usage from different files and order by time:
+```python
+rssMemory = pandas.concat(rssMemorySets)
+rssMemory.sort_values(by=['timestamp'], inplace=True)
+```
 
 Now I can build a chart with memory usage.
+```python
+rssMemory.plot(x='timestamp', y='rss')
+```
 
-Despite custom chard is more convinient then perfetto trace viwer, it's still not obvious if memory leaks is there.
+Despite custom chard is more convenient than perfetto trace viewer, it's still not obvious if memory leaks is there.
 
 I build a trendline of memory.
 It reveal how memory usage changes over time.
