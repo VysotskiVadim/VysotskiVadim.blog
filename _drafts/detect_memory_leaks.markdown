@@ -11,7 +11,7 @@ postImage:
 
 ## TLDR;
 
-Story of how I proved that the [SDK]((https://github.com/mapbox/mapbox-navigation-android)) doesn't leak the memory in a certain scenario.
+Story of how I wrote [perfetto trace analyzer](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3) to prove that the [SDK]((https://github.com/mapbox/mapbox-navigation-android)) doesn't leak the memory in a certain scenario.
 
 ## Introduction
 
@@ -37,11 +37,8 @@ I had to spend 2 days to figure how to do this.
 
 ## Record long traces
 
-Android studio has a built-in profile, let's record there.
-TODO::::
-I can just record memory trace, can't it?
-You can, but not for a long time.
-Android Studio becomes completely unresponsive after a few hours of recording.
+Android studio can't record a long trace,
+it becomes completely unresponsive after a few hours of recording.
 
 [Android supports system's trace recording since version 9](https://developer.android.com/topic/performance/tracing/on-device).
 Your phone don't even need to be connected to the PC.
@@ -82,8 +79,7 @@ I don't know if there is a memory leak🥲
 ### Draw a chart
 
 Let's try to draw a readable chart.
-
-Perfetto provide instruments for trace analysis.
+Perfetto provides instruments for trace analysis.
 I'm going to use [queries](https://perfetto.dev/docs/analysis/trace-processor) and [batch processor](https://perfetto.dev/docs/analysis/batch-trace-processor).
 
 Based on [examples](https://perfetto.dev/docs/data-sources/memory-counters#sql) and [docs](https://perfetto.dev/docs/analysis/sql-tables) I built a following query to receive RSS over time:
@@ -139,15 +135,46 @@ rssMemory.plot(x='timestamp', y='rss')
 
 That's better but... it's still arguable.
 Some people may say that chart is okay, some may see a leak.
+Does it look okay for you?
 
 ### Trend line
 
 Liner trend line may suggest how a value is going to change in the future.
+Let's draw it.
+
+A linear function can be defined by the equation `y = b * x + c`.
+[Polyfit function](https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html) will help you find `b` and `c` for the trend line.
+Pass your `x`(timestamp), `y`(memory), and 1 as a degree and you will get array of `b, c`.
+If coefficient `b`(first element of array) is less than 0 trend line is decreasing, otherwise increasing.
 
 ```python
-
+def drawTrendLine(dataFrame, xKey, yKey, color, label):
+  ts = pandas.to_numeric(dataFrame[xKey])
+  mem = pandas.to_numeric(dataFrame[yKey])
+  coefficients = np.polyfit(ts, mem, 1)
+  b = coefficients[0]
+  print(f'{label} has coefficient {b:.20f}')
+  p = np.poly1d(coefficients)
+  plt.plot(ts, p(ts), color=color, label=label)
+  plt.legend()
 ```
 
-### Links
+I see `rss trendline has coefficient -0.00000548365707914431` in the output.
+It means that the trend line is flat.
 
-[polyfit](https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html)
+<div style="overflow-x: auto; margin-bottom: 30px">
+  <img
+    height="596"
+    width="3986"
+    style="max-width: none"
+    src="{{site.images.baseUrl}}/detect_memory_leak_custom_chart_with_tendline.jpg"
+    alt="RSS chart in perfetto UI">
+</div>
+
+
+### So what?
+
+See full script on [GitHub](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3).
+
+Perfetto provides you great abilities for trace analysis.
+Even if something isn't present out of the box, you can implement it on your own.
