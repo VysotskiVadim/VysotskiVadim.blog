@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Detect small memory leaks"
-date: 2022-09-17 12:00:00 +0300
+date: 2022-10-10 10:20:00 +0200
 image: /assets/detect_memory_leak_image.jpg
 description: "Detect small memory leaks in Android applications."
 postImage:
