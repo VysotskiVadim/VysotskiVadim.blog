@@ -11,38 +11,33 @@ postImage:
 
 ## TLDR;
 
-Story of how I wrote [perfetto trace analyzer](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3) to prove that [Mapbox Navigation SDK](https://github.com/mapbox/mapbox-navigation-android) doesn't leak memory in a certain scenario.
+Story of how I wrote [perfetto trace analyzer](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3) which verifies absence of memory leaks in [Mapbox Navigation SDK](https://github.com/mapbox/mapbox-navigation-android).
 
 ## Introduction
 
-Regular Android application doesn't live long.
-Users switch between applications and OS kills unused ones.
-Even if an application leaks a little memory, it usually don't cause crash with out of memory exception (OOM).
+Regular Android applications don't live long.
+Users switch between them and OS kills unused ones.
+Even if an application leaks a little memory, it usually doesn't cause crash with out of memory exception (OOM).
 
 Some Android applications do live long.
-I had a case with navigator app that uses [Mapbox Navigation SDK](https://github.com/mapbox/mapbox-navigation-android).
-The app was always in foreground, it was restarted only together with OS.
-Small memory leak can cause OOM after a day, or a week, or a month.
-How to detect a small memory leak if it can reveal itself only after a month?
+I had a case with a navigator app that uses [Mapbox Navigation SDK](https://github.com/mapbox/mapbox-navigation-android).
+The app was always in foreground.
+Even small memory leak could cause OOM after a day, or a week, or a month.
 
-## Detect memory leak
+## Detect small memory leak
 
-Small memory leak makes memory grow over time.
-Constant memory grow for a long period means that it's just a question of time for an application to run out of memory.
-The short answer is detect those small constant grow.
+Small memory leak reveals itself in constant memory growth over long time.
+It's not easy to detect it.
+It's even harder to prove that there are no memory leaks.
 
-It's easier to say "detect constant memory grow" than to do it.
-I had to spend 2 days to figure how to do this.
+I started from gathering information about app's memory usage.
 
+### Record long traces
 
-## Record long traces
-
-Android studio can't record a long trace,
-it becomes completely unresponsive after a few hours of recording.
-
+I tried recording a long trace in Android Studio's profiler, but it didn't work out.
+Android Studio becomes completely unresponsive after a few hours of recording.
+You don't need any external tool to record memory trace.
 [Android supports system's trace recording since version 9](https://developer.android.com/topic/performance/tracing/on-device).
-Your phone don't even need to be connected to the PC.
-You can use the phone anywhere while trace is being captured.
 
 Prepare your phone for long traces.
 Make sure it has some available space in memory.
@@ -51,15 +46,14 @@ Record only memory-related activities to reduce trace file size.
 
 Feel free to split trace in a few files.
 Stop recording and start it again.
-I will show you later how to work with a few traces.
+I will show you later how to concatenate a few traces.
 
 ### Analyze trace
 
 Download the trace from the phone and open it in using [perfetto trace viewer](https://ui.perfetto.dev/).
 
-
-Scroll the list and find find your process.
-I usually press **ctrl+f** and write application package name.
+Scroll the list and find your process.
+I usually press *ctrl+f* and write application package name.
 Find RSS chart of the process, it is a physical memory used by a process.
 Read [this](https://perfetto.dev/docs/case-studies/memory#linux-memory-management) to know more about other value.
 
@@ -73,8 +67,9 @@ Read [this](https://perfetto.dev/docs/case-studies/memory#linux-memory-managemen
     alt="RSS chart in perfetto UI">
 </div>
 
-I'm looking the the chart... and...
-I don't know if there is a memory leak🥲
+I'm looking at this chart... and...
+I don't know if there is a memory leak🥲.
+RSS jumps up and down, even if there is a small memory growth it's easy not to notice it.
 
 ### Draw a chart
 
@@ -134,17 +129,18 @@ rssMemory.plot(x='timestamp', y='rss')
 
 
 That's better but... it's still arguable.
-Some people may say that chart is okay, some may see a leak.
+Some people may say that chart is okay, some might see a leak.
 Does it look okay for you?
 
 ### Trend line
 
 Liner trend line may suggest how a value is going to change in the future.
-Let's draw it.
+Let's draw it to see if RSS is slowly growing.
 
+It's time to remember some math from school.
 A linear function can be defined by the equation `y = b * x + c`.
 [Polyfit function](https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html) will help you find `b` and `c` for the trend line.
-Pass your `x`(timestamp), `y`(memory), and 1 as a degree and you will get array of `b, c`.
+Pass your `x`(timestamp), `y`(memory), and 1 as a degree and you will get array of `[ b, c ]`.
 If coefficient `b`(first element of array) is less than 0 trend line is decreasing, otherwise increasing.
 
 ```python
@@ -161,6 +157,7 @@ def drawTrendLine(dataFrame, xKey, yKey, color, label):
 
 I see `rss trendline has coefficient -0.00000548365707914431` in the output.
 It means that the trend line is flat.
+Take a look on the trend line to check if the RSS values really follow calculated trend line.
 
 <div style="overflow-x: auto; margin-bottom: 30px">
   <img
@@ -172,10 +169,12 @@ It means that the trend line is flat.
 </div>
 
 
-## So what?
+## Thank you for reading
 
-Perfetto provides you great abilities for trace analysis.
-Even if something isn't present out of the box, you can implement it on your own.
+You can find whole script on the [Git Hub](https://gist.github.com/VysotskiVadim/31a3de8fd38729f179750b9dfed689e3).
+
+If you have similar problem, do not be afraid to write a custom tool.
+It's easier than it seems, at least when you do it for the second time 😅.
 
 ## Links
 
