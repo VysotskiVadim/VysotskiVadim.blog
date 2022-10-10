@@ -7,6 +7,7 @@ description: "Detect small memory leaks in Android applications."
 postImage:
   src: detect_memory_leak_image
   alt: Foam reveals a leak
+twitterLink: https://twitter.com/VysotskiVadim/status/1579387829935026177
 ---
 
 ## TLDR;
