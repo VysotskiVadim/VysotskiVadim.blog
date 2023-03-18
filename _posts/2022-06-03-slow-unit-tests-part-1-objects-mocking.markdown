@@ -12,9 +12,8 @@ twitterLink: https://twitter.com/VysotskiVadim/status/1532672644809732098
 ---
 ## Intro
 
-I work with a test suite that could have been executed in seconds but it is executing for 20 minutes.
-What does make it so slow?
-This is the question I'm trying to answer.
+Some unit test suites can be executed within seconds, while another suite of similar size takes more than 20 minutes.
+What makes some tests slow and others fast?
 
 I measured different factors that could slow tests down in isolation.
 Those numbers will help you understand how different decisions affect the execution time of your test suite. The way I measured is described in the [Measurements section](#measurements).
