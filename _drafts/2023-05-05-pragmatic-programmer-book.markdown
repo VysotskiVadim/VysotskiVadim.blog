@@ -22,4 +22,66 @@ The book provided me with missing pieces of the puzzle to see a bigger picture, 
 The book covers many aspects of programming, and I'm certain that every developer finds their pieces of a puzzle that are relevant to their problems and experience.
 
 
+### Takeaways
+
+Good enough software today is better than perfect software tomorrow.
+
+
+Investing in knowledge like investing in finance 
+
+
+Every principle is about easier to change
+
+
+Decoupling 
+
+
+Estimation unit represents certancy
+
+
+Estimate with a range of scenarios 
+
+
+Don't be scare to throw prototype away
+
+
+Inheritance tax
+
+
+Software is like gardening, not building
+
+
+TDD won't help if you don't have destination in your head
+
+
+Property based tests often surprise you
+
+
+Buy auth providers, they 
+
+
+Perfection is when it's nothing to take away
+
+
+Help people understand what they want in a feed back loop: explain consequences, edge cases, show mockups, prototypes. Try to be a customer to realize what it feels like
+
+
+Clients don't read detailed specifications, it's for developers to explain what they are doing.
+
+Requirements are need, not a design, not a user interface.
+
+Identity real, not imaginative constraints. Find a bigger box. Example with a trojan horse.
+
+Team structure dictates the way code looks like.
+
+Build the code, not your ego. Try to understand others viewpoint, difference isn't wrong.
+
+The goal it's using a technique, the goal is to deliver good software.
+
+A bug free system that answers wrong question isn't useful.
+
+Delight your user. Ask how to understand success of the project
+Sometimes requirements are Guesses.
+
+Be a problem solver
 
