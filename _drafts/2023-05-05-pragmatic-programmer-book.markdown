@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Top X takes from \"Pragmatic Programmer\" book"
+title: "Top X takeaways from \"Pragmatic Programmer\" book"
 date: 2023-05-05 10:20:00 +0200
 image: /assets/detect_memory_leak_image.jpg
-description: "Top X takes from \"Pragmatic Programmer\" book"
+description: "Top X takeaways from \"Pragmatic Programmer\" book"
 postImage:
   src: detect_memory_leak_image
   alt: Foam reveals a leak
