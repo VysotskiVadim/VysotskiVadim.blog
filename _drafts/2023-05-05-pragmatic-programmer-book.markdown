@@ -40,14 +40,22 @@ Be more than a coder. Be a problem solver, that's what the essence of a Pragmati
 
 Read `Topic 51: Delight Your Users`.
 
-### Work with others
+### Working with other people
+
+Just a two quotes from the book with my comments.
+The quotes were taken out of the context.
+They were used discussing a different topic, so I added personal comment to explain why a specific quote resonated with me.
 
 > Build the code, not your ego. 
 
-Don't worry if 
 
 > Try to understand others viewpoint, difference isn't wrong.
 
+There're so many ways to achieve the same goal.
+It's okay if somebody uses a technique that is different from what you think is the best.
+Ask if they see the same disadvantages in this approach as you see.
+Ask if they considered an approach that could illuminate this disadvantages.
+Even if you think that they're obviously wrong not doing as you suggest - just accept that they're different.
 
 
 ### Different techniques
