@@ -1,45 +1,62 @@
 ---
 layout: post
-title: "Top X takeaways from \"Pragmatic Programmer\" book"
+title: "Notes from \"Pragmatic Programmer\" book"
 date: 2023-05-05 10:20:00 +0200
 image: /assets/detect_memory_leak_image.jpg
-description: "Top X takeaways from \"Pragmatic Programmer\" book"
+description: "Notes from \"Pragmatic Programmer\" book"
 postImage:
   src: detect_memory_leak_image
   alt: Foam reveals a leak
 twitterLink: https://twitter.com/VysotskiVadim/
 ---
 
+
+
 # Introduction
+
+I have read the ["Pragmatic Programmer"](https://a.co/d/6TqIgPl) book and would like to share a few ideas/concepts that resonated with me.
 
 > “The best books... are those that tell you what you know already.”  
 -- George Orwell
 
-I have read the ["Pragmatic Programmer"](https://a.co/d/6TqIgPl) book and would like to share a few ideas/concepts that resonated with me.
-I had been thinking about those ideas before I even started reading the book.
-The book provided me with missing pieces of the puzzle to see a bigger picture, to finally understand solutions that had been floating in the air.
+I had 9 years of production experience when I read this book.
+I had seen the majority of advice from the book before.
+However some of the ideas were exactly what I was looking for, because they were related to the problems I experience daily.
 
-The book covers many aspects of programming, and I'm certain that every developer finds their pieces of a puzzle that are relevant to their problems and experience.
+# Notes
 
+I ordered the notes by value, putting the ones I find the most important first. 
+The notes themselves are brief, but I will include the name of the book chapter.
 
-# Takeaways from the book
+### Why do we write code at all?
 
-The ideas are ordered by value.
+Users have business problems that need to be solved.
+Software isn't a goal, it is only a means to achieve the goal.
+Ask your customer, "How will we know that the project is successful after it's done?".
+Keep the goal in mind, make it clear for your team.
+Analyze requirements if they correlate with the goal, they're quite often aren't.
+It doesn't matter if software is delivered in time, if it's bug free, etc, if the software doesn't solve user's problems.
+Be more than a coder. Be a problem solver, that's what the essence of a Pragmatic Programmer.
 
-### What's a pragmatic programmer goal?
-
-Be a problem solver
-
-Delight your user. Ask how to understand success of the project
-Sometimes requirements are Guesses.
-
-The goal it's using a technique, the goal is to deliver good software.
-
-A bug free system that answers wrong question isn't useful.
+Read `Topic 51: Delight Your Users`.
 
 ### Work with others
 
-Build the code, not your ego. Try to understand others viewpoint, difference isn't wrong.
+> Build the code, not your ego. 
+
+Don't worry if 
+
+> Try to understand others viewpoint, difference isn't wrong.
+
+
+
+### Different techniques
+
+The goal it's using a technique, the goal is to deliver good software.
+
+
+
+
 
 ### Small steps
 
