@@ -28,7 +28,7 @@ However some of the ideas were exactly what I was looking for, because they were
 I ordered the notes by value, putting the ones I find the most important first. 
 The notes themselves are brief, but I will include the name of the book chapter.
 
-### Why do we write code at all?
+### Goal of a pragmatic programmer
 
 Users have business problems that need to be solved.
 Software isn't a goal, it is only a means to achieve the goal.
@@ -40,30 +40,24 @@ Be more than a coder. Be a problem solver, that's what the essence of a Pragmati
 
 Read `Topic 51: Delight Your Users`.
 
-### Working with other people
+### Working in a team
 
-Just a two quotes from the book with my comments.
-The quotes were taken out of the context.
-They were used discussing a different topic, so I added personal comment to explain why a specific quote resonated with me.
-
-> Build the code, not your ego. 
-
+Two quotes from the book:
 
 > Try to understand others viewpoint, difference isn't wrong.
 
-There're so many ways to achieve the same goal.
-It's okay if somebody uses a technique that is different from what you think is the best.
-Ask if they see the same disadvantages in this approach as you see.
-Ask if they considered an approach that could illuminate this disadvantages.
-Even if you think that they're obviously wrong not doing as you suggest - just accept that they're different.
+and
 
+
+> Build the code, not your ego. 
+
+Do the quotes resonate with your experience?
+
+## TODO
 
 ### Different techniques
 
 The goal it's using a technique, the goal is to deliver good software.
-
-
-
 
 
 ### Small steps
