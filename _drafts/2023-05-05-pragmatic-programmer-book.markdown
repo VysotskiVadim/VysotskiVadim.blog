@@ -2,10 +2,10 @@
 layout: post
 title: "Notes from \"Pragmatic Programmer\" book"
 date: 2023-05-05 10:20:00 +0200
-image: /assets/progmatic-programming-book.jpg
+image: /assets/pragmatic-programming-book.jpg
 description: "Notes from \"Pragmatic Programmer\" book"
 postImage:
-  src: progmatic-programming-book
+  src: pragmatic-programming-book
   alt: Pragmatic programming book
 twitterLink: https://twitter.com/VysotskiVadim/
 ---
