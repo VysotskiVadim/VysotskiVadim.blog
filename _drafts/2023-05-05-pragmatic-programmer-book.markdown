@@ -37,8 +37,15 @@ Keep the goal in mind, make it clear for your team.
 Analyze requirements if they correlate with the goal, they're quite often aren't.
 It doesn't matter if software is delivered in time, if it's bug free, etc, if the software doesn't solve user's problems.
 Be more than a coder. Be a problem solver, that's what the essence of a Pragmatic Programmer.
+`Topic 51: Delight Your Users`.
 
-Read `Topic 51: Delight Your Users`.
+Don't fall into the cargo cult trap.
+Finishing all planned tasks at the end of a sprint or achieving 99.9% unit tests coverage is not what your users care about.
+Your users want to solve their problems using the software you produce.
+Focus on addressing the their problems instead of targeting artificial metrics such as: count of completed stories per sprint or code cleanliness.
+Try different tools and continue using it only if they help you achieve your goals.
+`Topic 50: Coconuts Don't Cut It`
+
 
 ### Working in a team
 
