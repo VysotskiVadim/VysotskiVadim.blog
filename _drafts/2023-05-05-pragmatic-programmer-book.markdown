@@ -48,10 +48,10 @@ Two quotes from the book:
 
 and
 
-
 > Build the code, not your ego. 
 
-Do the quotes resonate with your experience?
+Try to remember a few recent conflicts with your teammates.
+Would the conversation have been different if you had follow those advises?
 
 ## TODO
 
