@@ -2,11 +2,11 @@
 layout: post
 title: "Notes from \"Pragmatic Programmer\" book"
 date: 2023-05-05 10:20:00 +0200
-image: /assets/detect_memory_leak_image.jpg
+image: /assets/progmatic-programming-book.jpg
 description: "Notes from \"Pragmatic Programmer\" book"
 postImage:
-  src: detect_memory_leak_image
-  alt: Foam reveals a leak
+  src: progmatic-programming-book
+  alt: Pragmatic programming book
 twitterLink: https://twitter.com/VysotskiVadim/
 ---
 
@@ -97,4 +97,3 @@ Compare estimates: "half a year" and 181 day, which one represents more certaint
 
 Software development has more in common with gardening than with building, it's more organic than concrete.
 `Topic 40. Refactoring.`
-
