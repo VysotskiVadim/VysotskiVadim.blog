@@ -60,11 +60,24 @@ and
 Try to remember a few recent conflicts with your teammates.
 Would the conversation have been different if you had follow those advises?
 
+### What to learn?
+
+Knowledge is an expiring asset: everything in software development is rapidly changing, new tools/frameworks/techniques replace old ones.
+Ability to learn is the most important skill you need to master to always be valuable.
+
+We're limited by time and energy, how to choose knowledge to put it in knowledge portfolio?
+Look at how people manage their financial assets:
+
+1. They invest regularly;
+2. They diversify;
+3. They balance portfolio between conservative low risk low reward and high risk high reward investments
+4. They buy low and sell high
+
+Do the same with knowledge.
+
+*I noticed that I prefer investing in conservative assets, both in my financial(like real estate) and my knowledge portfolio(like soft skills or in-demand frameworks). I believe that once I gain confidence and establish a solid foundation, I will be more inclined to do riskier investments, like shares or emerging frameworks.*
+
 ## TODO
-
-### Different techniques
-
-The goal it's using a technique, the goal is to deliver good software.
 
 
 ### Small steps
