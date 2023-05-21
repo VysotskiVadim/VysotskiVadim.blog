@@ -56,7 +56,7 @@ and
 > Build the code, not your ego. 
 
 Try to remember a few recent conflicts with your teammates.
-Would the conversation have been different if you had follow those advises?
+Would the conversation have been different if you had followed those advises?
 
 ### What to learn?
 
