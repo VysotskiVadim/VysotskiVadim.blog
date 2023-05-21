@@ -77,48 +77,17 @@ Do the same with knowledge.
 
 *I noticed that I prefer investing in conservative assets, both in my financial(like real estate) and my knowledge portfolio(like soft skills or in-demand frameworks). I believe that once I gain confidence and establish a solid foundation, I will be more inclined to do riskier investments, like shares or emerging frameworks.*
 
-## TODO
-
-
-### Small steps
+### Others
 
 Good enough software today is better than perfect software tomorrow.
-Don't be scare to throw prototype away
 
-Perfection is when it's nothing to take away
+Perfection is achieved when there is nothing more to remove.
 
-Help people understand what they want in a feed back loop: explain consequences, edge cases, show mockups, prototypes. Try to be a customer to realize what it feels like
+Making code easier to change (aka ETC) is a common denominator among all principles (such as SOLID, KISS, DRY, etc.), laws (like the Law of Demeter), and best practices (such as decoupling).
 
+Team structure dictates the code structure.
 
-### What to learn?
+Estimation units represent certainty.
+Compare estimates: "half a year" and 181 day, which one represents more certainty?
 
-Investing in knowledge like investing in finance 
-
-### Good code
-
-Every principle is about easier to change
-
-Decoupling 
-
-Inheritance tax
-
-TDD won't help if you don't have destination in your head
-
-Buy auth providers, they 
-
-Property based tests often surprise you
-
-Team structure dictates the way code looks like.
-
-### Soft skills
-
-Estimation unit represents certancy
-Estimate with a range of scenarios 
-
-Software is like gardening, not building
-
-Clients don't read detailed specifications, it's for developers to explain what they are doing.
-
-Requirements are need, not a design, not a user interface.
-
-Identity real, not imaginative constraints. Find a bigger box. Example with a trojan horse.
+Software development has more in common with gardening than with building.
