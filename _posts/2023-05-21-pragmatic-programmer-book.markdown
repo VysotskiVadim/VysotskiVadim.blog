@@ -68,8 +68,8 @@ Look at how people manage their financial assets:
 
 1. They invest regularly;
 2. They diversify;
-3. They balance portfolio between conservative low risk low reward and high risk high reward investments
-4. They buy low and sell high
+3. They balance portfolio between conservative low risk low reward and high risk high reward investments;
+4. They buy low and sell high.
 
 Do the same with knowledge.
 
