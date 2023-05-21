@@ -7,7 +7,7 @@ description: "Notes from \"Pragmatic Programmer\" book"
 postImage:
   src: pragmatic-programming-book
   alt: Pragmatic programming book
-twitterLink: https://twitter.com/VysotskiVadim/
+twitterLink: https://twitter.com/VysotskiVadim/status/1660332054410584066
 ---
 
 # Introduction
