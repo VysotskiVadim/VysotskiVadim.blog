@@ -79,15 +79,22 @@ Do the same with knowledge.
 
 ### Others
 
-Good enough software today is better than perfect software tomorrow.
+Usually, good enough software today is better than perfect software tomorrow.
+`Topic 5. Good-Enough Software`
 
 Perfection is achieved when there is nothing more to remove.
+`Topic 45. The Requirements Pit`
 
 Making code easier to change (aka ETC) is a common denominator among all principles (such as SOLID, KISS, DRY, etc.), laws (like the Law of Demeter), and best practices (such as decoupling).
+`Topic 8. The Essence of Good Design`
 
-Team structure dictates the code structure.
+Team structure dictates the code structure(aka Conway's Law).
+`Topic 47. Working Together`.
 
 Estimation units represent certainty.
 Compare estimates: "half a year" and 181 day, which one represents more certainty?
+`Topic 15. Estimating.`
 
-Software development has more in common with gardening than with building.
+Software development has more in common with gardening than with building, it's more organic than concrete.
+`Topic 40. Refactoring.`
+
