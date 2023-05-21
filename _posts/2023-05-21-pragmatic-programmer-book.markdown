@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Notes from \"Pragmatic Programmer\" book"
+title: "Notes from the \"Pragmatic Programmer\" book"
 date: 2023-05-21 9:30:00 +0200
 image: /assets/pragmatic-programming-book.jpg
-description: "Notes from \"Pragmatic Programmer\" book"
+description: "Notes from the \"Pragmatic Programmer\" book"
 postImage:
   src: pragmatic-programming-book
   alt: Pragmatic programming book
