@@ -21,5 +21,16 @@ A different approach is needed for addressing `OutOfMemoryError`.
 
 This article explains how to collect data essential to finding the cause of `OutOfMemoryError`: a heap dump at the moment of the last allocation, which failed with `OutOfMemoryError`.
 
-## Collect Heap Dump
+## Heap Dump recording
 
+The most useful information for `OutOfMemoryError` troubleshooting is a Java heap dump. You can explore which objects consume the memory, how much is consumed by each object, and what stops the Garbage Collector from collecting them.
+
+[The official guide](https://developer.android.com/studio/profile/memory-profiler) provides instructions on collecting heap dumps from Android Studio.
+Simply launch the profiler and click "Record".
+The challenge lies in determining when to record.
+The heap dump recording should coincide with the occurrence of a noticeable memory leak; otherwise, the heap dump won't be valuable.
+The optimal moment for recording is when `OutOfMemoryError` happens, a task not feasible for a human to perform.
+
+### When to record a heap dump
+
+### How to record a heap dump
