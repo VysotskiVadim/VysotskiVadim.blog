@@ -2,12 +2,11 @@
 layout: post
 title: "OutOfMemoryError on Android: looking for the cause"
 date: 2024-01-06 11:00:00 +0100
-image: /assets/slow-down.jpg
+image: /assets/green-robot-looking-for-a-leak.jpg
 description: ""
 postImage:
-  src: slow-down
-  alt: A slow down sign
-linkToGithubText: "See the full file on the Github."
+  src: green-robot-looking-for-a-leak
+  alt: A green robot which is looking for a leak
 twitterLink: https://twitter.com/VysotskiVadim/status/1532672644809732098
 ---
 
