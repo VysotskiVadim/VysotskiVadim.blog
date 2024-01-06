@@ -94,3 +94,7 @@ The `recordHeapDumpOnOOM` initialises the handler and should be called once.
 
 You can see `recordHeapDumpOnOOM` in action in the [Example app](https://github.com/VysotskiVadim/android-oom).
 
+## Working with recorded Heap Dump
+
+Heap dumps will be recorded in internal application storage.
+I download it using [Device explorer from Android Studio](https://developer.android.com/studio/debug/device-file-explorer).
