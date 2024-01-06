@@ -32,4 +32,20 @@ The optimal moment for recording is when `OutOfMemoryError` happens, a task not 
 
 ### When to record a heap dump
 
+Wait for the `OutOfMemoryError` in [UncaughtExceptionHandler](https://developer.android.com/reference/java/lang/Thread.UncaughtExceptionHandler):
+
+```kotlin
+Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+    if (throwable is OutOfMemoryError) {
+        // record heap dump here
+    }
+    Log.e(LOG_TAG, "Unhandled exception", throwable)
+    System.exit(1);
+}
+```
+
+Third-party libraries like Firebase Crashlytics could override the default uncaught exception handler.
+Be careful if you use them.
+Find a guide that explains how to set a custom `UncaughtExceptionHandler` together with your library.
+
 ### How to record a heap dump
