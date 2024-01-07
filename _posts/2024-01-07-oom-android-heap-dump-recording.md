@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "OutOfMemoryError on Android: heap dump recording"
-date: 2024-01-06 11:00:00 +0100
+date: 2024-01-07 12:00:00 +0100
 image: /assets/green-robot-looking-for-a-leak.jpg
 description: "Learn how to record a Java heap dump at the moment of OutOfMemoryError."
 postImage:
