@@ -7,6 +7,8 @@ description: "Learn how to record a Java heap dump at the moment of OutOfMemoryE
 postImage:
   src: green-robot-looking-for-a-leak
   alt: A green robot which is looking for a leak
+twitterLink: https://twitter.com/VysotskiVadim/status/1743957018275119489
+linkedInLink: https://www.linkedin.com/posts/vadzim-vysotski-454b01210_outofmemoryerror-on-android-heap-dump-recording-activity-7149723307653709824-ORIS
 ---
 
 ## Introduction
