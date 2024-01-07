@@ -11,6 +11,10 @@ postImage:
 
 ## Introduction
 
+```
+java.lang.OutOfMemoryError: Failed to allocate a 32 byte allocation with 195576 free bytes and 190KB until OOM, target footprint 268435456, growth limit 268435456; giving up on allocation because <1% of heap free after GC.
+```
+
 `OutOfMemoryError` requires a special approach in troubleshooting.
 The delay between the memory leak, which causes the error, and the moment when the Android Runtime realizes that there is no more memory makes regular debug info useless.
 The error's stack trace points to an allocation that happened when the memory is already full.
@@ -26,8 +30,8 @@ The most useful information for `OutOfMemoryError` troubleshooting is a Java hea
 [The official guide](https://developer.android.com/studio/profile/memory-profiler) provides instructions on collecting heap dumps from Android Studio.
 Simply launch the profiler and click "Record".
 The challenge lies in determining when to record.
-The heap dump recording should coincide with the occurrence of a noticeable memory leak; otherwise, the heap dump won't be valuable.
-The optimal moment for recording is when `OutOfMemoryError` happens, a task not feasible for a human to perform.
+The heap dump should be taken when you observe a significant memory leak for it to be valuable.
+The best time to record is when `OutOfMemoryError` occurs, a task not feasible for a human to perform manually.
 
 Automating the recording of Java heap dumps is possible through the following Android API:
 [UncaughtExceptionHandler](https://developer.android.com/reference/java/lang/Thread.UncaughtExceptionHandler)
