@@ -23,6 +23,9 @@ A different approach is needed for addressing `OutOfMemoryError`.
 
 This article explains how to collect data essential to finding the cause of `OutOfMemoryError`: a heap dump at the moment of the last allocation, which failed with `OutOfMemoryError`.
 
+I learned this technique while optimizing Java memory usage in [Mapbox Navigation SDK v2](https://github.com/mapbox/mapbox-navigation-android).
+It was particularly useful when `OutOfMemoryError` occurred only in the customer's environment, and I wasn't able to reproduce them locally.
+
 ## Heap Dump recording
 
 The most useful information for `OutOfMemoryError` troubleshooting is a Java heap dump. You can explore which objects consume the memory, how much is consumed by each object, and what stops the Garbage Collector from collecting them.
