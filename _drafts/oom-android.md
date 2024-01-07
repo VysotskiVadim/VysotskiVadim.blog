@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OutOfMemoryError on Android: looking for the cause"
+title: "OutOfMemoryError on Android: heap dump recording"
 date: 2024-01-06 11:00:00 +0100
 image: /assets/green-robot-looking-for-a-leak.jpg
 description: ""
@@ -66,7 +66,7 @@ val heapDumpName = context
 Debug.dumpHprofData(heapDumpName)
 ```
 
-### Bringing It All Together
+### Final solution
 
 ```kotlin
 private const val LOG_TAG = "OOM-HEAP-RECORDER"
@@ -94,7 +94,15 @@ The `recordHeapDumpOnOOM` initialises the handler and should be called once.
 
 You can see `recordHeapDumpOnOOM` in action in the [Example app](https://github.com/VysotskiVadim/android-oom).
 
-## Working with recorded Heap Dump
+## Exploring heap dump
 
 Heap dumps will be recorded in internal application storage.
-I download it using [Device explorer from Android Studio](https://developer.android.com/studio/debug/device-file-explorer).
+I usually download them using [Device Explorer from Android Studio](https://developer.android.com/studio/debug/device-file-explorer).
+
+
+Once the file is downloaded, you have two tools available to open it:
+1. [Android Studio Profiler](https://developer.android.com/studio/profile/memory-profiler#import-hprof). You already have it installed.
+2. [MAT](https://eclipse.dev/mat/). More advanced compared to AS Profiler. MAT requires Android Heap Dumps [to be converted to Java format](https://stackoverflow.com/a/60205272).
+
+Explore the heap dump using one of the tools.
+The memory state at the moment of `OutOfMemoryError` is the best possible clue to identify the root cause of the error.
