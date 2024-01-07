@@ -107,10 +107,16 @@ You can see `recordHeapDumpOnOOM` in action in the [Example app](https://github.
 Heap dumps will be recorded in internal application storage.
 I usually download them using [Device Explorer from Android Studio](https://developer.android.com/studio/debug/device-file-explorer).
 
+Convert the downloaded Heap Dump from Android to Java format using `hprof-conv` from the Android SDK platform tools.
+Refer to the [documentation](https://android.googlesource.com/platform/frameworks/base/+/f6d03e5/docs/html/tools/help/hprof-conv.jd) or check [Stack Overflow](https://stackoverflow.com/a/60205272) to learn more about it.
 
-Once the file is downloaded, you have two tools available to open it:
+
+You have two tools available to open a Java Heap Dump:
 1. [Android Studio Profiler](https://developer.android.com/studio/profile/memory-profiler#import-hprof). You already have it installed.
-2. [MAT](https://eclipse.dev/mat/). More advanced compared to AS Profiler. MAT requires Android Heap Dumps [to be converted to Java format](https://stackoverflow.com/a/60205272).
+*Cannot recommend it. As of 2024, Android Studio was crashing until I allowed the IDE to use 5GB of memory. Even with 5GB of memory, it didn't work responsively.*
+2. [MAT](https://eclipse.dev/mat/). More advanced compared to AS Profiler.
+*I always use it for heap dump analysis. Works responsively with 2GB of memory available. As of 2024, it provides more capabilities for Java heap dump analysis than Android Studio Profiler.*
+
 
 Explore the heap dump using one of the tools.
 The memory state at the moment of `OutOfMemoryError` is the best possible clue to identify the root cause of the error.
