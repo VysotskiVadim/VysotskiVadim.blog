@@ -18,7 +18,7 @@ java.lang.OutOfMemoryError: Failed to allocate a 32 byte allocation with 195576 
 ```
 
 `OutOfMemoryError` requires a special approach in troubleshooting.
-The delay between the memory leak, which causes the error, and the moment when the Android Runtime realizes that there is no more memory makes regular debug info useless.
+The delay between the memory leak, which causes the error, and the moment when the Android Runtime realizes that there is no more memory, makes regular debug info useless.
 The error's stack trace points to an allocation that happened when the memory is already full.
 Logs don't contain info about allocations and objects collected by the Garbage Collector.
 A different approach is needed for addressing `OutOfMemoryError`.
